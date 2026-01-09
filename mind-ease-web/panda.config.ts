@@ -22,16 +22,14 @@ export default defineConfig({
       semanticTokens: {
         colors: {
           /* --- Brand & Icon Colors --- */
-          /* Usado para botões primários, logos e destaques */
-          brandPrimary: { value: { _light: '#2D8C96', _dark: '#89F0D1' } }, // Teal Profundo (Legibilidade) vs Menta (Dark Mode)
-          brandSecondary: { value: { _light: '#6AB2E4', _dark: '#A3D5F7' } }, // Azul do Ícone
+          brandPrimary: { value: { _light: '#2D8C96', _dark: '#89F0D1' } },
+          brandSecondary: { value: { _light: '#6AB2E4', _dark: '#A3D5F7' } },
 
           /* Gradientes sugeridos para fundos especiais ou headers */
           brandGradientStart: { value: { _light: '#A3D5F7', _dark: '#2A4555' } },
           brandGradientEnd: { value: { _light: '#89F0D1', _dark: '#1F3A33' } },
 
           /* --- Backgrounds --- */
-          /* Fundo principal com leve tom azulado para calma (não branco puro) */
           mainBackground: { value: { _light: '#F4F8FA', _dark: '#121416' } },
           modalBackground: { value: { _light: '#FFFFFF', _dark: '#1C2023' } },
           secondaryBackground: { value: { _light: '#FFFFFF', _dark: '#25292D' } },
@@ -41,7 +39,6 @@ export default defineConfig({
           transparentSecondaryBackground: { value: { _light: '#ffffffcc', _dark: '#25292db3' } },
 
           /* --- Typography --- */
-          /* Preto suavizado para cinza escuro para reduzir contraste agressivo */
           text: { value: { _light: '#2C3E50', _dark: '#E0E6ED' } },
           textReverse: { value: { _light: '#E0E6ED', _dark: '#2C3E50' } },
           textHeader: { value: { _light: '#E0E6ED', _dark: '#E0E6ED' } },
@@ -79,19 +76,19 @@ export default defineConfig({
           brandHover: { value: { _light: '#89F0D1', _dark: '#2D8C96' } },
           brandShadow: { value: { _light: '#A3D5F7', _dark: '#164E63' } },
 
-          /* Functional Colors (Suavizadas) */
+          /* Functional Colors */
           blue: { value: { _light: '#3B82F6', _dark: '#60A5FA' } },
-          /* Error: Coral/Salmon em vez de vermelho sangue */
+          /* Error: */
           error: { value: { _light: '#F43F5E', _dark: '#FB7185' } },
           orange: { value: { _light: '#F97316', _dark: '#FB923C' } },
 
           /* Semantic Aliases */
-          Success: { value: { _light: '#14B8A6', _dark: '#2DD4BF' } }, // Teal
-          Warning: { value: { _light: '#EAB308', _dark: '#FACC15' } }, // Amarelo Mostarda
+          Success: { value: { _light: '#14B8A6', _dark: '#2DD4BF' } },
+          Warning: { value: { _light: '#EAB308', _dark: '#FACC15' } },
 
           /* Neutrals */
           navyBlue: { value: { _light: '#1E3A8A', _dark: '#60A5FA' } },
-          matteBlue: { value: { _light: '#64748B', _dark: '#94A3B8' } }, // Slate blue
+          matteBlue: { value: { _light: '#64748B', _dark: '#94A3B8' } },
           lightGray: { value: { _light: '#CBD5E1', _dark: '#475569' } },
           lighterGray: { value: { _light: '#E2E8F0', _dark: '#334155' } },
           darkGray: { value: { _light: '#334155', _dark: '#334155' } },

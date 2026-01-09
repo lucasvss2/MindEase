@@ -265,7 +265,6 @@ export const headerStyles = {
   borderBottom: `3px solid var(--colors-brand-primary)`,
 }
 
-// Direct CSS variable usage for Drawer
 export const drawerStyles = {
   backgroundColor: `var(--colors-secondary-background)`,
 }
@@ -275,7 +274,6 @@ export const drawerBodyStyles = {
   padding: 0,
 }
 
-// Direct CSS variable usage for Logo Text
 export const logoTextStyles = {
   fontSize: '20px',
   fontWeight: 700,
