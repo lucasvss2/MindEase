@@ -5,22 +5,25 @@ import { Toaster } from 'sonner'
 import ptBR from 'antd/es/locale/pt_BR'
 
 import { Routes } from './routes'
-import { queryClient } from '@/shared'
+import { antdTheme, darkAntdTheme, queryClient, useThemeStore, ThemeProvider } from '@/shared'
 
 const App: React.FC = () => {
+  const { theme } = useThemeStore()
   return (
-    <QueryClientProvider client={queryClient}>
-      <ConfigProvider locale={ptBR}>
-        <Routes />
-        <Toaster
-          richColors
-          closeButton={false}
-          position="top-right"
-          toastOptions={{ style: { fontFamily: 'AcerFoco', height: '40px', padding: '8px' } }}
-        />
-      </ConfigProvider>
-      <ReactQueryDevtools buttonPosition="bottom-right" />
-    </QueryClientProvider>
+    <ThemeProvider>
+      <QueryClientProvider client={queryClient}>
+        <ConfigProvider theme={theme === 'light' ? antdTheme : darkAntdTheme} locale={ptBR}>
+          <Routes />
+          <Toaster
+            richColors
+            closeButton={false}
+            position="top-right"
+            toastOptions={{ style: { fontFamily: 'AcerFoco', height: '40px', padding: '8px' } }}
+          />
+        </ConfigProvider>
+        <ReactQueryDevtools buttonPosition="bottom-right" />
+      </QueryClientProvider>
+    </ThemeProvider>
   )
 }
 

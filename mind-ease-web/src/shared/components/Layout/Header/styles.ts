@@ -1,143 +1,253 @@
-import { CheckCircleOutlined } from '@ant-design/icons'
-import { Button, Layout, Drawer as AntdDrawer, Typography, Drawer } from 'antd'
-import { styled } from '@/shared/styles'
+import { cva, css } from '@/shared/styles'
 
-// Since we are migrating manually, we'll recreate the styled components using Panda's styled factory.
-// Some antd components (Layout.Header, Drawer) might need wrapping or className injection if styled directly,
-// but Panda's styled factory can wrap React components.
-
-export const Container = styled(Layout.Header, {
+export const Container = cva({
   base: {
     height: '50px !important',
-    padding: '0 16px !important',
-    backgroundColor: 'white !important', // Assuming #fff from prev file matches 'white' token or literal
-    borderBottom: '3px solid',
-    borderColor: 'brand',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    '& a': {
-      cursor: 'pointer',
-    },
-  },
-})
-
-export const LogoContainer = styled('div', {
-  base: {
-    padding: '0 8px',
-    display: 'flex',
-    cursor: 'pointer',
-    '& .ant-typography': {
-      lineHeight: '1.1',
-    },
-  },
-})
-
-export const AreaSwapperContainer = styled('div', {
-  base: {
-    display: 'flex',
-    width: '280px',
-  },
-})
-
-export const LogoTextContainer = styled('div', {
-  base: {
-    display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-    paddingLeft: '5px',
-  },
-})
-
-export const LogoText = styled(Typography.Text, {
-  base: {
-    fontSize: '20px !important',
-    fontWeight: '700 !important',
-    color: 'brand !important',
-  },
-})
-
-export const HeaderActionsContainer = styled('div', {
-  base: {
-    display: 'flex',
-    alignItems: 'center',
-    gap: '8px',
-  },
-})
-
-export const MenuButton = styled(Button, {
-  base: {
+    padding: '0 16px!important',
+    backgroundColor: 'darkGray !important',
     display: 'flex !important',
     alignItems: 'center !important',
-    gap: '4px !important',
-    padding: '4px 8px !important',
-    fontSize: '14px !important',
-    color: 'white !important',
-    textTransform: 'uppercase',
-    transition: 'all 0.2s ease',
-    '&:hover, &.ant-btn-text:not(:disabled):not(.ant-btn-disabled):hover': {
-      color: '#fff !important',
+    justifyContent: 'space-between !important',
+    borderBottom: 'solid',
+    borderBottomColor: 'brandPrimary !important',
+    borderBottomWidth: '3px !important',
+    '& a': {
+      cursor: 'pointer !important',
     },
+    '&.ant-select': {
+      height: '33px',
+    },
+    '&.ant-layout-header': {
+      backgroundColor: 'darkGray !important',
+    }
   },
-})
+  variants: {
+    theme: {
+      light: {
+        '&.ant-layout-header': {
+          backgroundColor: 'darkGray !important',
+        },
+        '& .ant-switch': {
+          border: 'solid !important',
+          borderWidth: '1px !important',
+          borderColor: 'brandPrimary !important',
 
-export const MenuDrawer = styled(AntdDrawer, {
-  base: {
-    '& .ant-drawer-title': {
-      color: 'text',
-      '&:not(:disabled):hover': {
-        color: 'text',
+          '& .ant-switch-handle': {
+            border: 'solid !important',
+            borderWidth: '1px !important',
+            borderColor: 'brandPrimary !important',
+            borderRadius: '50% !important',
+            top: '1px !important',
+
+            '&::before': {
+              backgroundColor: 'darkGray !important',
+            },
+          },
+
+          '& .ant-switch-inner': {
+            backgroundColor: 'darkGray !important',
+
+            '&:hover': {
+              backgroundColor: 'darkGray !important',
+            },
+
+            '& .anticon': {
+              color: 'brandPrimary !important',
+            },
+          },
+        },
       },
-    },
-    '& .ant-drawer-extra': {
-      color: 'darkGreen',
-      '&:not(:disabled):hover': {
-        color: 'token(colors.brand/80)',
-      },
-    },
-    '& .ant-drawer-body': {
-      padding: '0',
-    },
-    '& .ant-drawer-footer': {
-      display: 'flex',
-      justifyContent: 'end',
-      '& .ant-btn-default': {
-        '&:not(:disabled):hover': {
-          color: 'brand',
+      dark: {
+        '&.ant-layout-header': {
+          backgroundColor: 'darkGray !important',
+        },
+        '& .ant-switch': {
+          border: 'solid !important',
+          borderWidth: '1px !important',
+          borderColor: 'brandPrimary !important',
+
+          '& .ant-switch-handle': {
+            border: 'solid !important',
+            borderWidth: '1px !important',
+            borderColor: 'darkGray !important',
+            borderRadius: '50% !important',
+            top: '1px !important',
+
+            '&::before': {
+              backgroundColor: 'darkGray !important',
+            },
+          },
+
+          '& .ant-switch-inner': {
+            backgroundColor: 'brandPrimary !important',
+
+            '&:hover': {
+              backgroundColor: 'brandPrimary !important',
+            },
+
+            '& .anticon': {
+              color: 'darkGray !important',
+            },
+          },
         },
       },
     },
   },
 })
 
-export const LogOutButton = styled(Button, {
-  base: {
-    color: 'darkGreen !important',
-    border: '1px solid !important',
-    borderColor: 'darkGreen !important',
+export const HeaderContainer = css({
+  display: 'flex',
+  flexDirection: 'row',
+  alignItems: 'flex-end',
+  justifyContent: 'flex-end',
+  gap: '8px',
+})
+
+export const LogoContainer = css({
+  padding: '0 8px',
+  display: 'flex',
+  cursor: 'pointer',
+  '&.ant-typography': {
+    lineHeight: 1.1,
   },
 })
 
-export const MenuContent = styled('div', {
+export const LogoTextContainer = css({
+  display: 'flex',
+  flexDirection: 'row',
+  justifyContent: 'center',
+  alignItems: 'center',
+  paddingLeft: '5px',
+})
+
+export const LogoText = cva({
+  base: {
+    fontSize: '20px !important',
+    fontWeight: 700,
+    color: 'textHeader !important',
+  },
+})
+
+export const HeaderActionsContainer = css({
+  display: 'flex',
+  alignItems: 'center',
+  gap: '8px',
+})
+
+export const MenuContainer = cva({
+  base: {
+    display: 'flex',
+    alignItems: 'center',
+    gap: '18px',
+    '& .ant-select-selector': {
+      backgroundColor: 'secondaryBackground !important',
+      color: 'textHeader !important',
+    },
+  },
+})
+
+export const MenuButton = cva({
+  base: {
+    display: 'flex',
+    alignItems: 'center',
+    gap: '4px',
+
+    padding: '4px 8px',
+
+    fontSize: '14px',
+    color: 'white !important',
+    textTransform: 'uppercase',
+
+    transition: 'all 0.2s ease',
+
+    '&:hover': {
+      color: 'brandPrimary !important',
+    },
+    '& .ant-btn-text:not(:disabled):not(.ant-btn-disabled):hover': {
+      color: 'brandPrimary !important',
+    },
+  },
+})`
+`
+
+export const MenuDrawer = cva({
+  base: {
+    backgroundColor: 'secondaryBackground !important',
+    '&.ant-menu': {
+      backgroundColor: 'secondaryBackground !important',
+    },
+    '&.ant-drawer-title': {
+      backgroundColor: 'secondaryBackground !important',
+      color: 'textHeader  !important',
+
+      '&:not(:disabled):hover': {
+        backgroundColor: 'secondaryBackground !important',
+        color: 'textHeader !important',
+      },
+    },
+    '& .ant-drawer-header': {
+      borderBottom: 'solid',
+      borderBottomColor: 'separator !important',
+      borderBottomWidth: '1px !important',
+    },
+
+    '& .ant-drawer-extra': {
+      backgroundColor: 'secondaryBackground !important',
+      color: 'brand',
+
+      '&:not(:disabled):hover': {
+        backgroundColor: 'secondaryBackground !important',
+        color: 'brand',
+      },
+    },
+
+    '& .ant-drawer-body': {
+      backgroundColor: 'secondaryBackground !important',
+      padding: 0,
+    },
+
+    '& .ant-drawer-footer': {
+      display: 'flex',
+      justifyContent: 'end',
+      backgroundColor: 'secondaryBackground !important',
+      borderTop: `1px solid separator !important`,
+
+      '& .ant-btn-default': {
+        backgroundColor: 'secondaryBackground !important',
+        '&:not(:disabled):hover': {
+          backgroundColor: 'secondaryBackground !important',
+          color: 'brandPrimary !important',
+        },
+      },
+    },
+  },
+})
+
+export const MenuContent = cva({
   base: {
     '& .ant-menu-light.ant-menu-root.ant-menu-inline': {
-      display: 'flex',
-      flexDirection: 'column',
+      display: 'flex !important',
+      flexDirection: 'column !important',
       gap: '10px',
+      backgroundColor: 'secondaryBackground !important',
+      borderInlineEnd: 'none !important',
     },
+
     '& .ant-menu-item': {
       fontSize: '16px',
-      color: 'brand',
+      color: 'brandPrimary !important',
+
       '&:hover': {
         color: 'white !important',
-        background: 'brand !important',
+        background: 'brandPrimary !important',
       },
-      '&.ant-menu-item.ant-menu-item-selected': {
-        color: 'white',
-        background: 'brand',
-        fontWeight: '700',
+
+      '&.ant-menu-item-selected': {
+        color: 'white !important',
+        background: 'brandPrimary !important',
+        fontWeight: 700,
       },
+
       '& span.ant-menu-title-content': {
         transition: '0s',
       },
@@ -145,179 +255,29 @@ export const MenuContent = styled('div', {
   },
 })
 
-export const MenuContainer = styled('div', {
-  base: {
-    display: 'flex',
-    alignItems: 'center',
-    gap: '18px',
-  },
-})
+export const headerStyles = {
+  height: '50px',
+  padding: '0 16px',
+  backgroundColor: `var(--colors-dark-gray)`,
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'space-between',
+  borderBottom: `3px solid var(--colors-brand-primary)`,
+}
 
-export const UserButton = styled(Button, {
-  base: {
-    padding: '0 !important',
-    background: 'none !important',
-    borderColor: '#434343 !important',
-    '&:disabled': {
-      cursor: 'default',
-    },
-  },
-})
+// Direct CSS variable usage for Drawer
+export const drawerStyles = {
+  backgroundColor: `var(--colors-secondary-background)`,
+}
 
-export const NotificationButton = styled(Button, {
-  base: {
-    display: 'flex !important',
-    alignItems: 'center !important',
-    justifyContent: 'center !important',
-    width: '33px !important',
-    height: '33px !important',
-    borderRadius: '50% !important',
-    color: 'white !important',
-    fontSize: '14px !important',
-    textTransform: 'uppercase',
-    transition: 'all 0.2s ease',
-  },
-})
+export const drawerBodyStyles = {
+  backgroundColor: `var(--colors-secondary-background)`,
+  padding: 0,
+}
 
-export const NotificationContainer = styled('div', {
-  base: {
-    display: 'flex',
-    position: 'relative',
-  },
-})
-
-export const NotificationBadge = styled('span', {
-  base: {
-    position: 'absolute',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    top: '20px',
-    right: '-3px',
-    height: '16px',
-    borderRadius: '6px',
-    paddingLeft: '2px',
-    paddingRight: '2px',
-    backgroundColor: '#ffc600',
-    border: '1px solid #ffffff',
-    cursor: 'pointer',
-    fontSize: '10px',
-    fontWeight: '400',
-    color: '#000000',
-  },
-})
-
-export const UserArea = styled('div', {
-  base: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    gap: '8px',
-    fontSize: '12px',
-    border: 'none',
-    color: 'white',
-  },
-})
-
-export const HeaderButton = styled(Button, {
-  base: {
-    display: 'flex !important',
-    alignItems: 'center !important',
-    gap: '4px !important',
-    padding: '4px 8px !important',
-    fontSize: '14px !important',
-    color: 'white !important',
-    textTransform: 'uppercase',
-    transition: 'all 0.2s ease',
-    '&:hover, &.ant-btn-text:not(:disabled):not(.ant-btn-disabled):hover': {
-      color: 'brand !important',
-    },
-    '& .ant-badge': {
-      transition: 'all 0.2s ease',
-      color: 'white',
-      '&:hover, .ant-btn-text:not(:disabled):not(.ant-btn-disabled):hover': {
-        color: 'brand',
-      },
-    },
-  },
-})
-
-export const ToastContainer = styled('div', {
-  base: {
-    display: 'flex',
-    alignItems: 'center',
-    gap: '4px',
-  },
-})
-
-export const BoldSpan = styled('span', {
-  base: {
-    fontWeight: 'bold',
-  },
-})
-
-export const CircleOutlined = styled(CheckCircleOutlined, {
-  base: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    color: '#fff',
-    width: '14px',
-    height: '14px',
-    borderRadius: '99%',
-    backgroundColor: '#80c343',
-  },
-})
-
-export const NotificationDrawer = styled(Drawer, {
-  base: {
-    '& .ant-drawer-close': {
-      position: 'absolute',
-      top: '25px',
-      right: '10px',
-      color: 'brand',
-    },
-    '& .ant-drawer-title': {
-      fontSize: '20px',
-      fontWeight: '700',
-      color: 'text',
-    },
-  },
-})
-
-export const FooterSidebar = styled('div', {
-  base: {
-    display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    width: '100%',
-  },
-})
-
-export const CleanButton = styled(Button, {
-  base: {
-    color: 'darkGreen !important',
-    border: '1px solid !important',
-    borderColor: 'darkGreen !important',
-  },
-})
-
-export const GreenButton = styled(Button, {
-  base: {
-    backgroundColor: 'brand !important',
-    boxShadow: '0px 2px 0px 0px rgba(0, 0, 0, 0.04) !important',
-    border: '1px solid !important',
-    borderColor: 'brand !important',
-    borderRadius: '4px !important',
-    color: '#fff !important',
-    width: '100% !important',
-    height: '35px !important',
-    '&:disabled': {
-      backgroundColor: '#f5f5f5 !important', // Fallback for list item bg
-      color: '#d9d9d9 !important', // Fallback for light gray
-      border: '1px solid !important',
-      borderColor: '#d9d9d9 !important',
-      boxShadow: '0px 2px 0px 0px rgba(0, 0, 0, 0.04)',
-    },
-  },
-})
+// Direct CSS variable usage for Logo Text
+export const logoTextStyles = {
+  fontSize: '20px',
+  fontWeight: 700,
+  color: `var(--colors-text-header)`,
+}

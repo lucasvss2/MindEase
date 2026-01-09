@@ -1,9 +1,9 @@
 import { useLayoutEffect } from 'react'
 
 export const useDocumentTitle = (pageTitle: string | undefined) => {
-  const defaultTitle = 'Acer - Base de Conhecimento'
+  const defaultTitle = 'MindEase'
 
-  const title = pageTitle ? `${pageTitle} | Acer - Base de Conhecimento` : defaultTitle
+  const title = pageTitle ? `${pageTitle} | MindEase` : defaultTitle
 
   useLayoutEffect(() => {
     document.title = `${title}`

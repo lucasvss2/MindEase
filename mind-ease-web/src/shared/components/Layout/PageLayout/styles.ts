@@ -1,57 +1,59 @@
-import { Layout } from 'antd'
-import { styled } from '@/shared/styles'
+import { cva } from '@/shared/styles'
 
-export const SidebarContainer = styled(Layout, {
+export const Container = cva({
+  base: {
+    minHeight: '100vh !important',
+    height: '100% !important',
+  },
+})
+
+export const SidebarContainer = cva({
   base: {
     height: '100%',
     flexDirection: 'row',
 
-    '& .ant-layout-sider': {
-      backgroundColor: '#fff',
+    '&.ant-layout-sider': {
+      backgroundColor: 'secondaryBackground !important',
     },
 
-    '& .ant-layout-content': {
-      width: '0',
+    '&.ant-layout-content': {
+      width: 0,
     },
-  }
+  },
 })
 
-export const ContentContainer = styled(Layout, {
+export const ContentContainer = cva({
   base: {
-    padding: '16px 24px 24px',
-
-    '& .ant-layout-content': {
-      width: '100%',
+    padding: '24px 24px 24px',
+    '&.ant-layout-content': {
+      width: '100% !important',
     },
-  }
+
+    backgroundRepeat: 'no-repeat',
+    backgroundPosition: 'center',
+    backgroundSize: 'cover',
+  },
+  variants: {
+    active: {
+      true: {
+        backgroundImage: 'url(/motherboard-background.svg) !important',
+      },
+      false: {
+        backgroundImage: 'none',
+      },
+    },
+  },
+  defaultVariants: {
+    active: false,
+  },
 })
 
-export const Container = styled(Layout, {
-  base: {
-    // && increased specificity in v3, we can likely skip it or use &
-    minHeight: '100vh !important',
-    height: '100% !important',
-    overflowX: 'hidden',
-  }
-})
-
-export const CenterLoadingContainer = styled('div', {
+export const Content = cva({
   base: {
     display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
+    minHeight: '100vh',
     height: '100%',
-    minHeight: '85vh',
-    width: '100%',
-  }
-})
-
-export const Content = styled(Layout.Content, {
-  base: {
-     padding: '16px 24px 24px',
-     display: 'flex',
-     flexDirection: 'column',
-     gap: '16px',
-     margin: '16px 0',
-  }
+    flexDirection: 'column',
+    gap: '24px',
+  },
 })

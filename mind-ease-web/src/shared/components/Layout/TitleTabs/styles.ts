@@ -1,31 +1,30 @@
-import { Tabs } from 'antd'
-import { styled } from '@/shared/styles'
+import { cva } from '@/shared/styles'
 
-export const StyledTabs = styled(Tabs, {
+export const StyledTabs = cva({
   base: {
-    width: '100%',
+    width: '100% !important',
 
     '& .ant-tabs-nav': {
-      alignItems: 'flex-end',
-      justifyContent: 'space-between',
-      margin: '0',
+      alignItems: 'flex-end !important',
+      justifyContent: 'space-between !important',
+      margin: 0,
     },
 
     '& .ant-tabs-nav .ant-tabs-nav-wrap': {
-      flex: '0 0 auto',
-      margin: '0 1px 0 1px',
+      flex: '0 0 auto !important',
+      margin: '0 1px 0 1px !important',
     },
 
     '& .ant-tabs-tab': {
-      fontSize: '20px', // or token('fontSizes.xl') if available, keeping literal for fidelity
-      lineHeight: '24px',
-      fontWeight: '400',
-      fontFamily: 'AcerFoco, sans-serif', // Assuming this is the theme font
-      color: 'brand',
+      fontSize: '20px !important',
+      lineHeight: '24px !important',
+      fontWeight: 400,
+      fontFamily: 'AcerFoco !important',
+      color: 'text !important',
     },
 
     '& .ant-tabs-tab.ant-tabs-tab-active .ant-tabs-tab-btn': {
-      color: 'brand',
+      color: 'brand !important',
     },
 
     '& .ant-tabs-ink-bar': {
@@ -38,10 +37,10 @@ export const StyledTabs = styled(Tabs, {
     },
 
     '& .ant-tabs-extra-content': {
-      display: 'flex',
-      flex: '1',
-      justifyContent: 'flex-end',
-      minHeight: '40px',
+      display: 'flex !important',
+      flex: 1,
+      justifyContent: 'flex-end !important',
+      minHeight: '40px !important',
     },
-  }
+  },
 })

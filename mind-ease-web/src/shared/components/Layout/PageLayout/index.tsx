@@ -1,9 +1,9 @@
 import { ReactNode } from 'react'
+import { Layout } from 'antd'
 
+import { Header, useDocumentTitle, useThemeStore } from '@/shared'
 
 import * as S from './styles'
-
-import { Header, useDocumentTitle } from '@/shared'
 
 interface PageLayoutProps {
   title?: string
@@ -13,17 +13,20 @@ interface PageLayoutProps {
 
 const PageLayout = ({ title, sidebar, children }: PageLayoutProps) => {
   useDocumentTitle(title)
+  const { theme } = useThemeStore()
 
   return (
-    <S.Container>
+    <Layout className={S.Container()}>
       <Header />
 
-      <S.SidebarContainer>
+      <Layout className={S.SidebarContainer()}>
         {sidebar}
-        <S.Content>{children}</S.Content>
-      </S.SidebarContainer>
 
-    </S.Container>
+        <Layout className={S.ContentContainer({ active: theme === 'dark' ? true : false })}>
+          <Layout.Content className={S.Content()}>{children}</Layout.Content>
+        </Layout>
+      </Layout>
+    </Layout>
   )
 }
 
