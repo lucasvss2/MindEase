@@ -1,8 +1,10 @@
-import { ReactNode } from "react";
-
-export interface IFormFieldProps {
-    label?: string;
-    message?: string;
-    children: ReactNode
-    variant?: 'default' | 'error'
+export type FormFieldVariant = "default" | "error";
+export interface IFormFieldSharedProps {
+  children: React.ReactNode;
+  variant?: FormFieldVariant;
 }
+export interface IFormFieldProps extends IFormFieldSharedProps {
+  label?: string;
+  message?: string;
+}
+
