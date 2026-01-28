@@ -17,9 +17,11 @@ import { SettingsSlider } from "./components/SettingsSlider";
 
 export const InterfaceAdjustments = () => {
   const {
+    animationSpeed,
     updateFontSizeScale,
     spacingScale,
     updateSpacingScale,
+    updateAnimationSpeed,
     fontSizeScale,
     contrast,
     updateContrast,
@@ -122,9 +124,9 @@ export const InterfaceAdjustments = () => {
 
         <SettingsSlider
           title='Velocidade de animação'
-          value={spacingScale}
-          onIncrese={() => {}}
-          onDecrease={() => {}}
+          value={animationSpeed}
+          onIncrese={() => updateAnimationSpeed(animationSpeed + 1)}
+          onDecrease={() => updateAnimationSpeed(animationSpeed - 1)}
           icon={<MaterialCommunityIcons name='speedometer' size={22} />}
         />
       </Card>
