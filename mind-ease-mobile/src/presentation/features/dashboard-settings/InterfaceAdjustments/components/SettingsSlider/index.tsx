@@ -49,9 +49,9 @@ export const SettingsSlider = ({
           <FormFieldLabel>{title}</FormFieldLabel>
         </IconTextContainer>
 
-        <View className='flex-row justify-between flex-grow'>
+        <View className='flex-row justify-between'>
           <Text
-            className='font-lexend-semi-bold text-blue-600'
+            className='font-lexend-semi-bold self-end text-blue-600'
             style={[scaledTitleFontSpacing]}
           >
             {value.toFixed(2)}
