@@ -1,10 +1,13 @@
-import { useFonts } from "@/presentation/hooks/useFonts";
 import "@/app/styles/global.css";
+import { TOKENS } from "@/presentation/constants/tokens";
+import { useFonts } from "@/presentation/hooks/useFonts";
+import useUserPreferencesStore from "@/presentation/store/useUserPreferencesStore";
 import { FontAwesome } from "@expo/vector-icons";
 import { SplashScreen, Tabs } from "expo-router";
 SplashScreen.preventAutoHideAsync();
 export default function RootLayout() {
   useFonts();
+  const { fontType } = useUserPreferencesStore();
 
   return (
     <Tabs
@@ -22,8 +25,9 @@ export default function RootLayout() {
           justifyContent: "center",
         },
         tabBarLabelStyle: {
-          fontFamily: "Lexend_600SemiBold",
-          fontSize: 12,
+          fontFamily: TOKENS.FONT_FAMILY[fontType],
+          fontWeight: 600,
+          fontSize: 16,
         },
       }}
     >

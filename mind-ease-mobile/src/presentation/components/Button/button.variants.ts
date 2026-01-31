@@ -12,8 +12,8 @@ export const buttonVariants = cva(
         link: "bg-transparent",
       },
       size: {
-        sm: "font-lexend-regular",
-        md: "font-lexend-medium",
+        sm: "font-normal",
+        md: "font-medium",
       },
       disabled: {
         true: "opacity-50 grayscale",
