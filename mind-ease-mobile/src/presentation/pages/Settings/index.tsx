@@ -4,10 +4,13 @@ import { ComplexityLevel } from "@/presentation/features/dashboard-settings/Comp
 import { InterfaceAdjustments } from "@/presentation/features/dashboard-settings/InterfaceAdjustments";
 import { SummaryMode } from "@/presentation/features/dashboard-settings/SumaryMode";
 import { ScrollView } from "react-native";
+import { cn } from "@/utils/twClassnamesResolver";
 
-export function DashboardSettingsPage() {
+export function Settings() {
   return (
-    <ScrollView className='px-8 flex-1 gap-8 bg-neutral-50'>
+    <ScrollView
+      className={cn("flex-1 gap-8 bg-neutral-50 px-8")}
+    >
       <ActivityProfile />
       <InterfaceAdjustments />
       <SummaryMode />
@@ -16,4 +19,3 @@ export function DashboardSettingsPage() {
     </ScrollView>
   );
 }
-
