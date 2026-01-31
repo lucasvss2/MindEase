@@ -7,4 +7,5 @@ export interface IButtonProps
     VariantProps<typeof buttonVariants> {
   children: React.ReactNode;
   textClassName?: string;
+  leftIcon?: React.ReactNode;
 }
