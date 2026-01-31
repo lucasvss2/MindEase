@@ -1,13 +1,31 @@
-import { create } from 'zustand';
-import { Actions, States } from './interface';
+import { create } from "zustand";
+import { Actions, States } from "./interface";
+import { IUserPreferences } from "@/domain/types/settings";
 
-const useUserPreferencesStore = create<States&Actions>((set) => ({
-    fontSizeScale: 0,
-    spacingScale: 0,
-    increaseFontSizeScale: () => set(({fontSizeScale}) => ({ fontSizeScale: fontSizeScale + 1 })),
-    decreaseFontSizeScale: () => set(({fontSizeScale}) => ({ fontSizeScale: fontSizeScale - 1 })),
-    increaseSpacingScale: () => set(({spacingScale}) => ({ spacingScale: spacingScale + 1 })),
-    decreaseSpacingScale: () => set(({spacingScale}) => ({ spacingScale: spacingScale - 1 })),
+const initialPreferences: IUserPreferences = {
+  fontSizeScale: 1,
+  spacingScale: 1,
+  contrast: "standard",
+  activityProfile: "work",
+  enableSummaryMode: false,
+  complexityLevel: "high",
+  animationSpeed: 1,
+  fontType: "sans",
+};
+
+const useUserPreferencesStore = create<States & Actions>((set) => ({
+  ...initialPreferences,
+
+  updateEnableSummaryMode: (enableSummaryMode) => set({ enableSummaryMode }),
+  updateContrast: (contrast) => set({ contrast }),
+  updateActivityProfile: (activityProfile) => set({ activityProfile }),
+  updateComplexityLevel: (complexityLevel) => set({ complexityLevel }),
+  updateFontSizeScale: (value) => set(() => ({ fontSizeScale: value })),
+  updateSpacingScale: (value) => set(() => ({ spacingScale: value })),
+  updateAnimationSpeed: (value) => set(() => ({ animationSpeed: value })),
+  updateFontType: (fontType) => set(() => ({ fontType })),
+  resetPreferences: () => set({ ...initialPreferences }),
 }));
 
 export default useUserPreferencesStore;
+
