@@ -6,4 +6,5 @@ export * from './ColorPicker';
 export * from './Dropdown';
 export * from './Dropdown/components';
 export * from './ScreenHeader';
+export * from './SheetModal';
 export * from './TimerRing';
