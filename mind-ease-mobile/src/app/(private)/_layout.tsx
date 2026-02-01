@@ -49,6 +49,13 @@ export default function RootLayout() {
         }}
       />
       <Tabs.Screen
+        name='details'
+        options={{
+          href: null,
+          tabBarStyle: { display: 'none' },
+        }}
+      />
+      <Tabs.Screen
         name='tasks'
         options={{
           tabBarIcon: ({ color, size }) => (
