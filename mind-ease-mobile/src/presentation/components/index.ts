@@ -2,6 +2,7 @@ export * from './Avatar';
 export * from './BoardCard';
 export * from './Button';
 export * from './Card';
+export * from './ColorPicker';
 export * from './Dropdown';
 export * from './Dropdown/components';
 export * from './ScreenHeader';
