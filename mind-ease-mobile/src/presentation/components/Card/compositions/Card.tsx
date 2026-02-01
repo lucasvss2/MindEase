@@ -6,6 +6,7 @@ import { ICardsSharedProps } from "../interface";
 export const Card: React.FC<ICardsSharedProps> = ({
   children,
   className = "",
+  style,
 }) => {
   return (
     <View
@@ -13,6 +14,7 @@ export const Card: React.FC<ICardsSharedProps> = ({
         "w-full rounded-lg border border-neutral-200 shadow-sm bg-neutral-0 px-5 py-5",
         className,
       )}
+      style={style}
     >
       {children}
     </View>
