@@ -1,14 +1,40 @@
+import { useState } from "react";
 import { View, Text, ScrollView, TouchableOpacity } from "react-native";
+import { useRouter } from "expo-router";
 import { MaterialIcons } from "@expo/vector-icons";
 import { BoardCard } from "@/presentation/components";
 import { MOCK_BOARDS } from "@/data/mocks";
 import { cn } from "@/utils/twClassnamesResolver";
 import { THEME_COLORS } from "@/presentation/constants/theme";
-import { Header } from "./components";
+import { CreateBoardModal, Header } from "./components";
 
 export function Tasks() {
+  const router = useRouter();
+  const [createModalVisible, setCreateModalVisible] = useState(false);
+
+  const handleCreateBoard = ({
+    title,
+    color,
+  }: {
+    title: string;
+    color: string;
+  }) => {
+    const newId = `new-${Date.now()}`;
+    router.push({
+      pathname: "/details",
+      params: { id: newId, title, color },
+    });
+    setCreateModalVisible(false);
+  };
+
   return (
     <View className={cn("flex-1 bg-neutral-0")}>
+      <CreateBoardModal
+        snapPoints={[65, 90]}
+        visible={createModalVisible}
+        onClose={() => setCreateModalVisible(false)}
+        onCreate={handleCreateBoard}
+      />
       <Header />
       <View className={cn("flex-1")}>
         <View className={cn("px-5 pt-6 pb-6 border-b border-neutral-200 bg-neutral-0")}>
@@ -16,7 +42,7 @@ export function Tasks() {
             Meus quadros
           </Text>
           <Text className="text-base font-lexend-regular text-neutral-600 mt-1">
-            7 quadros ativos
+            {MOCK_BOARDS.length} quadros ativos
           </Text>
         </View>
         <ScrollView
@@ -33,9 +59,12 @@ export function Tasks() {
               <BoardCard
                 key={board.id}
                 board={board}
-                onPress={() => {
-                  // TODO: Navegar para detalhes do quadro (ex.: router.push(`/board/${board.id}`))
-                }}
+                onPress={() =>
+                  router.push({
+                    pathname: "/details",
+                    params: { id: board.id, title: board.title, color: board.color },
+                  })
+                }
               />
             ))}
           </View>
@@ -47,9 +76,7 @@ export function Tasks() {
         >
           <TouchableOpacity
             activeOpacity={0.7}
-            onPress={() => {
-              // TODO: Navegar para criação de quadro ou abrir modal
-            }}
+            onPress={() => setCreateModalVisible(true)}
             className={cn(
               "w-full py-5 rounded-lg border-2 border-neutral-300 items-center justify-center"
             )}

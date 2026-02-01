@@ -13,7 +13,7 @@ export function Header() {
         "flex-row items-center justify-between px-4 py-3 border-b border-neutral-200 bg-neutral-0"
       )}
     >
-      <Text className="text-3xl font-lexend-semi-bold text-neutral-1000 text-blue-400">
+      <Text className="text-3xl font-lexend-semi-bold text-blue-600">
         MindEase
       </Text>
       <View className="flex-row items-center gap-4">
