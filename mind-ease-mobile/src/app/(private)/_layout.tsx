@@ -1,6 +1,9 @@
 import { useFonts } from "@/presentation/hooks/useFonts";
 import "@/app/styles/global.css";
-import { FontAwesome } from "@expo/vector-icons";
+import {
+  FontAwesome,
+  MaterialCommunityIcons,
+} from "@expo/vector-icons";
 import { SplashScreen, Tabs } from "expo-router";
 SplashScreen.preventAutoHideAsync();
 export default function RootLayout() {
@@ -15,36 +18,41 @@ export default function RootLayout() {
         tabBarStyle: {
           paddingTop: 12,
           paddingBottom: 8,
+          paddingHorizontal: 16,
           height: 64,
         },
         tabBarItemStyle: {
           alignItems: "center",
           justifyContent: "center",
+          minWidth: 80,
+          paddingHorizontal: 8,
         },
         tabBarLabelStyle: {
           fontFamily: "Lexend_600SemiBold",
           fontSize: 12,
+          marginTop: 4,
         },
+        tabBarAllowFontScaling: false,
       }}
     >
       <Tabs.Screen
         name='index'
         options={{
-          href: null, // Oculta do rodapé
+          href: null,
         }}
       />
       <Tabs.Screen
         name='focus'
         options={{
-          href: null, // Oculta do rodapé - acessível apenas via navegação programática
-          tabBarStyle: { display: 'none' }, // Oculta o rodapé quando estiver na página Focus
+          href: null,
+          tabBarStyle: { display: 'none' },
         }}
       />
       <Tabs.Screen
         name='tasks'
         options={{
           tabBarIcon: ({ color, size }) => (
-            <FontAwesome name='tasks' color={color} size={size} />
+            <FontAwesome name='check-square-o' color={color} size={size} />
           ),
           title: "Tarefas",
         }}
@@ -53,7 +61,11 @@ export default function RootLayout() {
         name='settings'
         options={{
           tabBarIcon: ({ color, size }) => (
-            <FontAwesome name='cog' color={color} size={size} />
+            <MaterialCommunityIcons
+              name='cog-outline'
+              color={color}
+              size={size}
+            />
           ),
           title: "Configurações",
         }}
