@@ -32,4 +32,10 @@ export const THEME_COLORS = {
     background: "#E4F0FF",
     statusBar: "#E4F0FF",
   },
+  /** Fundos das seções (colunas) na tela de detalhes do quadro */
+  section: {
+    paraFazer: "#FEF2F2",
+    emProgresso: "#FFFBEB",
+    concluido: "#F0FDF4",
+  },
 } as const;
