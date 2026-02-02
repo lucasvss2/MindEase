@@ -1,12 +1,6 @@
-/* import { defineConfig } from 'vite'
+import { defineConfig, loadEnv } from 'vite'
 import react from '@vitejs/plugin-react-swc'
-
-// https://vite.dev/config/
-export default defineConfig({
-  plugins: [react()],
-}) */
-
-import { defineConfig, loadEnv } from "vite";
+import wyw from '@wyw-in-js/vite';
 import viteTsConfigPaths from "vite-tsconfig-paths";
 
 export default defineConfig(({ command }) => {
@@ -17,7 +11,6 @@ export default defineConfig(({ command }) => {
       outDir: "build",
       sourcemap: true,
       rollupOptions: {
-        // plugins: [analyse()],
         cache: false,
         maxParallelFileOps: 2,
         output: {
@@ -30,16 +23,29 @@ export default defineConfig(({ command }) => {
       },
     },
     server: {
-      hot: true,
       port: 3000,
       fs: {
         deny: [".env", ".env.*"],
       },
     },
-
-    plugins: [viteTsConfigPaths()],
-    extensions: [".ts", ".tsx"],
-  };
-
+    plugins: [
+      react(),
+      viteTsConfigPaths(),
+      wyw({
+        include: ['./src/**/*.{ts,tsx}'],
+        babelOptions: {
+          presets: ['@babel/preset-typescript', '@babel/preset-react'],
+          plugins: [
+            ['module-resolver', {
+              root: ['./src'],
+              alias: {
+                '@': './src',
+              },
+            }],
+          ],
+        },
+      }),
+    ],
+  }
   return config;
-});
+})

@@ -1,3 +1,21 @@
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+.eslintcache
+.gitconfig
+
+# dependencies
+node_modules
+/.pnp
+.pnp.js
+
+# testing
+/coverage
+
+# production
+/build
+dist
+dist-ssr
+
 # Logs
 logs
 *.log
@@ -7,17 +25,16 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
-node_modules
-build
-dist
-dist-ssr
+# misc
+.DS_Store
 *.local
+.env
 
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
+!.vscode/settings.json
 .idea
-.DS_Store
 *.suo
 *.ntvs*
 *.njsproj
@@ -27,6 +44,3 @@ dist-ssr
 ## Panda
 styled-system
 styled-system-studio
-## Panda
-src/shared/styles/styled-system
-src/shared/styles/styled-system-studio
