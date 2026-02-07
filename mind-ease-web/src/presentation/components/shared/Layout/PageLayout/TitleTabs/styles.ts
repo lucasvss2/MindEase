@@ -21,8 +21,8 @@ export const StyledTabs = styled(Tabs)`
     font-size: ${rem(20)};
     line-height: ${rem(24)};
     font-weight: 400;
-    font-family: ${styledTheme.base.fontFamily};
-    color: ${styledTheme.base.colorPrimary};
+    font-family: ${styledTheme.base.token.fontFamily};
+    color: ${styledTheme.colors.text};
   }
 
   .ant-tabs-tab.ant-tabs-tab-active .ant-tabs-tab-btn {

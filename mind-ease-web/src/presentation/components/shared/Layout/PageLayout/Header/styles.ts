@@ -38,12 +38,13 @@ export const LogoTextContainer = styled.div`
   justify-content: center;
   align-items: center;
   padding-left: 5px;
+  gap: 8px
 `
 
 export const LogoText = styled(Typography.Text)`
   font-size: 20px;
   font-weight: 700;
-  color: #94d956;
+  color: ${styledTheme.colors.brand};
 `
 
 export const HeaderActionsContainer = styled.div`
@@ -60,7 +61,7 @@ export const MenuButton = styled(Button)`
   padding: 4px 8px;
 
   font-size: 14px;
-  color: ${styledTheme.colors.white};
+  color: ${styledTheme.colors.neutral0};
   text-transform: uppercase;
 
   transition: all 0.2s ease;
@@ -120,12 +121,12 @@ export const MenuContent = styled.div`
     color: ${styledTheme.colors.brand};
 
     &:hover {
-      color: ${styledTheme.colors.white} !important;
+      color: ${styledTheme.colors.neutral0} !important;
       background: ${styledTheme.colors.brand} !important;
     }
 
     &.ant-menu-item.ant-menu-item-selected {
-      color: ${styledTheme.colors.white};
+      color: ${styledTheme.colors.neutral0};
       background: ${styledTheme.colors.brand};
 
       font-weight: 700;
@@ -161,7 +162,7 @@ export const NotificationButton = styled(Button)`
   width: 33px;
   height: 33px;
   border-radius: 50%;
-  color: ${styledTheme.colors.white};
+  color: ${styledTheme.colors.neutral0};
   font-size: 14px;
   text-transform: uppercase;
   transition: all 0.2s ease;
@@ -183,12 +184,12 @@ export const NotificationBadge = styled.span`
   border-radius: 6px;
   padding-left: 2px;
   padding-right: 2px;
-  background-color: #ffc600;
-  border: 1px solid #ffffff;
+  background-color: ${styledTheme.colors.yellow600};
+  border: 1px solid ${styledTheme.colors.neutral0};
   cursor: pointer;
   font-size: 10px;
   font-weight: 400;
-  color: #000000;
+  color: ${styledTheme.colors.neutral1000};
 `
 
 export const UserArea = styled.div`
@@ -201,7 +202,7 @@ export const UserArea = styled.div`
 
   border: none;
 
-  color: ${styledTheme.colors.white};
+  color: ${styledTheme.colors.neutral0};
 `
 
 export const HeaderButton = styled(Button)`
@@ -212,7 +213,7 @@ export const HeaderButton = styled(Button)`
   padding: 4px 8px;
   font-size: 14px;
 
-  color: ${styledTheme.colors.white};
+  color: ${styledTheme.colors.neutral0};
   text-transform: uppercase;
 
   transition: all 0.2s ease;
@@ -224,7 +225,7 @@ export const HeaderButton = styled(Button)`
 
   .ant-badge {
     transition: all 0.2s ease;
-    color: ${styledTheme.colors.white};
+    color: ${styledTheme.colors.neutral0};
 
     &:hover,
     .ant-btn-text:not(:disabled):not(.ant-btn-disabled):hover {
@@ -251,7 +252,7 @@ export const CircleOutlined = styled(CheckCircleOutlined)`
   width: 14px;
   height: 14px;
   border-radius: 99%;
-  background-color: #80c343;
+  background-color: ${styledTheme.colors.brand};
 `
 
 export const NotificationDrawer = styled(Drawer)`
@@ -259,7 +260,7 @@ export const NotificationDrawer = styled(Drawer)`
     position: absolute;
     top: 25px;
     right: 10px;
-    color: ${styledTheme.base.colorPrimary};
+    color: ${styledTheme.colors.brand};
   }
 
   .ant-drawer-title {
