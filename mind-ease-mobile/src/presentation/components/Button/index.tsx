@@ -1,6 +1,6 @@
 import { cn } from "@/utils/twClassnamesResolver";
 import React, { useState } from "react";
-import { Text, TextStyle, TouchableOpacity } from "react-native";
+import { TextStyle, TouchableOpacity, View } from "react-native";
 
 import { TOKENS } from "@/presentation/constants/tokens";
 import { useAccessibilityScale } from "@/presentation/hooks/useAccessibilityScale";
@@ -17,7 +17,7 @@ export const Button: React.FC<IButtonProps> = ({
   style,
   disabled,
   leftIcon,
-  ...props 
+  ...props
 }) => {
   const [isPressed, setIsPressed] = useState(false);
 
@@ -27,7 +27,6 @@ export const Button: React.FC<IButtonProps> = ({
     "spacing",
   ) as number;
 
-  console.log({ contrast });
   const scaledFontSpacing = useAccessibilityScale(
     TOKENS.FONT_SIZE[size === "md" ? "base" : "sm"],
   ) as TextStyle;
@@ -141,8 +140,13 @@ export const Button: React.FC<IButtonProps> = ({
         className,
       )}
       style={[
-        { padding: scaledContainerPadding },
+        {
+          padding: scaledContainerPadding,
+          fontFamily: fontType,
+          fontSize: scaledFontSpacing,
+        },
         buttonVariants[contrast][variant!],
+
         ,
         style,
       ]}
@@ -151,11 +155,21 @@ export const Button: React.FC<IButtonProps> = ({
       {...props}
     >
       {leftIcon ? (
-        <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: 8 }}>
+        <View
+          style={{
+            flexDirection: "row",
+            alignItems: "center",
+            justifyContent: "center",
+            gap: 8,
+          }}
+        >
           {leftIcon}
-          {content}
+          {children}
         </View>
-      ) : content}
+      ) : (
+        children
+      )}
     </TouchableOpacity>
   );
 };
+
