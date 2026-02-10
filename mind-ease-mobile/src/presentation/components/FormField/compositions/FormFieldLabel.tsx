@@ -1,5 +1,6 @@
 import { TOKENS } from "@/presentation/constants/tokens";
 import { useAccessibilityScale } from "@/presentation/hooks/useAccessibilityScale";
+import useUserPreferencesStore from "@/presentation/store/useUserPreferencesStore";
 import React from "react";
 import { Text, TextStyle } from "react-native";
 
@@ -9,11 +10,12 @@ export const FormFieldLabel: React.FC<{ children: React.ReactNode }> = ({
   const scaledLabelSize = useAccessibilityScale<TextStyle>(
     TOKENS.FONT_SIZE.base,
   );
+  const { fontType } = useUserPreferencesStore();
 
   return (
     <Text
       className='font-lexend-semi-bold text-neutral-950 mb-1'
-      style={[scaledLabelSize]}
+      style={[scaledLabelSize, { fontFamily: TOKENS.FONT_FAMILY[fontType] }]}
     >
       {children}
     </Text>

@@ -2,6 +2,7 @@ import { FormFieldLabel } from "@/presentation/components/FormField";
 import { Slider } from "@/presentation/components/Slider";
 import { TOKENS } from "@/presentation/constants/tokens";
 import { useAccessibilityScale } from "@/presentation/hooks/useAccessibilityScale";
+import useUserPreferencesStore from "@/presentation/store/useUserPreferencesStore";
 import { useCallback, useRef } from "react";
 import { Text, TextStyle, View } from "react-native";
 import { IconTextContainer } from "../IconTextContainer";
@@ -21,6 +22,7 @@ export const SettingsSlider = ({
   const scaledTitleFontSpacing = useAccessibilityScale<TextStyle>(
     TOKENS.FONT_SIZE.base,
   );
+  const { fontType } = useUserPreferencesStore();
 
   const lastValue = useRef<number>(1);
 
@@ -52,7 +54,10 @@ export const SettingsSlider = ({
         <View className='flex-row justify-between'>
           <Text
             className='font-lexend-semi-bold self-end text-blue-600'
-            style={[scaledTitleFontSpacing]}
+            style={[
+              scaledTitleFontSpacing,
+              { fontFamily: TOKENS.FONT_FAMILY[fontType] },
+            ]}
           >
             {value.toFixed(2)}
           </Text>
