@@ -1,6 +1,6 @@
 import { cn } from "@/utils/twClassnamesResolver";
 import React, { useState } from "react";
-import { TextStyle, TouchableOpacity, View } from "react-native";
+import { Text, TextStyle, TouchableOpacity, View } from "react-native";
 
 import { TOKENS } from "@/presentation/constants/tokens";
 import { useAccessibilityScale } from "@/presentation/hooks/useAccessibilityScale";
@@ -130,6 +130,18 @@ export const Button: React.FC<IButtonProps> = ({
     },
   } as any;
 
+  const textClasses =
+    variant === "default" ? "text-neutral-0" : "text-neutral-950";
+
+  const Content = () => (
+    <Text
+      className={cn("bg-transparent text-center", textClasses, textClassName)}
+      style={[scaledFontSpacing]}
+    >
+      {children}
+    </Text>
+  );
+
   return (
     <TouchableOpacity
       activeOpacity={0.7}
@@ -164,10 +176,10 @@ export const Button: React.FC<IButtonProps> = ({
           }}
         >
           {leftIcon}
-          {children}
+          <Content />
         </View>
       ) : (
-        children
+        <Content />
       )}
     </TouchableOpacity>
   );
