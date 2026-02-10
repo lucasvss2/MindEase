@@ -1,38 +1,42 @@
-import { cn } from '@/utils/twClassnamesResolver';
-import React from 'react';
-import { Text, TextStyle, TouchableOpacity, View } from 'react-native';
+import { cn } from "@/utils/twClassnamesResolver";
+import React from "react";
+import { Text, TextStyle, TouchableOpacity, View } from "react-native";
 
-import { TOKENS } from '@/presentation/constants/tokens';
-import { useAccessibilityScale } from '@/presentation/hooks/useAccessibilityScale';
-import { buttonVariants } from './button.variants';
-import { IButtonProps } from './interface';
+import { TOKENS } from "@/presentation/constants/tokens";
+import { useAccessibilityScale } from "@/presentation/hooks/useAccessibilityScale";
+import useUserPreferencesStore from "@/presentation/store/useUserPreferencesStore";
+import { buttonVariants } from "./button.variants";
+import { IButtonProps } from "./interface";
 
-export const Button: React.FC<IButtonProps> = ({ 
-  children, 
-  variant, 
-  size = 'md', 
+export const Button: React.FC<IButtonProps> = ({
+  children,
+  variant,
+  size = "md",
   className,
   textClassName,
   style,
   disabled,
   leftIcon,
-  ...props 
+  ...props
 }) => {
-  const scaledContainerPadding  = 
-  useAccessibilityScale(TOKENS.SPACING[size as 'sm' | 'md'], 'spacing') as number
-  
-  const scaledFontSpacing  = 
-  useAccessibilityScale(TOKENS.FONT_SIZE[size === 'md' ? 'base': 'sm']) as TextStyle
-  
+  const { fontType } = useUserPreferencesStore();
+  const scaledContainerPadding = useAccessibilityScale(
+    TOKENS.SPACING[size as "sm" | "md"],
+    "spacing",
+  ) as number;
+
+  const scaledFontSpacing = useAccessibilityScale(
+    TOKENS.FONT_SIZE[size === "md" ? "base" : "sm"],
+  ) as TextStyle;
 
   const textClasses =
     variant === "default"
       ? "text-neutral-0 font-lexend-bold"
       : "text-neutral-950";
   const content = (
-    <Text  
+    <Text
       className={cn("bg-transparent text-center", textClasses, textClassName)}
-      style={[scaledFontSpacing]}
+      style={[scaledFontSpacing, { fontFamily: fontType }]}
     >
       {children}
     </Text>
@@ -43,15 +47,25 @@ export const Button: React.FC<IButtonProps> = ({
       activeOpacity={0.7}
       disabled={disabled!}
       className={cn(buttonVariants({ variant, size, disabled }), className)}
-      style={[{padding: scaledContainerPadding}, style]}
+      style={[{ padding: scaledContainerPadding }, style]}
       {...props}
     >
       {leftIcon ? (
-        <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: 8 }}>
+        <View
+          style={{
+            flexDirection: "row",
+            alignItems: "center",
+            justifyContent: "center",
+            gap: 8,
+          }}
+        >
           {leftIcon}
           {content}
         </View>
-      ) : content}
+      ) : (
+        content
+      )}
     </TouchableOpacity>
   );
 };
+
