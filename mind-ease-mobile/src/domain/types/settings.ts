@@ -1,4 +1,4 @@
-export type Contrast = "soft" | "standard" | "high";
+export type Contrast = "low" | "moderate" | "high";
 export type ActivityProfile = "work" | "study";
 export type ComplexityLevel = "low" | "medium" | "high";
 export type FontType = "sans" | "serif" | "mono";

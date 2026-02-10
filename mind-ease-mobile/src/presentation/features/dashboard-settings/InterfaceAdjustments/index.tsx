@@ -33,14 +33,14 @@ export const InterfaceAdjustments = () => {
     () => [
       {
         text: "Suave",
-        conditional: contrast === "soft",
-        onPress: () => updateContrast("soft"),
+        conditional: contrast === "low",
+        onPress: () => updateContrast("low"),
         size: "sm",
       },
       {
         text: "Padrão",
-        conditional: contrast === "standard",
-        onPress: () => updateContrast("standard"),
+        conditional: contrast === "moderate",
+        onPress: () => updateContrast("moderate"),
         size: "sm",
       },
       {
