@@ -1,0 +1,11 @@
+import { LoginPage } from "@/presentation/pages/Login";
+
+import { SafeAreaView } from "react-native-safe-area-context";
+
+export default function LoginScreen() {
+  return (
+    <SafeAreaView className='items-center justify-center flex-1 bg-blue-50'>
+      <LoginPage />
+    </SafeAreaView>
+  );
+}
