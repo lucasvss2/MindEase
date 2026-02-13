@@ -4,6 +4,8 @@ import { useFonts } from "@/presentation/hooks/useFonts";
 import useUserPreferencesStore from "@/presentation/store/useUserPreferencesStore";
 import { FontAwesome, MaterialCommunityIcons } from "@expo/vector-icons";
 import { SplashScreen, Tabs } from "expo-router";
+import ToastManager from "toastify-react-native";
+
 SplashScreen.preventAutoHideAsync();
 export default function RootLayout() {
   useFonts();
@@ -77,6 +79,7 @@ export default function RootLayout() {
           title: "Configurações",
         }}
       />
+      <ToastManager />
     </Tabs>
   );
 }
