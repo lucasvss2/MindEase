@@ -5,13 +5,12 @@ import { Text, TextStyle, TouchableOpacity, View } from "react-native";
 import { TOKENS } from "@/presentation/constants/tokens";
 import { useAccessibilityScale } from "@/presentation/hooks/useAccessibilityScale";
 import useUserPreferencesStore from "@/presentation/store/useUserPreferencesStore";
-import { buttonSizeVariants } from "./button.variants";
 import { IButtonProps } from "./interface";
 
 export const Button: React.FC<IButtonProps> = ({
   children,
   variant = "default",
-  size = "md",
+  size = "sm",
   className,
   textClassName,
   style,
@@ -130,13 +129,19 @@ export const Button: React.FC<IButtonProps> = ({
     },
   } as any;
 
-  const textClasses =
-    variant === "default" ? "text-neutral-0" : "text-neutral-950";
+  const textColorByContrast = buttonVariants[contrast][variant!].color;
 
   const Content = () => (
     <Text
-      className={cn("bg-transparent text-center", textClasses, textClassName)}
-      style={[scaledFontSpacing]}
+      className={cn(
+        "bg-transparent text-center",
+        size === "sm" ? "font-normal" : "font-medium",
+        textClassName,
+      )}
+      style={[
+        scaledFontSpacing,
+        { color: textColorByContrast, fontFamily: fontType },
+      ]}
     >
       {children}
     </Text>
@@ -148,16 +153,15 @@ export const Button: React.FC<IButtonProps> = ({
       disabled={disabled!}
       className={cn(
         "flex-row items-center justify-center rounded-md shadow-sm",
-        buttonSizeVariants({ size }),
+        disabled &&'cursor-not-allowed',
         className,
       )}
       style={[
         {
           padding: scaledContainerPadding,
-          fontFamily: fontType,
           fontSize: scaledFontSpacing,
         },
-        buttonVariants[contrast][variant!],
+        buttonVariants[contrast][disabled ? "neutral" : variant!],
 
         ,
         style,

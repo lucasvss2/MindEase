@@ -1,14 +1,7 @@
-import { cva } from "class-variance-authority";
+import { TOKENS } from "@/presentation/constants";
 
-export const buttonSizeVariants = cva("", {
-  variants: {
-    size: {
-      sm: "font-normal",
-      md: "font-medium",
-    },
-  },
-  defaultVariants: {
-    size: "md",
-  },
-});
+export const buttonSizeVariants = {
+  sm: TOKENS.SPACING.sm,
+  md: TOKENS.SPACING.md,
+};
 
