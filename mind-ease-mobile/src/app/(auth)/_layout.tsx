@@ -2,10 +2,11 @@ import "@/app/styles/global.css";
 import { queryClient } from "@/infrastructure/query";
 import { useFonts } from "@/presentation/hooks/useFonts";
 import { QueryClientProvider } from "@tanstack/react-query";
-import { SplashScreen, Stack } from "expo-router";
+import { Stack } from "expo-router";
 import ToastManager from "toastify-react-native";
-
-SplashScreen.preventAutoHideAsync();
+if (__DEV__) {
+  require("../../../ReactotronConfig");
+}
 
 export default function RootLayout() {
   useFonts();
