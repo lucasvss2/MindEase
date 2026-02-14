@@ -136,7 +136,7 @@ export const Button: React.FC<IButtonProps> = ({
   const Content = () => (
     <Text
       className={cn("bg-transparent text-center", textClasses, textClassName)}
-      style={[scaledFontSpacing]}
+      style={[scaledFontSpacing, { fontFamily: fontType }]}
     >
       {children}
     </Text>
