@@ -8,6 +8,7 @@
 .theme-light {
   --color-brand: #7fb3d5ff;
   --color-bgColor: #434343;
+  --color-black: #000000;
 
   --color-link: #7fb3d5ff;
   --color-linkActive: #7fb3d5ff;
@@ -71,12 +72,24 @@
   --color-buttonLinkHoverBG: #FFFFFF;
   --color-buttonLinkHoverText: #383838;
   --color-buttonLinkHoverBorder: none;
+
+  /* dialog-danger */
+  --color-dialogDangerBG: #F8F8F8;
+  --color-dialogDangerText: #6E2215;
+  --color-dialogDangerTitle: #6E2215;
+  --color-dialogDangerBorder: 1px solid #C9280C;
+  /* dialog-default */
+  --color-dialogDefaultBG: #F8F9F9;
+  --color-dialogDefaultText: #3B3A3A;
+  --color-dialogDefaultTitle: #3B3A3A;
+  --color-dialogDefaultBorder: 1px solid #D9D9D9;
 }
 
 /* Light Low Contrast Theme */
 .theme-light-low-contrast {
   --color-brand: #a8c8dc;
   --color-bgColor: #5a5a5a;
+  --color-black: #000000;
 
   --color-link: #a8c8dc;
   --color-linkActive: #a8c8dc;
@@ -140,12 +153,24 @@
   --color-buttonLinkHoverBG: #FFFFFF;
   --color-buttonLinkHoverText: #636363;
   --color-buttonLinkHoverBorder: none;
+
+  /* dialog-danger */
+  --color-dialogDangerBG: #F8F8F8;
+  --color-dialogDangerText: #9A2A17;
+  --color-dialogDangerTitle: #9A2A17;
+  --color-dialogDangerBorder: 1px solid #9A2A17;
+  /* dialog-default */
+  --color-dialogDefaultBG: #F8F9F9;
+  --color-dialogDefaultText: #3B3A3A;
+  --color-dialogDefaultTitle: #5B5B5B;
+  --color-dialogDefaultBorder: 1px solid #F8F8F8;
 }
 
 /* Light High Contrast Theme */
 .theme-light-high-contrast {
   --color-brand: #2b7aad;
   --color-bgColor: #1a1a1a;
+  --color-black: #000000;
 
   --color-link: #0066cc;
   --color-linkActive: #003366;
@@ -209,6 +234,17 @@
   --color-buttonLinkHoverBG: #FFFFFF;
   --color-buttonLinkHoverText: #000000;
   --color-buttonLinkHoverBorder: none;
+
+  /* dialog-danger */
+  --color-dialogDangerBG: #FFFFFF;
+  --color-dialogDangerText: #43150D;
+  --color-dialogDangerTitle: #43150D;
+  --color-dialogDangerBorder: 1px solid #43150D;
+  /* dialog-default */
+  --color-dialogDefaultBG: #FFFFFF;
+  --color-dialogDefaultTitle: #000000;
+  --color-dialogDefaultText: #000000;
+  --color-dialogDefaultBorder: 1px solid #D9D9D9;
 }
 
 /* ===== Font Variables ===== */
@@ -217,6 +253,7 @@
   --font-sans: 'Lexend', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
   --font-serif: 'Bitter', Georgia, 'Times New Roman', serif;
   --font-mono: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
+  --box-shadow-sm: 0 4px 8px 0 rgba(88, 84, 84, 0.25);
 }
 
 /* ===== Base Styles ===== */
