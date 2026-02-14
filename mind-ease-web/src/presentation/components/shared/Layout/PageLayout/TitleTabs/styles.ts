@@ -18,9 +18,7 @@ export const StyledTabs = styled(Tabs)`
 
   .ant-tabs-tab {
     font-size: ${rem(20)};
-    line-height: ${rem(24)};
     font-weight: 400;
-    font-family: 'Lexend', sans-serif;
     color: var(--color-text);
   }
 

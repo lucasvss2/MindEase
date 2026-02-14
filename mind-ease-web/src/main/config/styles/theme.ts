@@ -1,5 +1,4 @@
 // ===== Theme Color Definitions =====
-// Define as cores para cada modo de tema aqui
 
 const colors = {
   transparent: 'transparent',
@@ -47,10 +46,12 @@ const colors = {
   red700: '#C9280C',
   red750: '#B71C1C',
   red800: '#751721',
+  red825: '#9A2A17',
   red850: '#940000',
   red900: '#6E2215',
   red925: '#7F0000',
   red950: '#6B1304',
+  red1000: '#43150D',
   yellow50: '#FFF9C4',
   yellow100: '#FFF2BC',
   yellow150: '#FEF3C7',
@@ -60,6 +61,7 @@ const colors = {
   yellow800: '#856404',
   yellow950: '#5C3D00',
   neutral0: '#FFFFFF',
+  neutral40: '#F8F8F8',
   neutral50: '#F8F9F9',
   neutral75: '#F5F5F5',
   neutral125: '#EDEBEB',
@@ -77,6 +79,7 @@ const colors = {
   neutral625: '#636363',
   neutral650: '#615E5E',
   neutral700: '#5A5A5A',
+  neutral725: '#5B5B5B',
   neutral750: '#5C5C5C',
   neutral800: '#3B3A3A',
   neutral825: '#585858',
@@ -94,11 +97,11 @@ const colors = {
   teal900: '#004239',
 }
 
-
 export const themeColors = {
   light: {
     brand: '#7fb3d5ff',
     bgColor: '#434343',
+    black: '#000000',
 
     link: '#7fb3d5ff',
     linkActive: '#7fb3d5ff',
@@ -178,12 +181,22 @@ export const themeColors = {
     buttonLinkHoverText: colors.neutral850,
     buttonLinkHoverBorder: colors.none,
 
+    //dialog-danger
+    dialogDangerBG: colors.neutral40,
+    dialogDangerText: colors.red900,
+    dialogDangerTitle: colors.red900,
+    dialogDangerBorder: `1px solid ${colors.red700}`,
+    //dialog-default
+    dialogDefaultBG: colors.neutral50,
+    dialogDefaultText: colors.neutral800,
+    dialogDefaultTitle: colors.neutral800,
+    dialogDefaultBorder: `1px solid ${colors.neutral350}`,
   },
 
   lightLowContrast: {
     brand: '#a8c8dc',
     bgColor: '#5a5a5a',
-
+    black: '#000000',
     link: '#a8c8dc',
     linkActive: '#a8c8dc',
     linkHover: '#c8e8b0',
@@ -262,11 +275,22 @@ export const themeColors = {
     buttonLinkHoverText: colors.neutral625,
     buttonLinkHoverBorder: colors.none,
 
+    //dialog-danger
+    dialogDangerBG: colors.neutral40,
+    dialogDangerText: colors.red825,
+    dialogDangerTitle: colors.red825,
+    dialogDangerBorder: `1px solid ${colors.red825}`,
+    //dialog-default
+    dialogDefaultBG: colors.neutral50,
+    dialogDefaultText: colors.neutral800,
+    dialogDefaultTitle: colors.neutral725,
+    dialogDefaultBorder: `1px solid ${colors.neutral40}`,
   },
 
   lightHighContrast: {
     brand: '#2b7aad',
     bgColor: '#1a1a1a',
+    black: '#000000',
 
     link: '#0066cc',
     linkActive: '#003366',
@@ -346,13 +370,24 @@ export const themeColors = {
     buttonLinkHoverText: colors.neutral1000,
     buttonLinkHoverBorder: colors.none,
 
+    //dialog-danger
+    dialogDangerBG: colors.neutral0,
+    dialogDangerText: colors.red1000,
+    dialogDangerTitle: colors.red1000,
+    dialogDangerBorder: `1px solid ${colors.red1000}`,
+    //dialog-default
+    dialogDefaultBG: colors.neutral0,
+    dialogDefaultTitle: colors.neutral1000,
+    dialogDefaultText: colors.neutral1000,
+    dialogDefaultBorder: `1px solid ${colors.neutral350}`,
+
   },
 }
 
 // ===== Ant Design Theme =====
 export const antdTheme = {
   token: {
-    fontFamily: 'Lexend, JetBrains Mono, sans-serif',
+    fontFamily: 'var(--font-sans)',
     borderRadius: 5,
   },
 }

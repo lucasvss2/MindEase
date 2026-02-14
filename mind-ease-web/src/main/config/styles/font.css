@@ -8,7 +8,7 @@
   font-style: normal;
   src:
     local('Lexend Thin'),
-    url('@/assets/fonts/Lexend/Lexend-Thin.ttf') format('truetype');
+    url('../../../assets/fonts/Lexend/Lexend-Thin.ttf') format('truetype');
 }
 
 @font-face {
@@ -17,7 +17,7 @@
   font-style: normal;
   src:
     local('Lexend ExtraLight'),
-    url('@/assets/fonts/Lexend/Lexend-ExtraLight.ttf') format('truetype');
+    url('../../../assets/fonts/Lexend/Lexend-ExtraLight.ttf') format('truetype');
 }
 
 @font-face {
@@ -26,7 +26,7 @@
   font-style: normal;
   src:
     local('Lexend Light'),
-    url('@/assets/fonts/Lexend/Lexend-Light.ttf') format('truetype');
+    url('../../../assets/fonts/Lexend/Lexend-Light.ttf') format('truetype');
 }
 
 @font-face {
@@ -35,7 +35,7 @@
   font-style: normal;
   src:
     local('Lexend Regular'),
-    url('@/assets/fonts/Lexend/Lexend-Regular.ttf') format('truetype');
+    url('../../../assets/fonts/Lexend/Lexend-Regular.ttf') format('truetype');
 }
 
 @font-face {
@@ -44,7 +44,7 @@
   font-style: normal;
   src:
     local('Lexend Medium'),
-    url('@/assets/fonts/Lexend/Lexend-Medium.ttf') format('truetype');
+    url('../../../assets/fonts/Lexend/Lexend-Medium.ttf') format('truetype');
 }
 
 @font-face {
@@ -53,7 +53,7 @@
   font-style: normal;
   src:
     local('Lexend SemiBold'),
-    url('@/assets/fonts/Lexend/Lexend-SemiBold.ttf') format('truetype');
+    url('../../../assets/fonts/Lexend/Lexend-SemiBold.ttf') format('truetype');
 }
 
 @font-face {
@@ -62,7 +62,7 @@
   font-style: normal;
   src:
     local('Lexend Bold'),
-    url('@/assets/fonts/Lexend/Lexend-Bold.ttf') format('truetype');
+    url('../../../assets/fonts/Lexend/Lexend-Bold.ttf') format('truetype');
 }
 
 @font-face {
@@ -71,7 +71,7 @@
   font-style: normal;
   src:
     local('Lexend ExtraBold'),
-    url('@/assets/fonts/Lexend/Lexend-ExtraBold.ttf') format('truetype');
+    url('../../../assets/fonts/Lexend/Lexend-ExtraBold.ttf') format('truetype');
 }
 
 @font-face {
@@ -80,7 +80,7 @@
   font-style: normal;
   src:
     local('Lexend Black'),
-    url('@/assets/fonts/Lexend/Lexend-Black.ttf') format('truetype');
+    url('../../../assets/fonts/Lexend/Lexend-Black.ttf') format('truetype');
 }
 
 /* ==========================================================================
@@ -93,7 +93,7 @@
   font-style: normal;
   src:
     local('JetBrains Mono Thin'),
-    url('@/assets/fonts/JetBrains_Mono/JetBrainsMono-Thin.ttf') format('truetype');
+    url('../../../assets/fonts/JetBrains_Mono/JetBrainsMono-Thin.ttf') format('truetype');
 }
 
 @font-face {
@@ -102,7 +102,7 @@
   font-style: italic;
   src:
     local('JetBrains Mono Thin Italic'),
-    url('@/assets/fonts/JetBrains_Mono/JetBrainsMono-ThinItalic.ttf') format('truetype');
+    url('../../../assets/fonts/JetBrains_Mono/JetBrainsMono-ThinItalic.ttf') format('truetype');
 }
 
 @font-face {
@@ -111,7 +111,7 @@
   font-style: normal;
   src:
     local('JetBrains Mono ExtraLight'),
-    url('@/assets/fonts/JetBrains_Mono/JetBrainsMono-ExtraLight.ttf') format('truetype');
+    url('../../../assets/fonts/JetBrains_Mono/JetBrainsMono-ExtraLight.ttf') format('truetype');
 }
 
 @font-face {
@@ -120,7 +120,7 @@
   font-style: italic;
   src:
     local('JetBrains Mono ExtraLight Italic'),
-    url('@/assets/fonts/JetBrains_Mono/JetBrainsMono-ExtraLightItalic.ttf') format('truetype');
+    url('../../../assets/fonts/JetBrains_Mono/JetBrainsMono-ExtraLightItalic.ttf') format('truetype');
 }
 
 @font-face {
@@ -129,7 +129,7 @@
   font-style: normal;
   src:
     local('JetBrains Mono Light'),
-    url('@/assets/fonts/JetBrains_Mono/JetBrainsMono-Light.ttf') format('truetype');
+    url('../../../assets/fonts/JetBrains_Mono/JetBrainsMono-Light.ttf') format('truetype');
 }
 
 @font-face {
@@ -138,7 +138,7 @@
   font-style: italic;
   src:
     local('JetBrains Mono Light Italic'),
-    url('@/assets/fonts/JetBrains_Mono/JetBrainsMono-LightItalic.ttf') format('truetype');
+    url('../../../assets/fonts/JetBrains_Mono/JetBrainsMono-LightItalic.ttf') format('truetype');
 }
 
 @font-face {
@@ -147,7 +147,7 @@
   font-style: normal;
   src:
     local('JetBrains Mono Regular'),
-    url('@/assets/fonts/JetBrains_Mono/JetBrainsMono-Regular.ttf') format('truetype');
+    url('../../../assets/fonts/JetBrains_Mono/JetBrainsMono-Regular.ttf') format('truetype');
 }
 
 @font-face {
@@ -156,7 +156,7 @@
   font-style: italic;
   src:
     local('JetBrains Mono Italic'),
-    url('@/assets/fonts/JetBrains_Mono/JetBrainsMono-Italic.ttf') format('truetype');
+    url('../../../assets/fonts/JetBrains_Mono/JetBrainsMono-Italic.ttf') format('truetype');
 }
 
 @font-face {
@@ -165,7 +165,7 @@
   font-style: normal;
   src:
     local('JetBrains Mono Medium'),
-    url('@/assets/fonts/JetBrains_Mono/JetBrainsMono-Medium.ttf') format('truetype');
+    url('../../../assets/fonts/JetBrains_Mono/JetBrainsMono-Medium.ttf') format('truetype');
 }
 
 @font-face {
@@ -174,7 +174,7 @@
   font-style: italic;
   src:
     local('JetBrains Mono Medium Italic'),
-    url('@/assets/fonts/JetBrains_Mono/JetBrainsMono-MediumItalic.ttf') format('truetype');
+    url('../../../assets/fonts/JetBrains_Mono/JetBrainsMono-MediumItalic.ttf') format('truetype');
 }
 
 @font-face {
@@ -183,7 +183,7 @@
   font-style: normal;
   src:
     local('JetBrains Mono SemiBold'),
-    url('@/assets/fonts/JetBrains_Mono/JetBrainsMono-SemiBold.ttf') format('truetype');
+    url('../../../assets/fonts/JetBrains_Mono/JetBrainsMono-SemiBold.ttf') format('truetype');
 }
 
 @font-face {
@@ -192,7 +192,7 @@
   font-style: italic;
   src:
     local('JetBrains Mono SemiBold Italic'),
-    url('@/assets/fonts/JetBrains_Mono/JetBrainsMono-SemiBoldItalic.ttf') format('truetype');
+    url('../../../assets/fonts/JetBrains_Mono/JetBrainsMono-SemiBoldItalic.ttf') format('truetype');
 }
 
 @font-face {
@@ -201,7 +201,7 @@
   font-style: normal;
   src:
     local('JetBrains Mono Bold'),
-    url('@/assets/fonts/JetBrains_Mono/JetBrainsMono-Bold.ttf') format('truetype');
+    url('../../../assets/fonts/JetBrains_Mono/JetBrainsMono-Bold.ttf') format('truetype');
 }
 
 @font-face {
@@ -210,7 +210,7 @@
   font-style: italic;
   src:
     local('JetBrains Mono Bold Italic'),
-    url('@/assets/fonts/JetBrains_Mono/JetBrainsMono-BoldItalic.ttf') format('truetype');
+    url('../../../assets/fonts/JetBrains_Mono/JetBrainsMono-BoldItalic.ttf') format('truetype');
 }
 
 @font-face {
@@ -219,7 +219,7 @@
   font-style: normal;
   src:
     local('JetBrains Mono ExtraBold'),
-    url('@/assets/fonts/JetBrains_Mono/JetBrainsMono-ExtraBold.ttf') format('truetype');
+    url('../../../assets/fonts/JetBrains_Mono/JetBrainsMono-ExtraBold.ttf') format('truetype');
 }
 
 @font-face {
@@ -228,7 +228,7 @@
   font-style: italic;
   src:
     local('JetBrains Mono ExtraBold Italic'),
-    url('@/assets/fonts/JetBrains_Mono/JetBrainsMono-ExtraBoldItalic.ttf') format('truetype');
+    url('../../../assets/fonts/JetBrains_Mono/JetBrainsMono-ExtraBoldItalic.ttf') format('truetype');
 }
 
 /* ==========================================================================
@@ -241,7 +241,7 @@
   font-style: normal;
   src:
     local('Bitter Thin'),
-    url('@/assets/fonts/Bitter/Bitter-Thin.ttf') format('truetype');
+    url('../../../assets/fonts/Bitter/Bitter-Thin.ttf') format('truetype');
 }
 
 @font-face {
@@ -250,7 +250,7 @@
   font-style: italic;
   src:
     local('Bitter Thin Italic'),
-    url('@/assets/fonts/Bitter/Bitter-ThinItalic.ttf') format('truetype');
+    url('../../../assets/fonts/Bitter/Bitter-ThinItalic.ttf') format('truetype');
 }
 
 @font-face {
@@ -259,7 +259,7 @@
   font-style: normal;
   src:
     local('Bitter ExtraLight'),
-    url('@/assets/fonts/Bitter/Bitter-ExtraLight.ttf') format('truetype');
+    url('../../../assets/fonts/Bitter/Bitter-ExtraLight.ttf') format('truetype');
 }
 
 @font-face {
@@ -268,7 +268,7 @@
   font-style: italic;
   src:
     local('Bitter ExtraLight Italic'),
-    url('@/assets/fonts/Bitter/Bitter-ExtraLightItalic.ttf') format('truetype');
+    url('../../../assets/fonts/Bitter/Bitter-ExtraLightItalic.ttf') format('truetype');
 }
 
 @font-face {
@@ -277,7 +277,7 @@
   font-style: normal;
   src:
     local('Bitter Light'),
-    url('@/assets/fonts/Bitter/Bitter-Light.ttf') format('truetype');
+    url('../../../assets/fonts/Bitter/Bitter-Light.ttf') format('truetype');
 }
 
 @font-face {
@@ -286,7 +286,7 @@
   font-style: italic;
   src:
     local('Bitter Light Italic'),
-    url('@/assets/fonts/Bitter/Bitter-LightItalic.ttf') format('truetype');
+    url('../../../assets/fonts/Bitter/Bitter-LightItalic.ttf') format('truetype');
 }
 
 @font-face {
@@ -295,7 +295,7 @@
   font-style: normal;
   src:
     local('Bitter Regular'),
-    url('@/assets/fonts/Bitter/Bitter-Regular.ttf') format('truetype');
+    url('../../../assets/fonts/Bitter/Bitter-Regular.ttf') format('truetype');
 }
 
 @font-face {
@@ -304,7 +304,7 @@
   font-style: italic;
   src:
     local('Bitter Italic'),
-    url('@/assets/fonts/Bitter/Bitter-Italic.ttf') format('truetype');
+    url('../../../assets/fonts/Bitter/Bitter-Italic.ttf') format('truetype');
 }
 
 @font-face {
@@ -313,7 +313,7 @@
   font-style: normal;
   src:
     local('Bitter Medium'),
-    url('@/assets/fonts/Bitter/Bitter-Medium.ttf') format('truetype');
+    url('../../../assets/fonts/Bitter/Bitter-Medium.ttf') format('truetype');
 }
 
 @font-face {
@@ -322,7 +322,7 @@
   font-style: italic;
   src:
     local('Bitter Medium Italic'),
-    url('@/assets/fonts/Bitter/Bitter-MediumItalic.ttf') format('truetype');
+    url('../../../assets/fonts/Bitter/Bitter-MediumItalic.ttf') format('truetype');
 }
 
 @font-face {
@@ -331,7 +331,7 @@
   font-style: normal;
   src:
     local('Bitter SemiBold'),
-    url('@/assets/fonts/Bitter/Bitter-SemiBold.ttf') format('truetype');
+    url('../../../assets/fonts/Bitter/Bitter-SemiBold.ttf') format('truetype');
 }
 
 @font-face {
@@ -340,7 +340,7 @@
   font-style: italic;
   src:
     local('Bitter SemiBold Italic'),
-    url('@/assets/fonts/Bitter/Bitter-SemiBoldItalic.ttf') format('truetype');
+    url('../../../assets/fonts/Bitter/Bitter-SemiBoldItalic.ttf') format('truetype');
 }
 
 @font-face {
@@ -349,7 +349,7 @@
   font-style: normal;
   src:
     local('Bitter Bold'),
-    url('@/assets/fonts/Bitter/Bitter-Bold.ttf') format('truetype');
+    url('../../../assets/fonts/Bitter/Bitter-Bold.ttf') format('truetype');
 }
 
 @font-face {
@@ -358,7 +358,7 @@
   font-style: italic;
   src:
     local('Bitter Bold Italic'),
-    url('@/assets/fonts/Bitter/Bitter-BoldItalic.ttf') format('truetype');
+    url('../../../assets/fonts/Bitter/Bitter-BoldItalic.ttf') format('truetype');
 }
 
 @font-face {
@@ -367,7 +367,7 @@
   font-style: normal;
   src:
     local('Bitter ExtraBold'),
-    url('@/assets/fonts/Bitter/Bitter-ExtraBold.ttf') format('truetype');
+    url('../../../assets/fonts/Bitter/Bitter-ExtraBold.ttf') format('truetype');
 }
 
 @font-face {
@@ -376,7 +376,7 @@
   font-style: italic;
   src:
     local('Bitter ExtraBold Italic'),
-    url('@/assets/fonts/Bitter/Bitter-ExtraBoldItalic.ttf') format('truetype');
+    url('../../../assets/fonts/Bitter/Bitter-ExtraBoldItalic.ttf') format('truetype');
 }
 
 @font-face {
@@ -385,7 +385,7 @@
   font-style: normal;
   src:
     local('Bitter Black'),
-    url('@/assets/fonts/Bitter/Bitter-Black.ttf') format('truetype');
+    url('../../../assets/fonts/Bitter/Bitter-Black.ttf') format('truetype');
 }
 
 @font-face {
@@ -394,5 +394,5 @@
   font-style: italic;
   src:
     local('Bitter Black Italic'),
-    url('@/assets/fonts/Bitter/Bitter-BlackItalic.ttf') format('truetype');
+    url('../../../assets/fonts/Bitter/Bitter-BlackItalic.ttf') format('truetype');
 }
