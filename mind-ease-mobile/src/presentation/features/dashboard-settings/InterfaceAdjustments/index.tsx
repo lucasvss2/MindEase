@@ -32,13 +32,13 @@ export const InterfaceAdjustments = () => {
   const contrastOptionsButtons: IButtonGroupProps["buttons"] = useMemo(
     () => [
       {
-        text: "Suave",
+        text: "Baixo",
         conditional: contrast === "low",
         onPress: () => updateContrast("low"),
         size: "sm",
       },
       {
-        text: "Padrão",
+        text: "Moderado",
         conditional: contrast === "moderate",
         onPress: () => updateContrast("moderate"),
         size: "sm",
