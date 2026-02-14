@@ -24,3 +24,8 @@ export const createAccountSchema = yup.object({
     ),
 });
 
+export type TLogin = yup.InferType<typeof loginSchema>;
+export type TCreateAccount = yup.InferType<typeof createAccountSchema>;
+
+
+
