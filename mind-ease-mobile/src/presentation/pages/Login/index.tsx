@@ -17,13 +17,13 @@ export const LoginPage = () => {
   const router = useRouter();
   const { control, formState, handleSubmit, ...formProps } = useForm({
     resolver: yupResolver(loginSchema),
-    mode: "all",
+    mode: "onChange",
   });
 
   const { data: signInData, mutateAsync, isPending } = useSignInMutation();
   const { setEmail, setToken, setRefreshToken } = useAuthStore();
 
-  const fieldValues = formProps.getValues();
+  const fieldValues = formProps.watch();
 
   const someFieldIsInvalid =
     !!formState.errors.email ||
