@@ -6,6 +6,7 @@ import { PublicScreenLayout } from "@/presentation/layouts/PublicScreenLayout";
 import useAuthStore from "@/presentation/store/useAuthStore";
 import handleError from "@/utils/helpers/handleError";
 import { loginSchema, TLogin } from "@/utils/validations/authSchemas";
+import { FontAwesome } from "@expo/vector-icons";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useRouter } from "expo-router";
 import { FormProvider, useForm } from "react-hook-form";
@@ -74,7 +75,7 @@ export const LoginPage = () => {
         <PasswordField />
 
         <Button
-          leftIcon='arrowright'
+          leftIcon={<FontAwesome name='arrow-right' />}
           onPress={handleSubmit(onLogin)}
           disabled={someFieldIsInvalid}
           isLoading={isPending}
