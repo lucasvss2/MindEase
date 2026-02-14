@@ -3,6 +3,7 @@ import { useAccessibilityScale } from "@/presentation/hooks/useAccessibilityScal
 import { Text, TextStyle } from "react-native";
 import { messageVariants } from "../form-field.variants";
 import { IFormFieldSharedProps } from "../interface";
+import useUserPreferencesStore from "@/presentation/store/useUserPreferencesStore";
 
 export const FormFieldMessage: React.FC<IFormFieldSharedProps> = ({
   children,
@@ -11,11 +12,15 @@ export const FormFieldMessage: React.FC<IFormFieldSharedProps> = ({
   const scaledInputAndMessageSize = useAccessibilityScale<TextStyle>(
     TOKENS.FONT_SIZE.sm,
   );
+  const { fontType } = useUserPreferencesStore();
 
   return (
     <Text
       className={messageVariants({ variant })}
-      style={[scaledInputAndMessageSize]}
+      style={[
+        scaledInputAndMessageSize,
+        { fontFamily: TOKENS.FONT_FAMILY[fontType] },
+      ]}
     >
       {children}
     </Text>
