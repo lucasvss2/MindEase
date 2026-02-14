@@ -1,12 +1,16 @@
 import { Button } from "@/presentation/components";
 import { EmailField } from "@/presentation/components/Fields/EmailField";
 import { PasswordField } from "@/presentation/components/Fields/PasswordField";
+import { useSignInMutation } from "@/presentation/features/Auth/queries";
 import { PublicScreenLayout } from "@/presentation/layouts/PublicScreenLayout";
-import { loginSchema } from "@/utils/validations/authSchemas";
+import useAuthStore from "@/presentation/store/useAuthStore";
+import handleError from "@/utils/helpers/handleError";
+import { loginSchema, TLogin } from "@/utils/validations/authSchemas";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useRouter } from "expo-router";
 import { FormProvider, useForm } from "react-hook-form";
 import { Text, View } from "react-native";
+import { Toast } from "toastify-react-native";
 
 export const LoginPage = () => {
   const router = useRouter();
@@ -14,6 +18,9 @@ export const LoginPage = () => {
     resolver: yupResolver(loginSchema),
     mode: "all",
   });
+
+  const { data: signInData, mutateAsync, isPending } = useSignInMutation();
+  const { setEmail, setToken, setRefreshToken } = useAuthStore();
 
   const fieldValues = formProps.getValues();
 
@@ -23,8 +30,18 @@ export const LoginPage = () => {
     !fieldValues.email ||
     !fieldValues.password;
 
-  console.log(formProps.getValues().email);
-  const onLogin = () => {};
+  const onLogin = async (data: TLogin) => {
+    try {
+      const response = await mutateAsync(data);
+      setEmail(signInData?.user.email);
+      setToken(response?.accessToken);
+      setRefreshToken(response?.refreshToken);
+
+      router.replace("/(private)/tasks");
+    } catch (error: any) {
+      handleError(error, Toast.error);
+    }
+  };
 
   return (
     <PublicScreenLayout
@@ -60,6 +77,7 @@ export const LoginPage = () => {
           leftIcon='arrowright'
           onPress={handleSubmit(onLogin)}
           disabled={someFieldIsInvalid}
+          isLoading={isPending}
         >
           Entrar
         </Button>
