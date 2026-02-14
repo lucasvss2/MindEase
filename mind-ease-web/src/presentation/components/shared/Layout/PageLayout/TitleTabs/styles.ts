@@ -1,7 +1,6 @@
 import { Tabs } from 'antd'
 import { rem } from 'polished'
 import { styled } from '@linaria/react'
-import { styledTheme } from '@/main/config/styles'
 
 export const StyledTabs = styled(Tabs)`
   width: 100%;
@@ -21,17 +20,17 @@ export const StyledTabs = styled(Tabs)`
     font-size: ${rem(20)};
     line-height: ${rem(24)};
     font-weight: 400;
-    font-family: ${styledTheme.base.token.fontFamily};
-    color: ${styledTheme.colors.text};
+    font-family: 'Lexend', sans-serif;
+    color: var(--color-text);
   }
 
   .ant-tabs-tab.ant-tabs-tab-active .ant-tabs-tab-btn {
-    color: ${styledTheme.customTokens.tab.selectedColor};
+    color: #434343;
   }
 
   .ant-tabs-ink-bar {
     height: 1px !important;
-    background: ${styledTheme.customTokens.tab.selectedColor} !important;
+    background: #434343 !important;
   }
 
   .ant-tabs-nav::before {
@@ -45,4 +44,3 @@ export const StyledTabs = styled(Tabs)`
     min-height: ${rem(40)};
   }
 `
-
