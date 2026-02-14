@@ -6,5 +6,6 @@ export interface IButtonProps extends TouchableOpacityProps {
   leftIcon?: React.ReactNode;
   size?: "sm" | "md";
   variant?: "default" | "dashed" | "outlined" | "link" | "neutral";
+  isLoading?: boolean
 }
 

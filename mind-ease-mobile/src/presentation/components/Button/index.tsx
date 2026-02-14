@@ -1,6 +1,12 @@
 import { cn } from "@/utils/twClassnamesResolver";
 import React, { useState } from "react";
-import { Text, TextStyle, TouchableOpacity, View } from "react-native";
+import {
+  ActivityIndicator,
+  Text,
+  TextStyle,
+  TouchableOpacity,
+  View,
+} from "react-native";
 
 import { TOKENS } from "@/presentation/constants/tokens";
 import { useAccessibilityScale } from "@/presentation/hooks/useAccessibilityScale";
@@ -16,6 +22,7 @@ export const Button: React.FC<IButtonProps> = ({
   style,
   disabled,
   leftIcon,
+  isLoading,
   ...props
 }) => {
   const [isPressed, setIsPressed] = useState(false);
@@ -29,6 +36,8 @@ export const Button: React.FC<IButtonProps> = ({
   const scaledFontSpacing = useAccessibilityScale(
     TOKENS.FONT_SIZE[size === "md" ? "base" : "sm"],
   ) as TextStyle;
+
+  const isDisabled = isLoading || disabled;
 
   const buttonVariants = {
     low: {
@@ -132,28 +141,37 @@ export const Button: React.FC<IButtonProps> = ({
   const textColorByContrast = buttonVariants[contrast][variant!].color;
 
   const Content = () => (
-    <Text
-      className={cn(
-        "bg-transparent text-center",
-        size === "sm" ? "font-normal" : "font-medium",
-        textClassName,
+    <View className="flex-row items-center gap-4">
+      <Text
+        className={cn(
+          "bg-transparent text-center",
+          size === "sm" ? "font-normal" : "font-medium",
+          textClassName,
+        )}
+        style={[
+          scaledFontSpacing,
+          { color: textColorByContrast, fontFamily: fontType },
+        ]}
+      >
+        {children}
+      </Text>
+      
+      {isLoading && (
+        <ActivityIndicator
+          color={TOKENS.COLORS.neutral[880]}
+          className='self-center'
+        />
       )}
-      style={[
-        scaledFontSpacing,
-        { color: textColorByContrast, fontFamily: fontType },
-      ]}
-    >
-      {children}
-    </Text>
+    </View>
   );
 
   return (
     <TouchableOpacity
       activeOpacity={0.7}
-      disabled={disabled!}
+      disabled={isDisabled!}
       className={cn(
         "flex-row items-center justify-center rounded-md shadow-sm",
-        disabled &&'cursor-not-allowed',
+        isDisabled && "cursor-not-allowed",
         className,
       )}
       style={[
@@ -161,7 +179,7 @@ export const Button: React.FC<IButtonProps> = ({
           padding: scaledContainerPadding,
           fontSize: scaledFontSpacing,
         },
-        buttonVariants[contrast][disabled ? "neutral" : variant!],
+        buttonVariants[contrast][isDisabled ? "neutral" : variant!],
 
         ,
         style,
