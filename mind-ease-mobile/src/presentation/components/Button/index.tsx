@@ -1,22 +1,28 @@
 import { cn } from "@/utils/twClassnamesResolver";
 import React, { useState } from "react";
-import { Text, TextStyle, TouchableOpacity, View } from "react-native";
+import {
+  ActivityIndicator,
+  Text,
+  TextStyle,
+  TouchableOpacity,
+  View,
+} from "react-native";
 
 import { TOKENS } from "@/presentation/constants/tokens";
 import { useAccessibilityScale } from "@/presentation/hooks/useAccessibilityScale";
 import useUserPreferencesStore from "@/presentation/store/useUserPreferencesStore";
-import { buttonSizeVariants } from "./button.variants";
 import { IButtonProps } from "./interface";
 
 export const Button: React.FC<IButtonProps> = ({
   children,
   variant = "default",
-  size = "md",
+  size = "sm",
   className,
   textClassName,
   style,
   disabled,
   leftIcon,
+  isLoading,
   ...props
 }) => {
   const [isPressed, setIsPressed] = useState(false);
@@ -30,6 +36,8 @@ export const Button: React.FC<IButtonProps> = ({
   const scaledFontSpacing = useAccessibilityScale(
     TOKENS.FONT_SIZE[size === "md" ? "base" : "sm"],
   ) as TextStyle;
+
+  const isDisabled = isLoading || disabled;
 
   const buttonVariants = {
     low: {
@@ -130,34 +138,48 @@ export const Button: React.FC<IButtonProps> = ({
     },
   } as any;
 
-  const textClasses =
-    variant === "default" ? "text-neutral-0" : "text-neutral-950";
+  const textColorByContrast = buttonVariants[contrast][variant!].color;
 
   const Content = () => (
-    <Text
-      className={cn("bg-transparent text-center", textClasses, textClassName)}
-      style={[scaledFontSpacing, { fontFamily: fontType }]}
-    >
-      {children}
-    </Text>
+    <View className="flex-row items-center gap-4">
+      <Text
+        className={cn(
+          "bg-transparent text-center",
+          size === "sm" ? "font-normal" : "font-medium",
+          textClassName,
+        )}
+        style={[
+          scaledFontSpacing,
+          { color: textColorByContrast, fontFamily: fontType },
+        ]}
+      >
+        {children}
+      </Text>
+      
+      {isLoading && (
+        <ActivityIndicator
+          color={TOKENS.COLORS.neutral[880]}
+          className='self-center'
+        />
+      )}
+    </View>
   );
 
   return (
     <TouchableOpacity
       activeOpacity={0.7}
-      disabled={disabled!}
+      disabled={isDisabled!}
       className={cn(
         "flex-row items-center justify-center rounded-md shadow-sm",
-        buttonSizeVariants({ size }),
+        isDisabled && "cursor-not-allowed",
         className,
       )}
       style={[
         {
           padding: scaledContainerPadding,
-          fontFamily: fontType,
           fontSize: scaledFontSpacing,
         },
-        buttonVariants[contrast][variant!],
+        buttonVariants[contrast][isDisabled ? "neutral" : variant!],
 
         ,
         style,

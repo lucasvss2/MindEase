@@ -1,5 +1,3 @@
-
-
 export const TOKENS = {
   FONT_SIZE: {
     xs: 12,
@@ -10,6 +8,7 @@ export const TOKENS = {
     "2xl": 24,
     "3xl": 28,
     "4xl": 32,
+    "5xl": 36,
   },
   SPACING: {
     "2xs": 4,
@@ -19,6 +18,12 @@ export const TOKENS = {
     lg: 20,
     xl: 24,
     "2xl": 32,
+  },
+  SIZE: {
+    sm: 40,
+    md: 44,
+    lg: 90,
+    xl: 112,
   },
   LINE_HEIGHT: 1.15,
   LETTER_SPACING: 0.12,
@@ -51,7 +56,7 @@ export const TOKENS = {
       725: "#1581B7",
       750: "#46A4D2",
       800: "#5276A8",
-      815:"4A6B9C",
+      815: "4A6B9C",
       850: "#3D5A85",
       900: "#004B70",
       915: "#0A5F8A",
@@ -104,7 +109,7 @@ export const TOKENS = {
       425: "rgba(223, 216, 216, 0.09)",
       500: "#79747E",
       550: "#727272",
-      600: '#79747E',
+      600: "#79747E",
       625: "#636363",
       650: "#615E5E",
       700: "#5A5A5A",
