@@ -7,14 +7,16 @@
 :root,
 .theme-light {
   --color-brand: #7fb3d5ff;
-  --color-bgColor: #434343;
+  --color-bgColor: #FFFFFF;
+  --color-borderHeader: #E8E8E8;
   --color-black: #000000;
 
   --color-link: #7fb3d5ff;
   --color-linkActive: #7fb3d5ff;
   --color-linkHover: #badb91;
-
-  --color-text: #242425;
+  
+  --color-titleText: #3B3A3A;
+  --color-text: #3B3A3A;
   --color-error: #fe2000;
   --color-colorBorderPrimary: #D9D9D9;
 
@@ -83,19 +85,25 @@
   --color-dialogDefaultText: #3B3A3A;
   --color-dialogDefaultTitle: #3B3A3A;
   --color-dialogDefaultBorder: 1px solid #D9D9D9;
+
+  /* carousel */
+  --color-activeDotColor: #EFF6FF;
+  --color-inactiveDotColor: #8a858517;
 }
 
 /* Light Low Contrast Theme */
 .theme-light-low-contrast {
-  --color-brand: #a8c8dc;
-  --color-bgColor: #5a5a5a;
+  --color-brand: #7fb3d5ff;
+  --color-bgColor: #FFFFFF;
+  --color-borderHeader: #E8E8E8;
   --color-black: #000000;
 
   --color-link: #a8c8dc;
   --color-linkActive: #a8c8dc;
   --color-linkHover: #c8e8b0;
 
-  --color-text: #4a4a4b;
+  --color-titleText: #585858;
+  --color-text: #727272;
   --color-colorBorderPrimary: #e0e0e0;
   --color-error: #e85040;
 
@@ -164,19 +172,26 @@
   --color-dialogDefaultText: #3B3A3A;
   --color-dialogDefaultTitle: #5B5B5B;
   --color-dialogDefaultBorder: 1px solid #F8F8F8;
+
+  /* carousel */
+  --color-activeDotColor: #EFF6FF;
+  --color-inactiveDotColor: '#8a858517',
+;
 }
 
 /* Light High Contrast Theme */
 .theme-light-high-contrast {
-  --color-brand: #2b7aad;
-  --color-bgColor: #1a1a1a;
+  --color-brand: #7fb3d5ff;
+  --color-bgColor: #FFFFFF;
+  --color-borderHeader: #E8E8E8;
   --color-black: #000000;
 
   --color-link: #0066cc;
   --color-linkActive: #003366;
   --color-linkHover: #004d99;
 
-  --color-text: #000000;
+  --color-titleText: #000000;
+  --color-text: #2F2E2E;
   --color-colorBorderPrimary: #000000;
   --color-error: #cc0000;
 
@@ -245,6 +260,10 @@
   --color-dialogDefaultTitle: #000000;
   --color-dialogDefaultText: #000000;
   --color-dialogDefaultBorder: 1px solid #D9D9D9;
+
+  /* carousel */
+  --color-activeDotColor: #EFF6FF;
+  --color-inactiveDotColor: #8a858517;
 }
 
 /* ===== Font Variables ===== */
