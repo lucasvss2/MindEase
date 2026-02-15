@@ -3,6 +3,7 @@ import { useAccessibilityScale } from "@/presentation/hooks/useAccessibilityScal
 import useUserPreferencesStore from "@/presentation/store/useUserPreferencesStore";
 import React from "react";
 import { Text, TextStyle } from "react-native";
+import { formColorByContrast } from "../form-field.variants";
 
 export const FormFieldLabel: React.FC<{ children: React.ReactNode }> = ({
   children,
@@ -10,12 +11,18 @@ export const FormFieldLabel: React.FC<{ children: React.ReactNode }> = ({
   const scaledLabelSize = useAccessibilityScale<TextStyle>(
     TOKENS.FONT_SIZE.base,
   );
-  const { fontType } = useUserPreferencesStore();
+  const { fontType, contrast } = useUserPreferencesStore();
 
   return (
     <Text
       className='font-lexend-semi-bold text-neutral-950 mb-1'
-      style={[scaledLabelSize, { fontFamily: TOKENS.FONT_FAMILY[fontType] }]}
+      style={[
+        scaledLabelSize,
+        {
+          fontFamily: TOKENS.FONT_FAMILY[fontType],
+          color: formColorByContrast[contrast].default,
+        },
+      ]}
     >
       {children}
     </Text>
