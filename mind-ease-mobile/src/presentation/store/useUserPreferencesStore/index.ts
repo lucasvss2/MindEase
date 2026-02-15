@@ -5,7 +5,7 @@ import { IUserPreferences } from "@/domain/types/settings";
 const initialPreferences: IUserPreferences = {
   fontSizeScale: 1,
   spacingScale: 1,
-  contrast: "standard",
+  contrast: "moderate",
   activityProfile: "work",
   enableSummaryMode: false,
   complexityLevel: "high",
