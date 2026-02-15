@@ -100,14 +100,16 @@ const colors = {
 export const themeColors = {
   light: {
     brand: '#7fb3d5ff',
-    bgColor: '#434343',
+    bgColor: colors.neutral0,
+    borderHeader: colors.neutral250,
     black: '#000000',
 
     link: '#7fb3d5ff',
     linkActive: '#7fb3d5ff',
     linkHover: '#badb91',
 
-    text: '#242425',
+    titleText: colors.neutral800,
+    text: colors.neutral800,
     error: '#fe2000',
     colorBorderPrimary: '#D9D9D9',
 
@@ -191,17 +193,24 @@ export const themeColors = {
     dialogDefaultText: colors.neutral800,
     dialogDefaultTitle: colors.neutral800,
     dialogDefaultBorder: `1px solid ${colors.neutral350}`,
+
+    //carousel
+    activeDotColor: colors.blue50,
+    inactiveDotColor: colors.neutral400,
   },
 
   lightLowContrast: {
-    brand: '#a8c8dc',
-    bgColor: '#5a5a5a',
+    brand: '#7fb3d5ff',
+    bgColor: colors.neutral0,
+    borderHeader: colors.neutral250,
     black: '#000000',
+
     link: '#a8c8dc',
     linkActive: '#a8c8dc',
     linkHover: '#c8e8b0',
 
-    text: '#4a4a4b',
+    titleText: colors.neutral825,
+    text: colors.neutral550,
     colorBorderPrimary: '#e0e0e0',
     error: '#e85040',
 
@@ -285,18 +294,24 @@ export const themeColors = {
     dialogDefaultText: colors.neutral800,
     dialogDefaultTitle: colors.neutral725,
     dialogDefaultBorder: `1px solid ${colors.neutral40}`,
+
+    //carousel
+    activeDotColor: colors.blue50,
+    inactiveDotColor: colors.neutral400,
   },
 
   lightHighContrast: {
-    brand: '#2b7aad',
-    bgColor: '#1a1a1a',
+    brand: '#7fb3d5ff',
+    bgColor: colors.neutral0,
+    borderHeader: colors.neutral250,
     black: '#000000',
 
     link: '#0066cc',
     linkActive: '#003366',
     linkHover: '#004d99',
 
-    text: '#000000',
+    titleText: colors.neutral1000,
+    text: colors.neutral900,
     colorBorderPrimary: '#000000',
     error: '#cc0000',
 
@@ -381,6 +396,9 @@ export const themeColors = {
     dialogDefaultText: colors.neutral1000,
     dialogDefaultBorder: `1px solid ${colors.neutral350}`,
 
+    //carousel
+    activeDotColor: colors.blue50,
+    inactiveDotColor: colors.neutral400,
   },
 }
 
