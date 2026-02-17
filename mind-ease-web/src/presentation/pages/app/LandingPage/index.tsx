@@ -1,5 +1,5 @@
 import { PageLayout } from '@/layouts'
-import { LandingPageCarrousel, ResponsiveButton } from '@/presentation'
+import { LandingPageCarrousel, ResponsiveButton, ResponsiveInput } from '@/presentation'
 import * as S from './styles'
 
 export function LandingPage() {
@@ -22,7 +22,11 @@ export function LandingPage() {
         </S.SubHeading>
 
         <S.ActionGroup>
-          <input type="email" placeholder="Digite seu e-mail..." />
+          <ResponsiveInput
+            placeholder="Digite seu e-mail..."
+            width="280px"
+            height="56px"
+          />
           <ResponsiveButton
             width='100%'
             height='56px'

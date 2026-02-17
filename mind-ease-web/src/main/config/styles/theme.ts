@@ -71,6 +71,7 @@ const colors = {
   neutral250: '#E8E8E8',
   neutral275: '#E3E3E3',
   neutral300: '#E3DDDD',
+  neutral325: '#D1CDCD',
   neutral350: '#D9D9D9',
   neutral400: '#8a858517',
   neutral425: '#dfd8d817',
@@ -163,7 +164,7 @@ export const themeColors = {
     //state-active
     buttonNeutralActiveBG: colors.neutral125,
     buttonNeutralActiveText: colors.neutral845,
-    buttonNeutralActiveBorder: `1px solid {colors.neutral600}`,
+    buttonNeutralActiveBorder: `1px solid ${colors.neutral600}`,
     //state-hover
     buttonNeutralHoverBG: colors.neutral125,
     buttonNeutralHoverText: colors.neutral850,
@@ -183,6 +184,20 @@ export const themeColors = {
     buttonLinkHoverText: colors.neutral850,
     buttonLinkHoverBorder: colors.none,
 
+    //input-default
+    inputDefaultBG: colors.neutral0,
+    inputDefaultText: colors.neutral800,
+    inputDefaultLabel: colors.neutral800,
+    inputDefaultBorder: `1px solid ${colors.neutral800}`,
+    inputDefaultPlaceholder: colors.neutral800,
+
+    //input-error
+    inputErrorBG: colors.neutral0,
+    inputErrorText: colors.red850,
+    inputErrorLabel: colors.neutral800,
+    inputErrorBorder: `1px solid ${colors.red850}`,
+    inputErrorPlaceholder: colors.neutral930,
+
     //dialog-danger
     dialogDangerBG: colors.neutral40,
     dialogDangerText: colors.red900,
@@ -194,9 +209,28 @@ export const themeColors = {
     dialogDefaultTitle: colors.neutral800,
     dialogDefaultBorder: `1px solid ${colors.neutral350}`,
 
+    //switch-active
+    switchActiveBG: colors.blue915,
+    switchActiveHandle: colors.neutral225,
+    //switch-inactive
+    switchInactiveBG: colors.neutral600,
+    switchInactiveHandle: colors.neutral200,
+
+    //slider
+    sliderHandle: colors.blue725,
+    sliderBG: colors.neutral350,
+    sliderBorder: colors.neutral600,
+
     //carousel
     activeDotColor: colors.blue50,
     inactiveDotColor: colors.neutral400,
+
+    //card
+    cardBG: colors.neutral50,
+    cardText: colors.neutral800,
+    cardTitle: colors.neutral800,
+    cardBorder: `1px solid ${colors.neutral300}`,
+    cardDivider: colors.neutral300,
   },
 
   lightLowContrast: {
@@ -284,6 +318,20 @@ export const themeColors = {
     buttonLinkHoverText: colors.neutral625,
     buttonLinkHoverBorder: colors.none,
 
+    //input-default
+    inputDefaultBG: colors.neutral0,
+    inputDefaultText: colors.neutral600,
+    inputDefaultLabel: colors.neutral600,
+    inputDefaultBorder: `1px solid ${colors.neutral600}`,
+    inputDefaultPlaceholder: colors.neutral600,
+
+    //input-error
+    inputErrorBG: colors.neutral0,
+    inputErrorText: colors.red600,
+    inputErrorLabel: colors.neutral600,
+    inputErrorBorder: `1px solid ${colors.red600}`,
+    inputErrorPlaceholder: colors.neutral600,
+
     //dialog-danger
     dialogDangerBG: colors.neutral40,
     dialogDangerText: colors.red825,
@@ -295,9 +343,28 @@ export const themeColors = {
     dialogDefaultTitle: colors.neutral725,
     dialogDefaultBorder: `1px solid ${colors.neutral40}`,
 
+    //switch-active
+    switchActiveBG: colors.blue750,
+    switchActiveHandle: colors.neutral925,
+    //switch-inactive
+    switchInactiveBG: colors.neutral600,
+    switchInactiveHandle: colors.neutral300,
+
+    //slider
+    sliderHandle: colors.blue750,
+    sliderBG: colors.neutral350,
+    sliderBorder: colors.neutral825,
+
     //carousel
     activeDotColor: colors.blue50,
     inactiveDotColor: colors.neutral400,
+
+    //card
+    cardBG: colors.neutral75,
+    cardText: colors.neutral550,
+    cardTitle: colors.neutral825,
+    cardBorder: `1px solid ${colors.neutral325}`,
+    cardDivider: colors.neutral325,
   },
 
   lightHighContrast: {
@@ -385,6 +452,27 @@ export const themeColors = {
     buttonLinkHoverText: colors.neutral1000,
     buttonLinkHoverBorder: colors.none,
 
+    //input-default
+    inputDefaultBG: colors.neutral0,
+    inputDefaultText: colors.neutral930,
+    inputDefaultLabel: colors.neutral1000,
+    inputDefaultBorder: `1px solid ${colors.neutral1000}`,
+    inputDefaultPlaceholder: colors.neutral930,
+
+    //input-error
+    inputErrorBG: colors.neutral0,
+    inputErrorText: colors.red950,
+    inputErrorLabel: colors.neutral930,
+    inputErrorBorder: `1px solid ${colors.red950}`,
+    inputErrorPlaceholder: colors.neutral930,
+
+    //switch-active
+    switchActiveBG: colors.blue900,
+    switchActiveHandle: colors.neutral0,
+    //switch-inactive
+    switchInactiveBG: colors.neutral890,
+    switchInactiveHandle: colors.neutral50,
+
     //dialog-danger
     dialogDangerBG: colors.neutral0,
     dialogDangerText: colors.red1000,
@@ -396,9 +484,21 @@ export const themeColors = {
     dialogDefaultText: colors.neutral1000,
     dialogDefaultBorder: `1px solid ${colors.neutral350}`,
 
+    //slider
+    sliderHandle: colors.blue900,
+    sliderBG: colors.neutral350,
+    sliderBorder: colors.neutral890,
+
     //carousel
     activeDotColor: colors.blue50,
     inactiveDotColor: colors.neutral400,
+
+    //card
+    cardBG: colors.neutral0,
+    cardText: colors.neutral900,
+    cardTitle: colors.neutral1000,
+    cardBorder: `1px solid ${colors.neutral300}`,
+    cardDivider: colors.neutral600,
   },
 }
 
