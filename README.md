@@ -22,7 +22,7 @@ Navigate to the web directory and follow the setup instructions:
 ```bash
 cd mind-ease-web
 npm install
-npm run prepare
+
 npm run dev
 ```
 
@@ -47,7 +47,7 @@ npm start
 ### Web Platform
 - **Frontend Framework**: React 19 with TypeScript
 - **Build Tool**: Vite
-- **Styling**: PandaCSS with Ant Design
+- **Styling**: Linaria (Zero-runtime CSS-in-JS) with Ant Design
 - **State Management**: Zustand + TanStack Query
 - **Routing**: React Router v7
 
@@ -65,7 +65,7 @@ MindEase/
 ├── mind-ease-web/          # Web application
 │   ├── src/                # Source code
 │   ├── public/             # Static assets
-│   ├── panda.config.ts     # PandaCSS configuration
+
 │   ├── package.json        # Dependencies and scripts
 │   └── README.md           # Web-specific documentation
 │
@@ -161,8 +161,9 @@ We welcome contributions to MindEase! Please follow these guidelines:
 |--------|-------------|
 | `npm run dev` | Start development server |
 | `npm run build` | Build for production |
-| `npm run preview` | Preview production build |
+| `npm run serve` | Preview production build |
 | `npm run lint` | Run ESLint |
+| `npm run test` | Run tests (Vitest) |
 
 ### Mobile Platform
 | Script | Description |
