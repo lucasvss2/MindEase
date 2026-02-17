@@ -5,7 +5,7 @@ export const Container = styled(Layout.Header)`
   height: 50px;
   padding: 0 16px;
   background-color: var(--color-bgColor);
-  border-bottom: 3px solid var(--color-brand);
+  border-bottom: 1px solid var(--color-borderHeader);
 
   display: flex;
   align-items: center;

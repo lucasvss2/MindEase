@@ -1,1 +1,5 @@
 export * from './LandingPage'
+export * from './RegisterPage'
+export * from './LoginPage'
+export * from './BoardPage'
+export * from './ProfilePage'

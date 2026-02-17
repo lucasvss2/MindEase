@@ -7,14 +7,16 @@
 :root,
 .theme-light {
   --color-brand: #7fb3d5ff;
-  --color-bgColor: #434343;
+  --color-bgColor: #FFFFFF;
+  --color-borderHeader: #E8E8E8;
   --color-black: #000000;
 
   --color-link: #7fb3d5ff;
   --color-linkActive: #7fb3d5ff;
   --color-linkHover: #badb91;
-
-  --color-text: #242425;
+  
+  --color-titleText: #3B3A3A;
+  --color-text: #3B3A3A;
   --color-error: #fe2000;
   --color-colorBorderPrimary: #D9D9D9;
 
@@ -83,19 +85,58 @@
   --color-dialogDefaultText: #3B3A3A;
   --color-dialogDefaultTitle: #3B3A3A;
   --color-dialogDefaultBorder: 1px solid #D9D9D9;
+
+  /* carousel */
+  --color-activeDotColor: #EFF6FF;
+  --color-inactiveDotColor: #8a858517;
+
+  /* input-default */
+  --color-inputDefaultBG: #FFFFFF;
+  --color-inputDefaultText: #3B3A3A;
+  --color-inputDefaultLabel: #3B3A3A;
+  --color-inputDefaultBorder: 1px solid #3B3A3A;
+  --color-inputDefaultPlaceholder: #3B3A3A;
+
+  /* input-error */
+  --color-inputErrorBG: #FFFFFF;
+  --color-inputErrorText: #940000;
+  --color-inputErrorLabel: #3B3A3A;
+  --color-inputErrorBorder: 1px solid #940000;
+  --color-inputErrorPlaceholder: #292929;
+
+  /* switch-active */
+  --color-switchActiveBG: #0A5F8A;
+  --color-switchActiveHandle: #E2E2E2;
+  /* switch-inactive */
+  --color-switchInactiveBG: #79747E;
+  --color-switchInactiveHandle: #EDEDED;
+
+  /* slider */
+  --color-sliderHandle: #1581B7;
+  --color-sliderBG: #D9D9D9;
+  --color-sliderBorder: #79747E;
+
+  /* card */
+  --color-cardBG: #F8F9F9;
+  --color-cardText: #3B3A3A;
+  --color-cardTitle: #3B3A3A;
+  --color-cardBorder: 1px solid #E3DDDD;
+  --color-cardDivider: #E3DDDD;
 }
 
 /* Light Low Contrast Theme */
 .theme-light-low-contrast {
-  --color-brand: #a8c8dc;
-  --color-bgColor: #5a5a5a;
+  --color-brand: #7fb3d5ff;
+  --color-bgColor: #FFFFFF;
+  --color-borderHeader: #E8E8E8;
   --color-black: #000000;
 
   --color-link: #a8c8dc;
   --color-linkActive: #a8c8dc;
   --color-linkHover: #c8e8b0;
 
-  --color-text: #4a4a4b;
+  --color-titleText: #585858;
+  --color-text: #727272;
   --color-colorBorderPrimary: #e0e0e0;
   --color-error: #e85040;
 
@@ -164,19 +205,58 @@
   --color-dialogDefaultText: #3B3A3A;
   --color-dialogDefaultTitle: #5B5B5B;
   --color-dialogDefaultBorder: 1px solid #F8F8F8;
+
+  /* carousel */
+  --color-activeDotColor: #EFF6FF;
+  --color-inactiveDotColor: #8a858517;
+
+  /* input-default */
+  --color-inputDefaultBG: #FFFFFF;
+  --color-inputDefaultText: #727272;
+  --color-inputDefaultLabel: #727272;
+  --color-inputDefaultBorder: 1px solid #727272;
+  --color-inputDefaultPlaceholder: #727272;
+
+  /* input-error */
+  --color-inputErrorBG: #FFFFFF;
+  --color-inputErrorText: #C22929;
+  --color-inputErrorLabel: #727272;
+  --color-inputErrorBorder: 1px solid #C22929;
+  --color-inputErrorPlaceholder: #727272;
+
+  /* switch-active */
+  --color-switchActiveBG: #46A4D2;
+  --color-switchActiveHandle: #2B2B2B;
+  /* switch-inactive */
+  --color-switchInactiveBG: #79747E;
+  --color-switchInactiveHandle: #E3DDDD;
+
+  /* slider */
+  --color-sliderHandle: #46A4D2;
+  --color-sliderBG: #D9D9D9;
+  --color-sliderBorder: #585858;
+
+  /* card */
+  --color-cardBG: #F5F5F5;
+  --color-cardText: #727272;
+  --color-cardTitle: #585858;
+  --color-cardBorder: 1px solid #D1CDCD;
+  --color-cardDivider: #D1CDCD;
 }
 
 /* Light High Contrast Theme */
 .theme-light-high-contrast {
-  --color-brand: #2b7aad;
-  --color-bgColor: #1a1a1a;
+  --color-brand: #7fb3d5ff;
+  --color-bgColor: #FFFFFF;
+  --color-borderHeader: #E8E8E8;
   --color-black: #000000;
 
   --color-link: #0066cc;
   --color-linkActive: #003366;
   --color-linkHover: #004d99;
 
-  --color-text: #000000;
+  --color-titleText: #000000;
+  --color-text: #2F2E2E;
   --color-colorBorderPrimary: #000000;
   --color-error: #cc0000;
 
@@ -245,6 +325,43 @@
   --color-dialogDefaultTitle: #000000;
   --color-dialogDefaultText: #000000;
   --color-dialogDefaultBorder: 1px solid #D9D9D9;
+
+  /* carousel */
+  --color-activeDotColor: #EFF6FF;
+  --color-inactiveDotColor: #8a858517;
+
+  /* input-default */
+  --color-inputDefaultBG: #FFFFFF;
+  --color-inputDefaultText: #292929;
+  --color-inputDefaultLabel: #000000;
+  --color-inputDefaultBorder: 1px solid #000000;
+  --color-inputDefaultPlaceholder: #292929;
+
+  /* input-error */
+  --color-inputErrorBG: #FFFFFF;
+  --color-inputErrorText: #6B1304;
+  --color-inputErrorLabel: #292929;
+  --color-inputErrorBorder: 1px solid #6B1304;
+  --color-inputErrorPlaceholder: #292929;
+
+  /* switch-active */
+  --color-switchActiveBG: #004B70;
+  --color-switchActiveHandle: #FFFFFF;
+  /* switch-inactive */
+  --color-switchInactiveBG: #444444;
+  --color-switchInactiveHandle: #F8F9F9;
+
+  /* slider */
+  --color-sliderHandle: #004B70;
+  --color-sliderBG: #D9D9D9;
+  --color-sliderBorder: #444444;
+
+  /* card */
+  --color-cardBG: #FFFFFF;
+  --color-cardText: #2F2E2E;
+  --color-cardTitle: #000000;
+  --color-cardBorder: 1px solid #E3DDDD;
+  --color-cardDivider: #79747E;
 }
 
 /* ===== Font Variables ===== */
