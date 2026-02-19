@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import { TextStyle } from "react-native";
 
 export interface ISheetModalProps {
   visible: boolean;
@@ -8,4 +9,6 @@ export interface ISheetModalProps {
   initialSnapIndex?: 0 | 1;
   closeButtonAccessibilityLabel?: string;
   children: ReactNode;
+  titleStyle?: TextStyle;
 }
+
