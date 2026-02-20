@@ -38,7 +38,7 @@ export const LoginPage = () => {
       setToken(response?.accessToken);
       setRefreshToken(response?.refreshToken);
 
-      router.replace("/(private)/tasks");
+      router.replace("/(private)/menu");
     } catch (error: any) {
       handleError(error, Toast.error);
     }
@@ -49,15 +49,22 @@ export const LoginPage = () => {
       title='Bem vindo(a)'
       subTitle='Acesse sua conta Mind Ease'
       footer={
-        <View className='gap-8'>
-          <View className='flex-row items-center justify-center w-full gap-1'>
-            <Text className='text-xl font-nunito-regular text-neutral-800'>
+        <View className='gap-8' accessible={false} accessibilityRole="none">
+          <View className='flex-row items-center justify-center w-full gap-1' accessible={false} accessibilityRole="none">
+            <Text
+              className='text-xl font-nunito-regular text-neutral-800'
+              accessibilityRole="text"
+              accessibilityLabel="Não tem uma conta?"
+            >
               Não tem uma conta?
             </Text>
             <Button
               size='md'
               variant='link'
               onPress={() => router.navigate("/(auth)/create-account")}
+              accessibilityLabel="Criar conta"
+              accessibilityRole="link"
+              accessibilityHint="Navega para a tela de cadastro"
             >
               Criar conta
             </Button>

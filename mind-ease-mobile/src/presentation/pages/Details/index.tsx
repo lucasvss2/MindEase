@@ -41,7 +41,7 @@ export function Details() {
   return (
     <View className={cn("flex-1 bg-neutral-0")}>
       <ScreenHeader
-        onBack={() => router.back()}
+        onBack={() => router.replace("/menu")}
         title={title ?? "Detalhes"}
         titlePrefix={
           <View
@@ -112,7 +112,7 @@ export function Details() {
           <Text className="text-base font-lexend-regular text-neutral-600">
             Colunas visíveis:{" "}
           </Text>
-          <View className={cn("flex-row gap-4 mt-3 flex-nowrap")}>
+          <View className={cn("flex-row gap-4 mt-3 flex-wrap")}>
             {COLUMN_OPTIONS.map(({ key, label }) => (
               <TouchableOpacity
                 key={key}
@@ -129,7 +129,10 @@ export function Details() {
                   size={28}
                   color={THEME_COLORS.blue[600]}
                 />
-                <Text className="text-base font-lexend-regular text-neutral-1000">
+                <Text
+                  className="text-base font-lexend-regular text-neutral-1000"
+                  numberOfLines={1}
+                >
                   {label}
                 </Text>
               </TouchableOpacity>
@@ -147,17 +150,23 @@ export function Details() {
                 key={key}
                 className={cn("py-3")}
               >
-                <View className={cn("flex-row items-center gap-2")}>
+                <View className={cn("flex-row items-center gap-2 min-w-0 flex-1")} style={{ minWidth: 0 }}>
                   <MaterialIcons
                     name={COLUMN_OPTIONS.find((o) => o.key === key)?.icon ?? "list"}
                     size={22}
                     color={THEME_COLORS.neutral[1000]}
                   />
-                  <View className={cn("flex-row")}>
-                    <Text className="text-base font-lexend-semi-bold text-neutral-1000">
+                  <View className={cn("flex-row flex-1 min-w-0")} style={{ minWidth: 0 }}>
+                    <Text
+                      className="text-base font-lexend-semi-bold text-neutral-1000"
+                      numberOfLines={1}
+                    >
                       {label}
                     </Text>
-                    <Text className="text-base font-lexend-regular text-neutral-1000">
+                    <Text
+                      className="text-base font-lexend-regular text-neutral-1000"
+                      numberOfLines={1}
+                    >
                       {" "}({SECTION_CONTENT[key].items.length})
                     </Text>
                   </View>
@@ -170,7 +179,17 @@ export function Details() {
                       <TouchableOpacity
                         key={index}
                         activeOpacity={0.7}
-                        onPress={() => {}}
+                        onPress={() =>
+                          router.push({
+                            pathname: "/create-task",
+                            params: {
+                              id: `${key}-${index}`,
+                              boardId: id,
+                              boardTitle: title ?? "",
+                              boardColor: color ?? "",
+                            },
+                          })
+                        }
                       >
                         <Card
                           className={cn(
@@ -196,6 +215,65 @@ export function Details() {
             ))}
           </View>
         </ScrollView>
+        <View
+          className={cn(
+            "border-t border-neutral-200 bg-neutral-0 px-5 py-4"
+          )}
+          accessible={false}
+          accessibilityRole="none"
+        >
+          <TouchableOpacity
+            activeOpacity={0.7}
+            onPress={() =>
+            router.push(
+              id
+                ? {
+                    pathname: "/create-task",
+                    params: {
+                      boardId: id,
+                      boardTitle: title ?? "",
+                      boardColor: color ?? "",
+                    },
+                  }
+                : "/create-task"
+            )
+          }
+            accessibilityRole="button"
+            accessibilityLabel="Criar nova tarefa"
+            accessibilityHint="Abre a tela para criar uma nova tarefa neste quadro"
+            style={{
+              width: "100%",
+              minHeight: 56,
+              paddingVertical: 20,
+              paddingHorizontal: 20,
+              borderRadius: 8,
+              borderWidth: 2,
+              borderStyle: "dashed",
+              borderColor: THEME_COLORS.neutral[300],
+              alignItems: "center",
+              justifyContent: "center",
+              backgroundColor: THEME_COLORS.neutral[0],
+            }}
+          >
+            <View style={{ flexDirection: "row", alignItems: "center", gap: 8, flexShrink: 0 }}>
+              <MaterialIcons
+                name="add"
+                size={22}
+                color={THEME_COLORS.neutral[1000]}
+              />
+              <Text
+                style={{
+                  fontSize: 16,
+                  fontFamily: "Lexend_600SemiBold",
+                  color: THEME_COLORS.neutral[1000],
+                  flexShrink: 0,
+                }}
+              >
+                Criar nova tarefa
+              </Text>
+            </View>
+          </TouchableOpacity>
+        </View>
       </View>
     </View>
   );

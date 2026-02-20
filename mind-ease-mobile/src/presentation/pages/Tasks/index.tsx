@@ -1,100 +1,141 @@
-import { useState } from "react";
-import { View, Text, ScrollView, TouchableOpacity } from "react-native";
-import { useRouter } from "expo-router";
-import { MaterialIcons } from "@expo/vector-icons";
-import { BoardCard } from "@/presentation/components";
-import { MOCK_BOARDS } from "@/data/mocks";
+import { useMemo, useState } from "react";
+import { View } from "react-native";
+import { useRouter, useLocalSearchParams } from "expo-router";
+import { ScreenHeader } from "@/presentation/components";
+import { useTimerStore } from "@/presentation/store";
+import { formatTimeSpent } from "@/utils/dateUtils";
 import { cn } from "@/utils/twClassnamesResolver";
-import { THEME_COLORS } from "@/presentation/constants/theme";
-import { CreateBoardModal, Header } from "./components";
+import { SECTION_CONTENT } from "@/data/mocks";
+import type { SectionKey } from "@/data/mocks";
+import type { TasksVariant, ITasksParams } from "./interface";
+import { TASKS_HEADER_TITLES } from "./interface";
+import { TaskFormView, TaskDetailView } from "./components";
 
+export type { ITasksParams, TasksVariant } from "./interface";
+
+function getTaskById(id: string | undefined) {
+  if (!id) return null;
+  const match = id.match(/^(.+)-(\d+)$/);
+  if (!match) return null;
+  const key = match[1] as SectionKey;
+  const index = parseInt(match[2], 10);
+  const section = SECTION_CONTENT[key];
+  if (!section || index < 0 || index >= section.items.length) return null;
+  return section.items[index];
+}
+
+function getTasksVariant(id: string | undefined): TasksVariant {
+  return id ? "detail" : "form";
+}
+
+/**
+ * Tela de tarefa com duas vertentes: criação (form) e detalhe/edição (detail).
+ * Orquestra qual view exibir conforme os parâmetros da rota.
+ */
 export function Tasks() {
   const router = useRouter();
-  const [createModalVisible, setCreateModalVisible] = useState(false);
+  const { id, boardId, boardTitle, boardColor } =
+    useLocalSearchParams() as ITasksParams;
 
-  const handleCreateBoard = ({
-    title,
-    color,
-  }: {
-    title: string;
-    color: string;
-  }) => {
-    const newId = `new-${Date.now()}`;
-    router.push({
-      pathname: "/details",
-      params: { id: newId, title, color },
-    });
-    setCreateModalVisible(false);
+  const task = useMemo(() => getTaskById(id), [id]);
+  const variant = useMemo(() => getTasksVariant(id), [id]);
+  const headerTitle = TASKS_HEADER_TITLES[variant];
+
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+  const [checklistItems, setChecklistItems] = useState<
+    { label: string; completed: boolean }[]
+  >([]);
+  const [checklistInput, setChecklistInput] = useState("");
+
+  const {
+    totalTimeSpentSeconds,
+    focusDurationMinutes,
+    setFocusDurationMinutes,
+  } = useTimerStore();
+  const timeSpentLabel = formatTimeSpent(totalTimeSpentSeconds);
+
+  const checklistCompleted = checklistItems.filter((i) => i.completed).length;
+  const checklistTotal = checklistItems.length;
+
+  const handleAddChecklistItem = () => {
+    const trimmed = checklistInput.trim();
+    if (!trimmed) return;
+    setChecklistItems((prev) => [...prev, { label: trimmed, completed: false }]);
+    setChecklistInput("");
+  };
+
+  const handleToggleItem = (index: number) => {
+    setChecklistItems((prev) =>
+      prev.map((item, i) =>
+        i === index ? { ...item, completed: !item.completed } : item
+      )
+    );
+  };
+
+  const handleRemoveItem = (index: number) => {
+    setChecklistItems((prev) => prev.filter((_, i) => i !== index));
+  };
+
+  const handleBack = () => {
+    if (boardId) {
+      router.replace({
+        pathname: "/details",
+        params: {
+          id: boardId,
+          title: boardTitle ?? "",
+          color: boardColor ?? "",
+        },
+      });
+    } else {
+      router.back();
+    }
   };
 
   return (
     <View className={cn("flex-1 bg-neutral-0")}>
-      <CreateBoardModal
-        snapPoints={[65, 90]}
-        visible={createModalVisible}
-        onClose={() => setCreateModalVisible(false)}
-        onCreate={handleCreateBoard}
+      <ScreenHeader
+        onBack={handleBack}
+        title={headerTitle}
+        className="bg-neutral-0 border-neutral-200"
       />
-      <Header />
-      <View className={cn("flex-1")}>
-        <View className={cn("px-5 pt-6 pb-6 border-b border-neutral-200 bg-neutral-0")}>
-          <Text className="text-3xl font-lexend-semi-bold text-neutral-1000">
-            Meus quadros
-          </Text>
-          <Text className="text-base font-lexend-regular text-neutral-600 mt-1">
-            {MOCK_BOARDS.length} quadros ativos
-          </Text>
-        </View>
-        <ScrollView
-          className={cn("flex-1")}
-          contentContainerStyle={{
-            paddingHorizontal: 20,
-            paddingTop: 24,
-            paddingBottom: 24,
-          }}
-          showsVerticalScrollIndicator={false}
-        >
-          <View className={cn("gap-5")}>
-            {MOCK_BOARDS.map((board) => (
-              <BoardCard
-                key={board.id}
-                board={board}
-                onPress={() =>
-                  router.push({
-                    pathname: "/details",
-                    params: { id: board.id, title: board.title, color: board.color },
-                  })
-                }
-              />
-            ))}
-          </View>
-        </ScrollView>
-        <View
-          className={cn(
-            "border-t border-neutral-200 bg-neutral-0 px-5 py-4"
-          )}
-        >
-          <TouchableOpacity
-            activeOpacity={0.7}
-            onPress={() => setCreateModalVisible(true)}
-            className={cn(
-              "w-full py-5 rounded-lg border-2 border-neutral-300 items-center justify-center"
-            )}
-            style={{ borderStyle: "dashed" }}
-          >
-            <View className="flex-row items-center gap-2">
-              <MaterialIcons
-                name="add"
-                size={22}
-                color={THEME_COLORS.neutral[1000]}
-              />
-              <Text className="text-base font-lexend-semi-bold text-neutral-1000">
-                Criar novo quadro
-              </Text>
-            </View>
-          </TouchableOpacity>
-        </View>
-      </View>
+      {variant === "form" ? (
+        <TaskFormView
+          title={title}
+          setTitle={setTitle}
+          description={description}
+          setDescription={setDescription}
+          checklistItems={checklistItems}
+          checklistInput={checklistInput}
+          setChecklistInput={setChecklistInput}
+          checklistCompleted={checklistCompleted}
+          checklistTotal={checklistTotal}
+          onAddChecklistItem={handleAddChecklistItem}
+          onToggleChecklistItem={handleToggleItem}
+          onRemoveChecklistItem={handleRemoveItem}
+          focusDurationMinutes={focusDurationMinutes}
+          setFocusDurationMinutes={setFocusDurationMinutes}
+          timeSpentLabel={timeSpentLabel}
+          onSave={handleBack}
+        />
+      ) : task ? (
+        <TaskDetailView
+          task={task}
+          checklistItems={checklistItems}
+          checklistInput={checklistInput}
+          setChecklistInput={setChecklistInput}
+          checklistCompleted={checklistCompleted}
+          checklistTotal={checklistTotal}
+          onAddChecklistItem={handleAddChecklistItem}
+          onToggleChecklistItem={handleToggleItem}
+          onRemoveChecklistItem={handleRemoveItem}
+          focusDurationMinutes={focusDurationMinutes}
+          setFocusDurationMinutes={setFocusDurationMinutes}
+          timeSpentLabel={timeSpentLabel}
+        />
+      ) : (
+        <View className={cn("flex-1")} />
+      )}
     </View>
   );
 }

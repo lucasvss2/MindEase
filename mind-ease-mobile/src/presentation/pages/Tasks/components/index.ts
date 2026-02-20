@@ -1,3 +1,2 @@
-export * from "./CreateBoardModal";
-export * from "./Header";
-export * from "./NotificationDropdown";
+export { TaskFormView } from "./TaskFormView";
+export { TaskDetailView } from "./TaskDetailView";
