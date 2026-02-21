@@ -1,3 +1,4 @@
-export * from "./CreateBoardModal";
+export * from "./BoardModal";
 export * from "./Header";
 export * from "./NotificationDropdown";
+
