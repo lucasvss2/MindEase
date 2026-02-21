@@ -26,6 +26,7 @@ export const PublicScreenLayout = ({
   children,
   footer,
 }: IPublicScreenLayout) => {
+  const { enableSummaryMode } = useUserPreferencesStore();
   const scaledTitle = useAccessibilityScale<TextStyle>(
     TOKENS.FONT_SIZE["2xl"],
     "font",
@@ -71,29 +72,31 @@ export const PublicScreenLayout = ({
             } as ViewStyle
           }
         >
-          <View className='flex-row justify-center w-full'>
-            <Logo />
-          </View>
+          {!enableSummaryMode && (
+            <>
+              <View className='flex-row justify-center w-full'>
+                <Logo />
+              </View>
 
-          <Text
-            className='text-center text-blue-600'
-            style={[
-              scaledTitle,
-              {
-                fontFamily: fontType,
-                fontWeight: 700,
-              },
-            ]}
-          >
-            {title}
-          </Text>
+              <Text
+                className='text-center text-blue-600'
+                style={[
+                  scaledTitle,
+                  {
+                    fontFamily: fontType,
+                    fontWeight: 700,
+                  },
+                ]}
+              >
+                {title}
+              </Text>
+            </>
+          )}
+
           {subTitle && (
             <Text
-            className="text-center"
-              style={[
-                scaledSubTitle,
-                { fontFamily: fontType},
-              ]}
+              className='text-center'
+              style={[scaledSubTitle, { fontFamily: fontType }]}
             >
               {subTitle}
             </Text>
