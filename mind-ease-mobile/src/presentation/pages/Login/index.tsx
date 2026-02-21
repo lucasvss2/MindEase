@@ -1,19 +1,32 @@
 import { Button } from "@/presentation/components";
 import { EmailField } from "@/presentation/components/Fields/EmailField";
 import { PasswordField } from "@/presentation/components/Fields/PasswordField";
+import { TOKENS } from "@/presentation/constants/tokens";
 import { useSignInMutation } from "@/presentation/features/Auth/queries";
+import { useAccessibilityScale } from "@/presentation/hooks/useAccessibilityScale";
 import { PublicScreenLayout } from "@/presentation/layouts/PublicScreenLayout";
 import useAuthStore from "@/presentation/store/useAuthStore";
+import useUserPreferencesStore from "@/presentation/store/useUserPreferencesStore";
 import handleError from "@/utils/helpers/handleError";
 import { loginSchema, TLogin } from "@/utils/validations/authSchemas";
 import { FontAwesome } from "@expo/vector-icons";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useRouter } from "expo-router";
 import { FormProvider, useForm } from "react-hook-form";
-import { Text, View } from "react-native";
+import { Text, TextStyle, View, ViewStyle } from "react-native";
 import { Toast } from "toastify-react-native";
 
 export const LoginPage = () => {
+  const { fontType } = useUserPreferencesStore();
+  const scaledSpacing2xl = useAccessibilityScale<number>(
+    TOKENS.SPACING["2xl"],
+    "number",
+  );
+
+  const scaledTextBase = useAccessibilityScale<TextStyle>(
+    TOKENS.FONT_SIZE.base,
+    "font",
+  );
   const router = useRouter();
   const { control, formState, handleSubmit, ...formProps } = useForm({
     resolver: yupResolver(loginSchema),
@@ -49,12 +62,16 @@ export const LoginPage = () => {
       title='Bem vindo(a)'
       subTitle='Acesse sua conta Mind Ease'
       footer={
-        <View className='gap-8' accessible={false} accessibilityRole="none">
-          <View className='flex-row items-center justify-center w-full gap-1' accessible={false} accessibilityRole="none">
+        <View
+          className='flex-row items-center justify-center w-full'
+          style={{ gap: scaledSpacing2xl } as ViewStyle}
+        >
+          <View className='flex-row items-center flex-wrap justify-center'>
             <Text
-              className='text-xl font-nunito-regular text-neutral-800'
-              accessibilityRole="text"
-              accessibilityLabel="Não tem uma conta?"
+              style={[
+                scaledTextBase,
+                { fontFamily: fontType, fontWeight: 400 },
+              ]}
             >
               Não tem uma conta?
             </Text>

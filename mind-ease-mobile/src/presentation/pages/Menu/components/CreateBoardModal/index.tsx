@@ -1,8 +1,12 @@
 import { Button, ColorPicker, SheetModal } from "@/presentation/components";
+import { FormField, FormFieldLabel } from "@/presentation/components/FormField";
+import { InputField, InputRoot } from "@/presentation/components/Input";
+import { TOKENS } from "@/presentation/constants";
 import { THEME_COLORS } from "@/presentation/constants/theme";
+import { useAccessibilityScale } from "@/presentation/hooks/useAccessibilityScale";
 import { cn } from "@/utils/twClassnamesResolver";
 import { useState } from "react";
-import { Text, TextInput, TouchableOpacity, View } from "react-native";
+import { TextStyle, View } from "react-native";
 import type { ICreateBoardModalProps } from "./interface";
 
 const CONTENT_PADDING_H = 30 * 2;
@@ -30,6 +34,11 @@ export function CreateBoardModal({
   const [title, setTitle] = useState("");
   const [selectedColor, setSelectedColor] = useState(BOARD_COLORS[0]);
 
+  const scaledButtonGap = useAccessibilityScale<number>(
+    TOKENS.SPACING.sm,
+    "number",
+  );
+
   const handleCreate = () => {
     const trimmed = title.trim();
     if (!trimmed) return;
@@ -45,6 +54,12 @@ export function CreateBoardModal({
     onClose();
   };
 
+  const scaledLabelSize = useAccessibilityScale<TextStyle>(TOKENS.FONT_SIZE.xl);
+  const scaledContainerSpacing = useAccessibilityScale<number>(
+    TOKENS.SPACING.md,
+    "number",
+  );
+
   return (
     <SheetModal
       visible={visible}
@@ -52,52 +67,49 @@ export function CreateBoardModal({
       title='Novo quadro'
       snapPoints={snapPoints}
       initialSnapIndex={initialSnapIndex}
+      titleStyle={{ ...scaledLabelSize }}
     >
-      <Text className='text-sm font-lexend-regular text-neutral-600 mb-2'>
-        Nome do quadro
-      </Text>
-      <TextInput
-        value={title}
-        onChangeText={setTitle}
-        placeholder='Ex.: Quadro Trabalho'
-        placeholderTextColor={THEME_COLORS.neutral[600]}
-        className={cn(
-          "border border-neutral-200 rounded-lg px-4 py-3 text-base font-lexend-regular text-neutral-1000 mb-5",
-        )}
-        autoCapitalize='sentences'
-      />
+      <View style={{ gap: scaledContainerSpacing }}>
+        <FormField>
+          <FormFieldLabel> Nome do quadro</FormFieldLabel>
+          <InputRoot>
+            <InputField
+              value={title}
+              onChangeText={setTitle}
+              placeholder='Ex.: Quadro Trabalho'
+              placeholderTextColor={THEME_COLORS.neutral[600]}
+              autoCapitalize='sentences'
+            />
+          </InputRoot>
+        </FormField>
 
-      <Text className='text-sm font-lexend-regular text-neutral-600 mb-2'>
-        Cor do quadro
-      </Text>
-      <ColorPicker
-        colors={BOARD_COLORS}
-        selectedColor={selectedColor}
-        onSelectColor={setSelectedColor}
-        contentPaddingH={CONTENT_PADDING_H}
-      />
+        <FormField>
+          <FormFieldLabel> Cor do quadro</FormFieldLabel>
+          <ColorPicker
+            colors={BOARD_COLORS}
+            selectedColor={selectedColor}
+            onSelectColor={setSelectedColor}
+            contentPaddingH={CONTENT_PADDING_H}
+          />
+        </FormField>
+      </View>
 
-      <View className={cn("flex-row gap-3 mt-6")}>
-        <Button
-          variant='default'
-          onPress={handleCreate}
-          disabled={!title.trim()}
-          className={cn("py-3 px-5")}
-        >
-          <Text>Adicionar quadro</Text>
+      <View
+        className={cn("flex-row justify-between flex-wrap")}
+        style={{ gap: scaledButtonGap }}
+      >
+        <Button onPress={handleCreate} disabled={!title.trim()}>
+          Adicionar quadro
         </Button>
 
-        <TouchableOpacity
+        <Button
           activeOpacity={0.7}
           onPress={handleCancel}
-          className={cn(
-            "flex-1 py-3 rounded-lg items-center justify-center bg-neutral-200",
-          )}
+          variant='neutral'
+          className='flex-1'
         >
-          <Text className='text-base font-lexend-semi-bold text-neutral-1000'>
-            Cancelar
-          </Text>
-        </TouchableOpacity>
+          Cancelar
+        </Button>
       </View>
     </SheetModal>
   );

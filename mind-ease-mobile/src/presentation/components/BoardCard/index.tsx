@@ -1,22 +1,65 @@
-import { View, Text, TouchableOpacity } from "react-native";
-import { MaterialIcons } from "@expo/vector-icons";
 import { Card } from "@/presentation/components/Card";
 import { THEME_COLORS } from "@/presentation/constants/theme";
+import { TOKENS } from "@/presentation/constants/tokens";
+import { useAccessibilityScale } from "@/presentation/hooks/useAccessibilityScale";
+import useUserPreferencesStore from "@/presentation/store/useUserPreferencesStore";
 import { lightenHex } from "@/utils/colorUtils";
+import { MaterialIcons } from "@expo/vector-icons";
+import {
+  Text,
+  TextStyle,
+  TouchableOpacity,
+  View,
+  ViewStyle,
+} from "react-native";
 import type { IBoardCardProps } from "./interface";
 
 export type { IBoardCardData, IBoardCardProps } from "./interface";
 
 export function BoardCard({ board, onPress }: IBoardCardProps) {
+  const { fontType } = useUserPreferencesStore();
+  const scaledTextLg = useAccessibilityScale<TextStyle>(
+    TOKENS.FONT_SIZE.lg,
+    "font",
+  );
+  const scaledTextBase = useAccessibilityScale<TextStyle>(
+    TOKENS.FONT_SIZE.base,
+    "font",
+  );
+  const scaledSpacingLg = useAccessibilityScale<number>(
+    TOKENS.SPACING.lg,
+    "number",
+  );
+  const scaledSpacingXl = useAccessibilityScale<number>(
+    TOKENS.SPACING.xl,
+    "number",
+  );
+  const scaledSpacing2xs = useAccessibilityScale<number>(
+    TOKENS.SPACING["2xs"],
+    "number",
+  );
+
+  const scaledSpacingXs = useAccessibilityScale<number>(
+    TOKENS.SPACING["xs"],
+    "number",
+  );
+
   return (
     <TouchableOpacity activeOpacity={0.7} onPress={onPress}>
-      <Card className="flex-row items-center gap-5">
+      <Card
+        className='flex-row items-center justify-center'
+        style={
+          {
+            gap: scaledSpacingLg,
+          } as ViewStyle
+        }
+      >
         <View
-          className="w-12 h-12 rounded-full items-center justify-center"
+          className='w-12 h-12 rounded-full items-center justify-center'
           style={{ backgroundColor: lightenHex(board.color) }}
         >
           <View
-            className="w-6 h-6 rounded-full"
+            className='w-6 h-6 rounded-full'
             style={{ backgroundColor: board.color }}
           />
         </View>
@@ -37,7 +80,7 @@ export function BoardCard({ board, onPress }: IBoardCardProps) {
             <View className="w-1.5 h-1.5 rounded-full bg-neutral-600 flex-shrink-0" />
             <View className="flex-row items-center gap-1.5 flex-shrink-0">
               <MaterialIcons
-                name="schedule"
+                name='schedule'
                 size={16}
                 color={THEME_COLORS.neutral[600]}
               />
@@ -50,12 +93,15 @@ export function BoardCard({ board, onPress }: IBoardCardProps) {
             </View>
           </View>
         </View>
+
         <MaterialIcons
-          name="chevron-right"
+          name='chevron-right'
           size={24}
           color={THEME_COLORS.neutral[600]}
+          style={{ marginBottom: scaledSpacingXl }}
         />
       </Card>
     </TouchableOpacity>
   );
 }
+

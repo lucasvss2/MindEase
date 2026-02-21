@@ -1,5 +1,8 @@
 import { Card } from "@/presentation/components";
 import { Logo } from "@/presentation/components/Logo";
+import { TOKENS } from "@/presentation/constants/tokens";
+import { useAccessibilityScale } from "@/presentation/hooks/useAccessibilityScale";
+import useUserPreferencesStore from "@/presentation/store/useUserPreferencesStore";
 import {
   KeyboardAvoidingView,
   Platform,
@@ -7,10 +10,8 @@ import {
   Text,
   TextStyle,
   View,
+  ViewStyle,
 } from "react-native";
-import { TOKENS } from "../constants";
-import { useAccessibilityScale } from "../hooks/useAccessibilityScale";
-import useUserPreferencesStore from "../store/useUserPreferencesStore";
 
 interface IPublicScreenLayout {
   title: string;
@@ -25,16 +26,36 @@ export const PublicScreenLayout = ({
   children,
   footer,
 }: IPublicScreenLayout) => {
-  const scaledTitle = useAccessibilityScale<TextStyle>(TOKENS.FONT_SIZE["2xl"]);
+  const scaledTitle = useAccessibilityScale<TextStyle>(
+    TOKENS.FONT_SIZE["2xl"],
+    "font",
+  );
   const scaledSubTitle = useAccessibilityScale<TextStyle>(
     TOKENS.FONT_SIZE.base,
+    "font",
+  );
+
+  const scaledSpacingXl = useAccessibilityScale<number>(
+    TOKENS.SPACING.xl,
+    "number",
+  );
+  const scaledSpacingSm = useAccessibilityScale<number>(
+    TOKENS.SPACING.sm,
+    "number",
+  );
+  const scaledSpacing2xl = useAccessibilityScale<number>(
+    TOKENS.SPACING["2xl"],
+    "number",
   );
 
   const { fontType } = useUserPreferencesStore();
 
   return (
     <KeyboardAvoidingView
-      className='flex-col  w-full px-6'
+      style={{
+        paddingHorizontal: scaledSpacingXl,
+      }}
+      className='w-full'
       behavior={Platform.OS === "ios" ? "padding" : undefined}
       keyboardVerticalOffset={Platform.OS === "ios" ? 80 : 0}
     >
@@ -42,28 +63,51 @@ export const PublicScreenLayout = ({
         contentContainerStyle={{ flexGrow: 1 }}
         keyboardShouldPersistTaps='handled'
       >
-        <View className='gap-3 justify-center w-full'>
+        <View
+          className='w-full justify-center'
+          style={
+            {
+              gap: scaledSpacingSm,
+            } as ViewStyle
+          }
+        >
           <View className='flex-row justify-center w-full'>
             <Logo />
           </View>
 
           <Text
-            className='text-center font-bold text-3xl text-blue-600'
-            style={[scaledTitle,{ fontFamily: fontType }]}
+            className='text-center text-blue-600'
+            style={[
+              scaledTitle,
+              {
+                fontFamily: fontType,
+                fontWeight: 700,
+              },
+            ]}
           >
             {title}
           </Text>
           {subTitle && (
             <Text
-              className='text-center font-inter-regular text-base '
-              style={[scaledSubTitle, { fontFamily: fontType }]}
+            className="text-center"
+              style={[
+                scaledSubTitle,
+                { fontFamily: fontType},
+              ]}
             >
               {subTitle}
             </Text>
           )}
         </View>
 
-        <Card className='my-6 gap-8 h-max'>{children}</Card>
+        <Card
+          style={{
+            marginVertical: scaledSpacingXl,
+            gap: scaledSpacing2xl,
+          }}
+        >
+          {children}
+        </Card>
         {footer}
       </ScrollView>
     </KeyboardAvoidingView>
