@@ -97,7 +97,7 @@ export function Details() {
   return (
     <View className={cn("flex-1 bg-neutral-0")}>
       <ScreenHeader
-        onBack={() => router.back()}
+        onBack={() => router.replace("/menu")}
         title={title ?? "Detalhes"}
         titlePrefix={
           <View
@@ -285,7 +285,17 @@ export function Details() {
                       <TouchableOpacity
                         key={index}
                         activeOpacity={0.7}
-                        onPress={() => {}}
+                        onPress={() =>
+                          router.push({
+                            pathname: "/create-task",
+                            params: {
+                              id: `${key}-${index}`,
+                              boardId: id,
+                              boardTitle: title ?? "",
+                              boardColor: color ?? "",
+                            },
+                          })
+                        }
                       >
                         <Card
                           className={cn(
@@ -333,6 +343,65 @@ export function Details() {
             )}
           </View>
         </ScrollView>
+        <View
+          className={cn(
+            "border-t border-neutral-200 bg-neutral-0 px-5 py-4"
+          )}
+          accessible={false}
+          accessibilityRole="none"
+        >
+          <TouchableOpacity
+            activeOpacity={0.7}
+            onPress={() =>
+            router.push(
+              id
+                ? {
+                    pathname: "/create-task",
+                    params: {
+                      boardId: id,
+                      boardTitle: title ?? "",
+                      boardColor: color ?? "",
+                    },
+                  }
+                : "/create-task"
+            )
+          }
+            accessibilityRole="button"
+            accessibilityLabel="Criar nova tarefa"
+            accessibilityHint="Abre a tela para criar uma nova tarefa neste quadro"
+            style={{
+              width: "100%",
+              minHeight: 56,
+              paddingVertical: 20,
+              paddingHorizontal: 20,
+              borderRadius: 8,
+              borderWidth: 2,
+              borderStyle: "dashed",
+              borderColor: THEME_COLORS.neutral[300],
+              alignItems: "center",
+              justifyContent: "center",
+              backgroundColor: THEME_COLORS.neutral[0],
+            }}
+          >
+            <View style={{ flexDirection: "row", alignItems: "center", gap: 8, flexShrink: 0 }}>
+              <MaterialIcons
+                name="add"
+                size={22}
+                color={THEME_COLORS.neutral[1000]}
+              />
+              <Text
+                style={{
+                  fontSize: 16,
+                  fontFamily: "Lexend_600SemiBold",
+                  color: THEME_COLORS.neutral[1000],
+                  flexShrink: 0,
+                }}
+              >
+                Criar nova tarefa
+              </Text>
+            </View>
+          </TouchableOpacity>
+        </View>
       </View>
     </View>
   );

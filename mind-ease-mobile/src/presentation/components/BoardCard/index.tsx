@@ -63,53 +63,30 @@ export function BoardCard({ board, onPress }: IBoardCardProps) {
             style={{ backgroundColor: board.color }}
           />
         </View>
-
-        <View className='flex-1'>
+        <View className="flex-1 min-w-0" style={{ minWidth: 0 }}>
           <Text
-            className='text-neutral-1000'
-            style={[{ fontFamily: fontType, fontWeight: 600 }, scaledTextLg]}
+            className="text-lg font-lexend-semi-bold text-neutral-1000"
+            numberOfLines={1}
           >
             {board.title}
           </Text>
-
-          <View
-            className='flex-row items-center'
-            style={
-              {
-                gap: scaledSpacingXl,
-                marginTop: scaledSpacing2xs,
-              } as ViewStyle
-            }
-          >
+          <View className="flex-row items-center gap-6 mt-1 flex-wrap">
             <Text
-              className='text-neutral-600'
-              style={[
-                { fontFamily: fontType, fontWeight: 400 },
-                scaledTextBase,
-              ]}
+              className="text-base font-lexend-regular text-neutral-600"
+              numberOfLines={1}
             >
               {board.taskCount} tarefas
             </Text>
-            <View className='w-1.5 h-1.5 flex-row items-center rounded-full bg-neutral-600' />
-            <View
-              className='flex-row items-center'
-              style={
-                {
-                  gap: scaledSpacingXs,
-                } as ViewStyle
-              }
-            >
+            <View className="w-1.5 h-1.5 rounded-full bg-neutral-600 flex-shrink-0" />
+            <View className="flex-row items-center gap-1.5 flex-shrink-0">
               <MaterialIcons
                 name='schedule'
                 size={16}
                 color={THEME_COLORS.neutral[600]}
               />
               <Text
-                className='text-neutral-600'
-                style={[
-                  { fontFamily: fontType, fontWeight: 400 },
-                  scaledTextBase,
-                ]}
+                className="text-base font-lexend-regular text-neutral-600"
+                numberOfLines={1}
               >
                 {board.hours}h {board.minutes}m
               </Text>

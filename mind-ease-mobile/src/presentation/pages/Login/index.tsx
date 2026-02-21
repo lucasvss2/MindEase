@@ -51,7 +51,7 @@ export const LoginPage = () => {
       setToken(response?.accessToken);
       setRefreshToken(response?.refreshToken);
 
-      router.replace("/(private)/tasks");
+      router.replace("/(private)/menu");
     } catch (error: any) {
       handleError(error, Toast.error);
     }
@@ -79,6 +79,9 @@ export const LoginPage = () => {
               size='md'
               variant='link'
               onPress={() => router.navigate("/(auth)/create-account")}
+              accessibilityLabel="Criar conta"
+              accessibilityRole="link"
+              accessibilityHint="Navega para a tela de cadastro"
             >
               Criar conta
             </Button>
