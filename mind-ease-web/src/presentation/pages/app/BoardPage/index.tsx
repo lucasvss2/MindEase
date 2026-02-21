@@ -1,5 +1,9 @@
+import { PageLayout } from "@/layouts";
+
 export function BoardPage() {
   return (
-    <div>index</div>
+    <PageLayout title="Home" hideFloatButton>
+      <div></div>
+    </PageLayout>
   )
 }
