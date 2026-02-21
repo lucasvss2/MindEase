@@ -20,6 +20,9 @@ export const TOKENS = {
     "2xl": 32,
   },
   SIZE: {
+    '3xs': 24,
+    '2xs': 28,
+    xs: 32,
     sm: 40,
     md: 44,
     lg: 90,
