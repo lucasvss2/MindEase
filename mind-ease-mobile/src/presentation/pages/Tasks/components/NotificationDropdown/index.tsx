@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { View, Text, ScrollView } from "react-native";
+import { View, Text, ScrollView, TextStyle } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
 import {
   MOCK_NOTIFICATIONS,
@@ -9,13 +9,51 @@ import { Dropdown, DropdownItem } from "@/presentation/components";
 import { THEME_COLORS } from "@/presentation/constants/theme";
 import { formatTimestamp } from "@/utils/dateUtils";
 import { cn } from "@/utils/twClassnamesResolver";
+import { TOKENS } from "@/presentation/constants/tokens";
+import { useAccessibilityScale } from "@/presentation/hooks/useAccessibilityScale";
+import useUserPreferencesStore from "@/presentation/store/useUserPreferencesStore";
 
 export function NotificationDropdown() {
   const [notifications] = useState<INotification[]>(MOCK_NOTIFICATIONS);
   const unreadCount = notifications.filter((n) => !n.read).length;
 
+  const { fontType } = useUserPreferencesStore();
+  const scaledTextBase = useAccessibilityScale<TextStyle>(
+    TOKENS.FONT_SIZE.base,
+    "font",
+  );
+  const scaledTextSm = useAccessibilityScale<TextStyle>(
+    TOKENS.FONT_SIZE.sm,
+    "font",
+  );
+  const scaledTextXs = useAccessibilityScale<TextStyle>(
+    TOKENS.FONT_SIZE.xs,
+    "font",
+  );
+
+  const scaledSpacingXs = useAccessibilityScale<number>(
+    TOKENS.SPACING.xs,
+    "number",
+  );
+  const scaledSpacingSm = useAccessibilityScale<number>(
+    TOKENS.SPACING.sm,
+    "number",
+  );
+  const scaledSpacingMd = useAccessibilityScale<number>(
+    TOKENS.SPACING.md,
+    "number",
+  );
+  const scaledSpacing2xl = useAccessibilityScale<number>(
+    TOKENS.SPACING["2xl"],
+    "number",
+  );
+  const scaledSpacing2xs = useAccessibilityScale<number>(
+    TOKENS.SPACING["2xs"],
+    "number",
+  );
+
   const trigger = (
-    <View className="p-2">
+    <View style={{ padding: scaledSpacingXs }}>
       <MaterialIcons
         name="notifications-none"
         size={28}
@@ -45,20 +83,41 @@ export function NotificationDropdown() {
       accessibilityLabel={`Notificações${unreadCount > 0 ? `, ${unreadCount} não lidas` : ""}`}
     >
       <View className="flex-col">
-        <View className="flex-row items-center justify-between px-4 py-3 border-b border-neutral-200">
-          <Text className="text-base font-lexend-semi-bold text-neutral-1000">
+        <View
+          className="flex-row items-center justify-between border-b border-neutral-200"
+          style={{
+            paddingHorizontal: scaledSpacingMd,
+            paddingVertical: scaledSpacingSm,
+          }}
+        >
+          <Text
+            className="text-base text-neutral-1000"
+            style={[{ fontFamily: fontType, fontWeight: 600 }, scaledTextBase]}
+          >
             Notificações
           </Text>
         </View>
         <ScrollView className="max-h-80">
           {notifications.length === 0 ? (
-            <View className="px-4 py-8 items-center">
+            <View
+            className="items-center"
+              style={{
+                paddingHorizontal: scaledSpacingMd,
+                paddingVertical: scaledSpacing2xl,
+              }}
+            >
               <MaterialIcons
                 name="notifications-none"
                 size={48}
                 color={THEME_COLORS.neutral[300]}
               />
-              <Text className="text-sm font-lexend-regular text-neutral-600 mt-2">
+              <Text
+                className="text-neutral-600" 
+                style={[
+                  { fontFamily: fontType, fontWeight: 400, marginTop: scaledSpacingSm },
+                  scaledTextSm,
+                ]}
+              >
                 Nenhuma notificação
               </Text>
             </View>
@@ -72,18 +131,44 @@ export function NotificationDropdown() {
                 }}
                 className={cn(!notification.read && "bg-blue-50")}
               >
-                <View className="flex-row items-start gap-3">
+                <View
+                className="flex-row items-center"
+                  style={{
+
+                    gap: scaledSpacingSm,
+                  }}
+                >
                   {!notification.read && (
-                    <View className="w-2 h-2 rounded-full bg-blue-400 mt-2" />
+                    <View
+                    className="w-2 h-2 rounded-full bg-blue-400"
+                      style={{
+                        marginTop: scaledSpacingXs,
+                      }}
+                    />
                   )}
                   <View className="flex-1">
-                    <Text className="text-sm font-lexend-semi-bold text-neutral-1000">
+                    <Text
+                      className=" text-neutral-1000"
+                      style={[{ fontFamily: fontType, fontWeight: 600 }, scaledTextSm]}
+                    >
                       {notification.title}
                     </Text>
-                    <Text className="text-xs font-lexend-regular text-neutral-600 mt-1">
+                    <Text
+                      className=" text-neutral-600"
+                      style={[
+                        { fontFamily: fontType, fontWeight: 400, marginTop: scaledSpacing2xs },
+                        scaledTextXs,
+                      ]}
+                    >
                       {notification.message}
                     </Text>
-                    <Text className="text-xs font-lexend-regular text-neutral-400 mt-1">
+                    <Text
+                      className=" text-neutral-400"
+                      style={[
+                        { fontFamily: fontType, fontWeight: 400, marginTop: scaledSpacing2xs },
+                        scaledTextXs,
+                      ]}
+                    >
                       {formatTimestamp(notification.timestamp)}
                     </Text>
                   </View>

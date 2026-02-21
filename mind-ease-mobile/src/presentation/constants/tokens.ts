@@ -18,6 +18,8 @@ export const TOKENS = {
     lg: 20,
     xl: 24,
     "2xl": 32,
+    '3xl': 40,
+    "6xl": 96,
   },
   SIZE: {
     sm: 40,
