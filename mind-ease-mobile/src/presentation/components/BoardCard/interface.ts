@@ -1,13 +1,14 @@
+import { BoardModel } from "@/domain/models/BoardModel";
+
 export interface IBoardCardData {
   id: string;
   title: string;
   taskCount: number;
-  hours: number;
-  minutes: number;
+  totalHours: number;
   color: string;
 }
 
 export interface IBoardCardProps {
-  board: IBoardCardData;
-  onPress?: () => void;
+  board: BoardModel & { color: any };
 }
+

@@ -1,87 +1,104 @@
-import { useState } from "react";
-import { View, Text, ScrollView, TouchableOpacity } from "react-native";
-import { useRouter } from "expo-router";
-import { MaterialIcons } from "@expo/vector-icons";
-import { BoardCard } from "@/presentation/components";
 import { MOCK_BOARDS } from "@/data/mocks";
-import { cn } from "@/utils/twClassnamesResolver";
+import { BoardCard } from "@/presentation/components";
+import { Empty } from "@/presentation/components/Empty";
 import { THEME_COLORS } from "@/presentation/constants/theme";
-import { CreateBoardModal, Header } from "./components";
+import { TOKENS } from "@/presentation/constants/tokens";
+import {
+  useCreateBoardMutation,
+  useGetBoards,
+} from "@/presentation/features/Boards/board-queries";
+import { useAccessibilityScale } from "@/presentation/hooks/useAccessibilityScale";
+import { cn } from "@/utils/twClassnamesResolver";
+import { MaterialIcons } from "@expo/vector-icons";
+import { useRouter } from "expo-router";
+import { useState } from "react";
+import { ScrollView, Text, TouchableOpacity, View } from "react-native";
+import { BoardModal, Header } from "./components";
 
 export function Menu() {
   const router = useRouter();
   const [createModalVisible, setCreateModalVisible] = useState(false);
+  const { data: boards } = useGetBoards();
+  const { mutateAsync: mutateCreateBoard, isPending: isCreatingBoard } =
+    useCreateBoardMutation();
 
-  const handleCreateBoard = ({
-    title,
+  const scaledGapBoardList = useAccessibilityScale<number>(
+    TOKENS.SPACING["lg"],
+    "number",
+  );
+
+  const scaledBoardListSpacing = useAccessibilityScale<number>(
+    TOKENS.SPACING["lg"],
+    "number",
+  );
+
+  const handleCreateBoard = async ({
+    name,
     color,
+    description,
   }: {
-    title: string;
-    color: string;
+    name?: string;
+    color?: string;
+    description?: string;
   }) => {
-    const newId = `new-${Date.now()}`;
-    router.push({
-      pathname: "/details",
-      params: { id: newId, title, color },
+    if (!name || !color) return;
+
+    await mutateCreateBoard({
+      data: { name, description: description ?? "", color },
     });
+
     setCreateModalVisible(false);
   };
 
   return (
     <View className={cn("flex-1 bg-neutral-0")}>
-      <CreateBoardModal
+      <BoardModal
         snapPoints={[65, 90]}
         visible={createModalVisible}
-        onClose={() => setCreateModalVisible(false)}
-        onCreate={handleCreateBoard}
+        onCancel={() => setCreateModalVisible(false)}
+        onSubmit={handleCreateBoard}
+        isLoading={isCreatingBoard}
       />
       <Header />
       <View className={cn("flex-1")}>
-        <View className={cn("px-5 pt-6 pb-6 border-b border-neutral-200 bg-neutral-0")}>
-          <Text className="text-3xl font-lexend-bold text-neutral-1000">
+        <View
+          className={cn(
+            "px-5 pt-6 pb-6 border-b border-neutral-200 bg-neutral-0",
+          )}
+        >
+          <Text className='text-3xl font-lexend-bold text-neutral-1000'>
             Meus quadros
           </Text>
-          <Text className="text-base font-lexend-regular text-neutral-600 mt-1">
+          <Text className='text-base font-lexend-regular text-neutral-600 mt-1'>
             {MOCK_BOARDS.length} quadros ativos
           </Text>
         </View>
         <ScrollView
           className={cn("flex-1")}
-          contentContainerStyle={{
-            paddingHorizontal: 20,
-            paddingTop: 24,
-            paddingBottom: 24,
-          }}
+          contentContainerStyle={{ padding: scaledBoardListSpacing }}
           showsVerticalScrollIndicator={false}
         >
-          <View className={cn("gap-5")}>
-            {MOCK_BOARDS.map((board) => (
-              <BoardCard
-                key={board.id}
-                board={board}
-                onPress={() =>
-                  router.push({
-                    pathname: "/details",
-                    params: { id: board.id, title: board.title, color: board.color },
-                  })
-                }
-              />
-            ))}
-          </View>
+          {boards?.length === 0 ? (
+            <Empty message='Nenhum quadro criado!' />
+          ) : (
+            <View style={{ gap: scaledGapBoardList }}>
+              {boards?.map((board) => (
+                <BoardCard key={board.id} board={{ ...board }} />
+              ))}
+            </View>
+          )}
         </ScrollView>
         <View
-          className={cn(
-            "border-t border-neutral-200 bg-neutral-0 px-5 py-4"
-          )}
+          className={cn("border-t border-neutral-200 bg-neutral-0 px-5 py-4")}
           accessible={false}
-          accessibilityRole="none"
+          accessibilityRole='none'
         >
           <TouchableOpacity
             activeOpacity={0.7}
             onPress={() => setCreateModalVisible(true)}
-            accessibilityRole="button"
-            accessibilityLabel="Criar novo quadro"
-            accessibilityHint="Abre o formulário para criar um novo quadro"
+            accessibilityRole='button'
+            accessibilityLabel='Criar novo quadro'
+            accessibilityHint='Abre o formulário para criar um novo quadro'
             style={{
               width: "100%",
               minHeight: 56,
@@ -96,9 +113,16 @@ export function Menu() {
               backgroundColor: THEME_COLORS.neutral[0],
             }}
           >
-            <View style={{ flexDirection: "row", alignItems: "center", gap: 8, flexShrink: 0 }}>
+            <View
+              style={{
+                flexDirection: "row",
+                alignItems: "center",
+                gap: 8,
+                flexShrink: 0,
+              }}
+            >
               <MaterialIcons
-                name="add"
+                name='add'
                 size={22}
                 color={THEME_COLORS.neutral[1000]}
               />
@@ -119,3 +143,4 @@ export function Menu() {
     </View>
   );
 }
+

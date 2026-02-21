@@ -85,6 +85,7 @@ export function SheetModal({
             >
               <View className={cn("w-10 h-1 rounded-full bg-neutral-300")} />
             </View>
+
             <View
               style={{
                 paddingHorizontal: 30,
@@ -105,25 +106,29 @@ export function SheetModal({
               >
                 <Text
                   className='text-xl font-lexend-semi-bold text-neutral-1000'
-                  style={[titleStyle]}
+                  style={titleStyle}
                 >
                   {title}
                 </Text>
               </View>
+
               <TouchableOpacity
                 onPress={onClose}
                 hitSlop={{ top: 12, bottom: 12, left: 12, right: 12 }}
                 style={{ padding: 4 }}
                 accessibilityRole='button'
+                accessibilityRole='button'
                 accessibilityLabel={closeButtonAccessibilityLabel}
               >
                 <MaterialIcons
+                  name='close'
                   name='close'
                   size={24}
                   color={THEME_COLORS.neutral[1000]}
                 />
               </TouchableOpacity>
             </View>
+
             <KeyboardAvoidingView
               behavior={Platform.OS === "ios" ? "padding" : "height"}
               className={cn("flex-1")}
