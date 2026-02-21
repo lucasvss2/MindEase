@@ -1,6 +1,6 @@
 import { PageLayout } from "@/layouts"
 import * as S from "./styles"
-import { Form } from "antd"
+import { Form, Divider } from "antd"
 import {
   ResponsiveButton,
   ResponsiveInput,
@@ -14,15 +14,17 @@ export function LoginPage() {
       hideFloatButton
     >
       <S.Container>
-        <ResponsiveCard $width="400px">
+        <ResponsiveCard $width="400px" $gap="16px">
+          <S.Title>Login</S.Title>
           <Form>
             <Form.Item>
               <ResponsiveInput placeholder="Digite seu email" />
             </Form.Item>
             <Form.Item>
-              <ResponsiveInput placeholder="Digite sua senha" />
+              <ResponsiveInput type={'password'} placeholder="Digite sua senha" hidden />
             </Form.Item>
-            <ResponsiveButton type="default" htmlType="submit">Login</ResponsiveButton>
+            <Divider />
+            <ResponsiveButton width="100%" type="default" htmlType="submit">Login</ResponsiveButton>
           </Form>
         </ResponsiveCard>
       </S.Container>
