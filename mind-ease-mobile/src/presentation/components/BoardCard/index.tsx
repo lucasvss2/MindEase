@@ -20,6 +20,7 @@ export function BoardCard({ board }: IBoardCardProps) {
     });
   };
 
+  
   return (
     <TouchableOpacity activeOpacity={0.7} onPress={onNavigateToDetails}>
       <Card className='flex-row items-center gap-5'>
@@ -58,6 +59,7 @@ export function BoardCard({ board }: IBoardCardProps) {
             )}
           </View>
         </View>
+
         <MaterialIcons
           name='chevron-right'
           size={24}

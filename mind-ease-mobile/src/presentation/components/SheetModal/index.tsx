@@ -117,9 +117,11 @@ export function SheetModal({
                 hitSlop={{ top: 12, bottom: 12, left: 12, right: 12 }}
                 style={{ padding: 4 }}
                 accessibilityRole='button'
+                accessibilityRole='button'
                 accessibilityLabel={closeButtonAccessibilityLabel}
               >
                 <MaterialIcons
+                  name='close'
                   name='close'
                   size={24}
                   color={THEME_COLORS.neutral[1000]}

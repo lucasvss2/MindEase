@@ -1,161 +1,141 @@
-import { BoardCard, Button } from "@/presentation/components";
-import { Empty } from "@/presentation/components/Empty";
-import { THEME_COLORS, TOKENS } from "@/presentation/constants";
-import {
-  useCreateBoardMutation,
-  useGetBoards,
-} from "@/presentation/features/Boards/board-queries";
-import { useAccessibilityScale } from "@/presentation/hooks/useAccessibilityScale";
-import useUserPreferencesStore from "@/presentation/store/useUserPreferencesStore";
+import { useMemo, useState } from "react";
+import { View } from "react-native";
+import { useRouter, useLocalSearchParams } from "expo-router";
+import { ScreenHeader } from "@/presentation/components";
+import { useTimerStore } from "@/presentation/store";
+import { formatTimeSpent } from "@/utils/dateUtils";
 import { cn } from "@/utils/twClassnamesResolver";
-import { MaterialIcons } from "@expo/vector-icons";
-import { useRouter } from "expo-router";
-import { useState } from "react";
-import { ScrollView, Text, TextStyle, View } from "react-native";
-import { BoardModal, Header } from "./components";
+import { SECTION_CONTENT } from "@/data/mocks";
+import type { SectionKey } from "@/data/mocks";
+import type { TasksVariant, ITasksParams } from "./interface";
+import { TASKS_HEADER_TITLES } from "./interface";
+import { TaskFormView, TaskDetailView } from "./components";
 
+export type { ITasksParams, TasksVariant } from "./interface";
+
+function getTaskById(id: string | undefined) {
+  if (!id) return null;
+  const match = id.match(/^(.+)-(\d+)$/);
+  if (!match) return null;
+  const key = match[1] as SectionKey;
+  const index = parseInt(match[2], 10);
+  const section = SECTION_CONTENT[key];
+  if (!section || index < 0 || index >= section.items.length) return null;
+  return section.items[index];
+}
+
+function getTasksVariant(id: string | undefined): TasksVariant {
+  return id ? "detail" : "form";
+}
+
+/**
+ * Tela de tarefa com duas vertentes: criação (form) e detalhe/edição (detail).
+ * Orquestra qual view exibir conforme os parâmetros da rota.
+ */
 export function Tasks() {
   const router = useRouter();
-  const [createModalVisible, setCreateModalVisible] = useState(false);
-  const { data: boards } = useGetBoards();
-  const { mutateAsync: mutateCreateBoard, isPending: isCreatingBoard } =
-    useCreateBoardMutation();
-  const scaledTitle = useAccessibilityScale<TextStyle>(TOKENS.FONT_SIZE["2xl"]);
-  const scaledSubTitle = useAccessibilityScale<TextStyle>(
-    TOKENS.FONT_SIZE.base,
-  );
-  const scaledBoardListSpacing = useAccessibilityScale<number>(
-    TOKENS.SPACING["lg"],
-    "number",
-  );
+  const { id, boardId, boardTitle, boardColor } =
+    useLocalSearchParams() as ITasksParams;
 
-  const scaledButtonNewBoardSpacingY = useAccessibilityScale<number>(
-    TOKENS.SPACING["md"],
-    "number",
-  );
+  const task = useMemo(() => getTaskById(id), [id]);
+  const variant = useMemo(() => getTasksVariant(id), [id]);
+  const headerTitle = TASKS_HEADER_TITLES[variant];
 
-  const scaledButtonNewBoardSpacingX = useAccessibilityScale<number>(
-    TOKENS.SPACING["lg"],
-    "number",
-  );
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+  const [checklistItems, setChecklistItems] = useState<
+    { label: string; completed: boolean }[]
+  >([]);
+  const [checklistInput, setChecklistInput] = useState("");
 
-  const scaledTitleContainerSpacingY = useAccessibilityScale<number>(
-    TOKENS.SPACING["xl"],
-    "number",
-  );
+  const {
+    totalTimeSpentSeconds,
+    focusDurationMinutes,
+    setFocusDurationMinutes,
+  } = useTimerStore();
+  const timeSpentLabel = formatTimeSpent(totalTimeSpentSeconds);
 
-  const scaledTitleContainerSpacingX = useAccessibilityScale<number>(
-    TOKENS.SPACING["lg"],
-    "number",
-  );
+  const checklistCompleted = checklistItems.filter((i) => i.completed).length;
+  const checklistTotal = checklistItems.length;
 
-  const scaledGapHeader = useAccessibilityScale<number>(
-    TOKENS.SPACING["2xs"],
-    "number",
-  );
+  const handleAddChecklistItem = () => {
+    const trimmed = checklistInput.trim();
+    if (!trimmed) return;
+    setChecklistItems((prev) => [...prev, { label: trimmed, completed: false }]);
+    setChecklistInput("");
+  };
 
-  const scaledGapBordList = useAccessibilityScale<number>(
-    TOKENS.SPACING["lg"],
-    "number",
-  );
+  const handleToggleItem = (index: number) => {
+    setChecklistItems((prev) =>
+      prev.map((item, i) =>
+        i === index ? { ...item, completed: !item.completed } : item
+      )
+    );
+  };
 
-  const scaledAddBoardIconSize = useAccessibilityScale<number>(
-    TOKENS.FONT_SIZE["2xl"],
-    "number",
-  );
+  const handleRemoveItem = (index: number) => {
+    setChecklistItems((prev) => prev.filter((_, i) => i !== index));
+  };
 
-  const { fontType } = useUserPreferencesStore();
-
-  const handleCreateBoard = async ({
-    name,
-    color,
-    description,
-  }: {
-    name?: string;
-    color?: string;
-    description?: string;
-  }) => {
-    if (!name || !color) return;
-
-    await mutateCreateBoard({
-      data: { name, description: description ?? '', color },
-    });
-
-    setCreateModalVisible(false);
+  const handleBack = () => {
+    if (boardId) {
+      router.replace({
+        pathname: "/details",
+        params: {
+          id: boardId,
+          title: boardTitle ?? "",
+          color: boardColor ?? "",
+        },
+      });
+    } else {
+      router.back();
+    }
   };
 
   return (
     <View className={cn("flex-1 bg-neutral-0")}>
-      <BoardModal
-        snapPoints={[65, 90]}
-        visible={createModalVisible}
-        onCancel={() => setCreateModalVisible(false)}
-        onSubmit={handleCreateBoard}
-        isLoading={isCreatingBoard}
+      <ScreenHeader
+        onBack={handleBack}
+        title={headerTitle}
+        className="bg-neutral-0 border-neutral-200"
       />
-      <Header />
-      <View className={cn("flex-1")}>
-        <View
-          className={cn("border-b border-neutral-200 bg-neutral-0")}
-          style={{
-            paddingVertical: scaledTitleContainerSpacingY,
-            paddingHorizontal: scaledTitleContainerSpacingX,
-            gap: scaledGapHeader,
-          }}
-        >
-          <Text
-            className='text-neutral-1000'
-            style={[scaledTitle, { fontFamily: fontType, fontWeight: 600 }]}
-          >
-            Meus quadros
-          </Text>
-
-          <Text
-            className='text-neutral-600'
-            style={[scaledSubTitle, { fontFamily: fontType, fontWeight: 400 }]}
-          >
-            {boards?.length || 0} quadros ativos
-          </Text>
-        </View>
-
-        <ScrollView
-          className={cn("flex-1")}
-          contentContainerStyle={{ padding: scaledBoardListSpacing }}
-          showsVerticalScrollIndicator={false}
-        >
-          {boards?.length === 0 ? (
-            <Empty message='Nenhum quadro criado!' />
-          ) : (
-            <View style={{ gap: scaledGapBordList }}>
-              {boards?.map((board) => (
-                <BoardCard key={board.id} board={{ ...board }} />
-              ))}
-            </View>
-          )}
-        </ScrollView>
-        <View
-          className={cn("border-t border-neutral-200 bg-neutral-0")}
-          style={{
-            paddingVertical: scaledButtonNewBoardSpacingY,
-            paddingHorizontal: scaledButtonNewBoardSpacingX,
-          }}
-        >
-          <Button
-            activeOpacity={0.7}
-            onPress={() => setCreateModalVisible(true)}
-            variant='dashed'
-            leftIcon={
-              <MaterialIcons
-                name='add'
-                size={scaledAddBoardIconSize}
-                color={THEME_COLORS.neutral[1000]}
-              />
-            }
-          >
-            Criar novo quadro
-          </Button>
-        </View>
-      </View>
+      {variant === "form" ? (
+        <TaskFormView
+          title={title}
+          setTitle={setTitle}
+          description={description}
+          setDescription={setDescription}
+          checklistItems={checklistItems}
+          checklistInput={checklistInput}
+          setChecklistInput={setChecklistInput}
+          checklistCompleted={checklistCompleted}
+          checklistTotal={checklistTotal}
+          onAddChecklistItem={handleAddChecklistItem}
+          onToggleChecklistItem={handleToggleItem}
+          onRemoveChecklistItem={handleRemoveItem}
+          focusDurationMinutes={focusDurationMinutes}
+          setFocusDurationMinutes={setFocusDurationMinutes}
+          timeSpentLabel={timeSpentLabel}
+          onSave={handleBack}
+        />
+      ) : task ? (
+        <TaskDetailView
+          task={task}
+          checklistItems={checklistItems}
+          checklistInput={checklistInput}
+          setChecklistInput={setChecklistInput}
+          checklistCompleted={checklistCompleted}
+          checklistTotal={checklistTotal}
+          onAddChecklistItem={handleAddChecklistItem}
+          onToggleChecklistItem={handleToggleItem}
+          onRemoveChecklistItem={handleRemoveItem}
+          focusDurationMinutes={focusDurationMinutes}
+          setFocusDurationMinutes={setFocusDurationMinutes}
+          timeSpentLabel={timeSpentLabel}
+        />
+      ) : (
+        <View className={cn("flex-1")} />
+      )}
     </View>
   );
 }
