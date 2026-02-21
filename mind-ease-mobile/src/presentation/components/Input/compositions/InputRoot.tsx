@@ -6,7 +6,7 @@ import { View } from "react-native";
 import { inputColorsVariant } from "../input.variants";
 import { IInputRoot } from "../interface";
 
-export const InputRoot = ({ children, isError = false }: IInputRoot) => {
+export const InputRoot = ({ children, isError = false ,className=''}: IInputRoot) => {
   const { contrast } = useUserPreferencesStore();
 
   const scaledGap = useAccessibilityScale<number>(TOKENS.SPACING.xs, "number");
@@ -20,7 +20,7 @@ export const InputRoot = ({ children, isError = false }: IInputRoot) => {
 
   return (
     <View
-      className={cn(`border h-14 rounded-md w-full  flex-row items-center`)}
+      className={cn(`border h-14 rounded-md w-full  flex-row items-center`, className)}
       style={[
         {
           borderColor: borderColor,
