@@ -2,11 +2,27 @@ import { AppError } from "@/domain/errors/app-error";
 import { TaskModel } from "@/domain/models/TaskModel";
 import { ITaskRepository } from "@/domain/respositories/ITaskRepository";
 import { api } from "@/infrastructure/http/api";
-import { UpdateTaskDTO } from "../dtos/task-dto";
+import {
+  CreateTaskDTO,
+  TaskResponseDTO,
+  UpdateTaskDTO,
+} from "../dtos/task-dto";
 import { TaskMapper } from "../mappers/task-mappers";
 
 export class TaskServices implements ITaskRepository {
   private readonly endpoint = "tasks";
+
+  async createTask(props: CreateTaskDTO): Promise<TaskModel> {
+    try {
+      const { data } = await api.post<TaskResponseDTO>(this.endpoint, props);
+      return TaskMapper.toDomain(data);
+    } catch (error: any) {
+      throw new AppError(
+        error.response?.data?.error || "Erro ao criar coluna",
+        error.response?.status,
+      );
+    }
+  }
 
   async getTasks(): Promise<TaskModel[]> {
     try {
@@ -23,6 +39,7 @@ export class TaskServices implements ITaskRepository {
   async getTaskById(id: string): Promise<TaskModel> {
     try {
       const response = await api.get(`${this.endpoint}/${id}`);
+
       return TaskMapper.toDomain(response.data);
     } catch (error: any) {
       throw new AppError(
