@@ -19,16 +19,22 @@ import {
 } from "@/presentation/features/Columns/columns-queries";
 import { lightenHex } from "@/utils/colorUtils";
 import { cn } from "@/utils/twClassnamesResolver";
+
 import { MaterialIcons } from "@expo/vector-icons";
 import { useLocalSearchParams, useRouter } from "expo-router";
 import { useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import { ScrollView, Text, TouchableOpacity, View } from "react-native";
-import { BoardModal } from "../Tasks/components";
 import { CreateColumnModal } from "./Column/Modal/CreateColumnModal";
 import { EditColumnModal } from "./Column/Modal/EditColumnModal";
+import { BoardModal } from "../Tasks/components/BoardModal";
 
 const COLUMN_OPTIONS = [
+  {
+    key: "paraFazer" as const,
+    label: "Para fazer",
+    icon: "format-list-bulleted" as const,
+  },
   {
     key: "paraFazer" as const,
     label: "Para fazer",
@@ -277,7 +283,7 @@ export function Details() {
             </View>
           </ScrollView>
         </View>
-        
+
         <View>
           <View
             className={cn("border-t border-neutral-200 bg-neutral-0")}
