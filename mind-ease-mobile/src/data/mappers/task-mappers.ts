@@ -6,16 +6,24 @@ export class TaskMapper {
     return {
       id: raw.id,
       userId: raw.userId,
-      boardId: raw.boardId,
+      columnId: raw.columnId,
       title: raw.title,
       description: raw.description,
       status: raw.status,
       dueDate: raw.dueDate,
+      hours: raw.hours,
       createdAt: raw.createdAt,
       updatedAt: raw.updatedAt,
-      board: {
-        id: raw.board.id,
-        name: raw.board.name,
+
+      column: {
+        id: raw.column.id,
+        name: raw.column.name,
+        slug: raw.column.slug,
+        board: {
+          id: raw.column.board.id,
+          name: raw.column.board.name,
+          color: raw.column.board.color,
+        },
       },
     };
   }
