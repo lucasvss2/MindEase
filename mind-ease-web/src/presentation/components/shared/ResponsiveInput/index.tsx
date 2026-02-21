@@ -4,7 +4,7 @@ import * as S from './styles'
 interface ResponsiveInputProps extends Omit<InputProps, 'type'> {
   width?: string
   height?: string
-  type?: 'default' | 'primary' | 'dashed' | 'text' | 'link' | 'neutral'
+  type?: string | 'default' | 'primary' | 'dashed' | 'text' | 'link' | 'neutral'
 }
 
 export function ResponsiveInput({ width, height, type, disabled = false, onClick, ...rest }: ResponsiveInputProps) {

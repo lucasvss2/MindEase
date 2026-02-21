@@ -1,8 +1,16 @@
+import { useNavigate } from 'react-router-dom'
+import { useState } from 'react'
 import { PageLayout } from '@/layouts'
-import { LandingPageCarrousel, ResponsiveButton, ResponsiveInput } from '@/presentation'
+import {
+  LandingPageCarrousel,
+  ResponsiveButton,
+  ResponsiveInput
+} from '@/presentation'
 import * as S from './styles'
 
 export function LandingPage() {
+  const navigate = useNavigate()
+  const [email, setEmail] = useState('')
 
   return (
     <PageLayout noPadding>
@@ -26,15 +34,22 @@ export function LandingPage() {
             placeholder="Digite seu e-mail..."
             width="280px"
             height="56px"
+            onChange={(e) => {
+              setEmail(e.target.value)
+            }}
           />
           <ResponsiveButton
             width='100%'
             height='56px'
             type='primary'
             disabled={false}
-            onClick={() => { }}
+            onClick={() => {
+              navigate('/register', { state: { email: email } })
+            }}
             style={{ maxWidth: '250px' }}
-          >Começar Agora</ResponsiveButton>
+          >
+            Começar Agora
+          </ResponsiveButton>
         </S.ActionGroup>
       </S.HeroContainer>
     </PageLayout>
