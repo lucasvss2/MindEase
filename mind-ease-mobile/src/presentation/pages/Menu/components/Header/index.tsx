@@ -7,7 +7,7 @@ import { NotificationDropdown } from "../NotificationDropdown";
 import { UserSettingsDropdown } from "../UserSettingsDropdown";
 
 export function Header() {
-  const { fontType } = useUserPreferencesStore();
+  const { fontType, enableSummaryMode } = useUserPreferencesStore();
   const scaledText3xlSize = useAccessibilityScale<TextStyle>(
     TOKENS.FONT_SIZE["3xl"],
     "font",
@@ -26,19 +26,26 @@ export function Header() {
         padding: scaledSpacingLgSize,
       }}
     >
-      <Text
-        className='text-blue-600'
-        style={[{ fontFamily: fontType, fontWeight: 600 }, scaledText3xlSize]}
-      >
-        MindEase
-      </Text>
+      {!enableSummaryMode && (
+        <Text
+          className='text-blue-600'
+          style={[{ fontFamily: fontType, fontWeight: 600 }, scaledText3xlSize]}
+        >
+          MindEase
+        </Text>
+      )}
+
       <View
-        className='flex-row items-center'
+        className={cn(
+          "flex-row items-center",
+          enableSummaryMode && "flex-1 justify-end gap-3",
+        )}
         style={{ gap: scaledSpacingLgSize } as ViewStyle}
       >
-        <NotificationDropdown />
+        {!enableSummaryMode && <NotificationDropdown />}
         <UserSettingsDropdown />
       </View>
     </View>
   );
 }
+

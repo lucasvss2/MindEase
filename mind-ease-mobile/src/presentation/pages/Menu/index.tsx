@@ -8,15 +8,15 @@ import {
   useGetBoards,
 } from "@/presentation/features/Boards/board-queries";
 import { useAccessibilityScale } from "@/presentation/hooks/useAccessibilityScale";
+import useUserPreferencesStore from "@/presentation/store/useUserPreferencesStore";
 import { cn } from "@/utils/twClassnamesResolver";
 import { MaterialIcons } from "@expo/vector-icons";
-import { useRouter } from "expo-router";
 import { useState } from "react";
 import { ScrollView, Text, TouchableOpacity, View } from "react-native";
 import { BoardModal, Header } from "./components";
 
 export function Menu() {
-  const router = useRouter();
+  const { enableSummaryMode } = useUserPreferencesStore();
   const [createModalVisible, setCreateModalVisible] = useState(false);
   const { data: boards } = useGetBoards();
   const { mutateAsync: mutateCreateBoard, isPending: isCreatingBoard } =
@@ -69,9 +69,12 @@ export function Menu() {
           <Text className='text-3xl font-lexend-bold text-neutral-1000'>
             Meus quadros
           </Text>
-          <Text className='text-base font-lexend-regular text-neutral-600 mt-1'>
-            {MOCK_BOARDS.length} quadros ativos
-          </Text>
+
+          {!enableSummaryMode && (
+            <Text className='text-base font-lexend-regular text-neutral-600 mt-1'>
+              {MOCK_BOARDS.length} quadros ativos
+            </Text>
+          )}
         </View>
         <ScrollView
           className={cn("flex-1")}
@@ -126,16 +129,18 @@ export function Menu() {
                 size={22}
                 color={THEME_COLORS.neutral[1000]}
               />
-              <Text
-                style={{
-                  fontSize: 16,
-                  fontFamily: "Lexend_600SemiBold",
-                  color: THEME_COLORS.neutral[1000],
-                  flexShrink: 0,
-                }}
-              >
-                Criar novo quadro
-              </Text>
+              {!enableSummaryMode && (
+                <Text
+                  style={{
+                    fontSize: 16,
+                    fontFamily: "Lexend_600SemiBold",
+                    color: THEME_COLORS.neutral[1000],
+                    flexShrink: 0,
+                  }}
+                >
+                  Criar novo quadro
+                </Text>
+              )}
             </View>
           </TouchableOpacity>
         </View>

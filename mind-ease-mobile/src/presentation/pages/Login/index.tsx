@@ -17,7 +17,7 @@ import { Text, TextStyle, View, ViewStyle } from "react-native";
 import { Toast } from "toastify-react-native";
 
 export const LoginPage = () => {
-  const { fontType } = useUserPreferencesStore();
+  const { fontType, enableSummaryMode } = useUserPreferencesStore();
   const scaledSpacing2xl = useAccessibilityScale<number>(
     TOKENS.SPACING["2xl"],
     "number",
