@@ -26,5 +26,6 @@ export interface Actions {
   resetPreferences: () => void;
   updateAnimationSpeed: (value: number) => void;
   updateFontType: (fontType: FontType) => void;
+  updateAllPreferences: (preferences: States) => void;
 }
 
