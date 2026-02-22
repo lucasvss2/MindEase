@@ -1,20 +1,9 @@
+import { USER_INITIAL_PREFERENCES } from "@/presentation/constants/initialUserPreferences";
 import { create } from "zustand";
 import { Actions, States } from "./interface";
-import { IUserPreferences } from "@/domain/types/settings";
-
-const initialPreferences: IUserPreferences = {
-  fontSizeScale: 1,
-  spacingScale: 1,
-  contrast: "moderate",
-  activityProfile: "work",
-  enableSummaryMode: false,
-  complexityLevel: "high",
-  animationSpeed: 1,
-  fontType: "sans",
-};
 
 const useUserPreferencesStore = create<States & Actions>((set) => ({
-  ...initialPreferences,
+  ...USER_INITIAL_PREFERENCES,
 
   updateEnableSummaryMode: (enableSummaryMode) => set({ enableSummaryMode }),
   updateContrast: (contrast) => set({ contrast }),
@@ -24,7 +13,8 @@ const useUserPreferencesStore = create<States & Actions>((set) => ({
   updateSpacingScale: (value) => set(() => ({ spacingScale: value })),
   updateAnimationSpeed: (value) => set(() => ({ animationSpeed: value })),
   updateFontType: (fontType) => set(() => ({ fontType })),
-  resetPreferences: () => set({ ...initialPreferences }),
+  updateAllPreferences: (preferences) => set(() => ({ ...preferences })),
+  resetPreferences: () => set({ ...USER_INITIAL_PREFERENCES }),
 }));
 
 export default useUserPreferencesStore;
