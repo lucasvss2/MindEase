@@ -27,6 +27,10 @@ export function TimerRing({
     0,
     Math.min(1, totalTime > 0 ? timeRemaining / totalTime : 0)
   );
+  const isUrgent = progress <= 0.1;
+  const effectiveProgressColor = isUrgent
+    ? THEME_COLORS.timerRing.urgent
+    : progressColor;
 
   const radius = (size - strokeWidth) / 2;
   const circumference = 2 * Math.PI * radius;
@@ -52,7 +56,7 @@ export function TimerRing({
             cx={center}
             cy={center}
             r={radius}
-            stroke={progressColor}
+            stroke={effectiveProgressColor}
             strokeWidth={strokeWidth}
             fill="transparent"
             strokeDasharray={circumference}

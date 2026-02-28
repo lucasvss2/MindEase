@@ -16,7 +16,7 @@ export function ScreenHeader({
   return (
     <View
       className={cn(
-        "flex-row items-center px-4 py-3 border-b border-blue-200 bg-blue-50",
+        "flex-row items-center px-4 py-3 border-b border-neutral-200 bg-neutral-0",
         className
       )}
     >
@@ -31,10 +31,12 @@ export function ScreenHeader({
         {titlePrefix}
         <Text
           className={cn(
-            "text-2xl font-lexend-semi-bold text-neutral-1000",
+            "text-2xl font-lexend-semi-bold text-neutral-1000 flex-1",
             titleClassName
           )}
-          numberOfLines={1}
+          numberOfLines={2}
+          adjustsFontSizeToFit
+          minimumFontScale={0.7}
         >
           {title}
         </Text>

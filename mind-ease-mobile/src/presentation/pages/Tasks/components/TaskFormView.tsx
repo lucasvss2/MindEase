@@ -7,6 +7,7 @@ import {
 } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { Button, Card } from "@/presentation/components";
+import { Switch } from "@/presentation/components/Switch";
 import { THEME_COLORS } from "@/presentation/constants/theme";
 import { cn } from "@/utils/twClassnamesResolver";
 
@@ -25,8 +26,12 @@ export interface TaskFormViewProps {
   onRemoveChecklistItem: (index: number) => void;
   focusDurationMinutes: number;
   setFocusDurationMinutes: (minutes: number) => void;
+  restDurationMinutes: number;
+  setRestDurationMinutes: (minutes: number) => void;
   timeSpentLabel: string;
   onSave: () => void;
+  enableSoftSounds: boolean;
+  setEnableSoftSounds: (v: boolean) => void;
 }
 
 export function TaskFormView({
@@ -44,8 +49,12 @@ export function TaskFormView({
   onRemoveChecklistItem,
   focusDurationMinutes,
   setFocusDurationMinutes,
+  restDurationMinutes,
+  setRestDurationMinutes,
   timeSpentLabel,
   onSave,
+  enableSoftSounds,
+  setEnableSoftSounds,
 }: TaskFormViewProps) {
   return (
     <ScrollView
@@ -104,6 +113,25 @@ export function TaskFormView({
           <Text className="text-base font-lexend-semi-bold text-neutral-1000">
             Checklist ({checklistCompleted}/{checklistTotal})
           </Text>
+        </View>
+        <View className={cn("flex-row items-center justify-end gap-2")}>
+          <MaterialCommunityIcons
+            name="volume-high"
+            size={20}
+            color={THEME_COLORS.neutral[600]}
+          />
+          <Text className="text-sm font-lexend-regular text-neutral-600">
+            Sinais sonoros suaves
+          </Text>
+          <Switch
+            value={enableSoftSounds}
+            onValueChange={setEnableSoftSounds}
+            trackColor={{
+              false: THEME_COLORS.neutral[0],
+              true: THEME_COLORS.blue[600],
+            }}
+            style={{ transform: [{ scaleX: 0.9 }, { scaleY: 0.9 }] }}
+          />
         </View>
 
         {checklistItems.length > 0 && (
@@ -230,31 +258,78 @@ export function TaskFormView({
         <View
           style={{
             flexDirection: "row",
-            alignItems: "center",
-            gap: 8,
+            alignItems: "flex-start",
+            gap: 16,
           }}
         >
-          <TextInput
-            value={String(focusDurationMinutes)}
-            onChangeText={(text) => {
-              if (text === "") setFocusDurationMinutes(25);
-              else {
-                const n = parseInt(text, 10);
-                if (!Number.isNaN(n)) setFocusDurationMinutes(n);
-              }
-            }}
-            placeholder="25"
-            placeholderTextColor={THEME_COLORS.neutral[600]}
-            keyboardType="number-pad"
-            maxLength={3}
-            className={cn(
-              "border border-neutral-200 rounded-lg px-3 py-2 text-base font-lexend-regular text-neutral-1000 text-center"
-            )}
-            style={{ width: 56, minHeight: 40 }}
-          />
-          <Text className="text-sm font-lexend-regular text-neutral-600">
-            minutos de foco
-          </Text>
+          <View style={{ flex: 1, gap: 8 }}>
+            <Text className="text-sm font-lexend-regular text-neutral-600">
+              Tempo de foco
+            </Text>
+            <View
+              style={{
+                flexDirection: "row",
+                alignItems: "center",
+                gap: 8,
+              }}
+            >
+              <TextInput
+                value={String(focusDurationMinutes)}
+                onChangeText={(text) => {
+                  if (text === "") setFocusDurationMinutes(25);
+                  else {
+                    const n = parseInt(text, 10);
+                    if (!Number.isNaN(n)) setFocusDurationMinutes(n);
+                  }
+                }}
+                placeholder="25"
+                placeholderTextColor={THEME_COLORS.neutral[600]}
+                keyboardType="number-pad"
+                maxLength={3}
+                className={cn(
+                  "border border-neutral-200 rounded-lg px-3 py-2 text-base font-lexend-regular text-neutral-1000 text-center"
+                )}
+                style={{ width: 56, minHeight: 40 }}
+              />
+              <Text className="text-sm font-lexend-regular text-neutral-600">
+                min
+              </Text>
+            </View>
+          </View>
+          <View style={{ flex: 1, gap: 8 }}>
+            <Text className="text-sm font-lexend-regular text-neutral-600">
+              Tempo de descanso
+            </Text>
+            <View
+              style={{
+                flexDirection: "row",
+                alignItems: "center",
+                gap: 8,
+              }}
+            >
+              <TextInput
+                value={String(restDurationMinutes)}
+                onChangeText={(text) => {
+                  if (text === "") setRestDurationMinutes(5);
+                  else {
+                    const n = parseInt(text, 10);
+                    if (!Number.isNaN(n)) setRestDurationMinutes(n);
+                  }
+                }}
+                placeholder="5"
+                placeholderTextColor={THEME_COLORS.neutral[600]}
+                keyboardType="number-pad"
+                maxLength={3}
+                className={cn(
+                  "border border-neutral-200 rounded-lg px-3 py-2 text-base font-lexend-regular text-neutral-1000 text-center"
+                )}
+                style={{ width: 56, minHeight: 40 }}
+              />
+              <Text className="text-sm font-lexend-regular text-neutral-600">
+                min
+              </Text>
+            </View>
+          </View>
         </View>
       </Card>
 

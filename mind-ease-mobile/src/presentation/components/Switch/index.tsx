@@ -4,7 +4,11 @@ import { cn } from "@/utils/twClassnamesResolver";
 import React from "react";
 import { Switch as SwitchNative, SwitchProps } from "react-native";
 
-export const Switch: React.FC<SwitchProps> = ({ className = "", ...props }) => {
+export const Switch: React.FC<SwitchProps> = ({
+  className = "",
+  trackColor,
+  ...props
+}) => {
   const { contrast } = useUserPreferencesStore();
 
   const styleByContrast = {
@@ -37,12 +41,14 @@ export const Switch: React.FC<SwitchProps> = ({ className = "", ...props }) => {
     },
   };
 
-  const iosBackgroundColor = styleByContrast[contrast].trackColor.false;
+  const resolvedTrackColor = trackColor ?? styleByContrast[contrast].trackColor;
+  const iosBackgroundColor = resolvedTrackColor.false;
 
   return (
     <SwitchNative
       {...props}
-      {...styleByContrast[contrast]}
+      trackColor={resolvedTrackColor}
+      thumbColor={styleByContrast[contrast].thumbColor}
       ios_backgroundColor={iosBackgroundColor}
       className={cn(
         !props.value
