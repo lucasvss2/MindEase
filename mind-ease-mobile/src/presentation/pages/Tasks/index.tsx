@@ -52,6 +52,10 @@ export function Tasks() {
     totalTimeSpentSeconds,
     focusDurationMinutes,
     setFocusDurationMinutes,
+    restDurationMinutes,
+    setRestDurationMinutes,
+    enableSoftSounds,
+    setEnableSoftSounds,
   } = useTimerStore();
   const timeSpentLabel = formatTimeSpent(totalTimeSpentSeconds);
 
@@ -115,8 +119,12 @@ export function Tasks() {
           onRemoveChecklistItem={handleRemoveItem}
           focusDurationMinutes={focusDurationMinutes}
           setFocusDurationMinutes={setFocusDurationMinutes}
+          restDurationMinutes={restDurationMinutes}
+          setRestDurationMinutes={setRestDurationMinutes}
           timeSpentLabel={timeSpentLabel}
           onSave={handleBack}
+          enableSoftSounds={enableSoftSounds}
+          setEnableSoftSounds={setEnableSoftSounds}
         />
       ) : task ? (
         <TaskDetailView
@@ -131,6 +139,8 @@ export function Tasks() {
           onRemoveChecklistItem={handleRemoveItem}
           focusDurationMinutes={focusDurationMinutes}
           setFocusDurationMinutes={setFocusDurationMinutes}
+          restDurationMinutes={restDurationMinutes}
+          setRestDurationMinutes={setRestDurationMinutes}
           timeSpentLabel={timeSpentLabel}
         />
       ) : (

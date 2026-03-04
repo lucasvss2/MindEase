@@ -26,11 +26,18 @@ export const THEME_COLORS = {
   timerRing: {
     ring: "#D4DAE3",
     progress: "#5EA4FE",
+    /** Cor quando faltam 10% ou menos do tempo */
+    urgent: "#F59E0B",
   },
   /** Tela Focus: fundo e StatusBar */
   focus: {
     background: "#E4F0FF",
     statusBar: "#E4F0FF",
+  },
+  /** Tela Rest: fundo e StatusBar */
+  rest: {
+    background: "#F0FDF4",
+    statusBar: "#F0FDF4",
   },
   /** Fundos das seções (colunas) na tela de detalhes do quadro */
   section: {

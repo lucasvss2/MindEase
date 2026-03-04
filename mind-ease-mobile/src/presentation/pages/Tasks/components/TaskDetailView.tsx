@@ -24,6 +24,8 @@ export interface TaskDetailViewProps {
   onRemoveChecklistItem: (index: number) => void;
   focusDurationMinutes: number;
   setFocusDurationMinutes: (minutes: number) => void;
+  restDurationMinutes: number;
+  setRestDurationMinutes: (minutes: number) => void;
   timeSpentLabel: string;
 }
 
@@ -39,6 +41,8 @@ export function TaskDetailView({
   onRemoveChecklistItem,
   focusDurationMinutes,
   setFocusDurationMinutes,
+  restDurationMinutes,
+  setRestDurationMinutes,
   timeSpentLabel,
 }: TaskDetailViewProps) {
   const router = useRouter();
@@ -199,31 +203,78 @@ export function TaskDetailView({
         <View
           style={{
             flexDirection: "row",
-            alignItems: "center",
-            gap: 8,
+            alignItems: "flex-start",
+            gap: 16,
           }}
         >
-          <TextInput
-            value={String(focusDurationMinutes)}
-            onChangeText={(text) => {
-              if (text === "") setFocusDurationMinutes(25);
-              else {
-                const n = parseInt(text, 10);
-                if (!Number.isNaN(n)) setFocusDurationMinutes(n);
-              }
-            }}
-            placeholder="25"
-            placeholderTextColor={THEME_COLORS.neutral[600]}
-            keyboardType="number-pad"
-            maxLength={3}
-            className={cn(
-              "border border-neutral-200 rounded-lg px-3 py-2 text-base font-lexend-regular text-neutral-1000 text-center"
-            )}
-            style={{ width: 56, minHeight: 40 }}
-          />
-          <Text className="text-sm font-lexend-regular text-neutral-600">
-            minutos de foco
-          </Text>
+          <View style={{ flex: 1, gap: 8 }}>
+            <Text className="text-sm font-lexend-regular text-neutral-600">
+              Tempo de foco
+            </Text>
+            <View
+              style={{
+                flexDirection: "row",
+                alignItems: "center",
+                gap: 8,
+              }}
+            >
+              <TextInput
+                value={String(focusDurationMinutes)}
+                onChangeText={(text) => {
+                  if (text === "") setFocusDurationMinutes(25);
+                  else {
+                    const n = parseInt(text, 10);
+                    if (!Number.isNaN(n)) setFocusDurationMinutes(n);
+                  }
+                }}
+                placeholder="25"
+                placeholderTextColor={THEME_COLORS.neutral[600]}
+                keyboardType="number-pad"
+                maxLength={3}
+                className={cn(
+                  "border border-neutral-200 rounded-lg px-3 py-2 text-base font-lexend-regular text-neutral-1000 text-center"
+                )}
+                style={{ width: 56, minHeight: 40 }}
+              />
+              <Text className="text-sm font-lexend-regular text-neutral-600">
+                min
+              </Text>
+            </View>
+          </View>
+          <View style={{ flex: 1, gap: 8 }}>
+            <Text className="text-sm font-lexend-regular text-neutral-600">
+              Tempo de descanso
+            </Text>
+            <View
+              style={{
+                flexDirection: "row",
+                alignItems: "center",
+                gap: 8,
+              }}
+            >
+              <TextInput
+                value={String(restDurationMinutes)}
+                onChangeText={(text) => {
+                  if (text === "") setRestDurationMinutes(5);
+                  else {
+                    const n = parseInt(text, 10);
+                    if (!Number.isNaN(n)) setRestDurationMinutes(n);
+                  }
+                }}
+                placeholder="5"
+                placeholderTextColor={THEME_COLORS.neutral[600]}
+                keyboardType="number-pad"
+                maxLength={3}
+                className={cn(
+                  "border border-neutral-200 rounded-lg px-3 py-2 text-base font-lexend-regular text-neutral-1000 text-center"
+                )}
+                style={{ width: 56, minHeight: 40 }}
+              />
+              <Text className="text-sm font-lexend-regular text-neutral-600">
+                min
+              </Text>
+            </View>
+          </View>
         </View>
       </Card>
 
@@ -245,7 +296,15 @@ export function TaskDetailView({
 
       <Button
         variant="outlined"
-        onPress={() => router.push("/focus")}
+        onPress={() =>
+          router.push({
+            pathname: "/focus",
+            params: {
+              activityTitle: task.title,
+              activityDescription: task.description,
+            },
+          })
+        }
         className={cn("w-full py-3 mt-6")}
         leftIcon={
           <MaterialCommunityIcons

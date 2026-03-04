@@ -1,6 +1,7 @@
 import { create } from "zustand";
 
-const DEFAULT_FOCUS_MINUTES = 25;
+const DEFAULT_FOCUS_MINUTES = 1;
+const DEFAULT_REST_MINUTES = 1;
 const DEFAULT_DURATION = DEFAULT_FOCUS_MINUTES * 60; // segundos
 const TICK_MS = 1000;
 
@@ -11,8 +12,14 @@ interface TimerState {
   /** Duração do foco em minutos (usada em "Configurações de foco" e no cronômetro). */
   focusDurationMinutes: number;
   setFocusDurationMinutes: (minutes: number) => void;
+  /** Duração do descanso em minutos (usada em "Configurações de foco"). */
+  restDurationMinutes: number;
+  setRestDurationMinutes: (minutes: number) => void;
   /** Total seconds consumed in focus mode (all sessions). */
   totalTimeSpentSeconds: number;
+  /** Sinais sonoros suaves no alerta do timer (10% restante). */
+  enableSoftSounds: boolean;
+  setEnableSoftSounds: (v: boolean) => void;
   start: () => void;
   pause: () => void;
   resume: () => void;
@@ -60,7 +67,14 @@ export const useTimerStore = create<TimerState>((set, get) => {
         ...(get().isActive ? {} : { timeRemaining: clamped * 60 }),
       });
     },
+    restDurationMinutes: DEFAULT_REST_MINUTES,
+    setRestDurationMinutes: (minutes) => {
+      const clamped = Math.max(1, Math.min(999, Math.round(minutes)));
+      set({ restDurationMinutes: clamped });
+    },
     totalTimeSpentSeconds: 0,
+    enableSoftSounds: true,
+    setEnableSoftSounds: (v) => set({ enableSoftSounds: v }),
 
     start: () => {
       clearTimer();
