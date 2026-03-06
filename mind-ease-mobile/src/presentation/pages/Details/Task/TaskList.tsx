@@ -3,19 +3,20 @@ import { Card } from "@/presentation/components";
 import { useGetTaskByBoardAndColumnId } from "@/presentation/features/Tasks/tasks-queries";
 import { cn } from "@/utils/twClassnamesResolver";
 import { useRouter } from "expo-router";
-import { useCallback } from "react";
+import { useCallback, useEffect } from "react";
 import { Text, TouchableOpacity, View } from "react-native";
 
 export const TaskList = ({
   boardId,
   columnId,
-  columnName,
 }: {
   boardId: string;
   columnId: string;
-  columnName: string;
 }) => {
-  const { data: tasks } = useGetTaskByBoardAndColumnId(boardId, columnId);
+  const { data: tasks, refetch } = useGetTaskByBoardAndColumnId(
+    boardId,
+    columnId,
+  );
   const router = useRouter();
 
   const onNavigateToTaskView = useCallback(
@@ -28,6 +29,9 @@ export const TaskList = ({
     [router],
   );
 
+  useEffect(() => {
+    refetch();
+  }, [refetch]);
   if (!columnId) return;
 
   const hasTasks = tasks?.length;
