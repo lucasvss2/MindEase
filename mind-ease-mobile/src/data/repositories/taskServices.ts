@@ -18,7 +18,7 @@ export class TaskServices implements ITaskRepository {
       return TaskMapper.toDomain(data);
     } catch (error: any) {
       throw new AppError(
-        error.response?.data?.error || "Erro ao criar coluna",
+        error.response?.data?.error || "Erro ao criar tarefa",
         error.response?.status,
       );
     }
@@ -41,6 +41,37 @@ export class TaskServices implements ITaskRepository {
       const response = await api.get(`${this.endpoint}/${id}`);
 
       return TaskMapper.toDomain(response.data);
+    } catch (error: any) {
+      throw new AppError(
+        error.response?.data?.error || "Task não encontrada",
+        error.response?.status,
+      );
+    }
+  }
+
+  async getTaskByBoardAndColumnId(
+    boardId: string,
+    columnId: string,
+  ): Promise<TaskModel[]> {
+    try {
+      const response = await api.get(
+        `${this.endpoint}/board/${boardId}/column/${columnId}`,
+      );
+
+      return response.data.map(TaskMapper.toDomain);
+    } catch (error: any) {
+      throw new AppError(
+        error.response?.data?.error || "Tasks não encontradas",
+        error.response?.status,
+      );
+    }
+  }
+
+  async getTaskByColumnId(columnId: string): Promise<TaskModel[]> {
+    try {
+      const response = await api.get(`${this.endpoint}/column/${columnId}`);
+
+      return response.data.map(TaskMapper.toDomain);
     } catch (error: any) {
       throw new AppError(
         error.response?.data?.error || "Task não encontrada",
