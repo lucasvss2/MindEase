@@ -21,8 +21,7 @@ import {
   View,
 } from "react-native";
 import { Toast } from "toastify-react-native";
-import { ICreateTask, ITaskModal } from "../../interface";
-import { IGetFormattedChecklistData } from "./interface";
+import { ICreateTask, IGetFormattedChecklistData, ITaskModal } from "./interface";
 
 export const TaskModal = ({
   onCancelAction,
