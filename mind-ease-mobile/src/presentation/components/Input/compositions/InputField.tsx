@@ -4,8 +4,9 @@ import useUserPreferencesStore from "@/presentation/store/useUserPreferencesStor
 import { TextInput } from "react-native";
 import { inputColorsVariant } from "../input.variants";
 import { IInputProps } from "../interface";
+import { cn } from "@/utils/twClassnamesResolver";
 
-export const InputField = ({ variant = "default", ...props }: IInputProps) => {
+export const InputField = ({ variant = "default", className, ...props }: IInputProps) => {
   const scaledPadding = useAccessibilityScale<number>(
     TOKENS.SPACING["2xs"],
     "spacing",
@@ -16,7 +17,7 @@ export const InputField = ({ variant = "default", ...props }: IInputProps) => {
 
   return (
     <TextInput
-      className='flex-1  h-10'
+      className={cn('flex-1  h-10', className)}
       placeholderTextColor={colorByContrast}
       style={[
         {
