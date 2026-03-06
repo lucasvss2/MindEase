@@ -1,4 +1,6 @@
+import { TaskResponseDTO } from "@/data/dtos/task-dto";
 import { ColumnModel } from "@/domain/models/ColumnModel";
+import { TaskModel } from "@/domain/models/TaskModel";
 
 export interface IColumnModalSharedProps {
   visible: boolean;
@@ -14,4 +16,10 @@ export interface IEditColumnModal extends IColumnModalSharedProps {
   columns: ColumnModel[];
   onClose: () => void;
 }
+
+
+export type TVisibleColumns = Record<string,{
+  isVisible: boolean,
+  tasks: [] | TaskModel[] | undefined | null
+}>
 
