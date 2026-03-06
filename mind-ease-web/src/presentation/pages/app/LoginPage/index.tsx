@@ -16,6 +16,7 @@ export function LoginPage() {
       <S.Container>
         <ResponsiveCard $width="400px" $gap="16px">
           <S.Title>Login</S.Title>
+          <S.Subtitle>Acesse sua conta MindEase</S.Subtitle>
           <Form>
             <Form.Item>
               <ResponsiveInput placeholder="Digite seu email" />
