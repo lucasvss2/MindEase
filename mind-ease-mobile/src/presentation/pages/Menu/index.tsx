@@ -1,4 +1,3 @@
-import { MOCK_BOARDS } from "@/data/mocks";
 import { BoardCard } from "@/presentation/components";
 import { Empty } from "@/presentation/components/Empty";
 import { THEME_COLORS } from "@/presentation/constants/theme";
@@ -72,7 +71,7 @@ export function Menu() {
 
           {!enableSummaryMode && (
             <Text className='text-base font-lexend-regular text-neutral-600 mt-1'>
-              {MOCK_BOARDS.length} quadros ativos
+              {boards?.length} quadros ativos
             </Text>
           )}
         </View>
