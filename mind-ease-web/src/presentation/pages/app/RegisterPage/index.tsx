@@ -20,6 +20,7 @@ export function RegisterPage() {
       <S.Container>
         <ResponsiveCard $width="400px" $gap="16px">
           <S.Title>Crie sua conta MindEase</S.Title>
+          <S.Subtitle>Preencha seus dados pessoais</S.Subtitle>
           <Form>
             <Form.Item>
               <ResponsiveInput placeholder="Digite seu nome" />
