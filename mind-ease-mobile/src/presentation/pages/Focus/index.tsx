@@ -100,7 +100,7 @@ export function Focus({
     if (mode !== "focus" || !isActive) return;
     if (progress <= 0.1 && !hasShownRestWarning.current) {
       hasShownRestWarning.current = true;
-      Toast.warn("Quase lá! Prepare-se para um breve descanso", "bottom");
+      Toast.warn("Quase lá! Prepare-se para um breve descanso", "top");
     }
   }, [mode, isActive, progress]);
 
@@ -158,7 +158,8 @@ export function Focus({
         type: "success",
         text1: "Seção concluída!",
         text2: "Você será redirecionado aos detalhes automaticamente.",
-        position: "bottom",
+        position: "top",
+        visibilityTime: 6000,
       });
     }
   }, [mode, restTimeRemaining, restDurationMinutes]);
