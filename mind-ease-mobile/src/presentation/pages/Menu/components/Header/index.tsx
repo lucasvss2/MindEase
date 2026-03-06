@@ -3,7 +3,6 @@ import { useAccessibilityScale } from "@/presentation/hooks/useAccessibilityScal
 import useUserPreferencesStore from "@/presentation/store/useUserPreferencesStore";
 import { cn } from "@/utils/twClassnamesResolver";
 import { Text, TextStyle, View, ViewStyle } from "react-native";
-import { NotificationDropdown } from "../NotificationDropdown";
 import { UserSettingsDropdown } from "../UserSettingsDropdown";
 
 export function Header() {
@@ -42,7 +41,6 @@ export function Header() {
         )}
         style={{ gap: scaledSpacingLgSize } as ViewStyle}
       >
-        {!enableSummaryMode && <NotificationDropdown />}
         <UserSettingsDropdown />
       </View>
     </View>

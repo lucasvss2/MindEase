@@ -58,6 +58,8 @@ export class TaskServices implements ITaskRepository {
         `${this.endpoint}/board/${boardId}/column/${columnId}`,
       );
 
+      console.log({data: response?.data})
+
       return response.data.map(TaskMapper.toDomain);
     } catch (error: any) {
       throw new AppError(
