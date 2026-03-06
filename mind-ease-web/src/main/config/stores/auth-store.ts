@@ -2,16 +2,13 @@
 import { persist, devtools } from 'zustand/middleware'
 import { shallow } from 'zustand/shallow'
 import { createWithEqualityFn } from 'zustand/traditional'
+import { User } from '@/domain/models'
+
 interface Authorization {
-  user_id: number | undefined
+  user: User | undefined
   isUserAuthenticated: boolean
-  id_token: string | undefined
-  access_token: string | undefined
-  refresh_token: string | undefined
-  expires_in: number | undefined
-  token_type: string | undefined
-  permissions: 'SYS_ADMIN' | 'ADMIN' | 'EDITOR' | 'READER' | undefined
-  active_area_id: number | undefined
+  accessToken: string | undefined
+  refreshToken: string | undefined
 }
 
 interface AuthStoreState extends Authorization {
@@ -19,15 +16,10 @@ interface AuthStoreState extends Authorization {
 }
 
 const INITIAL_STATE: Authorization = {
-  user_id: undefined,
+  user: undefined,
   isUserAuthenticated: false,
-  id_token: undefined,
-  access_token: undefined,
-  refresh_token: undefined,
-  expires_in: undefined,
-  token_type: undefined,
-  permissions: undefined,
-  active_area_id: undefined,
+  accessToken: undefined,
+  refreshToken: undefined,
 }
 
 const authStore = createWithEqualityFn<AuthStoreState>()(

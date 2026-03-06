@@ -13,15 +13,16 @@ interface PageLayoutProps {
   sidebar?: ReactNode
   noPadding?: boolean
   hideFloatButton?: boolean
+  showUserAvatar?: boolean
 }
 
-const PageLayout = ({ title, sidebar, children, noPadding = false, hideFloatButton = false }: PageLayoutProps) => {
+const PageLayout = ({ title, sidebar, children, noPadding = false, hideFloatButton = false, showUserAvatar = false }: PageLayoutProps) => {
   const navigate = useNavigate()
   useDocumentTitle(title)
 
   return (
     <S.Container>
-      <Header />
+      <Header showUserAvatar={showUserAvatar} />
       {!hideFloatButton && <S.FloatButtonContainer trigger="hover" icon={<UserOutlined />}>
         <FloatButton
           content="Login"

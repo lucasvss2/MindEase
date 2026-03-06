@@ -7,7 +7,7 @@ export const api = axios.create({
 })
 
 api.interceptors.request.use((config) => {
-  const token = authStore.getState().id_token
+  const token = authStore.getState().accessToken
   if (token && config.headers) {
     config.headers.Authorization = `Bearer ${token}`
   }
@@ -22,41 +22,31 @@ api.interceptors.response.use(
   (error: AxiosError) => {
     if (error.response?.status === 401 && error.message === 'Request failed with status code 401') {
 
-      const refreshToken = authStore.getState().refresh_token
+      const refreshToken = authStore.getState().refreshToken
 
       const originalConfig = error.config
       if (!isRefreshing) {
         isRefreshing = true
 
-        const userId = 'string'/* decodedIdToken['cognito:username'] */
-
         api
-          .post('/auth/login', {
-            refresh_token: refreshToken as string,
-            user_sso_id: userId,
+          .post('/auth/refresh', {
+            refreshToken,
           })
           .then(({ data }) => {
-            const { access_token, id_token, refresh_token } =
-              data as RefreshLoginResponse
+            const { accessToken } = data as RefreshLoginResponse
+
             authStore.setState({
-              access_token: access_token,
-              id_token: id_token,
-              refresh_token: refresh_token,
+              accessToken: accessToken,
               isUserAuthenticated: true,
             })
 
-
-
-            /* rolesStore.getState().getUserRoles(id_token)
-            rolesStore.setState({ userRoles: permissions }) */
-
-            failedRequestsQueue.forEach((req) => req.onSuccess(id_token))
+            failedRequestsQueue.forEach((req) => req.onSuccess(accessToken))
             failedRequestsQueue = []
           })
           .catch((err) => {
             failedRequestsQueue.forEach((req) => req.onFailure(err))
             failedRequestsQueue = []
-            //clearAllCaches()
+            authStore.getState().signOut()
           })
           .finally(() => {
             isRefreshing = false

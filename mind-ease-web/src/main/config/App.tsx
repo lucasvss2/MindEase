@@ -21,7 +21,15 @@ const App: React.FC = () => {
           richColors
           closeButton={false}
           position="top-right"
-          toastOptions={{ style: { height: '40px', padding: '8px' } }}
+          toastOptions={{
+            style: {
+              padding: '12px 16px',
+              minHeight: '48px',
+              height: 'auto',
+              wordBreak: 'break-word',
+              whiteSpace: 'pre-wrap',
+            }
+          }}
         />
       </ConfigProvider>
       <ReactQueryDevtools buttonPosition="bottom-right" />

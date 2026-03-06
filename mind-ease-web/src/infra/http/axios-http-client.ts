@@ -1,5 +1,5 @@
 import { HttpClient, HttpRequest, HttpResponse } from '@/data/protocols/http'
-import { api } from '@/infra/services/api'
+import { api } from '@/infra/http/axios-instance'
 
 export class AxiosHttpClient implements HttpClient {
   async request(data: HttpRequest): Promise<HttpResponse> {

@@ -6,8 +6,7 @@ import authStore from '@/main/config/stores/auth-store'
 import { showToast } from '@/presentation'
 
 type RefreshLoginMutation = {
-  refresh_token: string
-  user_sso_id: string
+  refreshToken: string
   redirectPage: string | null
 }
 
@@ -17,21 +16,17 @@ export const useRefreshLoginToken = () => {
   const refreshLogin = makeRemoteRefreshLogin()
 
   return useMutation({
-    mutationFn: async ({ refresh_token, user_sso_id }: RefreshLoginMutation) => {
+    mutationFn: async ({ refreshToken }: RefreshLoginMutation) => {
       return refreshLogin.refresh({
-        refresh_token: refresh_token,
-        user_sso_id: user_sso_id,
+        refreshToken,
       })
     },
     onSuccess: (data, { redirectPage }) => {
       // Atualizar auth stores
       authStore.setState(
         {
-          access_token: data.access_token,
-          refresh_token: data.refresh_token,
-          id_token: data.id_token,
+          accessToken: data.accessToken,
           isUserAuthenticated: true,
-          expires_in: data.expires_in,
         },
         false,
         'sign-in',
@@ -40,14 +35,14 @@ export const useRefreshLoginToken = () => {
 
       showToast({
         type: 'success',
-        message: 'Usuário validado com sucesso!',
-        description: 'Usuário validado com sucesso!',
+        message: 'Sessão renovada com sucesso!',
+        description: 'Sessão renovada com sucesso!',
       })
 
       if (redirectPage) {
         return navigate(`/${redirectPage}`)
       } else {
-        navigate(`/home`)
+        navigate(`/board`)
       }
     },
     onError: (err) => {
@@ -55,12 +50,12 @@ export const useRefreshLoginToken = () => {
 
       showToast({
         type: 'error',
-        message: 'Erro ao validar usuário. Por favor, faça login novamente.',
-        description: 'Erro ao validar usuário. Por favor, faça login novamente.',
+        message: 'Sessão expirada. Por favor, faça login novamente.',
+        description: 'Sessão expirada. Por favor, faça login novamente.',
       })
 
-      //clearAllCaches()
-      window.location.href = 'https://www.hml.acer-loginunico.com/'
+      authStore.getState().signOut()
+      navigate('/login')
     },
   })
 }

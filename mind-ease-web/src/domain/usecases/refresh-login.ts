@@ -6,8 +6,7 @@ export interface RefreshLogin {
 
 export namespace RefreshLogin {
   export type Params = {
-    refresh_token: string
-    user_sso_id: string
+    refreshToken: string
   }
 
   export type Model = RefreshLoginResponse

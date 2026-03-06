@@ -6,13 +6,10 @@ import Carrousel4 from '@/assets/images/carrousel-4.png'
 import * as S from './styles'
 
 export function LandingPageCarrousel() {
-  const onChange = (currentSlide: number) => {
-    console.log(currentSlide);
-  };
 
   return (
     <S.CarouselContainer>
-      <Carousel afterChange={onChange} autoplay dots>
+      <Carousel autoplay dots>
         <div>
           <S.Content>
             <img src={Carrousel1} alt="MindEase-logo" />

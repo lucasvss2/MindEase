@@ -1,1 +1,6 @@
 export * from './remote-refresh-login'
+export * from './remote-authentication'
+export * from './remote-add-account'
+export * from './remote-load-user'
+export * from './remote-load-settings'
+export * from './remote-save-settings'
