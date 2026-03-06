@@ -3,8 +3,7 @@ export interface ICheckboxSharedProps {
 }
 
 export interface ICheckboxFieldProps extends ICheckboxSharedProps {
-  id: string;
-  onToggle: (id: string) => void;
+  onToggle: () => void;
   label: string;
 }
 
