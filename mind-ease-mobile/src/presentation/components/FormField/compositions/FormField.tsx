@@ -5,12 +5,14 @@ import { View } from "react-native";
 import { FormFieldLabel } from "..";
 import { IFormFieldProps } from "../interface";
 import { FormFieldMessage } from "./FormFieldMessage";
+import { cn } from "@/utils/twClassnamesResolver";
 
 export const FormField: React.FC<IFormFieldProps> = ({
   label,
   message,
   variant = "default",
   children,
+  className = ''
 }) => {
   const scaledGap = useAccessibilityScale<number>(
     TOKENS.SPACING["2xs"],
@@ -18,7 +20,7 @@ export const FormField: React.FC<IFormFieldProps> = ({
   );
 
   return (
-    <View style={{ gap: scaledGap }}>
+    <View style={{ gap: scaledGap }} className={cn("w-full", className)}>
       {label && <FormFieldLabel>{label}</FormFieldLabel>}
 
       {children}
