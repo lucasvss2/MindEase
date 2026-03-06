@@ -1,6 +1,7 @@
-export interface User {
-  id: number
-  name: string
+export type User = {
+  id?: string
+  userId?: string
   email: string
-  area: string
+  name: string
+  createdAt?: string
 }

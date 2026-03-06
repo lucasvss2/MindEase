@@ -5,6 +5,7 @@ export const SidebarContainer = styled(Layout)`
   flex: 1;
   flex-direction: row;
   overflow: hidden;
+  position: relative;
 
   .ant-layout-sider {
     background-color: #fff;

@@ -1,12 +1,17 @@
-export type UserPermissions = {
-  '*'?: '*'
+import { User } from './user'
+
+export type LoginResponse = {
+  user: User
+  accessToken: string
+  refreshToken: string
+}
+
+export type AddAccountResponse = {
+  user: User
+  accessToken: string
+  refreshToken: string
 }
 
 export type RefreshLoginResponse = {
-  id_token: string
-  access_token: string
-  refresh_token: string
-  expires_in: number
-  token_type: string
-  permissions: UserPermissions
+  accessToken: string
 }

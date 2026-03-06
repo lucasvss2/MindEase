@@ -1,15 +1,16 @@
-import { Outlet } from 'react-router-dom'
-
-
+import { Outlet, Navigate } from 'react-router-dom'
+import authStore from '@/main/config/stores/auth-store'
 
 interface PrivateRouteProps {
-  allowedRoles: string[]
+  isPublicRoute?: boolean
 }
 
-export const PrivateRoute = ({ allowedRoles }: PrivateRouteProps) => {
+export const PrivateRoute = ({ isPublicRoute }: PrivateRouteProps) => {
+  const isUserAuthenticated = authStore((state) => state.isUserAuthenticated)
 
-  return (
-    <Outlet />
-  )
+  if (isPublicRoute) {
+    return isUserAuthenticated ? <Navigate to="/board" replace /> : <Outlet />
+  }
+
+  return isUserAuthenticated ? <Outlet /> : <Navigate to="/" replace />
 }
-
