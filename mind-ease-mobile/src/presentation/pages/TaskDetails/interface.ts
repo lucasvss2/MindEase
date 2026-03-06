@@ -69,3 +69,12 @@ export interface ICreateOrEditField {
   task: TaskModel;
 }
 
+export interface IFocusConfigField {
+  isEditing: boolean;
+  setIsEditing: Dispatch<SetStateAction<boolean>>;
+  label: string;
+  value: string;
+  setValue: Dispatch<SetStateAction<string>>;
+  onUpdateFocusConfig: () => void
+}
+
