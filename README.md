@@ -1,23 +1,110 @@
 # 🧠 MindEase
 
-**MindEase** is a comprehensive mental health and well-being platform designed to support users through accessible and intuitive digital experiences. Available on both web and mobile platforms, MindEase provides tools and features to help users manage their mental wellness journey with ease and confidence.
+O **MindEase** é uma plataforma de organização e produtividade desenhada sob a ótica da **Psicologia das Cores** e da **Acessibilidade Cognitiva**. O projeto nasceu para resolver o desafio de usuários que sofrem com sobrecarga sensorial, fotofobia ou neurodivergências (como TDAH e Autismo), onde interfaces padrão com alto brilho e excesso de informações podem ser paralisantes.
 
 ---
 
-## 📱 Platform Overview
+## 🚀 Principais funcionalidades
 
-MindEase is built as a multi-platform solution:
+- **Painel de Configuração Cognitiva:** permite ao usuário personalizar a complexidade da interface, níveis de contraste (Baixo, Moderado, Alto) e perfis de uso para reduzir a sobrecarga sensorial.
 
-- **🌐 Web Application** - Modern, responsive web experience built with React and cutting-edge technologies
-- **📱 Mobile Application** - Native mobile experience built with React Native for iOS and Android
+- **Modo Foco com Isolamento Visual:** ao iniciar uma tarefa, o sistema oculta distrações externas, mantendo em evidência apenas o cronômetro e as informações essenciais da atividade em curso.
+
+- **Gestão de Tarefas e Checklists:** sistema de criação de tarefas com títulos, descrições e checklists inteligentes para decompor atividades complexas em etapas menores.
+
+- **Timer Pomodoro Adaptativo:** cronômetro configurável para tempos de foco e descanso, com variações visuais de progresso ajustadas ao perfil de contraste escolhido pelo usuário.
+
+- **Modo de Descanso Automático:** transição imediata para uma interface de repouso após o fim do foco, com mensagens de acolhimento e cronômetro de pausa automático.
 
 ---
 
-## 🚀 Quick Start
+## 📱 Tecnologias Utilizadas
 
-### Web Application
+### Web
 
-Navigate to the web directory and follow the setup instructions:
+- **Vite:** Build tool de próxima geração utilizada para garantir um ambiente de desenvolvimento ultra-rápido e otimização de performance no bundle final.
+
+- **React Router Dom (v7):** Gerenciamento de rotas e navegação declarativa na versão web.
+
+- **Ant Design (v6):** Biblioteca de componentes de UI utilizada para acelerar o desenvolvimento com elementos consistentes e acessíveis.
+
+- **Linaria:** Utilizada para CSS-in-JS com zero runtime, garantindo que os estilos sejam extraídos para arquivos CSS estáticos durante o build, otimizando o carregamento da página.
+
+- **Polished:** Conjunto de ferramentas leves para manipular cores e estilos diretamente no código (útil para os cálculos de contraste dinâmico).
+
+#### 🛠️ Gestão de Dados & Utilitários
+
+- **TanStack React Query Devtools:** Ferramenta de inspeção para monitorar o estado das requisições e cache de dados em tempo real durante o desenvolvimento.
+
+- **Dayjs:** Biblioteca leve para manipulação e formatação de datas (essencial para a lógica de calendários e histórico de tarefas).
+
+- **Lodash:** Conjunto de utilitários para manipulação de arrays e objetos, garantindo um código mais limpo e performático.
+
+- **Sonner:** Sistema de notificações (toasts) altamente personalizável e elegante para feedbacks de ações do usuário.
+
+- **Zustand (v5):** Mesma solução de estado global utilizada no Mobile, garantindo paridade de lógica entre as plataformas para as configurações de contraste e acessibilidade.
+
+#### 🧪 Qualidade de Código & Testes
+
+- **TypeScript (v5.9):** Superset JavaScript que adiciona tipagem estática, reduzindo erros em tempo de desenvolvimento e melhorando a manutenção do código.
+
+- **Vitest:** Framework de testes unitários focado em velocidade, utilizado para validar as lógicas de cálculo de tempo e transições de estado.
+
+- **ESLint & Prettier:** Conjunto de ferramentas para garantir a padronização do código e prevenir erros comuns de sintaxe e estilo.
+
+- **Env-cmd:** Gerenciamento de variáveis de ambiente para diferentes contextos (desenvolvimento, homologação e produção).
+
+### Mobile
+
+- **Expo (v54):** Framework para desenvolvimento nativo e acesso a APIs do dispositivo.
+- **React (v19) & React Native (v0.81):** Base para construção da interface e lógica mobile.
+- **Expo Router (v6):** Sistema de navegação baseado em arquivos.
+
+#### Estilização & UI
+
+- **NativeWind (v4) & Tailwind CSS (v3):** Estilização baseada em utilitários para implementação de tokens de design.
+- **Class Variance Authority (CVA):** Gerenciamento de variantes de componentes (botões e cards).
+- **Google Fonts:** Integração das fontes `Lexend`, `JetBrains Mono` e `Bitter` para máxima legibilidade.
+
+#### Gerenciamento de Estado & Dados
+
+- **Zustand:** Gerenciamento de estado global para preferências de perfil e configurações de contraste.
+- **TanStack React Query (v5):** Sincronização de dados e gerenciamento de cache.
+- **Axios:** Cliente HTTP para consumo de APIs.
+
+#### UX & Interação
+
+- **React Native Reanimated (v4):** Engine de animações para transições suaves de cores e estados.
+- **Expo AV:** Execução de sons ambientais durante o modo foco.
+- **Expo Haptics:** Feedback tátil para interações do usuário.
+- **Toastify React Native:** Sistema de notificações sutil para alertas de transição.
+
+#### Formulários & Validação
+
+- **React Hook Form:** Controle de formulários de criação de tarefas.
+- **Yup:** Validação de esquemas e dados de entrada.
+
+---
+
+## 🚀 Executando a aplicação
+
+#### Pré-requisitos
+
+- Node.js (v18 ou superior)
+- npm ou yarn
+- Navegador moderno
+
+#### Clonando o respositório
+
+```bash
+git clone https://github.com/lucasvss2/MindEase.git
+
+cd MindEase
+```
+
+### Web
+
+Acesse o diretório web e siga as instruções de configuração:
 
 ```bash
 cd mind-ease-web
@@ -26,189 +113,63 @@ npm install
 npm run dev
 ```
 
-For detailed web setup and documentation, see [mind-ease-web/README.md](./mind-ease-web/README.md)
+Para obter informações detalhadas sobre a configuração e a documentação da web, consulte[mind-ease-web/README.md](./mind-ease-web/README.md)
 
-### Mobile Application
+### Mobile
 
-Navigate to the mobile directory and follow the setup instructions:
+Acesse o diretório de dispositivos móveis e siga as instruções de configuração:
 
 ```bash
 cd mind-ease-mobile
 npm install
-npm start
 ```
 
-> **Note**: The mobile application is built with **React Native** and requires additional setup for iOS and Android development environments.
-
----
-
-## 🛠️ Technology Stack
-
-### Web Platform
-- **Frontend Framework**: React 19 with TypeScript
-- **Build Tool**: Vite
-- **Styling**: Linaria (Zero-runtime CSS-in-JS) with Ant Design
-- **State Management**: Zustand + TanStack Query
-- **Routing**: React Router v7
-
-### Mobile Platform
-- **Framework**: React Native
-- **Language**: TypeScript
-- **Platform Support**: iOS and Android
-
----
-
-## 📁 Repository Structure
-
-```
-MindEase/
-├── mind-ease-web/          # Web application
-│   ├── src/                # Source code
-│   ├── public/             # Static assets
-
-│   ├── package.json        # Dependencies and scripts
-│   └── README.md           # Web-specific documentation
-│
-├── mind-ease-mobile/       # Mobile application (React Native)
-│   ├── src/                # Source code
-│   ├── android/            # Android native code
-│   ├── ios/                # iOS native code
-│   ├── package.json        # Dependencies and scripts
-│   └── README.md           # Mobile-specific documentation
-│
-└── README.md               # This file - Project overview
+```bash
+npx expo run:android
 ```
 
----
+Ou
 
-## ✨ Key Features
+```bash
+npx expo run:ios
+```
 
-### 🎨 User Experience
-- Modern, intuitive interface designed for accessibility
-- Light and dark mode support across all platforms
-- Responsive design that adapts to any screen size
-- Consistent user experience between web and mobile
-
-### 🔒 Privacy & Security
-- User data protection and privacy-first approach
-- Secure authentication and authorization
-- Encrypted data transmission
-
-### 📊 Mental Wellness Tools
-- Dashboard for tracking mental health metrics
-- Personalized recommendations and insights
-- Progress tracking and goal setting
+> **Note**: O aplicativo móvel foi desenvolvido com **React Native** e requer configuração adicional para ambientes de desenvolvimento iOS e Android.
 
 ---
 
-## 🚀 Development
+## 💻 📱 Visão geral da plataforma
 
-### Prerequisites
+### 🌐 **Web**
 
-#### For Web Development
-- Node.js (v18 or higher)
-- npm or yarn package manager
-- Modern web browser
+//Add imagens
 
-#### For Mobile Development
-- Node.js (v18 or higher)
-- npm or yarn package manager
-- **For iOS**: macOS with Xcode installed
-- **For Android**: Android Studio with SDK configured
-- React Native CLI or Expo CLI (depending on project setup)
+### 📱 **Mobile**
 
-### Getting Started
+<img src="mind-ease-mobile/assets/images/screenshots/login.png" alt="Tela de login" width="200" >
 
-1. **Clone the repository**
-   ```bash
-   git clone <repository-url>
-   cd MindEase
-   ```
+<img src="mind-ease-mobile/assets/images/screenshots/create-account.png" alt="Tela de criação de conta" width="200" >
 
-2. **Choose your platform**
-   - For web development: `cd mind-ease-web`
-   - For mobile development: `cd mind-ease-mobile`
+<img src="mind-ease-mobile/assets/images/screenshots/boards.png" alt="Tela de quadros" width="200" >
 
-3. **Follow platform-specific instructions**
-   - Each platform has its own README with detailed setup instructions
-   - Refer to the respective README files for installation and development guidelines
+<img src="mind-ease-mobile/assets/images/screenshots/task-list.png" alt="Tela de lista de tarefas" width="200" >
+
+<img src="mind-ease-mobile/assets/images/screenshots/task-details.png" alt="Tela detalhes da tarefa" width="200" >
+
+
+## 📄 Licença
+
+
+#### Este projeto é privado e de propriedade exclusiva.
+---
+
+## 🙏 Agradecimentos
+
+Construído com ❤️ pela equipe de desenvolvimento da MindEase.
+
+Um agradecimento especial à comunidade de código aberto pelas incríveis ferramentas e bibliotecas que tornam este projeto possível.
 
 ---
 
-## 🤝 Contributing
+**MindEase** - MindEase - Apoiando o bem-estar mental através da tecnologia 💙💙
 
-We welcome contributions to MindEase! Please follow these guidelines:
-
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes with clear, descriptive messages
-4. Push to your branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
-
-### Development Standards
-- Follow TypeScript best practices
-- Maintain consistent code style across platforms
-- Write meaningful commit messages
-- Add appropriate tests for new features
-- Update documentation as needed
-
----
-
-## 📜 Scripts Overview
-
-### Web Platform
-| Script | Description |
-|--------|-------------|
-| `npm run dev` | Start development server |
-| `npm run build` | Build for production |
-| `npm run serve` | Preview production build |
-| `npm run lint` | Run ESLint |
-| `npm run test` | Run tests (Vitest) |
-
-### Mobile Platform
-| Script | Description |
-|--------|-------------|
-| `npm start` | Start Metro bundler |
-| `npm run android` | Run on Android device/emulator |
-| `npm run ios` | Run on iOS device/simulator |
-| `npm test` | Run tests |
-
----
-
-## 🗺️ Roadmap
-
-- [x] Web application with modern UI/UX
-- [ ] React Native mobile application for iOS
-- [ ] React Native mobile application for Android
-- [ ] Cross-platform data synchronization
-- [ ] Advanced analytics and insights
-- [ ] Offline mode support
-- [ ] Push notifications
-- [ ] Social features and community support
-
----
-
-## 📄 License
-
-This project is private and proprietary.
-
----
-
-## 🆘 Support
-
-For issues, questions, or contributions:
-- Create an issue in the repository
-- Contact the development team
-- Check platform-specific README files for detailed documentation
-
----
-
-## 🙏 Acknowledgments
-
-Built with ❤️ by the MindEase development team.
-
-Special thanks to the open-source community for the amazing tools and libraries that make this project possible.
-
----
-
-**MindEase** - Supporting mental wellness through technology 💙
