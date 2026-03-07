@@ -10,7 +10,9 @@ export const TaskHeaderTextContainer = ({
   scaledText,
   onPress,
 }: ITaskHeaderTextContainer) => {
-  const { fontType } = useUserPreferencesStore();
+  const { activeProfileId, study, work } = useUserPreferencesStore();
+
+  const { fontType } = activeProfileId === "study" ? study : work;
   const scaledIconSize = useAccessibilityScale<number>(
     TOKENS.SIZE["2xs"],
     "number",
@@ -20,7 +22,7 @@ export const TaskHeaderTextContainer = ({
     <View className='flex-row justify-between items-center'>
       <Text
         className='text-neutral-1000 break-words w-8/12'
-        style={[{ fontFamily: fontType }, scaledText]}
+        style={[{ fontFamily: TOKENS.FONT_FAMILY[fontType] }, scaledText]}
       >
         {text}
       </Text>

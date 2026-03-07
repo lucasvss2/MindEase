@@ -17,7 +17,9 @@ import { Text, TextStyle, View, ViewStyle } from "react-native";
 import { Toast } from "toastify-react-native";
 
 export const LoginPage = () => {
-  const { fontType, enableSummaryMode } = useUserPreferencesStore();
+  const { activeProfileId, study, work } = useUserPreferencesStore();
+  const { fontType } = activeProfileId === "study" ? study : work;
+
   const scaledSpacing2xl = useAccessibilityScale<number>(
     TOKENS.SPACING["2xl"],
     "number",
@@ -60,7 +62,7 @@ export const LoginPage = () => {
   return (
     <PublicScreenLayout
       title='Bem vindo(a)'
-      subTitle='Acesse sua conta Mind Ease'
+      subTitle='Acesse sua conta'
       footer={
         <View
           className='flex-row items-center justify-center w-full'
@@ -70,7 +72,7 @@ export const LoginPage = () => {
             <Text
               style={[
                 scaledTextBase,
-                { fontFamily: fontType, fontWeight: 400 },
+                { fontFamily: TOKENS.FONT_FAMILY[fontType], fontWeight: 400 },
               ]}
             >
               Não tem uma conta?
@@ -79,9 +81,9 @@ export const LoginPage = () => {
               size='md'
               variant='link'
               onPress={() => router.navigate("/(auth)/create-account")}
-              accessibilityLabel="Criar conta"
-              accessibilityRole="link"
-              accessibilityHint="Navega para a tela de cadastro"
+              accessibilityLabel='Criar conta'
+              accessibilityRole='link'
+              accessibilityHint='Navega para a tela de cadastro'
             >
               Criar conta
             </Button>

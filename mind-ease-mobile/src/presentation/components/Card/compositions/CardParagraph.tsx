@@ -9,9 +9,13 @@ export const CardParagraph = ({
   children,
   className = "",
 }: ICardsSharedProps) => {
-  const scaledFontSpacing = useAccessibilityScale<TextStyle>(18);
-  const { fontType } = useUserPreferencesStore();
+  const scaledFontSpacing = useAccessibilityScale<TextStyle>(
+    TOKENS.FONT_SIZE.lg,
+  );
+  const { activeProfileId, study, work } = useUserPreferencesStore();
 
+  const { fontType } = activeProfileId === "study" ? study : work;
+  
   return (
     <Text
       className={cn("text-neutral-900", className)}

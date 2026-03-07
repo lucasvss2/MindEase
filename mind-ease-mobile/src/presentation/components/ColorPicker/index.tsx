@@ -1,8 +1,14 @@
-import { View, TouchableOpacity, useWindowDimensions, ViewStyle } from "react-native";
-import { TOKENS } from "@/presentation/constants/tokens";
 import { THEME_COLORS } from "@/presentation/constants/theme";
+import { TOKENS } from "@/presentation/constants/tokens";
+import { useAccessibilityScale } from "@/presentation/hooks/useAccessibilityScale";
 import { lightenHex } from "@/utils/colorUtils";
 import { cn } from "@/utils/twClassnamesResolver";
+import {
+  TouchableOpacity,
+  useWindowDimensions,
+  View,
+  ViewStyle,
+} from "react-native";
 
 const COLUMNS = 4;
 
@@ -26,8 +32,11 @@ export function ColorPicker({
   style,
 }: ColorPickerProps) {
   const { width: windowWidth } = useWindowDimensions();
-  const gap = TOKENS.SPACING.sm;
-  const marginBottom = TOKENS.SPACING["2xl"];
+  const gap = useAccessibilityScale<number>(TOKENS.SPACING.sm, "number");
+  const marginBottom = useAccessibilityScale<number>(
+    TOKENS.SPACING["2xl"],
+    "number",
+  );
   const colorSize =
     (windowWidth - contentPaddingH - gap * (columns - 1)) / columns;
 
@@ -49,7 +58,7 @@ export function ColorPicker({
             key={color}
             activeOpacity={0.7}
             onPress={() => onSelectColor(color)}
-            className="items-center justify-center rounded-lg border-2"
+            className='items-center justify-center rounded-lg border-2'
             style={{
               width: colorSize,
               height: colorSize,
@@ -61,7 +70,7 @@ export function ColorPicker({
           >
             {isSelected && (
               <View
-                className="rounded-full"
+                className='rounded-full'
                 style={{
                   width: Math.min(14, colorSize * 0.4),
                   height: Math.min(14, colorSize * 0.4),
@@ -76,3 +85,4 @@ export function ColorPicker({
     </View>
   );
 }
+

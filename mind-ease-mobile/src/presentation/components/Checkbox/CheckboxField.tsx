@@ -1,3 +1,5 @@
+import { TOKENS } from "@/presentation/constants";
+import { useAccessibilityScale } from "@/presentation/hooks/useAccessibilityScale";
 import { cn } from "@/utils/twClassnamesResolver";
 import { TouchableOpacity } from "react-native";
 import Checkbox from ".";
@@ -9,11 +11,17 @@ export const CheckboxField = ({
   label,
   isChecked,
 }: ICheckboxFieldProps) => {
+  const scaledLgSpacingSize = useAccessibilityScale<number>(
+    TOKENS.SPACING.xs,
+    "number",
+  );
+  
   return (
     <TouchableOpacity
       activeOpacity={0.7}
       onPress={onToggle}
-      className={cn("flex-row items-center gap-2")}
+      className={cn("flex-row items-center")}
+      style={{ gap: scaledLgSpacingSize }}
     >
       <Checkbox isChecked={isChecked} />
 

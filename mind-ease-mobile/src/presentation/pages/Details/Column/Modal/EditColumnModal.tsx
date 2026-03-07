@@ -8,6 +8,7 @@ import {
   useDeleteColumnMutation,
   useUpdateColumnMutation,
 } from "@/presentation/features/Columns/columns-queries";
+import { useAccessibilityScale } from "@/presentation/hooks/useAccessibilityScale";
 import handleError from "@/utils/helpers/handleError";
 import { FontAwesome5 } from "@expo/vector-icons";
 import { ScrollView, TouchableOpacity, View } from "react-native";
@@ -28,6 +29,16 @@ export const EditColumnModal = ({
   const [deletedIds, setDeletedIds] = useState<string[]>([]);
 
   const visibleColumns = columns?.filter((col) => !deletedIds.includes(col.id));
+
+  const scaledMdSpacing = useAccessibilityScale<number>(
+    TOKENS.SPACING.md,
+    "number",
+  );
+
+   const scaledXlFontSize = useAccessibilityScale<number>(
+    TOKENS.SPACING.xl,
+    "number",
+  );
 
   const handleOnClose = useCallback(() => {
     setEditedNames({});
@@ -71,8 +82,9 @@ export const EditColumnModal = ({
       <ScrollView>
         {visibleColumns?.map((column) => (
           <View
-            className='flex-row gap-4 justify-between items-center mb-4'
+            className='flex-row justify-between items-center'
             key={column.id}
+            style={{ gap: scaledMdSpacing, marginBottom: scaledMdSpacing }}
           >
             <InputRoot className='w-7/12'>
               <InputField
@@ -90,7 +102,7 @@ export const EditColumnModal = ({
             >
               <FontAwesome5
                 name='trash'
-                size={20}
+                size={scaledXlFontSize}
                 color={TOKENS.COLORS.red[500]}
               />
             </TouchableOpacity>

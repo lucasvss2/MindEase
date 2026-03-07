@@ -9,11 +9,12 @@ export const SectionTitle: React.FC<{ children: React.ReactNode }> = ({
   const scaledTitleFontSpacing = useAccessibilityScale<TextStyle>(
     TOKENS.FONT_SIZE.lg,
   );
-  const { fontType } = useUserPreferencesStore();
+  const { activeProfileId, study, work } = useUserPreferencesStore();
+  const { fontType } = activeProfileId === "study" ? study : work;
 
   return (
     <Text
-      className='font-lexend-semi-bold text-neutral-900 flex-shrink'
+      className=' text-neutral-900 flex-shrink'
       style={[
         scaledTitleFontSpacing,
         { fontFamily: TOKENS.FONT_FAMILY[fontType] },

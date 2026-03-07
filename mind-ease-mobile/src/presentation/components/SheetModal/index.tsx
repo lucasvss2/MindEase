@@ -1,4 +1,7 @@
+import { TOKENS } from "@/presentation/constants";
 import { THEME_COLORS } from "@/presentation/constants/theme";
+import { useAccessibilityScale } from "@/presentation/hooks/useAccessibilityScale";
+import useUserPreferencesStore from "@/presentation/store/useUserPreferencesStore";
 import { cn } from "@/utils/twClassnamesResolver";
 import { MaterialIcons } from "@expo/vector-icons";
 import {
@@ -8,6 +11,7 @@ import {
   Modal,
   Platform,
   Text,
+  TextStyle,
   TouchableOpacity,
   TouchableWithoutFeedback,
   View,
@@ -36,6 +40,24 @@ export function SheetModal({
       snapPoints,
       initialSnapIndex,
     });
+
+  const { activeProfileId, study, work } = useUserPreferencesStore();
+
+  const { fontType } = activeProfileId === "study" ? study : work;
+  
+  const scaledXlText = useAccessibilityScale<TextStyle>(TOKENS.FONT_SIZE["xl"]);
+  const scaledXl = useAccessibilityScale<number>(
+    TOKENS.SPACING["xl"],
+    "number",
+  );
+
+  const scaled2xlSpacing = useAccessibilityScale<number>(
+    TOKENS.SPACING["2xl"],
+    "number",
+  );
+
+
+  const fontFamily = TOKENS.FONT_FAMILY[fontType];
 
   const handleOverlayPress = () => {
     Keyboard.dismiss();
@@ -88,8 +110,8 @@ export function SheetModal({
 
             <View
               style={{
-                paddingHorizontal: 30,
-                paddingVertical: 24,
+                paddingHorizontal: scaled2xlSpacing,
+                paddingVertical: scaledXl,
                 flexDirection: "row",
                 alignItems: "center",
                 justifyContent: "space-between",
@@ -105,8 +127,12 @@ export function SheetModal({
                 }}
               >
                 <Text
-                  className='text-xl font-lexend-semi-bold text-neutral-1000'
-                  style={titleStyle}
+                  className='text-neutral-1000'
+                  style={[
+                    titleStyle,
+                    scaledXlText,
+                    { fontFamily, fontWeight: 700 },
+                  ]}
                 >
                   {title}
                 </Text>
@@ -117,13 +143,11 @@ export function SheetModal({
                 hitSlop={{ top: 12, bottom: 12, left: 12, right: 12 }}
                 style={{ padding: 4 }}
                 accessibilityRole='button'
-                accessibilityRole='button'
                 accessibilityLabel={closeButtonAccessibilityLabel}
               >
                 <MaterialIcons
                   name='close'
-                  name='close'
-                  size={24}
+                  size={scaledXl}
                   color={THEME_COLORS.neutral[1000]}
                 />
               </TouchableOpacity>
@@ -134,9 +158,9 @@ export function SheetModal({
               className={cn("flex-1")}
               style={{
                 maxHeight: sheetMaxHeight - 120,
-                paddingHorizontal: 30,
-                paddingTop: 24,
-                paddingBottom: 30,
+                paddingHorizontal: scaled2xlSpacing,
+                paddingTop: scaledXl,
+                paddingBottom: scaled2xlSpacing,
               }}
             >
               {children}

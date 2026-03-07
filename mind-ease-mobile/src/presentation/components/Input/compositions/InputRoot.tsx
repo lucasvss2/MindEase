@@ -6,12 +6,22 @@ import { View } from "react-native";
 import { inputColorsVariant } from "../input.variants";
 import { IInputRoot } from "../interface";
 
-export const InputRoot = ({ children, isError = false ,className=''}: IInputRoot) => {
-  const { contrast } = useUserPreferencesStore();
-
+export const InputRoot = ({
+  children,
+  isError = false,
+  className = "",
+}: IInputRoot) => {
+  const { activeProfileId, study, work } = useUserPreferencesStore();
+  const { contrast } = activeProfileId === "study" ? study : work;
+  
   const scaledGap = useAccessibilityScale<number>(TOKENS.SPACING.xs, "number");
   const scaledPadding = useAccessibilityScale<number>(
     TOKENS.SPACING.sm,
+    "number",
+  );
+
+  const scaled2xlSize = useAccessibilityScale<number>(
+    TOKENS.SIZE["2xl"],
     "number",
   );
 
@@ -20,9 +30,13 @@ export const InputRoot = ({ children, isError = false ,className=''}: IInputRoot
 
   return (
     <View
-      className={cn(`border h-14 rounded-md w-full  flex-row items-center`, className)}
+      className={cn(
+        `border rounded-md w-full  flex-row items-center`,
+        className,
+      )}
       style={[
         {
+          height: scaled2xlSize,
           borderColor: borderColor,
           borderWidth: 1,
           gap: scaledGap,

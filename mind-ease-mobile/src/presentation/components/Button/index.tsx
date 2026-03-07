@@ -27,7 +27,10 @@ export const Button: React.FC<IButtonProps> = ({
 }) => {
   const [isPressed, setIsPressed] = useState(false);
 
-  const { fontType, contrast } = useUserPreferencesStore();
+  const { activeProfileId, study, work } = useUserPreferencesStore();
+
+  const { fontType, contrast } = activeProfileId === "study" ? study : work;
+  
   const scaledContainerPadding = useAccessibilityScale(
     TOKENS.SPACING[size as "sm" | "md"],
     "spacing",
@@ -141,7 +144,7 @@ export const Button: React.FC<IButtonProps> = ({
   const textColorByContrast = buttonVariants[contrast][variant!].color;
 
   const Content = () => (
-    <View className="flex-row items-center gap-4">
+    <View className='flex-row items-center gap-4'>
       <Text
         className={cn(
           "bg-transparent text-center",
@@ -150,12 +153,15 @@ export const Button: React.FC<IButtonProps> = ({
         )}
         style={[
           scaledFontSpacing,
-          { color: textColorByContrast, fontFamily: fontType },
+          {
+            color: textColorByContrast,
+            fontFamily: TOKENS.FONT_FAMILY[fontType],
+          },
         ]}
       >
         {children}
       </Text>
-      
+
       {isLoading && (
         <ActivityIndicator
           color={TOKENS.COLORS.neutral[880]}

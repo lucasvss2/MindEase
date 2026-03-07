@@ -1,27 +1,34 @@
 import { IUserPreferences } from "@/domain/types";
-import { USER_INITIAL_PREFERENCES } from "@/presentation/constants/initialUserPreferences";
+import { INITIAL_STATE_USER_PREFERENCES, USER_INITIAL_PREFERENCES } from "@/presentation/constants/initialUserPreferences";
 import * as SecureStore from "expo-secure-store";
 
 const PREFERENCES_KEY = "user_preferences";
+type TActivityProfile = "study" | "work";
 
-export const getUserPreferences = async (): Promise<IUserPreferences> => {
+export interface IUserPreferencesStoraged {
+  activeProfileId: TActivityProfile;
+  study: Partial<IUserPreferences>;
+  work: Partial<IUserPreferences>;
+}
+
+export const getUserPreferences = async (): Promise<IUserPreferencesStoraged> => {
   try {
     const jsonValue = await SecureStore.getItemAsync(PREFERENCES_KEY);
 
     if (jsonValue !== null) {
-      return JSON.parse(jsonValue) as IUserPreferences;
+      return JSON.parse(jsonValue) as IUserPreferencesStoraged;
     }
 
-    return USER_INITIAL_PREFERENCES;
+    return INITIAL_STATE_USER_PREFERENCES;
   } catch (error) {
     console.error("Erro ao recuperar preferências do SecureStore:", error);
 
-    return USER_INITIAL_PREFERENCES;
+    return INITIAL_STATE_USER_PREFERENCES;
   }
 };
 
 export const saveUserPreferences = async (
-  updates: Partial<IUserPreferences>,
+  updates: IUserPreferencesStoraged,
   Toast: any,
 ): Promise<void> => {
   try {

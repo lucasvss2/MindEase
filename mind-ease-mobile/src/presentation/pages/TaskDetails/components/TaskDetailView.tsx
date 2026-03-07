@@ -11,8 +11,8 @@ import { FocusConfigField } from "./FocusConfigField";
 import { TaskHeader } from "./TaskHeader";
 
 export function TaskDetailView({ task }: ITaskSharedProps) {
-  const scaledTextBase = useAccessibilityScale<TextStyle>(
-    TOKENS.FONT_SIZE.base,
+  const scaledTextSm = useAccessibilityScale<TextStyle>(
+    TOKENS.FONT_SIZE.sm,
   );
   const [focusTime, setFocusTime] = useState<string>("1");
   const [restTime, setRestTime] = useState<string>("1");
@@ -54,7 +54,7 @@ export function TaskDetailView({ task }: ITaskSharedProps) {
       }}
       keyboardShouldPersistTaps='handled'
     >
-      <TaskHeader scaledTextBase={scaledTextBase} task={task} />
+      <TaskHeader scaledTextBase={scaledTextSm} task={task} />
 
       <ChecklistSection task={task} />
 

@@ -22,8 +22,9 @@ export const SettingsSlider = ({
   const scaledTitleFontSpacing = useAccessibilityScale<TextStyle>(
     TOKENS.FONT_SIZE.base,
   );
-  const { fontType } = useUserPreferencesStore();
-
+  const { activeProfileId, study, work } = useUserPreferencesStore();
+  const { fontType } = activeProfileId === "study" ? study : work;
+  
   const lastValue = useRef<number>(1);
 
   const onValueChange = useCallback(
@@ -53,10 +54,10 @@ export const SettingsSlider = ({
 
         <View className='flex-row justify-between'>
           <Text
-            className='font-lexend-semi-bold self-end text-blue-600'
+            className='self-end text-blue-600'
             style={[
               scaledTitleFontSpacing,
-              { fontFamily: TOKENS.FONT_FAMILY[fontType] },
+              { fontFamily: TOKENS.FONT_FAMILY[fontType], fontWeight: 700 },
             ]}
           >
             {value.toFixed(2)}

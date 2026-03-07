@@ -21,7 +21,11 @@ import {
   View,
 } from "react-native";
 import { Toast } from "toastify-react-native";
-import { ICreateTask, IGetFormattedChecklistData, ITaskModal } from "./interface";
+import {
+  ICreateTask,
+  IGetFormattedChecklistData,
+  ITaskModal,
+} from "./interface";
 
 export const TaskModal = ({
   onCancelAction,
@@ -30,7 +34,9 @@ export const TaskModal = ({
   boardId,
   columnId,
 }: ITaskModal) => {
-  const { fontType } = useUserPreferencesStore();
+  const { activeProfileId, study, work } = useUserPreferencesStore();
+
+  const { fontType } = activeProfileId === "study" ? study : work;
   const { control, handleSubmit } = useFormContext();
 
   const { mutateAsync: createTask, isPending: isPendingTaskCreation } =
@@ -138,7 +144,7 @@ export const TaskModal = ({
             className='text-green-800'
             style={[
               scaledChecklisTitle,
-              { fontFamily: fontType, fontWeight: "600" },
+              { fontFamily: TOKENS.FONT_FAMILY[fontType], fontWeight: "600" },
             ]}
           >
             CheckList

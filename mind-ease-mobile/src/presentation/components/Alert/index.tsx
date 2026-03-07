@@ -6,8 +6,10 @@ import { alertVariants } from "./alert.variants";
 import { IAlert } from "./interface";
 
 export const Alert = ({ title, children, type = "info" }: IAlert) => {
-  const { contrast, fontType } = useUserPreferencesStore();
-  const scaledTitleSize = useAccessibilityScale<TextStyle>(
+  const { activeProfileId, study, work } = useUserPreferencesStore();
+  const { fontType , contrast} = activeProfileId === "study" ? study : work;
+
+    const scaledTitleSize = useAccessibilityScale<TextStyle>(
     TOKENS.FONT_SIZE.lg,
   );
 
@@ -29,7 +31,7 @@ export const Alert = ({ title, children, type = "info" }: IAlert) => {
       <Text
         style={{
           color: contrastStyle.color,
-          fontFamily: fontType,
+          fontFamily: TOKENS.FONT_FAMILY[fontType],
           fontWeight: 500,
           ...scaledTitleSize,
         }}
@@ -39,7 +41,7 @@ export const Alert = ({ title, children, type = "info" }: IAlert) => {
       <Text
         style={{
           color: contrastStyle.color,
-          fontFamily: fontType,
+          fontFamily: TOKENS.FONT_FAMILY[fontType],
           ...scaledDescriptionSize,
         }}
       >

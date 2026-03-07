@@ -14,13 +14,15 @@ import { useGetColumnsByBoardId } from "@/presentation/features/Columns/columns-
 import { lightenHex } from "@/utils/colorUtils";
 import { cn } from "@/utils/twClassnamesResolver";
 
+import { TOKENS } from "@/presentation/constants";
+import { useAccessibilityScale } from "@/presentation/hooks/useAccessibilityScale";
 import { useColumnStore } from "@/presentation/store/useColumnStore";
-import { MaterialIcons } from "@expo/vector-icons";
-import { useQueryClient } from "@tanstack/react-query";
+import useUserPreferencesStore from "@/presentation/store/useUserPreferencesStore";
+import { FontAwesome, MaterialIcons } from "@expo/vector-icons";
 import { useLocalSearchParams, useRouter } from "expo-router";
 import { useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
-import { ScrollView, Text, View } from "react-native";
+import { ScrollView, Text, TextStyle, View } from "react-native";
 import { BoardModal } from "../Tasks/components/BoardModal";
 import { CreateColumnModal } from "./Column/Modal/CreateColumnModal";
 import { EditColumnModal } from "./Column/Modal/EditColumnModal";
@@ -42,15 +44,18 @@ export function Details() {
   const [showEditModal, setShowEditModal] = useState(false);
   const [showCreateColumnModal, setShowCreateColumnModal] = useState(false);
   const [showEditColumnModal, setShowEditColumnModal] = useState(false);
-  const [showCreateTaskModal, setShowCreateTaskModal] = useState(false);
   const { mutateAsync: mutateDeleteBoard } = useDeleteBoardMutation();
   const { mutateAsync: mutateUpdateBoard } = useUpdateBoardMutation();
   const { data: columns } = useGetColumnsByBoardId(boardId);
 
   const { toggleColumn, selectionsByBoard } = useColumnStore();
+  const { activeProfileId, study, work } = useUserPreferencesStore();
+  const { fontType, enableSummaryMode } = activeProfileId === "study" ? study : work;
+
+  const scaledTextBase = useAccessibilityScale<TextStyle>(TOKENS.FONT_SIZE.sm);
+  const fontFamily = TOKENS.FONT_FAMILY[fontType];
 
   const taskForm = useForm();
-  const queryClient = useQueryClient();
   const currentBoardVisibleMap = selectionsByBoard[boardId] || {};
 
   const activeIds = Object.keys(currentBoardVisibleMap).filter(
@@ -106,25 +111,29 @@ export function Details() {
           onBack={() => router.back()}
           title={name ?? "Detalhes"}
           titlePrefix={
-            <View
-              className='rounded-full items-center justify-center ml-2'
-              style={{
-                width: 29,
-                height: 29,
-                borderRadius: 14.5,
-                backgroundColor: lightenHex(headerColor),
-              }}
-            >
+            enableSummaryMode ? (
+              <></>
+            ) : (
               <View
-                className='rounded-full'
+                className='rounded-full items-center justify-center ml-2'
                 style={{
-                  width: 14,
-                  height: 14,
-                  borderRadius: 7,
-                  backgroundColor: headerColor,
+                  width: 29,
+                  height: 29,
+                  borderRadius: 14.5,
+                  backgroundColor: lightenHex(headerColor),
                 }}
-              />
-            </View>
+              >
+                <View
+                  className='rounded-full'
+                  style={{
+                    width: 14,
+                    height: 14,
+                    borderRadius: 7,
+                    backgroundColor: headerColor,
+                  }}
+                />
+              </View>
+            )
           }
           rightSlot={
             <Dropdown
@@ -143,24 +152,20 @@ export function Details() {
               accessibilityLabel='Opções do quadro'
             >
               <DropdownItem onPress={() => setShowEditModal(true)}>
-                <Text className='text-sm font-lexend-regular text-neutral-1000'>
+                <Text
+                  className=' text-neutral-1000'
+                  style={[scaledTextBase, { fontFamily }]}
+                >
                   Editar quadro
                 </Text>
               </DropdownItem>
 
               <DropdownItem onPress={onDeleteBoard}>
-                <Text className='text-sm font-lexend-regular text-neutral-1000'>
+                <Text
+                  className=' text-neutral-1000'
+                  style={[scaledTextBase, { fontFamily }]}
+                >
                   Excluir quadro
-                </Text>
-              </DropdownItem>
-
-              <DropdownItem
-                onPress={() => {
-                  setShowCreateTaskModal(true);
-                }}
-              >
-                <Text className='text-sm font-lexend-regular text-neutral-1000'>
-                  Adicionar tarefa
                 </Text>
               </DropdownItem>
             </Dropdown>
@@ -173,7 +178,10 @@ export function Details() {
               "px-5 pt-6 pb-6 border-b border-neutral-200 bg-neutral-0",
             )}
           >
-            <Text className='text-base font-lexend-regular text-neutral-600'>
+            <Text
+              className=' text-neutral-600'
+              style={[scaledTextBase, { fontFamily }]}
+            >
               {columns && columns?.length > 0
                 ? "Colunas visíveis"
                 : "Nenhuma coluna criada"}
@@ -201,6 +209,7 @@ export function Details() {
                   boardId={boardId}
                   columnId={id}
                   columnName={columnData?.name ?? ""}
+                  boardColor={color!}
                 />
               );
             })}
@@ -228,7 +237,7 @@ export function Details() {
                 />
               }
             >
-              Criar nova coluna
+              {enableSummaryMode ? "Nova coluna" : "Criar nova coluna"}
             </Button>
           </View>
 
@@ -245,8 +254,8 @@ export function Details() {
               variant='dashed'
               // isLoading={isCreatingBoard}
               leftIcon={
-                <MaterialIcons
-                  name='add'
+                <FontAwesome
+                  name='pencil-square-o'
                   size={30}
                   color={THEME_COLORS.neutral[1000]}
                 />

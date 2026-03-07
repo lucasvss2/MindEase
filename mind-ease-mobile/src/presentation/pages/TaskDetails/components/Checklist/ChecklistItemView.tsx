@@ -3,7 +3,7 @@ import useUserPreferencesStore from "@/presentation/store/useUserPreferencesStor
 import { cn } from "@/utils/twClassnamesResolver";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { Text, TouchableOpacity, View } from "react-native";
-import { IChecklistItemView } from "../interface";
+import { IChecklistItemView } from "../../interface";
 
 export const ChecklistItemView = ({
   item,
@@ -13,8 +13,9 @@ export const ChecklistItemView = ({
   isAnyItemEditing,
   index,
 }: IChecklistItemView) => {
-  const { fontType } = useUserPreferencesStore();
+  const { activeProfileId, study, work } = useUserPreferencesStore();
 
+  const { fontType } = activeProfileId === "study" ? study : work;
   return (
     <View
       className='flex-row items-center justify-between p-3 rounded-xl'
@@ -36,7 +37,7 @@ export const ChecklistItemView = ({
               ? "text-neutral-500 line-through"
               : "text-neutral-800",
           )}
-          style={{ fontFamily: fontType }}
+          style={{ fontFamily: TOKENS.FONT_FAMILY[fontType] }}
         >
           {item.text}
         </Text>
