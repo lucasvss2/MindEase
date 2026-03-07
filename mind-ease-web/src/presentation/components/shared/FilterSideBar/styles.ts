@@ -89,7 +89,7 @@ export const PanelHeader = styled.div`
   align-items: center;
   justify-content: space-between;
   padding: 16px 16px 8px;
-  font-size: 16px;
+  font-size: calc(var(--font-size-base) + var(--font-size-offset));
   font-weight: 700;
   color: var(--color-titleText);
   background-color: var(--color-bgColor);
@@ -102,7 +102,7 @@ export const PanelContent = styled.div`
   padding: 24px 16px;
   overflow-y: auto;
   gap: 24px;
-  align-items: center;
+  align-items: stretch;
 `
 
 export const PanelFooter = styled.div`
@@ -128,11 +128,11 @@ export const ComplexityGroup = styled.div`
 `
 
 export const ComplexityLabel = styled.span`
-  font-size: 11px;
+  font-size: 0.69em;
   font-weight: 600;
   color: var(--color-cardText);
   text-transform: uppercase;
-  letter-spacing: 0.06em;
+  letter-spacing: calc(0.06em + var(--letter-spacing-offset));
 `
 
 export const ComplexityButtons = styled.div`
@@ -152,7 +152,7 @@ export const ComplexityButton = styled.button<ComplexityButtonProps>`
     ${({ $active }) => ($active ? 'var(--color-brand)' : 'var(--color-cardDivider)')};
   background-color: ${({ $active }) => ($active ? 'var(--color-buttonDefaultBG)' : 'transparent')};
   color: ${({ $active }) => ($active ? 'var(--color-brand)' : 'var(--color-cardText)')};
-  font-size: 12px;
+  font-size: 0.75em;
   font-weight: ${({ $active }) => ($active ? '700' : '500')};
   cursor: pointer;
   transition:

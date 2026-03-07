@@ -58,5 +58,5 @@ export const SettingsContainer = styled.div`
   flex-direction: row;
   gap: 16px;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-start;
 `

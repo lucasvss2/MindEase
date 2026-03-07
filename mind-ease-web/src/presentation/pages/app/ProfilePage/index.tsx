@@ -10,6 +10,7 @@ import {
   useComplexity,
   usePomodoroSettings,
   useReduceMotion,
+  useFont,
   ResponsiveSlider,
   ResponsiveSwitch,
   ResponsiveInput,
@@ -26,7 +27,8 @@ export function ProfilePage() {
   const { fontSizeLevel, changeFontSize } = useFontSize()
   const { letterSpacingLevel, changeLetterSpacing } = useLetterSpacing()
   const { complexityLevel, changeComplexity } = useComplexity()
-  const { reduceMotion, transitionOverlayEnabled, setReduceMotion, setTransitionOverlayEnabled } = useReduceMotion()
+  const { transitionOverlayEnabled, setTransitionOverlayEnabled } = useReduceMotion()
+  const { font, changeFont } = useFont()
   const {
     soundEnabled,
     toggleSound,
@@ -124,6 +126,36 @@ export function ProfilePage() {
                 Alto
               </ResponsiveButton>
             </S.SettingsContainer>
+            <h4 style={{ fontSize: '16px', fontWeight: 'bold' }}>Fonte</h4>
+            <S.SettingsContainer>
+              <ResponsiveButton
+                width="220px"
+                height="56px"
+                type={font === 'lexend' ? 'default' : 'neutral'}
+                onClick={() => changeFont('lexend')}
+                style={{ fontFamily: "'Lexend', sans-serif" }}
+              >
+                Lexend
+              </ResponsiveButton>
+              <ResponsiveButton
+                width="220px"
+                height="56px"
+                type={font === 'bitter' ? 'default' : 'neutral'}
+                onClick={() => changeFont('bitter')}
+                style={{ fontFamily: "'Bitter', serif" }}
+              >
+                Bitter
+              </ResponsiveButton>
+              <ResponsiveButton
+                width="220px"
+                height="56px"
+                type={font === 'jetbrains-mono' ? 'default' : 'neutral'}
+                onClick={() => changeFont('jetbrains-mono')}
+                style={{ fontFamily: "'JetBrains Mono', monospace" }}
+              >
+                JetBrains Mono
+              </ResponsiveButton>
+            </S.SettingsContainer>
             <h4 style={{ fontSize: '16px', fontWeight: 'bold' }}>Tamanho do Texto</h4>
             <ResponsiveSlider
               value={fontSizeLevel}
@@ -150,13 +182,7 @@ export function ProfilePage() {
               min={1}
               max={3}
             />
-            <h4 style={{ fontSize: '16px', fontWeight: 'bold' }}>Reduzir animações</h4>
-            <S.SettingsContainer>
-              <ResponsiveSwitch
-                checked={reduceMotion}
-                onChange={(val) => setReduceMotion(val)}
-              />
-            </S.SettingsContainer>
+
             <h4 style={{ fontSize: '16px', fontWeight: 'bold' }}>Overlay de transição entre páginas</h4>
             <S.SettingsContainer>
               <ResponsiveSwitch
