@@ -45,9 +45,10 @@ export const TaskList = ({
   );
 
   useEffect(() => {
-    refetch();
-  }, [refetch]);
-  if (!columnId) return;
+    if (columnId) {
+      refetch();
+    }
+  }, [columnId, refetch]);
 
   const hasTasks = tasks?.length;
   const fontFamily = TOKENS.FONT_FAMILY[fontType];
