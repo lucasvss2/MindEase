@@ -6,8 +6,9 @@ import { Text, TextStyle, View } from "react-native";
 import { emptyContrast } from "./empty.variant";
 
 export const Empty = ({ message }:{message: string}) => {
-  const { contrast, fontType } = useUserPreferencesStore();
-  const scaledEmptyText = useAccessibilityScale<TextStyle>(
+  const { activeProfileId, study, work } = useUserPreferencesStore();
+
+  const { fontType, contrast } = activeProfileId === "study" ? study : work;  const scaledEmptyText = useAccessibilityScale<TextStyle>(
     TOKENS.FONT_SIZE["2xl"],
   );
 

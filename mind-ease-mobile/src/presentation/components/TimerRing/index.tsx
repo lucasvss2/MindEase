@@ -25,7 +25,10 @@ export function TimerRing({
   timeClassName,
   statusClassName,
 }: ITimerRingProps) {
-  const { fontType } = useUserPreferencesStore();
+  const { activeProfileId, study, work } = useUserPreferencesStore();
+
+  const { fontType } = activeProfileId === "study" ? study : work;
+  
   const progress = Math.max(
     0,
     Math.min(1, totalTime > 0 ? timeRemaining / totalTime : 0),

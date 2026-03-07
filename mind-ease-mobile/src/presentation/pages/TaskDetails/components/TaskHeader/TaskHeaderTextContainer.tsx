@@ -10,7 +10,9 @@ export const TaskHeaderTextContainer = ({
   scaledText,
   onPress,
 }: ITaskHeaderTextContainer) => {
-  const { fontType } = useUserPreferencesStore();
+  const { activeProfileId, study, work } = useUserPreferencesStore();
+
+  const { fontType } = activeProfileId === "study" ? study : work;
   const scaledIconSize = useAccessibilityScale<number>(
     TOKENS.SIZE["2xs"],
     "number",

@@ -22,8 +22,9 @@ export const SettingsSlider = ({
   const scaledTitleFontSpacing = useAccessibilityScale<TextStyle>(
     TOKENS.FONT_SIZE.base,
   );
-  const { fontType } = useUserPreferencesStore();
-
+  const { activeProfileId, study, work } = useUserPreferencesStore();
+  const { fontType } = activeProfileId === "study" ? study : work;
+  
   const lastValue = useRef<number>(1);
 
   const onValueChange = useCallback(

@@ -7,7 +7,9 @@ import { Text, TextStyle, TouchableOpacity, View } from "react-native";
 import { ITaskCardButton } from "./interface";
 
 export const TaskCardButton = ({ task }: ITaskCardButton) => {
-  const { fontType } = useUserPreferencesStore();
+  const { activeProfileId, study, work } = useUserPreferencesStore();
+  const { fontType } = activeProfileId === "study" ? study : work;
+
   const scaled2xsSpacing = useAccessibilityScale<number>(
     TOKENS.SPACING["2xs"],
     "number",

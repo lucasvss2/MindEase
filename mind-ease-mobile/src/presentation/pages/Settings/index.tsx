@@ -11,34 +11,17 @@ import { ScrollView, ViewStyle } from "react-native";
 import { Toast } from "toastify-react-native";
 
 export function Settings() {
-  const {
-    activityProfile,
-    animationSpeed,
-    contrast,
-    enableSummaryMode,
-    fontSizeScale,
-    fontType,
-    spacingScale,
-    resetPreferences
-  } = useUserPreferencesStore();
+  const { resetPreferences, getAllPreferences } = useUserPreferencesStore();
+
   const scaledSpacing2xl = useAccessibilityScale<number>(
     TOKENS.SPACING["2xl"],
     "number",
   );
 
   const onSavePreferences = () => {
-    saveUserPreferences(
-      {
-        activityProfile,
-        animationSpeed,
-        contrast,
-        enableSummaryMode,
-        fontSizeScale,
-        fontType,
-        spacingScale,
-      },
-      Toast,
-    );
+    const allData = getAllPreferences();
+
+    saveUserPreferences(allData, Toast);
   };
 
   return (

@@ -41,8 +41,10 @@ export function SheetModal({
       initialSnapIndex,
     });
 
-  const { fontType } = useUserPreferencesStore();
+  const { activeProfileId, study, work } = useUserPreferencesStore();
 
+  const { fontType } = activeProfileId === "study" ? study : work;
+  
   const scaledXlText = useAccessibilityScale<TextStyle>(TOKENS.FONT_SIZE["xl"]);
   const scaledXl = useAccessibilityScale<number>(
     TOKENS.SPACING["xl"],

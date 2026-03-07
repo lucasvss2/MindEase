@@ -17,17 +17,18 @@ import { SettingsSlider } from "./components/SettingsSlider";
 
 export const InterfaceAdjustments = () => {
   const {
-    animationSpeed,
+    activeProfileId,
+    study,
+    work,
     updateFontSizeScale,
-    spacingScale,
     updateSpacingScale,
     updateAnimationSpeed,
-    fontSizeScale,
-    contrast,
     updateContrast,
-    fontType,
     updateFontType,
   } = useUserPreferencesStore();
+
+  const { fontType, contrast, animationSpeed, spacingScale, fontSizeScale } =
+    activeProfileId === "study" ? study : work;
 
   const contrastOptionsButtons: IButtonGroupProps["buttons"] = useMemo(
     () => [

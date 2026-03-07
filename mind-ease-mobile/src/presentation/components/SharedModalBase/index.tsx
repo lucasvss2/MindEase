@@ -26,7 +26,10 @@ export const SharedModalBase = ({
   snapPoints = [45, 90],
   isLoading,
 }: ISharedModalBase) => {
-  const { fontType } = useUserPreferencesStore();
+  const { activeProfileId, study, work } = useUserPreferencesStore();
+
+  const { fontType } = activeProfileId === "study" ? study : work;
+
   const scaledSmSize = useAccessibilityScale<number>(
     TOKENS.SPACING["sm"],
     "number",

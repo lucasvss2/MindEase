@@ -4,12 +4,9 @@ import { TOKENS } from "@/presentation/constants/tokens";
 import { useAccessibilityScale } from "@/presentation/hooks/useAccessibilityScale";
 import { useTimerStore } from "@/presentation/store";
 import useUserPreferencesStore from "@/presentation/store/useUserPreferencesStore";
+import { startAlertSoundLoop, stopAlertSound } from "@/utils/playAlertSound";
 import { cn } from "@/utils/twClassnamesResolver";
 import { MaterialIcons } from "@expo/vector-icons";
-import {
-  startAlertSoundLoop,
-  stopAlertSound,
-} from "@/utils/playAlertSound";
 import * as Haptics from "expo-haptics";
 import { useRouter } from "expo-router";
 import { StatusBar } from "expo-status-bar";
@@ -45,13 +42,15 @@ export function Focus({
 
   const [mode, setMode] = useState<"focus" | "rest">("focus");
   const [restTimeRemaining, setRestTimeRemaining] = useState(
-    restDurationMinutes * 60
+    restDurationMinutes * 60,
   );
   const hasShownRestWarning = useRef(false);
   const hasShownRestComplete = useRef(false);
   const wasSoundPlaying = useRef(false);
 
-  const { fontType } = useUserPreferencesStore();
+  const { activeProfileId, study, work } = useUserPreferencesStore();
+  const { fontType } = activeProfileId === "study" ? study : work;
+
   const scaledTextBaseSize = useAccessibilityScale<TextStyle>(
     TOKENS.FONT_SIZE.base,
     "font",
@@ -91,10 +90,7 @@ export function Focus({
 
   const progress = duration > 0 ? timeRemaining / duration : 0;
   const shouldPlaySound =
-    mode === "focus" &&
-    isActive &&
-    progress <= 0.1 &&
-    enableSoftSounds;
+    mode === "focus" && isActive && progress <= 0.1 && enableSoftSounds;
 
   useEffect(() => {
     if (mode !== "focus" || !isActive) return;
@@ -170,14 +166,8 @@ export function Focus({
         className={cn("flex-1")}
         style={{ backgroundColor: THEME_COLORS.rest.background }}
       >
-        <StatusBar
-          style="dark"
-          backgroundColor={THEME_COLORS.rest.statusBar}
-        />
-        <ScreenHeader
-          onBack={() => router.back()}
-          title="Modo foco"
-        />
+        <StatusBar style='dark' backgroundColor={THEME_COLORS.rest.statusBar} />
+        <ScreenHeader onBack={() => router.back()} title='Modo foco' />
         <View
           className={cn("flex-1 items-center justify-center")}
           style={{ paddingHorizontal: scaledSpacingLgSize }}
@@ -211,11 +201,11 @@ export function Focus({
           <TimerRing
             timeRemaining={restTimeRemaining}
             totalTime={restDurationMinutes * 60}
-            status="Descansando"
-            progressColor="#22C55E"
+            status='Descansando'
+            progressColor='#22C55E'
           />
           <Button
-            variant="default"
+            variant='default'
             style={{ marginTop: scaledSpacing6xlSize }}
             onPress={() => router.back()}
           >
@@ -228,7 +218,7 @@ export function Focus({
 
   return (
     <View className={cn("flex-1 bg-blue-50")}>
-      <StatusBar style="dark" backgroundColor={THEME_COLORS.focus.statusBar} />
+      <StatusBar style='dark' backgroundColor={THEME_COLORS.focus.statusBar} />
       <ScreenHeader
         onBack={() => router.back()}
         title={activityTitle || "Modo foco"}
@@ -269,14 +259,14 @@ export function Focus({
           status={status}
         />
         <Button
-          variant="default"
+          variant='default'
           style={{ marginTop: scaledSpacing6xlSize }}
           onPress={isActive ? pause : resume}
           leftIcon={
             isActive ? (
-              <MaterialIcons name="pause" size={22} color="#FFFFFF" />
+              <MaterialIcons name='pause' size={22} color='#FFFFFF' />
             ) : (
-              <MaterialIcons name="play-arrow" size={22} color="#FFFFFF" />
+              <MaterialIcons name='play-arrow' size={22} color='#FFFFFF' />
             )
           }
         >
@@ -286,3 +276,4 @@ export function Focus({
     </View>
   );
 }
+

@@ -13,8 +13,9 @@ export const ChecklistItemView = ({
   isAnyItemEditing,
   index,
 }: IChecklistItemView) => {
-  const { fontType } = useUserPreferencesStore();
+  const { activeProfileId, study, work } = useUserPreferencesStore();
 
+  const { fontType } = activeProfileId === "study" ? study : work;
   return (
     <View
       className='flex-row items-center justify-between p-3 rounded-xl'

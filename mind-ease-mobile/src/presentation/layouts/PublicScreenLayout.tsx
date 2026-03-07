@@ -26,7 +26,6 @@ export const PublicScreenLayout = ({
   children,
   footer,
 }: IPublicScreenLayout) => {
-  const { enableSummaryMode } = useUserPreferencesStore();
   const scaledTitle = useAccessibilityScale<TextStyle>(
     TOKENS.FONT_SIZE["2xl"],
     "font",
@@ -49,7 +48,9 @@ export const PublicScreenLayout = ({
     "number",
   );
 
-  const { fontType } = useUserPreferencesStore();
+  const { activeProfileId, study, work } = useUserPreferencesStore();
+  const { fontType, enableSummaryMode } =
+    activeProfileId === "study" ? study : work;
 
   return (
     <KeyboardAvoidingView
@@ -74,8 +75,7 @@ export const PublicScreenLayout = ({
         >
           {!enableSummaryMode && (
             <>
-              <View
-                className='flex-row justify-center w-full shadow-lg shadow-gray-800'>
+              <View className='flex-row justify-center w-full shadow-lg shadow-gray-800'>
                 <Image
                   source={require("../../../assets/images/logo.jpeg")}
                   style={{ width: 100, height: 100 }}

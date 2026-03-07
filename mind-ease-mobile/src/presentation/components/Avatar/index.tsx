@@ -23,8 +23,10 @@ export function Avatar({
 }: IAvatarProps) {
   const hasImage = !!imageUri;
   const initials = name ? getInitials(name) : "";
-  const { fontType } = useUserPreferencesStore();
+  const { activeProfileId, study, work } = useUserPreferencesStore();
 
+  const { fontType } = activeProfileId === "study" ? study : work;
+  
   const containerStyle = {
     width: size,
     height: size,

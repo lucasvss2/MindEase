@@ -14,7 +14,9 @@ export function NotificationDropdown() {
   const [notifications] = useState<INotification[]>(MOCK_NOTIFICATIONS);
   const unreadCount = notifications.filter((n) => !n.read).length;
 
-  const { fontType } = useUserPreferencesStore();
+  const { activeProfileId, study, work } = useUserPreferencesStore();
+  const { fontType } = activeProfileId === "study" ? study : work;
+
   const scaledTextBase = useAccessibilityScale<TextStyle>(
     TOKENS.FONT_SIZE.base,
     "font",
