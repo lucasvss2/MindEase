@@ -42,6 +42,8 @@ export function Dropdown({
   closeOnOutsidePress = true,
   closeOnItemPress = true,
   accessibilityLabel,
+  testID,
+  testIDTrigger
 }: IDropdownProps) {
   const { isOpen: isDropdownOpen, toggle, close } = useDropdownState({
     isOpen,
@@ -49,12 +51,13 @@ export function Dropdown({
   });
 
   return (
-    <View className={cn("relative", className)}>
+    <View className={cn("relative", className)} testID={testID}>
       <DropdownTrigger
         trigger={trigger}
         badge={badge}
         onPress={toggle}
         accessibilityLabel={accessibilityLabel}
+        testID={testIDTrigger}
       />
 
       {isDropdownOpen && (

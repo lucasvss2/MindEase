@@ -9,5 +9,6 @@ export interface ISharedModalBase  {
   onSubmitChanges: () => void;
   isLoading?: boolean;
   visible: boolean;
+  testId?: string
 }
 

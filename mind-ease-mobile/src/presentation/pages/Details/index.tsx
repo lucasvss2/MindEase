@@ -50,7 +50,8 @@ export function Details() {
 
   const { toggleColumn, selectionsByBoard } = useColumnStore();
   const { activeProfileId, study, work } = useUserPreferencesStore();
-  const { fontType, enableSummaryMode } = activeProfileId === "study" ? study : work;
+  const { fontType, enableSummaryMode } =
+    activeProfileId === "study" ? study : work;
 
   const scaledTextBase = useAccessibilityScale<TextStyle>(TOKENS.FONT_SIZE.sm);
   const fontFamily = TOKENS.FONT_FAMILY[fontType];
@@ -150,6 +151,7 @@ export function Details() {
               align='bottom'
               closeOnItemPress
               accessibilityLabel='Opções do quadro'
+              testIDTrigger='dropdown-trigger-board-actions'
             >
               <DropdownItem onPress={() => setShowEditModal(true)}>
                 <Text
@@ -181,6 +183,7 @@ export function Details() {
             <Text
               className=' text-neutral-600'
               style={[scaledTextBase, { fontFamily }]}
+              testID="columns-section-title"
             >
               {columns && columns?.length > 0
                 ? "Colunas visíveis"

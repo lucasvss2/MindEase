@@ -36,6 +36,7 @@ export const ChecklistSection = ({ task }: ITaskSharedProps) => {
         gap: scaledMediumSpacing,
         marginTop: scaledMediumSpacing,
       }}
+      testID='task-checklist'
     >
       <View className='flex-row items-center gap-2'>
         <MaterialCommunityIcons

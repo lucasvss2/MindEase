@@ -9,6 +9,7 @@ export const Card: React.FC<ICardsSharedProps> = ({
   children,
   className = "",
   style,
+  testID
 }) => {
   const scaledLgSpacingSize = useAccessibilityScale<number>(
     TOKENS.SPACING.lg,
@@ -22,6 +23,7 @@ export const Card: React.FC<ICardsSharedProps> = ({
         className,
       )}
       style={[style, { padding: scaledLgSpacingSize }]}
+      testID={testID}
     >
       {children}
     </View>
