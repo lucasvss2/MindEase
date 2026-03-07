@@ -58,7 +58,7 @@ export function TaskDetailView({ task }: ITaskSharedProps) {
 
       <ChecklistSection task={task} />
 
-      <Card className='gap-4 mt-8'>
+      <Card className='gap-4 mt-8' testID="task-focus">
         <FocusConfigField
           label='Tempo de foco(min)'
           isEditing={isEditingFocusTime}

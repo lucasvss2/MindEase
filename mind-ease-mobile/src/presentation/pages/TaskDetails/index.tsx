@@ -42,7 +42,7 @@ export function TaskDetailsPage() {
   if (isLoading || !task) {
     return (
       <View className='flex-1 justify-center items-center'>
-        <ActivityIndicator size='large' color='#000' />
+        <ActivityIndicator size='large' color='#000' testID="task-loader" />
       </View>
     );
   }
@@ -54,6 +54,7 @@ export function TaskDetailsPage() {
         title={task?.title}
         rightSlot={
           <Dropdown
+
             trigger={
               <View className='p-2'>
                 <MaterialIcons
@@ -67,8 +68,9 @@ export function TaskDetailsPage() {
             align='bottom'
             closeOnItemPress
             accessibilityLabel='Opções do quadro'
+            testIDTrigger="dropdown-trigger-task-actions"
           >
-            <DropdownItem onPress={onDeleteTask} disabled={isDeletingTask}>
+            <DropdownItem onPress={onDeleteTask} disabled={isDeletingTask} testID="delete-task-button">
               <Text className='text-xl font-lexend-regular text-red-600'>
                 Excluir tarefa {isDeletingTask && <ActivityIndicator />}
               </Text>

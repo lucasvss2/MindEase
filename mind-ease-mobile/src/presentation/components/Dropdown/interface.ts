@@ -23,4 +23,6 @@ export interface IDropdownProps {
   closeOnOutsidePress?: boolean;
   closeOnItemPress?: boolean;
   accessibilityLabel?: string;
+  testID?: string
+  testIDTrigger?: string
 }

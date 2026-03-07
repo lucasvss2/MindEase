@@ -7,6 +7,7 @@ interface DropdownTriggerProps {
   badge?: ReactNode;
   onPress: () => void;
   accessibilityLabel?: string;
+  testID?: string
 }
 
 export function DropdownTrigger({
@@ -14,12 +15,14 @@ export function DropdownTrigger({
   badge,
   onPress,
   accessibilityLabel,
+  testID
 }: DropdownTriggerProps) {
   return (
     <Pressable
       onPress={onPress}
       accessibilityRole="button"
       accessibilityLabel={accessibilityLabel}
+      testID={testID}
     >
       <View className="relative">
         {trigger}

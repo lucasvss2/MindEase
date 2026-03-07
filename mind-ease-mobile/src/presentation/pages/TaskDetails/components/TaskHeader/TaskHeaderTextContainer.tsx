@@ -23,6 +23,7 @@ export const TaskHeaderTextContainer = ({
       <Text
         className='text-neutral-1000 break-words w-8/12'
         style={[{ fontFamily: TOKENS.FONT_FAMILY[fontType] }, scaledText]}
+        testID="task-header-content"
       >
         {text}
       </Text>

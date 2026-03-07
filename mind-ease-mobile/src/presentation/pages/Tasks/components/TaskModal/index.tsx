@@ -91,8 +91,6 @@ export const TaskModal = ({
     TOKENS.FONT_SIZE["xl"],
   );
 
-  console.log({ checkListFields });
-
   return (
     <SheetModal
       visible={visible}
@@ -116,6 +114,7 @@ export const TaskModal = ({
                     value={value}
                     onChangeText={onChange}
                     placeholder='Ex: Estudar React'
+                    testID='task-title-field'
                   />
                 </InputRoot>
               </FormField>
@@ -191,6 +190,7 @@ export const TaskModal = ({
               onPress={handleSubmit(onCreateTask as unknown as any)}
               className={cn("flex-1 py-3 px-5")}
               isLoading={isPendingTaskCreation}
+              testID='create-task-button'
             >
               {"Criar tarefa"}
             </Button>
