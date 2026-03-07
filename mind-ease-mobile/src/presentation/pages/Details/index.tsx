@@ -18,7 +18,7 @@ import { TOKENS } from "@/presentation/constants";
 import { useAccessibilityScale } from "@/presentation/hooks/useAccessibilityScale";
 import { useColumnStore } from "@/presentation/store/useColumnStore";
 import useUserPreferencesStore from "@/presentation/store/useUserPreferencesStore";
-import { MaterialIcons } from "@expo/vector-icons";
+import { FontAwesome, MaterialIcons } from "@expo/vector-icons";
 import { useLocalSearchParams, useRouter } from "expo-router";
 import { useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
@@ -49,7 +49,7 @@ export function Details() {
   const { data: columns } = useGetColumnsByBoardId(boardId);
 
   const { toggleColumn, selectionsByBoard } = useColumnStore();
-  const { fontType } = useUserPreferencesStore();
+  const { fontType, enableSummaryMode } = useUserPreferencesStore();
   const scaledTextBase = useAccessibilityScale<TextStyle>(TOKENS.FONT_SIZE.sm);
   const fontFamily = TOKENS.FONT_FAMILY[fontType];
 
@@ -109,25 +109,29 @@ export function Details() {
           onBack={() => router.back()}
           title={name ?? "Detalhes"}
           titlePrefix={
-            <View
-              className='rounded-full items-center justify-center ml-2'
-              style={{
-                width: 29,
-                height: 29,
-                borderRadius: 14.5,
-                backgroundColor: lightenHex(headerColor),
-              }}
-            >
+            enableSummaryMode ? (
+              <></>
+            ) : (
               <View
-                className='rounded-full'
+                className='rounded-full items-center justify-center ml-2'
                 style={{
-                  width: 14,
-                  height: 14,
-                  borderRadius: 7,
-                  backgroundColor: headerColor,
+                  width: 29,
+                  height: 29,
+                  borderRadius: 14.5,
+                  backgroundColor: lightenHex(headerColor),
                 }}
-              />
-            </View>
+              >
+                <View
+                  className='rounded-full'
+                  style={{
+                    width: 14,
+                    height: 14,
+                    borderRadius: 7,
+                    backgroundColor: headerColor,
+                  }}
+                />
+              </View>
+            )
           }
           rightSlot={
             <Dropdown
@@ -231,7 +235,7 @@ export function Details() {
                 />
               }
             >
-              Criar nova coluna
+              {enableSummaryMode ? "Nova coluna" : "Criar nova coluna"}
             </Button>
           </View>
 
@@ -248,8 +252,8 @@ export function Details() {
               variant='dashed'
               // isLoading={isCreatingBoard}
               leftIcon={
-                <MaterialIcons
-                  name='add'
+                <FontAwesome
+                  name='pencil-square-o'
                   size={30}
                   color={THEME_COLORS.neutral[1000]}
                 />
