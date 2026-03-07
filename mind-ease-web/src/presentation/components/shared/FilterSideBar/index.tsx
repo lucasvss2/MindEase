@@ -69,7 +69,7 @@ export const FilterSidebar = ({
           </ResponsiveButton>
           <ResponsiveButton
             type="link"
-            onClick={() => { navigate('/board') }}
+            onClick={() => { navigate('/boards') }}
           >
             <span style={{
               display: 'flex',

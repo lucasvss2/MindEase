@@ -31,7 +31,7 @@ export const useLogin = () => {
         description: 'Login realizado com sucesso.',
       })
 
-      navigate('/board')
+      navigate('/boards')
     },
     onError: (err: any) => {
       console.error('Error logging in', err)
