@@ -42,7 +42,6 @@ export function Details() {
   const [showEditModal, setShowEditModal] = useState(false);
   const [showCreateColumnModal, setShowCreateColumnModal] = useState(false);
   const [showEditColumnModal, setShowEditColumnModal] = useState(false);
-  const [showCreateTaskModal, setShowCreateTaskModal] = useState(false);
   const { mutateAsync: mutateDeleteBoard } = useDeleteBoardMutation();
   const { mutateAsync: mutateUpdateBoard } = useUpdateBoardMutation();
   const { data: columns } = useGetColumnsByBoardId(boardId);
@@ -50,7 +49,6 @@ export function Details() {
   const { toggleColumn, selectionsByBoard } = useColumnStore();
 
   const taskForm = useForm();
-  const queryClient = useQueryClient();
   const currentBoardVisibleMap = selectionsByBoard[boardId] || {};
 
   const activeIds = Object.keys(currentBoardVisibleMap).filter(
@@ -151,16 +149,6 @@ export function Details() {
               <DropdownItem onPress={onDeleteBoard}>
                 <Text className='text-sm font-lexend-regular text-neutral-1000'>
                   Excluir quadro
-                </Text>
-              </DropdownItem>
-
-              <DropdownItem
-                onPress={() => {
-                  setShowCreateTaskModal(true);
-                }}
-              >
-                <Text className='text-sm font-lexend-regular text-neutral-1000'>
-                  Adicionar tarefa
                 </Text>
               </DropdownItem>
             </Dropdown>
