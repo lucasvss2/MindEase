@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom'
 import { Dropdown, MenuProps } from 'antd'
-import { UserOutlined, LogoutOutlined } from '@ant-design/icons'
+import { LogoutOutlined, SettingOutlined } from '@ant-design/icons'
 import { useLogout } from '@/presentation/hooks/auth'
 
 import logo from '@/assets/images/mind-ease-icon.png'
@@ -18,8 +18,8 @@ export const Header = ({ showUserAvatar = true }: HeaderProps) => {
   const items: MenuProps['items'] = [
     {
       key: 'profile',
-      label: 'Perfil',
-      icon: <UserOutlined />,
+      label: 'Configurações',
+      icon: <SettingOutlined />,
       onClick: () => navigate('/profile'),
     },
     {

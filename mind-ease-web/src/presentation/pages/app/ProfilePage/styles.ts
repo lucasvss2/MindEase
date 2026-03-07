@@ -34,6 +34,7 @@ export const Name = styled.h2`
 export const Email = styled.p`
   font-size: 16px;
   color: #666;
+  margin-bottom: 0px;
 `
 
 export const SettingsContainer = styled.div`
