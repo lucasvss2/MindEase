@@ -117,28 +117,32 @@ export const FilterSidebar = ({
             </span>
           </ResponsiveButton>
 
-          {/* Mini-toggle de complexidade */}
-          <S.ComplexityGroup>
-            <S.ComplexityLabel>Nível de Complexidade</S.ComplexityLabel>
-            <S.ComplexityButtons>
-              <S.ComplexityButton
-                $active={complexityLevel === 'simplified'}
-                onClick={() => changeComplexity('simplified')}
-                title="Simplificado"
-              >
-                Simplificado
-              </S.ComplexityButton>
-              <S.ComplexityButton
-                $active={complexityLevel === 'normal'}
-                onClick={() => changeComplexity('normal')}
-                title="Normal"
-              >
-                Normal
-              </S.ComplexityButton>
-            </S.ComplexityButtons>
-          </S.ComplexityGroup>
+          {boardSwitcher && (
+            <>
+              {/* Mini-toggle de complexidade — só na tela de board */}
+              <S.ComplexityGroup>
+                <S.ComplexityLabel>Nível de Complexidade</S.ComplexityLabel>
+                <S.ComplexityButtons>
+                  <S.ComplexityButton
+                    $active={complexityLevel === 'simplified'}
+                    onClick={() => changeComplexity('simplified')}
+                    title="Simplificado"
+                  >
+                    Simplificado
+                  </S.ComplexityButton>
+                  <S.ComplexityButton
+                    $active={complexityLevel === 'normal'}
+                    onClick={() => changeComplexity('normal')}
+                    title="Normal"
+                  >
+                    Normal
+                  </S.ComplexityButton>
+                </S.ComplexityButtons>
+              </S.ComplexityGroup>
 
-          {boardSwitcher}
+              {boardSwitcher}
+            </>
+          )}
         </S.PanelContent>
 
         {filterFooter && (
