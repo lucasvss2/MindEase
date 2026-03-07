@@ -22,6 +22,7 @@ export const EmailField = () => {
               keyboardType='email-address'
               autoCapitalize='none'
               onChangeText={onChange}
+              testID='email-field'
               {...field}
             />
           </InputRoot>
