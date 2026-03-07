@@ -47,6 +47,7 @@ export const PasswordField = ({
               <InputField
                 secureTextEntry={!showPassword}
                 onChangeText={onChange}
+                testID='password-field'
                 {...props}
                 {...field}
               />
