@@ -1,9 +1,15 @@
 export type TaskStatus = "TODO" | "IN_PROGRESS" | "DONE";
 
+export interface ITaskChecklist {
+  id: string;
+  text: string;
+  isConcluded: boolean;
+}
 export interface TaskModel {
   id: string;
   userId: string;
   columnId: string;
+  boardId: string;
   title: string;
   description: string;
   status: TaskStatus;
@@ -21,5 +27,8 @@ export interface TaskModel {
       color: string;
     };
   };
+  checklist?: ITaskChecklist[];
+  isConcluded?: boolean;
+  enableSoundAlerts?: boolean;
 }
 

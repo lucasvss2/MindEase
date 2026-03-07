@@ -47,6 +47,7 @@ export default function PrivateLayout() {
           <Stack.Screen name='details' />
           <Stack.Screen name='create-task' />
           <Stack.Screen name='focus' />
+          <Stack.Screen name='task-details' />
         </Stack>
         <ToastManager />
       </SafeAreaView>

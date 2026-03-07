@@ -2,6 +2,7 @@ import { useCallback, useState } from "react";
 
 import { InputRoot } from "@/presentation/components/Input";
 import { InputField } from "@/presentation/components/Input/compositions/InputField";
+import { SharedModalBase } from "@/presentation/components/SharedModalBase";
 import { TOKENS } from "@/presentation/constants/tokens";
 import {
   useDeleteColumnMutation,
@@ -12,7 +13,6 @@ import { FontAwesome5 } from "@expo/vector-icons";
 import { ScrollView, TouchableOpacity, View } from "react-native";
 import { Toast } from "toastify-react-native";
 import { IEditColumnModal } from "./interface";
-import { SharedModalBase } from "@/presentation/components/SharedModalBase";
 
 export const EditColumnModal = ({
   columns,
@@ -48,7 +48,7 @@ export const EditColumnModal = ({
     } catch (error) {
       handleError(error, Toast.error);
     }
-  }, [deletedIds, editedNames, deleteColumn, updateColumn, handleOnClose]);
+  }, [deletedIds, editedNames, handleOnClose, deleteColumn, updateColumn]);
 
   const markAsDeleted = useCallback((id: string) => {
     setDeletedIds((prev) => [...prev, id]);

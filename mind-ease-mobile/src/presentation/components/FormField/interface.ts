@@ -6,5 +6,6 @@ export interface IFormFieldSharedProps {
 export interface IFormFieldProps extends IFormFieldSharedProps {
   label?: string;
   message?: string;
+  className?: string;
 }
 

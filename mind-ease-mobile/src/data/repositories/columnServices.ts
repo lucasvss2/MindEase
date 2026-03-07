@@ -36,7 +36,20 @@ export class ColumnServices implements IColumnRepository {
     }
   }
 
-  async getColumns(): Promise<ColumnModel[]> {
+  async getColumnsByBoardId(boardId: string): Promise<ColumnModel[]> {
+    try {
+      const { data } = await api.get<ColumnResponseDTO[]>(`${this.endpoint}/board/${boardId}`);
+
+      return ColumnMapper.toDomainList(data);
+    } catch (error: any) {
+      throw new AppError(
+        error.response?.data?.error || "Erro ao buscar colunas",
+        error.response?.status,
+      );
+    }
+  }
+
+   async getColumns(): Promise<ColumnModel[]> {
     try {
       const { data } = await api.get<ColumnResponseDTO[]>(this.endpoint);
 

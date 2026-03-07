@@ -19,6 +19,25 @@ export const useGetTaskById = (id: string) => {
   });
 };
 
+export const useGetTaskByColumnId = (columnId?: string) => {
+  return useQuery({
+    queryKey: ["tasks"],
+    queryFn: () => taskServices.getTaskByColumnId(columnId!),
+    enabled: !!columnId,
+  });
+};
+
+export const useGetTaskByBoardAndColumnId = (
+  boardId: string,
+  columnId: string,
+) => {
+  return useQuery({
+    queryKey: ["tasks"],
+    queryFn: () => taskServices.getTaskByBoardAndColumnId(boardId, columnId!),
+    enabled: !!columnId && !!boardId,
+  });
+};
+
 export const useCreateTaskMutation = () => {
   const queryClient = useQueryClient();
 
@@ -50,6 +69,7 @@ export const useDeleteTaskMutation = () => {
     mutationFn: (id: string) => taskServices.deleteTask(id),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["tasks"] });
+      queryClient.invalidateQueries({ queryKey: ["boards"] });
     },
   });
 };

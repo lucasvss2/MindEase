@@ -5,7 +5,6 @@ import { FormFieldLabel } from "../FormField";
 import { ICheckboxFieldProps } from "./interface";
 
 export const CheckboxField = ({
-  id,
   onToggle,
   label,
   isChecked,
@@ -13,7 +12,7 @@ export const CheckboxField = ({
   return (
     <TouchableOpacity
       activeOpacity={0.7}
-      onPress={() => onToggle(id)}
+      onPress={onToggle}
       className={cn("flex-row items-center gap-2")}
     >
       <Checkbox isChecked={isChecked} />

@@ -1,85 +1,68 @@
-import { SECTION_CONTENT } from "@/data/mocks";
 import {
   Button,
-  Card,
   Dropdown,
   DropdownItem,
   ScreenHeader,
 } from "@/presentation/components";
 import { CheckboxField } from "@/presentation/components/Checkbox/CheckboxField";
-import { Empty } from "@/presentation/components/Empty";
 import { THEME_COLORS } from "@/presentation/constants/theme";
 import {
   useDeleteBoardMutation,
   useUpdateBoardMutation,
 } from "@/presentation/features/Boards/board-queries";
-import {
-  useGetColumnBySlug,
-  useGetColumns,
-} from "@/presentation/features/Columns/columns-queries";
+import { useGetColumnsByBoardId } from "@/presentation/features/Columns/columns-queries";
 import { lightenHex } from "@/utils/colorUtils";
 import { cn } from "@/utils/twClassnamesResolver";
 
+import { useColumnStore } from "@/presentation/store/useColumnStore";
 import { MaterialIcons } from "@expo/vector-icons";
+import { useQueryClient } from "@tanstack/react-query";
 import { useLocalSearchParams, useRouter } from "expo-router";
 import { useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
-import { ScrollView, Text, TouchableOpacity, View } from "react-native";
+import { ScrollView, Text, View } from "react-native";
+import { BoardModal } from "../Tasks/components/BoardModal";
 import { CreateColumnModal } from "./Column/Modal/CreateColumnModal";
 import { EditColumnModal } from "./Column/Modal/EditColumnModal";
-import { BoardModal } from "../Tasks/components/BoardModal";
-
-const COLUMN_OPTIONS = [
-  {
-    key: "paraFazer" as const,
-    label: "Para fazer",
-    icon: "format-list-bulleted" as const,
-  },
-  {
-    key: "paraFazer" as const,
-    label: "Para fazer",
-    icon: "format-list-bulleted" as const,
-  },
-  { key: "emProgresso" as const, label: "Em progresso", icon: "sync" as const },
-  {
-    key: "concluido" as const,
-    label: "Concluído",
-    icon: "check-circle-outline" as const,
-  },
-] as const;
-
-type ColumnKey = (typeof COLUMN_OPTIONS)[number]["key"];
+import { TasksColumn } from "./Column/TasksColumn";
 
 export function Details() {
   const router = useRouter();
-  const { id, name, color } = useLocalSearchParams<{
+  const {
+    id: boardId,
+    name,
+    color,
+  } = useLocalSearchParams<{
     id: string;
     name: string;
     color?: string;
   }>();
   const headerColor = color ?? THEME_COLORS.neutral[300];
-  const [visibleColumns, setVisibleColumns] = useState<{
-    [key: string]: boolean;
-  }>({});
 
   const [showEditModal, setShowEditModal] = useState(false);
   const [showCreateColumnModal, setShowCreateColumnModal] = useState(false);
   const [showEditColumnModal, setShowEditColumnModal] = useState(false);
+  const [showCreateTaskModal, setShowCreateTaskModal] = useState(false);
   const { mutateAsync: mutateDeleteBoard } = useDeleteBoardMutation();
   const { mutateAsync: mutateUpdateBoard } = useUpdateBoardMutation();
-  const { data: columns } = useGetColumns();
-  const { data: columnBySlug } = useGetColumnBySlug(name);
+  const { data: columns } = useGetColumnsByBoardId(boardId);
 
-  const form = useForm;
+  const { toggleColumn, selectionsByBoard } = useColumnStore();
 
-  console.log({ visibleColumns });
-  const toggleColumn = (key: string) => {
-    setVisibleColumns((prev) => ({ ...prev, [key]: !prev[key] }));
-  };
+  const taskForm = useForm();
+  const queryClient = useQueryClient();
+  const currentBoardVisibleMap = selectionsByBoard[boardId] || {};
 
+  const activeIds = Object.keys(currentBoardVisibleMap).filter(
+    (id) => currentBoardVisibleMap[id] === true,
+  );
+
+  const validatedActiveIds = activeIds.filter((id) =>
+    columns?.some((col) => col.id === id),
+  );
   const onDeleteBoard = async () => {
-    if (!id) return;
-    await mutateDeleteBoard(id);
+    if (!boardId) return;
+    await mutateDeleteBoard(boardId);
     router.back();
   };
 
@@ -90,14 +73,14 @@ export function Details() {
     name?: string;
     color?: string;
   }) => {
-    if (!id || !name) return;
-    await mutateUpdateBoard({ id, data: { name, color } });
+    if (!boardId || !name) return;
+    await mutateUpdateBoard({ id: boardId, data: { name, color } });
     setShowEditModal(false);
   };
 
   return (
     <View className={cn("flex-1 bg-neutral-0")}>
-      <FormProvider {...form()}>
+      <FormProvider {...taskForm}>
         <BoardModal
           name={name}
           color={color}
@@ -108,8 +91,7 @@ export function Details() {
           isEditing
         />
         <CreateColumnModal
-          columnId={columnBySlug?.id ?? ""}
-          boardId={id}
+          boardId={boardId}
           visible={showCreateColumnModal}
           setVisible={setShowCreateColumnModal}
         />
@@ -174,7 +156,7 @@ export function Details() {
 
               <DropdownItem
                 onPress={() => {
-                  // TODO: Abrir fluxo de adicionar tarefa
+                  setShowCreateTaskModal(true);
                 }}
               >
                 <Text className='text-sm font-lexend-regular text-neutral-1000'>
@@ -202,86 +184,27 @@ export function Details() {
                 {columns?.map(({ name, id }) => (
                   <CheckboxField
                     key={id}
-                    id={name}
                     label={name}
-                    isChecked={visibleColumns[name]}
-                    onToggle={toggleColumn}
+                    isChecked={!!currentBoardVisibleMap[id]}
+                    onToggle={() => toggleColumn(boardId, id)} //ATUALIZAR TBM O NOME
                   />
                 ))}
               </View>
             </ScrollView>
           </View>
-          <ScrollView
-            className={cn("flex-1")}
-            contentContainerStyle={{
-              paddingHorizontal: 20,
-              paddingTop: 12,
-              paddingBottom: 24,
-            }}
-            showsVerticalScrollIndicator={false}
-          >
-            <View className={cn("gap-0")}>
-              {!columns ? (
-                <Empty message='Nenhuma coluna criada' />
-              ) : (
-                columns
-                  ?.filter(({ name }) => visibleColumns[name])
-                  .map(({ name }) => (
-                    <View key={name} className={cn("py-3")}>
-                      <View className={cn("flex-row items-center gap-2")}>
-                        <MaterialIcons
-                          name={
-                            COLUMN_OPTIONS.find((o) => o.key === name)?.icon ??
-                            "list"
-                          }
-                          size={22}
-                          color={THEME_COLORS.neutral[1000]}
-                        />
-                        <View className={cn("flex-row")}>
-                          <Text className='text-base font-lexend-semi-bold text-neutral-1000'>
-                            {name}
-                          </Text>
-                          <Text className='text-base font-lexend-regular text-neutral-1000'>
-                            {" "}
-                            ({SECTION_CONTENT[key].items.length})
-                          </Text>
-                        </View>
-                      </View>
-                      <Card
-                        className='mt-3 border-0 shadow-none gap-3'
-                        style={{ backgroundColor: SECTION_CONTENT[name].bg }}
-                      >
-                        {SECTION_CONTENT[name].items.map((item, index) => (
-                          <TouchableOpacity
-                            key={index}
-                            activeOpacity={0.7}
-                            onPress={() => {}}
-                          >
-                            <Card
-                              className={cn(
-                                "bg-neutral-0 border border-neutral-200",
-                              )}
-                            >
-                              <View className={cn("gap-1")}>
-                                <Text className='text-sm font-lexend-semi-bold text-neutral-1000'>
-                                  {item.title}
-                                </Text>
-                                <Text className='text-xs font-lexend-regular text-neutral-600'>
-                                  {item.description}
-                                </Text>
-                                <Text className='text-xs font-lexend-regular text-neutral-600 mt-1'>
-                                  {item.completed}/{item.total}
-                                </Text>
-                              </View>
-                            </Card>
-                          </TouchableOpacity>
-                        ))}
-                      </Card>
-                    </View>
-                  ))
-              )}
-            </View>
-          </ScrollView>
+          <ScrollView className='flex-1 px-5'>
+            {validatedActiveIds?.map((id) => {
+              const columnData = columns?.find((c) => c.id === id);
+              return (
+                <TasksColumn
+                  key={id}
+                  boardId={boardId}
+                  columnId={id}
+                  columnName={columnData?.name ?? ""}
+                />
+              );
+            })}
+          </ScrollView>{" "}
         </View>
 
         <View>

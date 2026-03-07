@@ -1,4 +1,3 @@
-import { UpdateBoardDTO } from "@/data/dtos/board-dto";
 import { CreateColumnDTO, UpdateColumnDTO } from "@/data/dtos/column-dto";
 import { ColumnServices } from "@/data/repositories/columnServices";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
@@ -9,6 +8,14 @@ export const useGetColumns = () => {
   return useQuery({
     queryKey: ["columns"],
     queryFn: () => columnService.getColumns(),
+  });
+};
+
+export const useGetColumnsByBoardId = (boardId: string) => {
+  return useQuery({
+    queryKey: ["columns", boardId],
+    queryFn: () => columnService.getColumnsByBoardId(boardId),
+    enabled: !!boardId,
   });
 };
 
@@ -27,7 +34,6 @@ export const useGetColumnBySlug = (slug: string) => {
     enabled: !!slug,
   });
 };
-
 
 export const useCreateColumnMutation = () => {
   const queryClient = useQueryClient();

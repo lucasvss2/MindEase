@@ -1,8 +1,8 @@
 import { InputField, InputRoot } from "@/presentation/components/Input";
+import { SharedModalBase } from "@/presentation/components/SharedModalBase";
 import { useCreateColumnMutation } from "@/presentation/features/Columns/columns-queries";
 import { useState } from "react";
 import { ICreateColumnModal } from "./interface";
-import { SharedModalBase } from "@/presentation/components/SharedModalBase";
 
 export const CreateColumnModal = ({
   boardId,
