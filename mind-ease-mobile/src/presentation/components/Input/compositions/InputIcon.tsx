@@ -10,7 +10,9 @@ export const InputIcon = ({
   size =  TOKENS.FONT_SIZE.base,
   variant = "default",
 }: IInputIcon) => {
-  const { contrast } = useUserPreferencesStore();
+  const { activeProfileId, study, work } = useUserPreferencesStore();
+  const { contrast } = activeProfileId === "study" ? study : work;
+  
   const scaledIconSize = useAccessibilityScale<number>(
    size,
     "number",

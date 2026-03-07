@@ -11,8 +11,9 @@ export const InputRoot = ({
   isError = false,
   className = "",
 }: IInputRoot) => {
-  const { contrast } = useUserPreferencesStore();
-
+  const { activeProfileId, study, work } = useUserPreferencesStore();
+  const { contrast } = activeProfileId === "study" ? study : work;
+  
   const scaledGap = useAccessibilityScale<number>(TOKENS.SPACING.xs, "number");
   const scaledPadding = useAccessibilityScale<number>(
     TOKENS.SPACING.sm,

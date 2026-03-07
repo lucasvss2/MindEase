@@ -13,7 +13,9 @@ export const UserSettingsDropdown = () => {
   const { refreshToken, reset } = useAuthStore();
   const router = useRouter();
   const { data: userInfos } = useGetUserInfos();
-  const { fontType } = useUserPreferencesStore();
+  const { activeProfileId, study, work } = useUserPreferencesStore();
+  const { fontType } = activeProfileId === "study" ? study : work;
+
   const scaledText = useAccessibilityScale<TextStyle>(TOKENS.FONT_SIZE.sm);
 
   const onSignOut = async () => {

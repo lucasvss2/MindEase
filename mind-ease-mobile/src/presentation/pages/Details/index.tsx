@@ -49,7 +49,9 @@ export function Details() {
   const { data: columns } = useGetColumnsByBoardId(boardId);
 
   const { toggleColumn, selectionsByBoard } = useColumnStore();
-  const { fontType, enableSummaryMode } = useUserPreferencesStore();
+  const { activeProfileId, study, work } = useUserPreferencesStore();
+  const { fontType, enableSummaryMode } = activeProfileId === "study" ? study : work;
+
   const scaledTextBase = useAccessibilityScale<TextStyle>(TOKENS.FONT_SIZE.sm);
   const fontFamily = TOKENS.FONT_FAMILY[fontType];
 

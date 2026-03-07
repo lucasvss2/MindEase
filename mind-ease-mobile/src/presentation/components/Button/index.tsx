@@ -27,7 +27,10 @@ export const Button: React.FC<IButtonProps> = ({
 }) => {
   const [isPressed, setIsPressed] = useState(false);
 
-  const { fontType, contrast } = useUserPreferencesStore();
+  const { activeProfileId, study, work } = useUserPreferencesStore();
+
+  const { fontType, contrast } = activeProfileId === "study" ? study : work;
+  
   const scaledContainerPadding = useAccessibilityScale(
     TOKENS.SPACING[size as "sm" | "md"],
     "spacing",

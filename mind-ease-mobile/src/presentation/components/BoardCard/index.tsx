@@ -13,11 +13,13 @@ export type { IBoardCardData, IBoardCardProps } from "./interface";
 
 export function BoardCard({ board }: IBoardCardProps) {
   const router = useRouter();
-  const { enableSummaryMode, fontType } = useUserPreferencesStore();
+  const { activeProfileId, study, work } = useUserPreferencesStore();
+
+  const { fontType, enableSummaryMode } =
+    activeProfileId === "study" ? study : work;
+
   const scaledTextLg = useAccessibilityScale<TextStyle>(TOKENS.FONT_SIZE.lg);
-  const scaledTextXs = useAccessibilityScale<TextStyle>(
-    TOKENS.FONT_SIZE.xs,
-  );
+  const scaledTextXs = useAccessibilityScale<TextStyle>(TOKENS.FONT_SIZE.xs);
 
   const scaled3xsSize = useAccessibilityScale<number>(
     TOKENS.SIZE["3xs"],

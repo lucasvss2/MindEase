@@ -15,7 +15,10 @@ export function ScreenHeader({
   className,
   titleClassName,
 }: IScreenHeaderProps) {
-  const { fontType } = useUserPreferencesStore();
+  const { activeProfileId, study, work } = useUserPreferencesStore();
+
+  const { fontType } = activeProfileId === "study" ? study : work;
+
   const scaledMdSpacing = useAccessibilityScale<number>(
     TOKENS.SPACING["md"],
     "number",

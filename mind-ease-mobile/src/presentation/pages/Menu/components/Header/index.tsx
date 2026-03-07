@@ -6,7 +6,9 @@ import { Image, Text, TextStyle, View, ViewStyle } from "react-native";
 import { UserSettingsDropdown } from "../UserSettingsDropdown";
 
 export function Header() {
-  const { fontType, enableSummaryMode } = useUserPreferencesStore();
+  const { activeProfileId, study, work } = useUserPreferencesStore();
+  const { fontType, enableSummaryMode } = activeProfileId === "study" ? study : work;
+
   const scaledTextXlSize = useAccessibilityScale<TextStyle>(
     TOKENS.FONT_SIZE["xl"],
     "font",

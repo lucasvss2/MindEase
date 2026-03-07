@@ -1,5 +1,6 @@
 import "@/app/styles/global.css";
 import { queryClient } from "@/infrastructure/query";
+import { INITIAL_STATE_USER_PREFERENCES } from "@/presentation/constants/initialUserPreferences";
 import { useFonts } from "@/presentation/hooks/useFonts";
 import useUserPreferencesStore from "@/presentation/store/useUserPreferencesStore";
 import { getUserPreferences } from "@/utils/helpers/userPreferencesSecureStorage";
@@ -22,7 +23,8 @@ export default function PrivateLayout() {
 
   useEffect(() => {
     const loadData = async () => {
-      const savedPrefs = await getUserPreferences();
+      const savedPrefs = await getUserPreferences() ||INITIAL_STATE_USER_PREFERENCES;
+      if (!savedPrefs) return;
       updateAllPreferences(savedPrefs);
     };
 

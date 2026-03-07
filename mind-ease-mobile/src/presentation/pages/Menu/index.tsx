@@ -21,12 +21,12 @@ import {
 import { BoardModal, Header } from "./components";
 
 export function Menu() {
-  const { enableSummaryMode } = useUserPreferencesStore();
   const [createModalVisible, setCreateModalVisible] = useState(false);
   const { data: boards } = useGetBoards();
   const { mutateAsync: mutateCreateBoard, isPending: isCreatingBoard } =
     useCreateBoardMutation();
-  const { fontType } = useUserPreferencesStore();
+  const { activeProfileId, study, work } = useUserPreferencesStore();
+  const { fontType, enableSummaryMode } = activeProfileId === "study" ? study : work;
 
   const scaledGapBoardList = useAccessibilityScale<number>(
     TOKENS.SPACING["lg"],

@@ -11,8 +11,10 @@ export const FormFieldLabel: React.FC<{ children: React.ReactNode }> = ({
   const scaledLabelSize = useAccessibilityScale<TextStyle>(
     TOKENS.FONT_SIZE.base,
   );
-  const { fontType, contrast } = useUserPreferencesStore();
+  const { activeProfileId, study, work } = useUserPreferencesStore();
 
+  const { fontType, contrast } = activeProfileId === "study" ? study : work;
+  
   return (
     <Text
       className='font-lexend-semi-bold text-neutral-950 mb-1'

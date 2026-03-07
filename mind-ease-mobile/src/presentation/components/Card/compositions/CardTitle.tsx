@@ -7,8 +7,10 @@ export const CardTitle = ({ title }: { title: string }) => {
   const scaledTitleFontSpacing = useAccessibilityScale<TextStyle>(
     TOKENS.FONT_SIZE["xl"],
   );
-  const { fontType } = useUserPreferencesStore();
+  const { activeProfileId, study, work } = useUserPreferencesStore();
 
+  const { fontType } = activeProfileId === "study" ? study : work;
+  
   return (
     <Text
       className='text-neutral-1000'

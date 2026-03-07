@@ -21,8 +21,9 @@ export const InputField = ({
     "number",
   );
 
-  const { fontType, contrast } = useUserPreferencesStore();
+  const { activeProfileId, study, work } = useUserPreferencesStore();
 
+  const { fontType , contrast} = activeProfileId === "study" ? study : work;
   const colorByContrast = inputColorsVariant[contrast].default;
 
   return (

@@ -23,7 +23,9 @@ export const TasksColumnContainer = ({
   columnName,
 }: IColumnTasksSection) => {
   const [showCreateTaskModal, setShowCreateTaskModal] = useState(false);
-  const { fontType, enableSummaryMode } = useUserPreferencesStore();
+  const { activeProfileId, study, work } = useUserPreferencesStore();
+  const { fontType, enableSummaryMode } = activeProfileId === "study" ? study : work;
+
   const taskForm = useForm();
 
   const scaledHorizontalSpacing = useAccessibilityScale<number>(

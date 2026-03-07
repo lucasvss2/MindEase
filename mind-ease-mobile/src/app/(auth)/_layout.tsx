@@ -2,7 +2,10 @@ import "@/app/styles/global.css";
 import { queryClient } from "@/infrastructure/query";
 import { useFonts } from "@/presentation/hooks/useFonts";
 import useUserPreferencesStore from "@/presentation/store/useUserPreferencesStore";
-import { getUserPreferences } from "@/utils/helpers/userPreferencesSecureStorage";
+import {
+  getUserPreferences,
+  IUserPreferencesStoraged,
+} from "@/utils/helpers/userPreferencesSecureStorage";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { Stack } from "expo-router";
 import { useEffect } from "react";
@@ -18,7 +21,10 @@ export default function RootLayout() {
 
   useEffect(() => {
     const loadData = async () => {
-      const savedPrefs = await getUserPreferences();
+      const savedPrefs =
+        (await getUserPreferences()) as IUserPreferencesStoraged;
+      if (!savedPrefs) return;
+
       updateAllPreferences(savedPrefs);
     };
 
