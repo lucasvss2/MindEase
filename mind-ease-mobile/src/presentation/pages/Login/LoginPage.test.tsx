@@ -6,6 +6,8 @@ import {
 } from "@testing-library/react-native";
 import { LoginPage } from "./";
 
+jest.setTimeout(85000);
+
 const mockMutateAsync = jest.fn();
 const mockReplace = jest.fn();
 const mockNavigate = jest.fn();

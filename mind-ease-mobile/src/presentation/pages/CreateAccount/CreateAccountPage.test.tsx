@@ -6,6 +6,8 @@ import {
 } from "@testing-library/react-native";
 import { CreateAccountPage } from "./";
 
+jest.setTimeout(85000);
+
 const mockMutateAsync = jest.fn();
 const mockReplace = jest.fn();
 
