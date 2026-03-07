@@ -28,7 +28,7 @@ export const CreateAccountPage = () => {
 
   const { mutateAsync, isPending } = useCreateAccountMutation();
 
-  const fieldValues = formProps.getValues();
+const fieldValues = formProps.watch();
 
   const someFieldIsInvalid =
     !!formState.errors.email ||
@@ -72,6 +72,7 @@ export const CreateAccountPage = () => {
                 <InputField
                   placeholder='Seu Nome'
                   autoCapitalize='words'
+                  testID='name-field'
                   onChangeText={onChange}
                   {...field}
                 />
@@ -88,6 +89,7 @@ export const CreateAccountPage = () => {
           disabled={someFieldIsInvalid}
           onPress={handleSubmit(onCreateAccount)}
           isLoading={isPending}
+          testID='create-account'
         >
           Criar conta
         </Button>

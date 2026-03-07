@@ -33,6 +33,7 @@ export const CreateColumnModal = ({
       visible={visible}
       onCancelAction={onCancelAction}
       onSubmitChanges={onSubmitChanges}
+      testId='create-column-modal'
     >
       <InputRoot>
         <InputField
@@ -40,6 +41,7 @@ export const CreateColumnModal = ({
           onChangeText={setColumnName}
           placeholder='Ex.: Backlog'
           autoCapitalize='sentences'
+          testID='column-name-field'
         />
       </InputRoot>
     </SharedModalBase>

@@ -4,7 +4,10 @@ import useUserPreferencesStore from "@/presentation/store/useUserPreferencesStor
 import SliderCommunity, { SliderProps } from "@react-native-community/slider";
 
 export const Slider: React.FC<SliderProps> = (props) => {
-  const { contrast } = useUserPreferencesStore();
+  const { activeProfileId, study, work } = useUserPreferencesStore();
+
+  const { contrast } = activeProfileId === "study" ? study : work;
+
   const scaled3xlSpacing = useAccessibilityScale<number>(
     TOKENS.SPACING["3xl"],
     "number",

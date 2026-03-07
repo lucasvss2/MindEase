@@ -5,5 +5,6 @@ export interface ICardsSharedProps {
   children: ReactNode;
   className?: string;
   style?: ViewStyle;
+  testID?: string
 }
 

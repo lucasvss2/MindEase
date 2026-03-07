@@ -79,6 +79,7 @@ export function BoardModal({
             onChangeText={setTitle}
             placeholder='Ex.: Quadro Trabalho'
             autoCapitalize='sentences'
+            testID="board-name"
           />
         </InputRoot>
 

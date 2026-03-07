@@ -32,6 +32,7 @@ export function SheetModal({
   closeButtonAccessibilityLabel = "Fechar",
   children,
   titleStyle,
+  testId,
 }: ISheetModalProps) {
   const { panHandlers, sheetHeight, translateY, sheetMaxHeight, windowHeight } =
     useSheetPanGesture({
@@ -44,7 +45,7 @@ export function SheetModal({
   const { activeProfileId, study, work } = useUserPreferencesStore();
 
   const { fontType } = activeProfileId === "study" ? study : work;
-  
+
   const scaledXlText = useAccessibilityScale<TextStyle>(TOKENS.FONT_SIZE["xl"]);
   const scaledXl = useAccessibilityScale<number>(
     TOKENS.SPACING["xl"],
@@ -55,7 +56,6 @@ export function SheetModal({
     TOKENS.SPACING["2xl"],
     "number",
   );
-
 
   const fontFamily = TOKENS.FONT_FAMILY[fontType];
 
@@ -73,7 +73,11 @@ export function SheetModal({
       animationType='fade'
       onRequestClose={onClose}
     >
-      <View className={cn("flex-1")} style={{ maxHeight: windowHeight }}>
+      <View
+        className={cn("flex-1")}
+        style={{ maxHeight: windowHeight }}
+        testID={testId}
+      >
         <TouchableWithoutFeedback onPress={handleOverlayPress}>
           <View
             style={{

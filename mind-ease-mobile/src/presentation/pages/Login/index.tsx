@@ -84,6 +84,7 @@ export const LoginPage = () => {
               accessibilityLabel='Criar conta'
               accessibilityRole='link'
               accessibilityHint='Navega para a tela de cadastro'
+              testID="create-account-btn-redirect"
             >
               Criar conta
             </Button>
@@ -105,6 +106,7 @@ export const LoginPage = () => {
           onPress={handleSubmit(onLogin)}
           disabled={someFieldIsInvalid}
           isLoading={isPending}
+          testID="sign-in-button"
         >
           Entrar
         </Button>

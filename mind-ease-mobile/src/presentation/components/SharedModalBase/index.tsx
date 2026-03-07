@@ -25,6 +25,7 @@ export const SharedModalBase = ({
   title,
   snapPoints = [45, 90],
   isLoading,
+  testId
 }: ISharedModalBase) => {
   const { activeProfileId, study, work } = useUserPreferencesStore();
 
@@ -50,6 +51,7 @@ export const SharedModalBase = ({
       onClose={onCancelAction}
       title={title}
       snapPoints={snapPoints}
+      testId={testId}
     >
       <ScrollView>
         <FormField>
@@ -71,6 +73,7 @@ export const SharedModalBase = ({
             onPress={onSubmitChanges}
             disabled={isLoading || disabled}
             isLoading={isLoading}
+            testID="save-change-modal-button"
           >
             {saveText}
           </Button>
@@ -82,6 +85,7 @@ export const SharedModalBase = ({
               "flex-1 rounded-lg items-center justify-center bg-neutral-200",
             )}
             style={{ paddingVertical: scaledSmSize }}
+            testID="modal-cancel-button"
           >
             <Text
               className=' text-neutral-1000'
