@@ -13,7 +13,9 @@ export const FormFieldMessage: React.FC<IFormFieldSharedProps> = ({
   const scaledInputAndMessageSize = useAccessibilityScale<TextStyle>(
     TOKENS.FONT_SIZE.sm,
   );
-  const { fontType, contrast } = useUserPreferencesStore();
+  const { activeProfileId, study, work } = useUserPreferencesStore();
+
+  const { fontType, contrast } = activeProfileId === "study" ? study : work;
   const textColor = inputColorsVariant[contrast][variant];
 
   return (

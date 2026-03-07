@@ -1,9 +1,9 @@
 import { Card } from "@/presentation/components";
-import { Logo } from "@/presentation/components/Logo";
 import { TOKENS } from "@/presentation/constants/tokens";
 import { useAccessibilityScale } from "@/presentation/hooks/useAccessibilityScale";
 import useUserPreferencesStore from "@/presentation/store/useUserPreferencesStore";
 import {
+  Image,
   KeyboardAvoidingView,
   Platform,
   ScrollView,
@@ -26,7 +26,6 @@ export const PublicScreenLayout = ({
   children,
   footer,
 }: IPublicScreenLayout) => {
-  const { enableSummaryMode } = useUserPreferencesStore();
   const scaledTitle = useAccessibilityScale<TextStyle>(
     TOKENS.FONT_SIZE["2xl"],
     "font",
@@ -49,7 +48,9 @@ export const PublicScreenLayout = ({
     "number",
   );
 
-  const { fontType } = useUserPreferencesStore();
+  const { activeProfileId, study, work } = useUserPreferencesStore();
+  const { fontType, enableSummaryMode } =
+    activeProfileId === "study" ? study : work;
 
   return (
     <KeyboardAvoidingView
@@ -74,8 +75,12 @@ export const PublicScreenLayout = ({
         >
           {!enableSummaryMode && (
             <>
-              <View className='flex-row justify-center w-full'>
-                <Logo />
+              <View className='flex-row justify-center w-full shadow-lg shadow-gray-800'>
+                <Image
+                  source={require("../../../assets/images/logo.jpeg")}
+                  style={{ width: 100, height: 100 }}
+                  className='shadow-lg'
+                />
               </View>
 
               <Text
@@ -96,7 +101,10 @@ export const PublicScreenLayout = ({
           {subTitle && (
             <Text
               className='text-center'
-              style={[scaledSubTitle, { fontFamily: fontType }]}
+              style={[
+                scaledSubTitle,
+                { fontFamily: TOKENS.FONT_FAMILY[fontType] },
+              ]}
             >
               {subTitle}
             </Text>

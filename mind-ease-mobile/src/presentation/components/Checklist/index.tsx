@@ -1,4 +1,5 @@
 import { TOKENS } from "@/presentation/constants";
+import { useAccessibilityScale } from "@/presentation/hooks/useAccessibilityScale";
 import { FontAwesome } from "@expo/vector-icons";
 import { Controller, useFieldArray, useFormContext } from "react-hook-form";
 import { BlurEvent, TouchableOpacity, View } from "react-native";
@@ -13,6 +14,20 @@ interface IChecklist {
 
 export const Checklist = ({ onFocus, onBlur }: IChecklist) => {
   const { control } = useFormContext();
+  const scaledXsSpacingSize = useAccessibilityScale<number>(
+    TOKENS.SPACING.xs,
+    "number",
+  );
+
+  const scaledSmSpacingSize = useAccessibilityScale<number>(
+    TOKENS.SPACING.sm,
+    "number",
+  );
+
+  const scaled3xsSpacingSize = useAccessibilityScale<number>(
+    TOKENS.SIZE['3xs'],
+    "number",
+  );
 
   const {
     fields: checkListFields,
@@ -28,7 +43,11 @@ export const Checklist = ({ onFocus, onBlur }: IChecklist) => {
       {checkListFields?.map((field, index) => (
         <View
           key={field.id}
-          className='flex-row items-center justify-between gap-2 mb-3'
+          className='flex-row items-center justify-between'
+          style={{
+            gap: scaledXsSpacingSize,
+            marginBottom: scaledSmSpacingSize,
+          }}
         >
           <Controller
             name={`checklist.${index}.value`}
@@ -51,10 +70,13 @@ export const Checklist = ({ onFocus, onBlur }: IChecklist) => {
             )}
           />
 
-          <TouchableOpacity onPress={() => remove(index)} className='ml-2'>
+          <TouchableOpacity
+            onPress={() => remove(index)}
+            style={{ marginLeft: scaledXsSpacingSize }}
+          >
             <FontAwesome
               name='trash'
-              size={24}
+              size={scaled3xsSpacingSize}
               color={TOKENS.COLORS.red[500]}
             />
           </TouchableOpacity>

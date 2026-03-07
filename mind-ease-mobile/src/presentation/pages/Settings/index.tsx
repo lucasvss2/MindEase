@@ -1,7 +1,6 @@
 import { Button } from "@/presentation/components/Button";
 import { TOKENS } from "@/presentation/constants/tokens";
 import { ActivityProfile } from "@/presentation/features/dashboard-settings/ActivityProfile";
-import { ComplexityLevel } from "@/presentation/features/dashboard-settings/ComplexityLevel";
 import { InterfaceAdjustments } from "@/presentation/features/dashboard-settings/InterfaceAdjustments";
 import { SummaryMode } from "@/presentation/features/dashboard-settings/SumaryMode";
 import { useAccessibilityScale } from "@/presentation/hooks/useAccessibilityScale";
@@ -12,36 +11,17 @@ import { ScrollView, ViewStyle } from "react-native";
 import { Toast } from "toastify-react-native";
 
 export function Settings() {
-  const {
-    activityProfile,
-    animationSpeed,
-    complexityLevel,
-    contrast,
-    enableSummaryMode,
-    fontSizeScale,
-    fontType,
-    spacingScale,
-    resetPreferences
-  } = useUserPreferencesStore();
+  const { resetPreferences, getAllPreferences } = useUserPreferencesStore();
+
   const scaledSpacing2xl = useAccessibilityScale<number>(
     TOKENS.SPACING["2xl"],
     "number",
   );
 
   const onSavePreferences = () => {
-    saveUserPreferences(
-      {
-        activityProfile,
-        animationSpeed,
-        complexityLevel,
-        contrast,
-        enableSummaryMode,
-        fontSizeScale,
-        fontType,
-        spacingScale,
-      },
-      Toast,
-    );
+    const allData = getAllPreferences();
+
+    saveUserPreferences(allData, Toast);
   };
 
   return (
@@ -57,7 +37,6 @@ export function Settings() {
       <ActivityProfile />
       <InterfaceAdjustments />
       <SummaryMode />
-      <ComplexityLevel />
       <Button
         variant='default'
         style={{ marginBottom: scaledSpacing2xl }}

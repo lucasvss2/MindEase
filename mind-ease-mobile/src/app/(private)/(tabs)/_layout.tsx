@@ -4,7 +4,9 @@ import { FontAwesome, MaterialCommunityIcons } from "@expo/vector-icons";
 import { Tabs } from "expo-router";
 
 export default function TabsLayout() {
-  const { fontType } = useUserPreferencesStore();
+  const { activeProfileId, study, work } = useUserPreferencesStore();
+
+  const { fontType } = activeProfileId === "study" ? study : work;
 
   return (
     <Tabs
@@ -35,26 +37,26 @@ export default function TabsLayout() {
       }}
     >
       <Tabs.Screen
-        name="index"
+        name='index'
         options={{
           href: null,
         }}
       />
       <Tabs.Screen
-        name="menu"
+        name='menu'
         options={{
           tabBarIcon: ({ color, size }) => (
-            <FontAwesome name="check-square-o" color={color} size={size} />
+            <FontAwesome name='check-square-o' color={color} size={size} />
           ),
           title: "Menu",
         }}
       />
       <Tabs.Screen
-        name="settings"
+        name='settings'
         options={{
           tabBarIcon: ({ color, size }) => (
             <MaterialCommunityIcons
-              name="cog-outline"
+              name='cog-outline'
               color={color}
               size={size}
             />
@@ -65,3 +67,4 @@ export default function TabsLayout() {
     </Tabs>
   );
 }
+

@@ -1,37 +1,61 @@
 import { ButtonGroup } from "@/presentation/components/ButtonGroup";
 import { Card } from "@/presentation/components/Card";
+import { TOKENS } from "@/presentation/constants";
 import { useAccessibilityScale } from "@/presentation/hooks/useAccessibilityScale";
 import useUserPreferencesStore from "@/presentation/store/useUserPreferencesStore";
 import { FontAwesome6 } from "@expo/vector-icons";
-import { useMemo } from "react";
+import { useEffect, useMemo } from "react";
 import { TextStyle, View } from "react-native";
 import { SectionTitle } from "../InterfaceAdjustments/components/SectionTitle";
 
 export const ActivityProfile = () => {
-  const { activityProfile, updateActivityProfile } = useUserPreferencesStore();
+  const {
+    activeProfileId,
+    study,
+    work,
+    updateActivityProfile,
+    updateAllPreferences,
+    getAllPreferences,
+  } = useUserPreferencesStore();
+  const activityProfile = activeProfileId === "study" ? study : work;
+
   const scaledGap = useAccessibilityScale<number>(16, "number");
   const scaledIconSize = useAccessibilityScale<TextStyle>(20).fontSize;
+
+  const scaledMdSpacing = useAccessibilityScale<number>(
+    TOKENS.SPACING["md"],
+    "number",
+  );
+
+  const scaled3xlSpacing = useAccessibilityScale<number>(
+    TOKENS.SPACING["3xl"],
+    "number",
+  );
 
   const buttons = useMemo(
     () => [
       {
         text: "Trabalho",
         value: "work",
-        conditional: activityProfile === "work",
+        conditional: activeProfileId === "work",
         onPress: () => updateActivityProfile("work"),
       },
       {
         text: "Estudo",
         value: "study",
-        conditional: activityProfile === "study",
+        conditional: activeProfileId === "study",
         onPress: () => updateActivityProfile("study"),
       },
     ],
-    [activityProfile, updateActivityProfile],
+    [activeProfileId, updateActivityProfile],
   );
 
+  useEffect(() => {
+    updateAllPreferences(getAllPreferences());
+  }, [activityProfile, getAllPreferences, updateAllPreferences]);
+
   return (
-    <View className='gap-4 mt-10'>
+    <View style={{ gap: scaledMdSpacing, marginTop: scaled3xlSpacing }}>
       <View className='flex flex-row items-center' style={{ gap: scaledGap }}>
         <FontAwesome6 name='user' size={scaledIconSize} color='black' />
 

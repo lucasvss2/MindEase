@@ -17,7 +17,9 @@ export const CreateOrEditField = ({
 }: ICreateOrEditField) => {
   const [editingField, setEditingField] = useState<string | null>();
   const [tempValue, setTempValue] = useState<string | null>();
-  const { fontType } = useUserPreferencesStore();
+  const { activeProfileId, study, work } = useUserPreferencesStore();
+
+  const { fontType } = activeProfileId === "study" ? study : work;
   const { mutateAsync: updateTaskMutation } = useUpdateTaskMutation();
 
   const onUpdateHeader = useCallback(
@@ -58,7 +60,10 @@ export const CreateOrEditField = ({
               multiline
               value={tempValue!}
               onChangeText={setTempValue}
-              style={[{ fontFamily: fontType }, scaledTextBase]}
+              style={[
+                { fontFamily: TOKENS.FONT_FAMILY[fontType] },
+                scaledTextBase,
+              ]}
             />
           </InputRoot>
           <CreateOrEditActionsButtons
@@ -71,7 +76,10 @@ export const CreateOrEditField = ({
         <>
           <Text
             className='text-neutral-600 flex-1'
-            style={[{ fontFamily: fontType }, scaledTextBase]}
+            style={[
+              { fontFamily: TOKENS.FONT_FAMILY[fontType] },
+              scaledTextBase,
+            ]}
           >
             {task?.description}
           </Text>

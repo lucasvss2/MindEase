@@ -1,6 +1,8 @@
+import { TOKENS } from "@/presentation/constants";
+import { useAccessibilityScale } from "@/presentation/hooks/useAccessibilityScale";
+import { cn } from "@/utils/twClassnamesResolver";
 import React from "react";
 import { View } from "react-native";
-import { cn } from "@/utils/twClassnamesResolver";
 import { ICardsSharedProps } from "../interface";
 
 export const Card: React.FC<ICardsSharedProps> = ({
@@ -8,13 +10,18 @@ export const Card: React.FC<ICardsSharedProps> = ({
   className = "",
   style,
 }) => {
+  const scaledLgSpacingSize = useAccessibilityScale<number>(
+    TOKENS.SPACING.lg,
+    "number",
+  );
+
   return (
     <View
       className={cn(
-        "w-full rounded-lg border border-neutral-200 shadow-sm bg-neutral-0 px-5 py-5",
+        "w-full rounded-lg border border-neutral-200 shadow-sm bg-neutral-0",
         className,
       )}
-      style={style}
+      style={[style, { padding: scaledLgSpacingSize }]}
     >
       {children}
     </View>

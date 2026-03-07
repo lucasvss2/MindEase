@@ -1,17 +1,32 @@
 import { Card } from "@/presentation/components/Card";
+import { TOKENS } from "@/presentation/constants";
 import { THEME_COLORS } from "@/presentation/constants/theme";
+import { useAccessibilityScale } from "@/presentation/hooks/useAccessibilityScale";
 import useUserPreferencesStore from "@/presentation/store/useUserPreferencesStore";
 import { lightenHex } from "@/utils/colorUtils";
 import { MaterialIcons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
-import { Text, TouchableOpacity, View } from "react-native";
+import { Text, TextStyle, TouchableOpacity, View } from "react-native";
 import type { IBoardCardProps } from "./interface";
 
 export type { IBoardCardData, IBoardCardProps } from "./interface";
 
 export function BoardCard({ board }: IBoardCardProps) {
   const router = useRouter();
-  const { enableSummaryMode } = useUserPreferencesStore();
+  const { activeProfileId, study, work } = useUserPreferencesStore();
+
+  const { fontType, enableSummaryMode } =
+    activeProfileId === "study" ? study : work;
+
+  const scaledTextLg = useAccessibilityScale<TextStyle>(TOKENS.FONT_SIZE.lg);
+  const scaledTextXs = useAccessibilityScale<TextStyle>(TOKENS.FONT_SIZE.xs);
+
+  const scaled3xsSize = useAccessibilityScale<number>(
+    TOKENS.SIZE["3xs"],
+    "number",
+  );
+
+  const scaledLgSize = useAccessibilityScale<number>(TOKENS.SIZE.lg, "number");
 
   const onNavigateToDetails = () => {
     if (!board) return;
@@ -27,23 +42,49 @@ export function BoardCard({ board }: IBoardCardProps) {
       <Card className='flex-row items-center gap-5'>
         {!enableSummaryMode && (
           <View
-            className='w-12 h-12 rounded-full items-center justify-center'
-            style={{ backgroundColor: lightenHex(board?.color) }}
+            className='rounded-full items-center justify-center'
+            style={{
+              backgroundColor: lightenHex(board?.color),
+              width: scaledLgSize,
+              height: scaledLgSize,
+            }}
           >
             <View
-              className='w-6 h-6 rounded-full'
-              style={{ backgroundColor: board?.color }}
+              className='rounded-full'
+              style={{
+                backgroundColor: board?.color,
+                width: scaled3xsSize,
+                height: scaled3xsSize,
+              }}
             />
           </View>
         )}
 
         <View className='flex-1'>
-          <Text className='text-lg font-lexend-semi-bold text-neutral-1000'>
+          <Text
+            className='text-neutral-1000'
+            style={[
+              {
+                fontFamily: TOKENS.FONT_FAMILY[fontType],
+                fontWeight: 700,
+              },
+              scaledTextLg,
+            ]}
+          >
             {board?.name}
           </Text>
-          <View className='flex-row items-center gap-6 mt-1'>
+          <View className='flex-row items-center mt-1'>
             {!enableSummaryMode && (
-              <Text className='text-base font-lexend-regular text-neutral-600'>
+              <Text
+                className=' text-neutral-600'
+                style={[
+                  {
+                    fontFamily: TOKENS.FONT_FAMILY[fontType],
+                    gap: scaled3xsSize,
+                  },
+                  scaledTextXs,
+                ]}
+              >
                 {board?.tasksCount} tarefas
               </Text>
             )}
@@ -57,7 +98,13 @@ export function BoardCard({ board }: IBoardCardProps) {
                     size={16}
                     color={THEME_COLORS.neutral[600]}
                   />
-                  <Text className='text-base font-lexend-regular text-neutral-600'>
+                  <Text
+                    className='text-neutral-600'
+                    style={[
+                      { fontFamily: TOKENS.FONT_FAMILY[fontType] },
+                      scaledTextXs,
+                    ]}
+                  >
                     {board?.totalHours}h
                   </Text>
                 </View>
@@ -68,7 +115,7 @@ export function BoardCard({ board }: IBoardCardProps) {
 
         <MaterialIcons
           name='chevron-right'
-          size={24}
+          size={scaled3xsSize}
           color={THEME_COLORS.neutral[600]}
         />
       </Card>

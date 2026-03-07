@@ -21,7 +21,6 @@ const BOARD_COLORS = [
   "#EA580C",
 ];
 
-
 export function BoardModal({
   visible,
   onCancel,
@@ -64,7 +63,7 @@ export function BoardModal({
       visible={visible}
       onCancelAction={handleCancel}
       title={isEditing ? "Editar quadro" : "Novo quadro"}
-      snapPoints={snapPoints}
+      snapPoints={[80, 90]}
       onSubmitChanges={handleCreate}
       saveText={isEditing ? "Atualizar quadro" : "Adicionar quadro"}
       isLoading={isLoading}

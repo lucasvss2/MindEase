@@ -4,8 +4,10 @@ import { Switch } from "@/presentation/components/Switch";
 import useUserPreferencesStore from "@/presentation/store/useUserPreferencesStore";
 
 export const SummaryMode = () => {
-  const { enableSummaryMode, updateEnableSummaryMode } =
+  const { activeProfileId, study, work, updateEnableSummaryMode } =
     useUserPreferencesStore();
+  const { enableSummaryMode } = activeProfileId === "study" ? study : work;
+
   return (
     <Card className='flex-row justify-center mb-10 items-center flex-wrap'>
       <FormFieldLabel>Habilitar modo resumo</FormFieldLabel>
