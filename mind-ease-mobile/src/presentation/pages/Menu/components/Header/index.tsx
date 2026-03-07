@@ -2,13 +2,13 @@ import { TOKENS } from "@/presentation/constants/tokens";
 import { useAccessibilityScale } from "@/presentation/hooks/useAccessibilityScale";
 import useUserPreferencesStore from "@/presentation/store/useUserPreferencesStore";
 import { cn } from "@/utils/twClassnamesResolver";
-import { Text, TextStyle, View, ViewStyle } from "react-native";
+import { Image, Text, TextStyle, View, ViewStyle } from "react-native";
 import { UserSettingsDropdown } from "../UserSettingsDropdown";
 
 export function Header() {
   const { fontType, enableSummaryMode } = useUserPreferencesStore();
-  const scaledText3xlSize = useAccessibilityScale<TextStyle>(
-    TOKENS.FONT_SIZE["3xl"],
+  const scaledTextXlSize = useAccessibilityScale<TextStyle>(
+    TOKENS.FONT_SIZE["xl"],
     "font",
   );
   const scaledSpacingLgSize = useAccessibilityScale<number>(
@@ -25,14 +25,36 @@ export function Header() {
         padding: scaledSpacingLgSize,
       }}
     >
-      {!enableSummaryMode && (
-        <Text
-          className='text-blue-600'
-          style={[{ fontFamily: fontType, fontWeight: 600 }, scaledText3xlSize]}
-        >
-          MindEase
-        </Text>
-      )}
+      <View className='shadow-lg items-center flex-row gap-4 shadow-gray-800'>
+        {!enableSummaryMode && (
+          <>
+            <Image
+              source={require("../../../../../../assets/images/logo.jpeg")}
+              style={{ width: 50, height: 50 }}
+              className='shadow-lg'
+            />
+
+            <Text
+              className='text-blue-600'
+              style={[
+                { fontFamily: fontType, fontWeight: 900 },
+                scaledTextXlSize,
+              ]}
+            >
+              Mind
+              <Text
+                className='text-blue-600'
+                style={[
+                  { fontFamily: fontType, fontWeight: 600 },
+                  scaledTextXlSize,
+                ]}
+              >
+                Ease
+              </Text>
+            </Text>
+          </>
+        )}
+      </View>
 
       <View
         className={cn(

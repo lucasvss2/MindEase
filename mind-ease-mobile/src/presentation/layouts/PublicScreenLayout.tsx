@@ -1,9 +1,9 @@
 import { Card } from "@/presentation/components";
-import { Logo } from "@/presentation/components/Logo";
 import { TOKENS } from "@/presentation/constants/tokens";
 import { useAccessibilityScale } from "@/presentation/hooks/useAccessibilityScale";
 import useUserPreferencesStore from "@/presentation/store/useUserPreferencesStore";
 import {
+  Image,
   KeyboardAvoidingView,
   Platform,
   ScrollView,
@@ -74,8 +74,13 @@ export const PublicScreenLayout = ({
         >
           {!enableSummaryMode && (
             <>
-              <View className='flex-row justify-center w-full'>
-                <Logo />
+              <View
+                className='flex-row justify-center w-full shadow-lg shadow-gray-800'>
+                <Image
+                  source={require("../../../assets/images/logo.jpeg")}
+                  style={{ width: 100, height: 100 }}
+                  className='shadow-lg'
+                />
               </View>
 
               <Text
@@ -96,7 +101,10 @@ export const PublicScreenLayout = ({
           {subTitle && (
             <Text
               className='text-center'
-              style={[scaledSubTitle, { fontFamily: TOKENS.FONT_FAMILY[fontType] }]}
+              style={[
+                scaledSubTitle,
+                { fontFamily: TOKENS.FONT_FAMILY[fontType] },
+              ]}
             >
               {subTitle}
             </Text>
