@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom'
 import { useMutation } from '@tanstack/react-query'
-import { makeRemoteAddAccount } from '@/main/factories'
+import { makeRemoteAddAccount } from '@/infra/factories'
 import authStore from '@/presentation/stores/auth-store'
 import { showToast } from '@/presentation'
 import { AddAccount } from '@/domain/usecases'

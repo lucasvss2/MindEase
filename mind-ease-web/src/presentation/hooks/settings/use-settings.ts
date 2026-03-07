@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query'
-import { makeRemoteLoadSettings } from '@/main/factories'
+import { makeRemoteLoadSettings } from '@/infra/factories'
 
 export const useSettings = () => {
   const loadSettings = makeRemoteLoadSettings()

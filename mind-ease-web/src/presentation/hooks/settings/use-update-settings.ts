@@ -1,5 +1,5 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query'
-import { makeRemoteSaveSettings } from '@/main/factories'
+import { makeRemoteSaveSettings } from '@/infra/factories'
 import { SaveSettings } from '@/domain/usecases'
 import { showToast } from '@/presentation'
 
