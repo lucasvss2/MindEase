@@ -8,7 +8,6 @@ const useUserPreferencesStore = create<States & Actions>((set) => ({
   updateEnableSummaryMode: (enableSummaryMode) => set({ enableSummaryMode }),
   updateContrast: (contrast) => set({ contrast }),
   updateActivityProfile: (activityProfile) => set({ activityProfile }),
-  updateComplexityLevel: (complexityLevel) => set({ complexityLevel }),
   updateFontSizeScale: (value) => set(() => ({ fontSizeScale: value })),
   updateSpacingScale: (value) => set(() => ({ spacingScale: value })),
   updateAnimationSpeed: (value) => set(() => ({ animationSpeed: value })),

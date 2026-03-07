@@ -6,7 +6,6 @@ export const USER_INITIAL_PREFERENCES: IUserPreferences = {
   contrast: "moderate",
   activityProfile: "work",
   enableSummaryMode: false,
-  complexityLevel: "high",
   animationSpeed: 1,
   fontType: "sans",
 };
