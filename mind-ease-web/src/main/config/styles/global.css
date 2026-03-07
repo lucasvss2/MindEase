@@ -371,6 +371,10 @@
   --font-serif: 'Bitter', Georgia, 'Times New Roman', serif;
   --font-mono: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
   --box-shadow-sm: 0 4px 8px 0 rgba(88, 84, 84, 0.25);
+  --font-size-base: 16px;
+  --font-size-offset: 0px;
+  --line-height-offset: 0px;
+  --letter-spacing-offset: 0px;
 }
 
 /* ===== Base Styles ===== */
@@ -383,10 +387,11 @@
 
 body {
   font-family: var(--font-sans);
+  font-size: calc(var(--font-size-base) + var(--font-size-offset));
   -webkit-font-smoothing: antialiased;
   color: var(--color-text);
-  line-height: 1.5em;
-  letter-spacing: 0.12em;
+  line-height: calc(1.5em + var(--line-height-offset));
+  letter-spacing: calc(0.12em + var(--letter-spacing-offset));
   word-spacing: 0.16em;
 }
 

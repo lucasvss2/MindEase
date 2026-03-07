@@ -5,16 +5,21 @@ import {
   FilterSidebar,
   useUser,
   useTheme,
-  useToggle
+  useToggle,
+  useFontSize,
+  useLetterSpacing,
+  ResponsiveSlider
 } from "@/presentation";
 import * as S from "./styles";
 import { Skeleton } from "antd";
+import dayjs from "dayjs";
 
 export function ProfilePage() {
   const { data: user, isLoading } = useUser()
   const { theme, changeTheme } = useTheme()
   const [isDrawerOpen, toggleFilterDrawer] = useToggle(true)
-
+  const { fontSizeLevel, changeFontSize } = useFontSize()
+  const { letterSpacingLevel, changeLetterSpacing } = useLetterSpacing()
 
   return (
     <PageLayout
@@ -30,7 +35,7 @@ export function ProfilePage() {
       }
     >
       <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'flex-start', height: '100%', gap: '24px' }}>
-        <ResponsiveCard $width="45%" $height="45%">
+        <ResponsiveCard $width="40%" $height="65%">
           <S.Title>Perfil</S.Title>
           <S.Content>
             {isLoading ? (
@@ -39,11 +44,12 @@ export function ProfilePage() {
               <S.InfoContainer>
                 <S.Name>Nome: {user?.name}</S.Name>
                 <S.Email>Email: {user?.email}</S.Email>
+                <S.Email>Se juntou ao MindEase em: {dayjs(user?.createdAt).format('DD/MM/YYYY')}</S.Email>
               </S.InfoContainer>
             )}
           </S.Content>
         </ResponsiveCard>
-        <ResponsiveCard $width="45%" $height="45%">
+        <ResponsiveCard $width="50%" $height="65%">
           <S.Title>Ajustes de Interface</S.Title>
           <S.SettingsContent>
             <h4 style={{ fontSize: '16px', fontWeight: 'bold' }}>Contraste</h4>
@@ -73,7 +79,34 @@ export function ProfilePage() {
                 Alto
               </ResponsiveButton>
             </S.SettingsContainer>
+            <h4 style={{ fontSize: '16px', fontWeight: 'bold' }}>Tamanho do Texto</h4>
+            <ResponsiveSlider
+              value={fontSizeLevel}
+              onChange={(val: number) => changeFontSize(val as 1 | 2 | 3)}
+              marks={{
+                1: 'Pequeno',
+                2: 'Médio',
+                3: 'Grande',
+              }}
+              step={1}
+              min={1}
+              max={3}
+            />
+            <h4 style={{ fontSize: '16px', fontWeight: 'bold' }}>Espaçamento entre letras</h4>
+            <ResponsiveSlider
+              value={letterSpacingLevel}
+              onChange={(val: number) => changeLetterSpacing(val as 1 | 2 | 3)}
+              marks={{
+                1: 'Pequeno',
+                2: 'Médio',
+                3: 'Grande',
+              }}
+              step={1}
+              min={1}
+              max={3}
+            />
           </S.SettingsContent>
+
         </ResponsiveCard>
       </div>
     </PageLayout>

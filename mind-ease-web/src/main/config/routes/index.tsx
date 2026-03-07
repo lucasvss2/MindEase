@@ -6,8 +6,10 @@ import {
   LoginPage,
   RegisterPage,
   BoardPage,
-  ProfilePage
+  ProfilePage,
+  FocusModePage
 } from '@/presentation'
+import { } from '@/presentation/pages/app/FocusModePage'
 
 export const Routes = () => {
   return (
@@ -24,6 +26,7 @@ export const Routes = () => {
         <Route element={<PrivateRoute />}>
           <Route path="/board" element={<BoardPage />} />
           <Route path="/profile" element={<ProfilePage />} />
+          <Route path="/focus" element={<FocusModePage />} />
         </Route>
       </ReactRoutes>
     </BrowserRouter>
