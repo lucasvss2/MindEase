@@ -9,7 +9,9 @@ export const Switch: React.FC<SwitchProps> = ({
   trackColor,
   ...props
 }) => {
-  const { contrast } = useUserPreferencesStore();
+  const { activeProfileId, study, work } = useUserPreferencesStore();
+
+  const { contrast } = activeProfileId === "study" ? study : work;
 
   const styleByContrast = {
     low: {
