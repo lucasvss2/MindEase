@@ -45,6 +45,7 @@ export function CreateBoardModal({ open, onClose }: CreateBoardModalProps) {
       title="Novo Quadro"
       open={open}
       onCancel={handleClose}
+      maskClosable={false}
       width={480}
       footer={
         <S.Footer>
@@ -72,6 +73,8 @@ export function CreateBoardModal({ open, onClose }: CreateBoardModalProps) {
         <S.FieldGroup>
           <S.Label>Nome do Quadro</S.Label>
           <ResponsiveInput
+            id='name-field'
+            name='name'
             placeholder="Ex: Projeto Marketing"
             value={name}
             onChange={(e) => setName(e.target.value)}
@@ -82,6 +85,8 @@ export function CreateBoardModal({ open, onClose }: CreateBoardModalProps) {
         <S.FieldGroup>
           <S.Label>Descrição <S.Optional>(opcional)</S.Optional></S.Label>
           <S.ResponsiveTextArea
+            id='description-field'
+            name='description'
             placeholder="Ex: Board para tarefas do projeto X"
             value={description}
             onChange={(e) => setDescription(e.target.value)}

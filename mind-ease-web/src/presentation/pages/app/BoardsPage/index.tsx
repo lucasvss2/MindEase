@@ -1,10 +1,11 @@
+import { useState } from 'react'
 import { FilterSidebar, useToggle, PageLayout, useBoards, ResponsiveButton, CreateBoardModal, BoardCard } from "@/presentation";
 import { PlusOutlined } from "@ant-design/icons";
 import * as S from "./styles";
 
 export function BoardsPage() {
   const [isDrawerOpen, toggleFilterDrawer] = useToggle(true)
-  const [isModalOpen, toggleModal] = useToggle(false)
+  const [isModalOpen, setIsModalOpen] = useState(false)
   const { data: boards } = useBoards()
 
   const count = boards?.length ?? 0
@@ -26,7 +27,7 @@ export function BoardsPage() {
       <S.Container>
         <S.Header>
           <S.Title>Quadros | <S.Subtitle>{count} {label}</S.Subtitle></S.Title>
-          <ResponsiveButton type="default" onClick={toggleModal}>
+          <ResponsiveButton type="default" onClick={() => setIsModalOpen(true)}>
             <PlusOutlined /> Criar novo quadro
           </ResponsiveButton>
         </S.Header>
@@ -42,7 +43,7 @@ export function BoardsPage() {
         )}
       </S.Container>
 
-      <CreateBoardModal open={isModalOpen} onClose={toggleModal} />
+      <CreateBoardModal open={isModalOpen} onClose={() => setIsModalOpen(false)} />
     </PageLayout>
   )
 }
