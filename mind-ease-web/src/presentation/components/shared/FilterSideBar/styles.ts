@@ -40,7 +40,7 @@ export const FloatingOpenButton = styled(Button)`
     height: 48px;
     border-radius: 12px;
 
-    background-color: var(--color-buttonDefaultBG, #EFF6FF);
+    background-color: var(--color-buttonDefaultBG, #eff6ff);
     border: none;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.18);
 
@@ -48,10 +48,13 @@ export const FloatingOpenButton = styled(Button)`
     align-items: center;
     justify-content: center;
 
-    transition: background-color 0.2s, box-shadow 0.2s, transform 0.1s;
+    transition:
+      background-color 0.2s,
+      box-shadow 0.2s,
+      transform 0.1s;
 
     &:hover {
-      background-color: var(--color-buttonDefaultHoverBG, #DBEBFF) !important;
+      background-color: var(--color-buttonDefaultHoverBG, #dbebff) !important;
       box-shadow: 0 4px 14px rgba(0, 0, 0, 0.22) !important;
       transform: scale(1.05);
     }
@@ -62,7 +65,7 @@ export const FloatingOpenButton = styled(Button)`
 
     .anticon {
       font-size: 16px;
-      color: var(--color-buttonDefaultText, #002D63);
+      color: var(--color-buttonDefaultText, #002d63);
     }
   }
 `
@@ -93,8 +96,8 @@ export const PanelHeader = styled.div`
 `
 
 export const PanelContent = styled.div`
-  display:flex;
-  flex-direction:column;
+  display: flex;
+  flex-direction: column;
   flex: 1;
   padding: 24px 16px;
   overflow-y: auto;
@@ -114,5 +117,51 @@ export const SidebarTrigger = styled(Button)`
   .anticon {
     font-size: 18px;
     color: var(--color-text);
+  }
+`
+
+export const ComplexityGroup = styled.div`
+  padding: 12px 16px 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+`
+
+export const ComplexityLabel = styled.span`
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--color-cardText);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+`
+
+export const ComplexityButtons = styled.div`
+  display: flex;
+  gap: 4px;
+`
+
+interface ComplexityButtonProps {
+  $active: boolean
+}
+
+export const ComplexityButton = styled.button<ComplexityButtonProps>`
+  flex: 1;
+  padding: 6px 8px;
+  border-radius: 6px;
+  border: 1px solid
+    ${({ $active }) => ($active ? 'var(--color-brand)' : 'var(--color-cardDivider)')};
+  background-color: ${({ $active }) => ($active ? 'var(--color-buttonDefaultBG)' : 'transparent')};
+  color: ${({ $active }) => ($active ? 'var(--color-brand)' : 'var(--color-cardText)')};
+  font-size: 12px;
+  font-weight: ${({ $active }) => ($active ? '700' : '500')};
+  cursor: pointer;
+  transition:
+    background-color 0.15s,
+    border-color 0.15s;
+
+  &:hover {
+    background-color: var(--color-buttonDefaultBG);
+    border-color: var(--color-brand);
+    color: var(--color-brand);
   }
 `

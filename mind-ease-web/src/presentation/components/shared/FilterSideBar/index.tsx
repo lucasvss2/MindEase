@@ -3,6 +3,7 @@ import { RightOutlined, SettingOutlined } from '@ant-design/icons'
 import * as S from './styles'
 import { ResponsiveButton } from '@/presentation'
 import { useNavigate } from 'react-router-dom'
+import { useComplexity } from '@/presentation/hooks/shared/useComplexity'
 
 type FilterSidebarProps = {
   filterFooter?: React.ReactNode
@@ -20,6 +21,7 @@ export const FilterSidebar = ({
   isFilterDrawerOpen,
 }: FilterSidebarProps) => {
   const navigate = useNavigate()
+  const { complexityLevel, changeComplexity } = useComplexity()
   return (
     <S.OuterWrapper $isOpen={isFilterDrawerOpen}>
       {!isFilterDrawerOpen &&
@@ -103,6 +105,27 @@ export const FilterSidebar = ({
               <div />
             </span>
           </ResponsiveButton>
+
+          {/* Mini-toggle de complexidade */}
+          <S.ComplexityGroup>
+            <S.ComplexityLabel>Nível de Complexidade</S.ComplexityLabel>
+            <S.ComplexityButtons>
+              <S.ComplexityButton
+                $active={complexityLevel === 'simplified'}
+                onClick={() => changeComplexity('simplified')}
+                title="Simplificado"
+              >
+                Simplificado
+              </S.ComplexityButton>
+              <S.ComplexityButton
+                $active={complexityLevel === 'normal'}
+                onClick={() => changeComplexity('normal')}
+                title="Normal"
+              >
+                Normal
+              </S.ComplexityButton>
+            </S.ComplexityButtons>
+          </S.ComplexityGroup>
         </S.PanelContent>
 
         {filterFooter && (

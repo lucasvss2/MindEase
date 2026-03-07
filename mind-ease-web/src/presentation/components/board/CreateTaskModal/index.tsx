@@ -1,8 +1,7 @@
 import { useState } from 'react'
-import { Modal, Input, Select, DatePicker } from 'antd'
+import { Modal, Input } from 'antd'
 import { PlusOutlined, CloseOutlined } from '@ant-design/icons'
 import { ResponsiveButton, ResponsiveInput, useCreateTask } from '@/presentation'
-import type { TaskStatus } from '@/domain/models'
 import * as S from './styles'
 
 interface ChecklistItem {
@@ -18,18 +17,10 @@ interface CreateTaskModalProps {
   columnName: string
 }
 
-const STATUS_OPTIONS = [
-  { value: 'TODO', label: 'A fazer' },
-  { value: 'IN_PROGRESS', label: 'Em andamento' },
-  { value: 'DONE', label: 'Concluído' },
-]
-
 const DEFAULT_STATE = {
   title: '',
   description: '',
-  status: 'TODO' as TaskStatus,
   hours: '',
-  dueDate: null as string | null,
   newChecklistItem: '',
   checklist: [] as ChecklistItem[],
 }
@@ -37,9 +28,7 @@ const DEFAULT_STATE = {
 export function CreateTaskModal({ open, onClose, boardId, columnId, columnName }: CreateTaskModalProps) {
   const [title, setTitle] = useState(DEFAULT_STATE.title)
   const [description, setDescription] = useState(DEFAULT_STATE.description)
-  const [status, setStatus] = useState<TaskStatus>(DEFAULT_STATE.status)
   const [hours, setHours] = useState(DEFAULT_STATE.hours)
-  const [dueDate, setDueDate] = useState<string | null>(DEFAULT_STATE.dueDate)
   const [newChecklistItem, setNewChecklistItem] = useState(DEFAULT_STATE.newChecklistItem)
   const [checklist, setChecklist] = useState<ChecklistItem[]>(DEFAULT_STATE.checklist)
 
@@ -64,9 +53,7 @@ export function CreateTaskModal({ open, onClose, boardId, columnId, columnName }
         columnId,
         title: title.trim(),
         description: description.trim() || undefined,
-        status,
         hours: hours ? Number(hours) : undefined,
-        dueDate: dueDate || undefined,
         checklist: checklist.length
           ? checklist.map((item) => ({ id: item.id, text: item.text, isConcluded: false as const }))
           : undefined,
@@ -78,9 +65,7 @@ export function CreateTaskModal({ open, onClose, boardId, columnId, columnName }
   const handleClose = () => {
     setTitle(DEFAULT_STATE.title)
     setDescription(DEFAULT_STATE.description)
-    setStatus(DEFAULT_STATE.status)
     setHours(DEFAULT_STATE.hours)
-    setDueDate(DEFAULT_STATE.dueDate)
     setNewChecklistItem(DEFAULT_STATE.newChecklistItem)
     setChecklist(DEFAULT_STATE.checklist)
     onClose()
@@ -137,42 +122,16 @@ export function CreateTaskModal({ open, onClose, boardId, columnId, columnName }
           />
         </S.FieldGroup>
 
-        <S.Row>
-          <S.HalfGroup>
-            <S.Label>Status</S.Label>
-            <Select
-              value={status}
-              onChange={(v) => setStatus(v)}
-              options={STATUS_OPTIONS}
-              style={{ width: '100%' }}
-            />
-          </S.HalfGroup>
-
-          <S.HalfGroup>
-            <S.Label>
-              Horas estimadas <S.Optional>(opcional)</S.Optional>
-            </S.Label>
-            <Input
-              type="number"
-              min={0}
-              placeholder="0"
-              value={hours}
-              onChange={(e) => setHours(e.target.value)}
-            />
-          </S.HalfGroup>
-        </S.Row>
-
         <S.FieldGroup>
           <S.Label>
-            Data de entrega <S.Optional>(opcional)</S.Optional>
+            Horas estimadas <S.Optional>(opcional)</S.Optional>
           </S.Label>
-          <DatePicker
-            style={{ width: '100%' }}
-            format="DD/MM/YYYY"
-            placeholder="Selecione uma data"
-            onChange={(date) =>
-              setDueDate(date ? date.toISOString() : null)
-            }
+          <Input
+            type="number"
+            min={0}
+            placeholder="0"
+            value={hours}
+            onChange={(e) => setHours(e.target.value)}
           />
         </S.FieldGroup>
 
