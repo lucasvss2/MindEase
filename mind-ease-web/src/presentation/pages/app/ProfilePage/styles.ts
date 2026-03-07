@@ -7,6 +7,16 @@ export const Title = styled.h1`
   margin-bottom: 24px;
 `
 
+export const ConfigBody = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center; 
+  align-items: flex-start; 
+  height: 100%; 
+  gap: 24px; 
+  padding: 24px 
+`
+
 export const Content = styled.div`
   display: flex;
   flex-direction: column;
@@ -16,6 +26,12 @@ export const Content = styled.div`
 export const SettingsContent = styled.div`
   display: flex;
   flex-direction: column;
+  gap: 16px;
+`
+
+export const SettingsSwitchContent = styled.div`
+  display: flex;
+  flex-direction: row;
   gap: 16px;
 `
 

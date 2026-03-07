@@ -9,4 +9,10 @@ export const FocusModePageContainer = styled.div`
   width: 100%;
 `;
 
-export const Title = styled.span``;
+export const Title = styled.span`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  font-size: 24px;
+`;

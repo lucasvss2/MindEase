@@ -1,5 +1,5 @@
 import { PageLayout } from "@/layouts"
-import { FilterSidebar, ResponsiveCard, useToggle } from "@/presentation"
+import { FilterSidebar, PomodoroTimer, ResponsiveCard, useToggle } from "@/presentation"
 import * as S from './styles'
 export const FocusModePage = () => {
   const [isDrawerOpen, toggleFilterDrawer] = useToggle(false)
@@ -17,9 +17,11 @@ export const FocusModePage = () => {
       }
     >
       <S.FocusModePageContainer>
-        <ResponsiveCard $width="60%" $height="60%">
-          <S.Title>Pomodoro</S.Title>
+        <ResponsiveCard $width="60%" $height="70%">
+          <S.Title>Timer Pomodoro</S.Title>
+          <PomodoroTimer />
         </ResponsiveCard>
+
       </S.FocusModePageContainer>
     </PageLayout>
   )
