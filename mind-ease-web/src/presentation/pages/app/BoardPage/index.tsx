@@ -1,10 +1,16 @@
-import { FilterSidebar, useToggle, PageLayout } from "@/presentation";
+import { useParams } from 'react-router-dom'
+import { FilterSidebar, useToggle, PageLayout, useBoard, KanbanBoard } from '@/presentation'
+import * as S from './styles'
+import { Divider } from 'antd'
 
 export function BoardPage() {
+  const { id } = useParams<{ id: string }>()
   const [isDrawerOpen, toggleFilterDrawer] = useToggle(true)
+  const { data: board } = useBoard(id!)
+
   return (
     <PageLayout
-      title="Board Name"
+      title="Board"
       hideFloatButton
       showUserAvatar
       sidebar={
@@ -15,9 +21,18 @@ export function BoardPage() {
         />
       }
     >
-      <div>
+      <S.Container>
+        <S.TitleRow>
+          {board && <S.ColorDot $color={board.color} />}
+          <S.Title>{board?.name ?? '...'}</S.Title>
+        </S.TitleRow>
 
-      </div>
+        {board?.description && (
+          <S.Description>{board.description}</S.Description>
+        )}
+        <Divider style={{ margin: '0px', border: 'var(--color-buttonNeutralHoverBorder)' }} />
+        {id && <KanbanBoard boardId={id} />}
+      </S.Container>
     </PageLayout>
   )
 }
