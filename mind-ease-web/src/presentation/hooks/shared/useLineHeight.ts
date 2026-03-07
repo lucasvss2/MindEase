@@ -1,5 +1,5 @@
 import { useLayoutEffect, useCallback } from 'react'
-import { useLineHeightStore, LineHeightLevel } from '@/main/config/stores/line-height-store'
+import { useLineHeightStore, LineHeightLevel } from '@/presentation/stores/line-height-store'
 
 const OFFSET_MAP: Record<LineHeightLevel, number> = {
   1: 0,

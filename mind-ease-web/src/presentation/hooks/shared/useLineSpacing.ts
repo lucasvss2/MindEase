@@ -1,5 +1,5 @@
 import { useLayoutEffect, useCallback } from 'react'
-import { useLineSpacingStore, LineSpacingLevel } from '@/main/config/stores/line-spacing-store'
+import { useLineSpacingStore, LineSpacingLevel } from '@/presentation/stores/line-spacing-store'
 
 const OFFSET_MAP: Record<LineSpacingLevel, number> = {
   1: 0,

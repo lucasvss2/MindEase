@@ -1,10 +1,10 @@
-import { PageLayout } from "@/layouts"
 import * as S from "./styles"
 import { Divider, Form } from "antd"
 import {
   ResponsiveButton,
   ResponsiveInput,
-  ResponsiveCard
+  ResponsiveCard,
+  PageLayout
 } from "@/presentation"
 import { useLocation } from "react-router-dom"
 import { useRegister } from "@/presentation/hooks/auth"

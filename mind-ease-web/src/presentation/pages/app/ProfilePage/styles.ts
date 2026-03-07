@@ -1,4 +1,4 @@
-import { styled } from "@linaria/react";
+import { styled } from '@linaria/react'
 
 export const Title = styled.h1`
   font-size: 24px;
@@ -10,11 +10,10 @@ export const Title = styled.h1`
 export const ConfigBody = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: center; 
-  align-items: flex-start; 
-  height: 100%; 
-  gap: 24px; 
-  padding: 24px 
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 24px;
+  padding: 24px;
 `
 
 export const Content = styled.div`
@@ -32,6 +31,7 @@ export const SettingsContent = styled.div`
 export const SettingsSwitchContent = styled.div`
   display: flex;
   flex-direction: row;
+  align-items: center;
   gap: 16px;
 `
 

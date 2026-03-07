@@ -1,5 +1,4 @@
-import { PageLayout } from "@/layouts"
-import { FilterSidebar, PomodoroTimer, ResponsiveCard, useToggle } from "@/presentation"
+import { FilterSidebar, PomodoroTimer, ResponsiveCard, useToggle, PageLayout } from "@/presentation"
 import * as S from './styles'
 export const FocusModePage = () => {
   const [isDrawerOpen, toggleFilterDrawer] = useToggle(false)
