@@ -28,27 +28,83 @@ export const DragHandle = styled.span`
   color: var(--color-cardText);
   flex-shrink: 0;
   margin-top: 1px;
-  font-size: 14px;
+  font-size: calc(14px + var(--font-size-offset));
 `
 
 export const CardTitleBlock = styled.div`
   flex: 1;
   min-width: 0;
+  overflow: hidden;
 `
 
 export const CardTitle = styled.p`
-  font-size: 14px;
+  font-size: calc(14px + var(--font-size-offset));
   font-weight: 600;
   color: var(--color-cardTitle);
   margin: 0;
-  word-break: break-word;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  cursor: default;
+
+  &:hover {
+    text-decoration: underline dotted;
+    text-underline-offset: 2px;
+  }
+`
+
+export const CardTitleInput = styled.input`
+  width: 100%;
+  font-size: calc(14px + var(--font-size-offset));
+  font-weight: 600;
+  color: var(--color-cardTitle);
+  background: var(--color-inputDefaultBG);
+  border: 1px solid var(--color-brand);
+  border-radius: 4px;
+  outline: none;
+  padding: 1px 4px;
+  margin: 0;
+  box-sizing: border-box;
 `
 
 export const CardDescription = styled.p`
-  font-size: 12px;
+  font-size: calc(12px + var(--font-size-offset));
   color: var(--color-cardText);
   margin: 4px 0 0;
-  word-break: break-word;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  cursor: default;
+
+  &[data-empty] {
+    font-style: italic;
+    opacity: 0.5;
+  }
+
+  &:hover {
+    text-decoration: underline dotted;
+    text-underline-offset: 2px;
+  }
+`
+
+export const CardDescInput = styled.textarea`
+  width: 100%;
+  font-size: calc(12px + var(--font-size-offset));
+  color: var(--color-cardTitle);
+  background: var(--color-inputDefaultBG);
+  border: 1px solid var(--color-brand);
+  border-radius: 4px;
+  outline: none;
+  padding: 2px 4px;
+  margin: 4px 0 0;
+  resize: none;
+  box-sizing: border-box;
+  font-family: inherit;
+
+  &::placeholder {
+    color: var(--color-inputDefaultPlaceholder);
+    font-style: italic;
+  }
 `
 
 export const MenuButton = styled.button`
@@ -76,7 +132,7 @@ export const ChecklistSection = styled.div`
 `
 
 export const ChecklistLabel = styled.span`
-  font-size: 12px;
+  font-size: calc(12px + var(--font-size-offset));
   font-weight: 500;
   color: var(--color-cardText);
 `
@@ -85,7 +141,7 @@ export const ChecklistItem = styled.label`
   display: flex;
   align-items: center;
   gap: 8px;
-  font-size: 13px;
+  font-size: calc(13px + var(--font-size-offset));
   cursor: pointer;
   color: var(--color-cardText);
 
@@ -118,6 +174,39 @@ export const ChecklistItem = styled.label`
   }
 `
 
+export const ChecklistItemText = styled.span`
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+`
+
+export const ChecklistDeleteButton = styled.button`
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0 2px;
+  color: var(--color-cardText);
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  font-size: calc(10px + var(--font-size-offset));
+  opacity: 0;
+  transition:
+    opacity 0.15s,
+    color 0.15s;
+
+  label:hover > & {
+    opacity: 1;
+  }
+
+  &:hover {
+    color: #f87171;
+    opacity: 1;
+  }
+`
+
 export const AddChecklistRow = styled.div`
   display: flex;
   align-items: center;
@@ -131,7 +220,7 @@ export const AddChecklistInput = styled.input`
   border: var(--color-cardBorder);
   border-radius: 6px;
   outline: none;
-  font-size: 12px;
+  font-size: calc(12px + var(--font-size-offset));
   color: var(--color-inputDefaultText);
   padding: 5px 8px;
 
@@ -153,7 +242,7 @@ export const AddChecklistButton = styled.button`
   padding: 2px;
   display: flex;
   align-items: center;
-  font-size: 16px;
+  font-size: calc(16px + var(--font-size-offset));
   transition: color 0.15s;
 
   &:hover {
@@ -175,23 +264,25 @@ export const FocusLabel = styled.div`
   display: flex;
   align-items: center;
   gap: 6px;
-  font-size: 12px;
+  font-size: calc(12px + var(--font-size-offset));
   font-weight: 600;
   color: var(--color-link);
+  white-space: nowrap;
 `
 
 export const FocusRow = styled.div`
   display: flex;
   align-items: center;
   gap: 8px;
+  flex-wrap: nowrap;
 `
 
 export const FocusInput = styled.input`
-  width: 52px;
+  width: calc(52px + var(--font-size-offset) * 3);
   padding: 4px 6px;
   border: var(--color-cardBorder);
   border-radius: 6px;
-  font-size: 13px;
+  font-size: calc(13px + var(--font-size-offset));
   background: var(--color-inputDefaultBG);
   color: var(--color-inputDefaultText);
   text-align: center;
@@ -203,21 +294,24 @@ export const FocusInput = styled.input`
 `
 
 export const FocusUnit = styled.span`
-  font-size: 12px;
+  font-size: calc(12px + var(--font-size-offset));
   color: var(--color-cardText);
+  white-space: nowrap;
 `
 
 export const CardFooter = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
 `
 
 export const TimerDisplay = styled.span`
   display: flex;
   align-items: center;
   gap: 5px;
-  font-size: 12px;
+  font-size: calc(12px + var(--font-size-offset));
   color: var(--color-cardText);
 `
 
@@ -230,10 +324,11 @@ export const StartFocusButton = styled.button`
   border: none;
   border-radius: 8px;
   padding: 6px 14px;
-  font-size: 13px;
+  font-size: calc(13px + var(--font-size-offset));
   font-weight: 600;
   cursor: pointer;
   transition: opacity 0.15s;
+  white-space: nowrap;
 
   &:hover {
     opacity: 0.88;
