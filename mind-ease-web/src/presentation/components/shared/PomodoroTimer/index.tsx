@@ -1,5 +1,5 @@
 import { useState, useEffect, useLayoutEffect, useCallback, useRef } from "react";
-import { usePomodoroSettings } from "@/presentation";
+import { usePomodoroSettings, showToast } from "@/presentation";
 import * as S from "./styles";
 
 const ALARM_SOUND_URL = "https://assets.mixkit.co/active_storage/sfx/2869/2869-preview.mp3";
@@ -37,39 +37,53 @@ export function PomodoroTimer() {
     }
   }
 
+  // Ref guard: garante que os efeitos de conclusão disparam apenas 1x por sessão
+  const completionFiredRef = useRef(false);
+
   useEffect(() => {
     if (typeof window !== "undefined") {
       audioRef.current = new Audio(ALARM_SOUND_URL);
     }
   }, []);
 
+  // Decrementa o timer — sem side effects no updater
   useEffect(() => {
     if (!isRunning) return;
 
+    completionFiredRef.current = false; // reseta a cada nova sessão iniciada
+
     const interval = setInterval(() => {
-      setTimeLeft((prev) => {
-        if (prev > 1) return prev - 1;
-
-        // Timer concluído: agenda efeitos colaterais fora do updater
-        setTimeout(() => {
-          setIsRunning(false);
-          if (soundEnabledRef.current && audioRef.current) {
-            audioRef.current.play().catch(e => console.error("Error playing sound:", e));
-          }
-          if (notificationEnabledRef.current && Notification.permission === "granted") {
-            new Notification("MindEase Pomodoro", {
-              body: "Tempo esgotado! Hora de uma pausa.",
-              icon: "/favicon.ico"
-            });
-          }
-        }, 0);
-
-        return 0;
-      });
+      setTimeLeft((prev) => (prev > 0 ? prev - 1 : 0));
     }, 1000);
 
     return () => clearInterval(interval);
   }, [isRunning]);
+
+  // Dispara os alertas quando o timer zera — guarded para disparar exatamente 1x
+  useEffect(() => {
+    if (timeLeft !== 0 || completionFiredRef.current) return;
+    completionFiredRef.current = true;
+
+    setTimeout(() => {
+      setIsRunning(false);
+      if (soundEnabledRef.current && audioRef.current) {
+        audioRef.current.play().catch(e => console.error("Error playing sound:", e));
+      }
+      if (soundEnabledRef.current) {
+        showToast({
+          type: 'success',
+          message: 'Pomodoro finalizado!',
+          description: 'Tempo esgotado! Hora de uma pausa.',
+        });
+      }
+      if (notificationEnabledRef.current && Notification.permission === "granted") {
+        new Notification("MindEase Pomodoro", {
+          body: "Tempo esgotado! Hora de uma pausa.",
+          icon: "/favicon.ico"
+        });
+      }
+    }, 0);
+  }, [timeLeft]);
 
   const handleStartPause = useCallback(() => {
     if (timeLeft === 0) return;

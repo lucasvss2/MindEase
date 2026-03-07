@@ -1,10 +1,10 @@
 import { FilterSidebar, useToggle, PageLayout } from "@/presentation";
 
-export function BoardPage() {
+export function BoardsPage() {
   const [isDrawerOpen, toggleFilterDrawer] = useToggle(true)
   return (
     <PageLayout
-      title="Board Name"
+      title="Home"
       hideFloatButton
       showUserAvatar
       sidebar={
