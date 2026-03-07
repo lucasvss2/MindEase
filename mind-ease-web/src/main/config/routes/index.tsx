@@ -8,12 +8,14 @@ import {
   BoardPage,
   BoardsPage,
   ProfilePage,
-  FocusModePage
+  FocusModePage,
+  TransitionOverlay
 } from '@/presentation'
 
 export const Routes = () => {
   return (
     <BrowserRouter >
+      <TransitionOverlay />
       <ReactRoutes>
         {/* Public Routes - Restrict Authenticated Users */}
         <Route element={<PrivateRoute isPublicRoute />}>

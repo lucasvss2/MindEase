@@ -7,128 +7,128 @@
 :root,
 .theme-light {
   --color-brand: #7fb3d5ff;
-  --color-bgColor: #FFFFFF;
-  --color-borderHeader: #E8E8E8;
+  --color-bgColor: #ffffff;
+  --color-borderHeader: #e8e8e8;
   --color-black: #000000;
 
   --color-link: #7fb3d5ff;
   --color-linkActive: #7fb3d5ff;
   --color-linkHover: #badb91;
-  
-  --color-titleText: #3B3A3A;
-  --color-text: #3B3A3A;
+
+  --color-titleText: #3b3a3a;
+  --color-text: #3b3a3a;
   --color-error: #fe2000;
-  --color-colorBorderPrimary: #D9D9D9;
+  --color-colorBorderPrimary: #d9d9d9;
 
   /* button-default */
-  --color-buttonDefaultBG: #EFF6FF;
-  --color-buttonDefaultText: #002D63;
+  --color-buttonDefaultBG: #eff6ff;
+  --color-buttonDefaultText: #002d63;
   --color-buttonDefaultBorder: none;
-  --color-buttonDefaultActiveBG: #EFF6FF;
-  --color-buttonDefaultActiveText: #002D63;
-  --color-buttonDefaultActiveBorder: 1px solid #2563EB;
-  --color-buttonDefaultHoverBG: #D0E4FF;
-  --color-buttonDefaultHoverText: #002D63;
-  --color-buttonDefaultHoverBorder: 1px solid #2563EB;
+  --color-buttonDefaultActiveBG: #eff6ff;
+  --color-buttonDefaultActiveText: #002d63;
+  --color-buttonDefaultActiveBorder: 1px solid #2563eb;
+  --color-buttonDefaultHoverBG: #d0e4ff;
+  --color-buttonDefaultHoverText: #002d63;
+  --color-buttonDefaultHoverBorder: 1px solid #2563eb;
 
   /* button-dashed */
-  --color-buttonDashedBG: #FFFFFF;
-  --color-buttonDashedText: #1B2332;
-  --color-buttonDashedBorder: 1px dashed #2563EB;
-  --color-buttonDashedActiveBG: #E8E8E8;
+  --color-buttonDashedBG: #ffffff;
+  --color-buttonDashedText: #1b2332;
+  --color-buttonDashedBorder: 1px dashed #2563eb;
+  --color-buttonDashedActiveBG: #e8e8e8;
   --color-buttonDashedActiveText: #292929;
-  --color-buttonDashedActiveBorder: 1px dashed #5EA4FE;
-  --color-buttonDashedHoverBG: #D9D9D9;
+  --color-buttonDashedActiveBorder: 1px dashed #5ea4fe;
+  --color-buttonDashedHoverBG: #d9d9d9;
   --color-buttonDashedHoverText: #383838;
-  --color-buttonDashedHoverBorder: 1px dashed #008FFF;
+  --color-buttonDashedHoverBorder: 1px dashed #008fff;
 
   /* button-outlined */
-  --color-buttonOutlinedBG: #EFF6FF;
-  --color-buttonOutlinedText: #1B2332;
-  --color-buttonOutlinedBorder: 1px solid #5EA4FE;
-  --color-buttonOutlinedActiveBG: #D1E6FF;
-  --color-buttonOutlinedActiveText: #002D63;
-  --color-buttonOutlinedActiveBorder: 1px solid #50ADFF;
-  --color-buttonOutlinedHoverBG: #C7DFFE;
-  --color-buttonOutlinedHoverText: #002D63;
-  --color-buttonOutlinedHoverBorder: 1px solid #2563EB;
+  --color-buttonOutlinedBG: #eff6ff;
+  --color-buttonOutlinedText: #1b2332;
+  --color-buttonOutlinedBorder: 1px solid #5ea4fe;
+  --color-buttonOutlinedActiveBG: #d1e6ff;
+  --color-buttonOutlinedActiveText: #002d63;
+  --color-buttonOutlinedActiveBorder: 1px solid #50adff;
+  --color-buttonOutlinedHoverBG: #c7dffe;
+  --color-buttonOutlinedHoverText: #002d63;
+  --color-buttonOutlinedHoverBorder: 1px solid #2563eb;
 
   /* button-neutral (disabled) */
   --color-buttonNeutralBG: #8a858517;
   --color-buttonNeutralText: #383838;
   --color-buttonNeutralBorder: none;
-  --color-buttonNeutralActiveBG: #EDEBEB;
-  --color-buttonNeutralActiveText: #3A3636;
-  --color-buttonNeutralActiveBorder: 1px solid #79747E;
-  --color-buttonNeutralHoverBG: #EDEBEB;
+  --color-buttonNeutralActiveBG: #edebeb;
+  --color-buttonNeutralActiveText: #3a3636;
+  --color-buttonNeutralActiveBorder: 1px solid #79747e;
+  --color-buttonNeutralHoverBG: #edebeb;
   --color-buttonNeutralHoverText: #383838;
-  --color-buttonNeutralHoverBorder: 1px solid #79747E;
+  --color-buttonNeutralHoverBorder: 1px solid #79747e;
 
   /* button-link */
   --color-buttonLinkBG: transparent;
   --color-buttonLinkText: #383838;
   --color-buttonLinkBorder: none;
-  --color-buttonLinkActiveBG: #FFFFFF;
+  --color-buttonLinkActiveBG: #ffffff;
   --color-buttonLinkActiveText: #383838;
   --color-buttonLinkActiveBorder: none;
-  --color-buttonLinkHoverBG: #FFFFFF;
+  --color-buttonLinkHoverBG: #ffffff;
   --color-buttonLinkHoverText: #383838;
   --color-buttonLinkHoverBorder: none;
 
   /* dialog-danger */
-  --color-dialogDangerBG: #F8F8F8;
-  --color-dialogDangerText: #6E2215;
-  --color-dialogDangerTitle: #6E2215;
-  --color-dialogDangerBorder: 1px solid #C9280C;
+  --color-dialogDangerBG: #f8f8f8;
+  --color-dialogDangerText: #6e2215;
+  --color-dialogDangerTitle: #6e2215;
+  --color-dialogDangerBorder: 1px solid #c9280c;
   /* dialog-default */
-  --color-dialogDefaultBG: #F8F9F9;
-  --color-dialogDefaultText: #3B3A3A;
-  --color-dialogDefaultTitle: #3B3A3A;
-  --color-dialogDefaultBorder: 1px solid #D9D9D9;
+  --color-dialogDefaultBG: #f8f9f9;
+  --color-dialogDefaultText: #3b3a3a;
+  --color-dialogDefaultTitle: #3b3a3a;
+  --color-dialogDefaultBorder: 1px solid #d9d9d9;
 
   /* carousel */
-  --color-activeDotColor: #EFF6FF;
+  --color-activeDotColor: #eff6ff;
   --color-inactiveDotColor: #8a858517;
 
   /* input-default */
-  --color-inputDefaultBG: #FFFFFF;
-  --color-inputDefaultText: #3B3A3A;
-  --color-inputDefaultLabel: #3B3A3A;
-  --color-inputDefaultBorder: 1px solid #3B3A3A;
-  --color-inputDefaultPlaceholder: #3B3A3A;
+  --color-inputDefaultBG: #ffffff;
+  --color-inputDefaultText: #3b3a3a;
+  --color-inputDefaultLabel: #3b3a3a;
+  --color-inputDefaultBorder: 1px solid #3b3a3a;
+  --color-inputDefaultPlaceholder: #3b3a3a;
 
   /* input-error */
-  --color-inputErrorBG: #FFFFFF;
+  --color-inputErrorBG: #ffffff;
   --color-inputErrorText: #940000;
-  --color-inputErrorLabel: #3B3A3A;
+  --color-inputErrorLabel: #3b3a3a;
   --color-inputErrorBorder: 1px solid #940000;
   --color-inputErrorPlaceholder: #292929;
 
   /* switch-active */
-  --color-switchActiveBG: #0A5F8A;
-  --color-switchActiveHandle: #E2E2E2;
+  --color-switchActiveBG: #0a5f8a;
+  --color-switchActiveHandle: #e2e2e2;
   /* switch-inactive */
-  --color-switchInactiveBG: #79747E;
-  --color-switchInactiveHandle: #EDEDED;
+  --color-switchInactiveBG: #79747e;
+  --color-switchInactiveHandle: #ededed;
 
   /* slider */
-  --color-sliderHandle: #1581B7;
-  --color-sliderBG: #D9D9D9;
-  --color-sliderBorder: #79747E;
+  --color-sliderHandle: #1581b7;
+  --color-sliderBG: #d9d9d9;
+  --color-sliderBorder: #79747e;
 
   /* card */
-  --color-cardBG: #F8F9F9;
-  --color-cardText: #3B3A3A;
-  --color-cardTitle: #3B3A3A;
-  --color-cardBorder: 1px solid #E3DDDD;
-  --color-cardDivider: #E3DDDD;
+  --color-cardBG: #f8f9f9;
+  --color-cardText: #3b3a3a;
+  --color-cardTitle: #3b3a3a;
+  --color-cardBorder: 1px solid #e3dddd;
+  --color-cardDivider: #e3dddd;
 }
 
 /* Light Low Contrast Theme */
 .theme-light-low-contrast {
   --color-brand: #7fb3d5ff;
-  --color-bgColor: #FFFFFF;
-  --color-borderHeader: #E8E8E8;
+  --color-bgColor: #ffffff;
+  --color-borderHeader: #e8e8e8;
   --color-black: #000000;
 
   --color-link: #a8c8dc;
@@ -141,114 +141,114 @@
   --color-error: #e85040;
 
   /* button-default */
-  --color-buttonDefaultBG: #EFF6FF;
+  --color-buttonDefaultBG: #eff6ff;
   --color-buttonDefaultText: #4a6b9c;
   --color-buttonDefaultBorder: none;
-  --color-buttonDefaultActiveBG: #EFF6FF;
+  --color-buttonDefaultActiveBG: #eff6ff;
   --color-buttonDefaultActiveText: #4a6b9c;
-  --color-buttonDefaultActiveBorder: 1px solid #A2C9FF;
-  --color-buttonDefaultHoverBG: #E4F0FF;
+  --color-buttonDefaultActiveBorder: 1px solid #a2c9ff;
+  --color-buttonDefaultHoverBG: #e4f0ff;
   --color-buttonDefaultHoverText: #4a6b9c;
-  --color-buttonDefaultHoverBorder: 1px solid #A2C9FF;
+  --color-buttonDefaultHoverBorder: 1px solid #a2c9ff;
 
   /* button-dashed */
-  --color-buttonDashedBG: #FFFFFF;
-  --color-buttonDashedText: #4D4D4D;
-  --color-buttonDashedBorder: 1px dashed #2563EB;
-  --color-buttonDashedActiveBG: #F5F5F5;
-  --color-buttonDashedActiveText: #4D4D4D;
-  --color-buttonDashedActiveBorder: 1px dashed #5EA4FE;
-  --color-buttonDashedHoverBG: #EDEBEB;
-  --color-buttonDashedHoverText: #4D4D4D;
-  --color-buttonDashedHoverBorder: 1px dashed #008FFF;
+  --color-buttonDashedBG: #ffffff;
+  --color-buttonDashedText: #4d4d4d;
+  --color-buttonDashedBorder: 1px dashed #2563eb;
+  --color-buttonDashedActiveBG: #f5f5f5;
+  --color-buttonDashedActiveText: #4d4d4d;
+  --color-buttonDashedActiveBorder: 1px dashed #5ea4fe;
+  --color-buttonDashedHoverBG: #edebeb;
+  --color-buttonDashedHoverText: #4d4d4d;
+  --color-buttonDashedHoverBorder: 1px dashed #008fff;
 
   /* button-outlined */
-  --color-buttonOutlinedBG: #EFF6FF;
+  --color-buttonOutlinedBG: #eff6ff;
   --color-buttonOutlinedText: #383838;
-  --color-buttonOutlinedBorder: 1px solid #A2C9FF;
-  --color-buttonOutlinedActiveBG: #E3F2FD;
-  --color-buttonOutlinedActiveText: #3D5A85;
-  --color-buttonOutlinedActiveBorder: 1px solid #8ECAFF;
-  --color-buttonOutlinedHoverBG: #E4F0FF;
+  --color-buttonOutlinedBorder: 1px solid #a2c9ff;
+  --color-buttonOutlinedActiveBG: #e3f2fd;
+  --color-buttonOutlinedActiveText: #3d5a85;
+  --color-buttonOutlinedActiveBorder: 1px solid #8ecaff;
+  --color-buttonOutlinedHoverBG: #e4f0ff;
   --color-buttonOutlinedHoverText: #4a6b9c;
-  --color-buttonOutlinedHoverBorder: 1px solid #5EA4FE;
+  --color-buttonOutlinedHoverBorder: 1px solid #5ea4fe;
 
   /* button-neutral (disabled) */
-  --color-buttonNeutralBG: #E8E8E8;
-  --color-buttonNeutralText: #615E5E;
+  --color-buttonNeutralBG: #e8e8e8;
+  --color-buttonNeutralText: #615e5e;
   --color-buttonNeutralBorder: none;
-  --color-buttonNeutralActiveBG: #EAE9E9;
-  --color-buttonNeutralActiveText: #5C5C5C;
+  --color-buttonNeutralActiveBG: #eae9e9;
+  --color-buttonNeutralActiveText: #5c5c5c;
   --color-buttonNeutralActiveBorder: none;
-  --color-buttonNeutralHoverBG: #EAE9E9;
-  --color-buttonNeutralHoverText: #5C5C5C;
+  --color-buttonNeutralHoverBG: #eae9e9;
+  --color-buttonNeutralHoverText: #5c5c5c;
   --color-buttonNeutralHoverBorder: 1px solid #636363;
 
   /* button-link */
   --color-buttonLinkBG: transparent;
   --color-buttonLinkText: #636363;
   --color-buttonLinkBorder: none;
-  --color-buttonLinkActiveBG: #FFFFFF;
+  --color-buttonLinkActiveBG: #ffffff;
   --color-buttonLinkActiveText: #636363;
   --color-buttonLinkActiveBorder: none;
-  --color-buttonLinkHoverBG: #FFFFFF;
+  --color-buttonLinkHoverBG: #ffffff;
   --color-buttonLinkHoverText: #636363;
   --color-buttonLinkHoverBorder: none;
 
   /* dialog-danger */
-  --color-dialogDangerBG: #F8F8F8;
-  --color-dialogDangerText: #9A2A17;
-  --color-dialogDangerTitle: #9A2A17;
-  --color-dialogDangerBorder: 1px solid #9A2A17;
+  --color-dialogDangerBG: #f8f8f8;
+  --color-dialogDangerText: #9a2a17;
+  --color-dialogDangerTitle: #9a2a17;
+  --color-dialogDangerBorder: 1px solid #9a2a17;
   /* dialog-default */
-  --color-dialogDefaultBG: #F8F9F9;
-  --color-dialogDefaultText: #3B3A3A;
-  --color-dialogDefaultTitle: #5B5B5B;
-  --color-dialogDefaultBorder: 1px solid #F8F8F8;
+  --color-dialogDefaultBG: #f8f9f9;
+  --color-dialogDefaultText: #3b3a3a;
+  --color-dialogDefaultTitle: #5b5b5b;
+  --color-dialogDefaultBorder: 1px solid #f8f8f8;
 
   /* carousel */
-  --color-activeDotColor: #EFF6FF;
+  --color-activeDotColor: #eff6ff;
   --color-inactiveDotColor: #8a858517;
 
   /* input-default */
-  --color-inputDefaultBG: #FFFFFF;
+  --color-inputDefaultBG: #ffffff;
   --color-inputDefaultText: #727272;
   --color-inputDefaultLabel: #727272;
   --color-inputDefaultBorder: 1px solid #727272;
   --color-inputDefaultPlaceholder: #727272;
 
   /* input-error */
-  --color-inputErrorBG: #FFFFFF;
-  --color-inputErrorText: #C22929;
+  --color-inputErrorBG: #ffffff;
+  --color-inputErrorText: #c22929;
   --color-inputErrorLabel: #727272;
-  --color-inputErrorBorder: 1px solid #C22929;
+  --color-inputErrorBorder: 1px solid #c22929;
   --color-inputErrorPlaceholder: #727272;
 
   /* switch-active */
-  --color-switchActiveBG: #46A4D2;
-  --color-switchActiveHandle: #2B2B2B;
+  --color-switchActiveBG: #46a4d2;
+  --color-switchActiveHandle: #2b2b2b;
   /* switch-inactive */
-  --color-switchInactiveBG: #79747E;
-  --color-switchInactiveHandle: #E3DDDD;
+  --color-switchInactiveBG: #79747e;
+  --color-switchInactiveHandle: #e3dddd;
 
   /* slider */
-  --color-sliderHandle: #46A4D2;
-  --color-sliderBG: #D9D9D9;
+  --color-sliderHandle: #46a4d2;
+  --color-sliderBG: #d9d9d9;
   --color-sliderBorder: #585858;
 
   /* card */
-  --color-cardBG: #F5F5F5;
+  --color-cardBG: #f5f5f5;
   --color-cardText: #727272;
   --color-cardTitle: #585858;
-  --color-cardBorder: 1px solid #D1CDCD;
-  --color-cardDivider: #D1CDCD;
+  --color-cardBorder: 1px solid #d1cdcd;
+  --color-cardDivider: #d1cdcd;
 }
 
 /* Light High Contrast Theme */
 .theme-light-high-contrast {
   --color-brand: #7fb3d5ff;
-  --color-bgColor: #FFFFFF;
-  --color-borderHeader: #E8E8E8;
+  --color-bgColor: #ffffff;
+  --color-borderHeader: #e8e8e8;
   --color-black: #000000;
 
   --color-link: #0066cc;
@@ -256,112 +256,112 @@
   --color-linkHover: #004d99;
 
   --color-titleText: #000000;
-  --color-text: #2F2E2E;
+  --color-text: #2f2e2e;
   --color-colorBorderPrimary: #000000;
   --color-error: #cc0000;
 
   /* button-default */
-  --color-buttonDefaultBG: #EFF6FF;
-  --color-buttonDefaultText: #1B2332;
+  --color-buttonDefaultBG: #eff6ff;
+  --color-buttonDefaultText: #1b2332;
   --color-buttonDefaultBorder: none;
-  --color-buttonDefaultActiveBG: #EFF6FF;
-  --color-buttonDefaultActiveText: #1B2332;
-  --color-buttonDefaultActiveBorder: 1px solid #5EA4FE;
-  --color-buttonDefaultHoverBG: #E4F0FF;
-  --color-buttonDefaultHoverText: #1B2332;
+  --color-buttonDefaultActiveBG: #eff6ff;
+  --color-buttonDefaultActiveText: #1b2332;
+  --color-buttonDefaultActiveBorder: 1px solid #5ea4fe;
+  --color-buttonDefaultHoverBG: #e4f0ff;
+  --color-buttonDefaultHoverText: #1b2332;
   --color-buttonDefaultHoverBorder: none;
 
   /* button-dashed */
-  --color-buttonDashedBG: #FFFFFF;
+  --color-buttonDashedBG: #ffffff;
   --color-buttonDashedText: #000000;
-  --color-buttonDashedBorder: 1px dashed #5EA4FE;
-  --color-buttonDashedActiveBG: #F5F5F5;
+  --color-buttonDashedBorder: 1px dashed #5ea4fe;
+  --color-buttonDashedActiveBG: #f5f5f5;
   --color-buttonDashedActiveText: #000000;
-  --color-buttonDashedActiveBorder: 1px dashed #5EA4FE;
-  --color-buttonDashedHoverBG: #F8F9F9;
+  --color-buttonDashedActiveBorder: 1px dashed #5ea4fe;
+  --color-buttonDashedHoverBG: #f8f9f9;
   --color-buttonDashedHoverText: #000000;
-  --color-buttonDashedHoverBorder: 1px dashed #5EA4FE;
+  --color-buttonDashedHoverBorder: 1px dashed #5ea4fe;
 
   /* button-outlined */
-  --color-buttonOutlinedBG: #EFF6FF;
-  --color-buttonOutlinedText: #1B2332;
-  --color-buttonOutlinedBorder: 1px solid #5EA4FE;
-  --color-buttonOutlinedActiveBG: #DBEBFF;
+  --color-buttonOutlinedBG: #eff6ff;
+  --color-buttonOutlinedText: #1b2332;
+  --color-buttonOutlinedBorder: 1px solid #5ea4fe;
+  --color-buttonOutlinedActiveBG: #dbebff;
   --color-buttonOutlinedActiveText: #000000;
-  --color-buttonOutlinedActiveBorder: 1px solid #3BA2F3;
-  --color-buttonOutlinedHoverBG: #CADDFF;
+  --color-buttonOutlinedActiveBorder: 1px solid #3ba2f3;
+  --color-buttonOutlinedHoverBG: #caddff;
   --color-buttonOutlinedHoverText: #000000;
-  --color-buttonOutlinedHoverBorder: 1px solid #008FFF;
+  --color-buttonOutlinedHoverBorder: 1px solid #008fff;
 
   /* button-neutral (disabled) */
   --color-buttonNeutralBG: #8a858517;
   --color-buttonNeutralText: #000000;
   --color-buttonNeutralBorder: none;
-  --color-buttonNeutralActiveBG: #E3E3E3;
+  --color-buttonNeutralActiveBG: #e3e3e3;
   --color-buttonNeutralActiveText: #000000;
   --color-buttonNeutralActiveBorder: none;
-  --color-buttonNeutralHoverBG: #E3E3E3;
+  --color-buttonNeutralHoverBG: #e3e3e3;
   --color-buttonNeutralHoverText: #000000;
-  --color-buttonNeutralHoverBorder: 1px solid #2B2B2B;
+  --color-buttonNeutralHoverBorder: 1px solid #2b2b2b;
 
   /* button-link */
   --color-buttonLinkBG: transparent;
   --color-buttonLinkText: #000000;
   --color-buttonLinkBorder: none;
-  --color-buttonLinkActiveBG: #FFFFFF;
+  --color-buttonLinkActiveBG: #ffffff;
   --color-buttonLinkActiveText: #000000;
   --color-buttonLinkActiveBorder: none;
-  --color-buttonLinkHoverBG: #FFFFFF;
+  --color-buttonLinkHoverBG: #ffffff;
   --color-buttonLinkHoverText: #000000;
   --color-buttonLinkHoverBorder: none;
 
   /* dialog-danger */
-  --color-dialogDangerBG: #FFFFFF;
-  --color-dialogDangerText: #43150D;
-  --color-dialogDangerTitle: #43150D;
-  --color-dialogDangerBorder: 1px solid #43150D;
+  --color-dialogDangerBG: #ffffff;
+  --color-dialogDangerText: #43150d;
+  --color-dialogDangerTitle: #43150d;
+  --color-dialogDangerBorder: 1px solid #43150d;
   /* dialog-default */
-  --color-dialogDefaultBG: #FFFFFF;
+  --color-dialogDefaultBG: #ffffff;
   --color-dialogDefaultTitle: #000000;
   --color-dialogDefaultText: #000000;
-  --color-dialogDefaultBorder: 1px solid #D9D9D9;
+  --color-dialogDefaultBorder: 1px solid #d9d9d9;
 
   /* carousel */
-  --color-activeDotColor: #EFF6FF;
+  --color-activeDotColor: #eff6ff;
   --color-inactiveDotColor: #8a858517;
 
   /* input-default */
-  --color-inputDefaultBG: #FFFFFF;
+  --color-inputDefaultBG: #ffffff;
   --color-inputDefaultText: #292929;
   --color-inputDefaultLabel: #000000;
   --color-inputDefaultBorder: 1px solid #000000;
   --color-inputDefaultPlaceholder: #292929;
 
   /* input-error */
-  --color-inputErrorBG: #FFFFFF;
-  --color-inputErrorText: #6B1304;
+  --color-inputErrorBG: #ffffff;
+  --color-inputErrorText: #6b1304;
   --color-inputErrorLabel: #292929;
-  --color-inputErrorBorder: 1px solid #6B1304;
+  --color-inputErrorBorder: 1px solid #6b1304;
   --color-inputErrorPlaceholder: #292929;
 
   /* switch-active */
-  --color-switchActiveBG: #004B70;
-  --color-switchActiveHandle: #FFFFFF;
+  --color-switchActiveBG: #004b70;
+  --color-switchActiveHandle: #ffffff;
   /* switch-inactive */
   --color-switchInactiveBG: #444444;
-  --color-switchInactiveHandle: #F8F9F9;
+  --color-switchInactiveHandle: #f8f9f9;
 
   /* slider */
-  --color-sliderHandle: #004B70;
-  --color-sliderBG: #D9D9D9;
+  --color-sliderHandle: #004b70;
+  --color-sliderBG: #d9d9d9;
   --color-sliderBorder: #444444;
 
   /* card */
-  --color-cardBG: #FFFFFF;
-  --color-cardText: #2F2E2E;
+  --color-cardBG: #ffffff;
+  --color-cardText: #2f2e2e;
   --color-cardTitle: #000000;
-  --color-cardBorder: 1px solid #E3DDDD;
-  --color-cardDivider: #79747E;
+  --color-cardBorder: 1px solid #e3dddd;
+  --color-cardDivider: #79747e;
 }
 
 /* ===== Font Variables ===== */
@@ -443,9 +443,9 @@ button {
   opacity: 0 !important;
 }
 
-.toast-success [data-sonner-toast][data-type=success] {
-  background: #E9FFD4 !important;
-  border: 1px solid #7BBA25 !important;
+.toast-success [data-sonner-toast][data-type='success'] {
+  background: #e9ffd4 !important;
+  border: 1px solid #7bba25 !important;
   color: var(--color-text) !important;
   margin-right: 0px !important;
 }
@@ -453,4 +453,12 @@ button {
 .toast-success {
   --toast-icon-margin-end: 0px !important;
   --toast-icon-margin-start: 0px !important;
+}
+
+/* ===== Reduce Motion ===== */
+.reduce-motion *,
+.reduce-motion *::before,
+.reduce-motion *::after {
+  transition: none !important;
+  animation: none !important;
 }
