@@ -13,7 +13,7 @@ export const PrivateRoute = ({ isPublicRoute }: PrivateRouteProps) => {
   useLineHeight()
 
   if (isPublicRoute) {
-    return isUserAuthenticated ? <Navigate to="/board" replace /> : <Outlet />
+    return isUserAuthenticated ? <Navigate to="/boards" replace /> : <Outlet />
   }
 
   return isUserAuthenticated ? <Outlet /> : <Navigate to="/" replace />

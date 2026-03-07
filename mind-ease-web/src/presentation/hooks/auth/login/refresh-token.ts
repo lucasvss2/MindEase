@@ -32,7 +32,6 @@ export const useRefreshLoginToken = () => {
         'sign-in',
       )
 
-
       showToast({
         type: 'success',
         message: 'Sessão renovada com sucesso!',
@@ -42,7 +41,7 @@ export const useRefreshLoginToken = () => {
       if (redirectPage) {
         return navigate(`/${redirectPage}`)
       } else {
-        navigate(`/board`)
+        navigate(`/boards`)
       }
     },
     onError: (err) => {

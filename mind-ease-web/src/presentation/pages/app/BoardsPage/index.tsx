@@ -1,4 +1,5 @@
 import { FilterSidebar, useToggle, PageLayout } from "@/presentation";
+import * as S from "./styles";
 
 export function BoardsPage() {
   const [isDrawerOpen, toggleFilterDrawer] = useToggle(true)
@@ -15,9 +16,9 @@ export function BoardsPage() {
         />
       }
     >
-      <div>
+      <S.Container>
 
-      </div>
+      </S.Container>
     </PageLayout>
   )
 }

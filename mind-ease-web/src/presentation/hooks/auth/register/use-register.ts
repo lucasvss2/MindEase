@@ -31,13 +31,12 @@ export const useRegister = () => {
         description: 'Sua conta foi criada com sucesso.',
       })
 
-      navigate('/board')
+      navigate('/boards')
     },
     onError: (err: any) => {
       console.error('Error registering', err)
 
-      const errorMessage =
-        err?.response?.data?.error || 'Erro ao criar conta. Tente novamente.'
+      const errorMessage = err?.response?.data?.error || 'Erro ao criar conta. Tente novamente.'
 
       showToast({
         type: 'error',
