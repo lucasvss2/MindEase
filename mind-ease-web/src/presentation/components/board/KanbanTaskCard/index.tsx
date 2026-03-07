@@ -12,7 +12,7 @@ import {
 } from '@ant-design/icons'
 import { useSortable } from '@dnd-kit/sortable'
 import { CSS } from '@dnd-kit/utilities'
-import { useDeleteTask, useUpdateTask } from '@/presentation'
+import { useDeleteTask, useUpdateTask, useComplexity } from '@/presentation'
 import type { Task, ChecklistItem } from '@/domain/models'
 import * as S from './styles'
 
@@ -53,6 +53,9 @@ export function KanbanTaskCard({ task }: KanbanTaskCardProps) {
     transition,
     opacity: isDragging ? 0.4 : 1,
   }
+
+  const { complexityLevel } = useComplexity()
+  const isSimplified = complexityLevel === 'simplified'
 
   const concludedCount = localChecklist.filter((i) => i.isConcluded).length
 
@@ -192,11 +195,13 @@ export function KanbanTaskCard({ task }: KanbanTaskCardProps) {
 
       {/* Checklist */}
       <S.ChecklistSection>
-        <S.ChecklistLabel>
-          Checklist{localChecklist.length > 0 ? ` (${concludedCount}/${localChecklist.length})` : ''}
-        </S.ChecklistLabel>
+        {(!isSimplified || localChecklist.length > 0) && (
+          <S.ChecklistLabel>
+            Checklist{localChecklist.length > 0 ? ` (${concludedCount}/${localChecklist.length})` : ''}
+          </S.ChecklistLabel>
+        )}
 
-        {localChecklist.map((item) => (
+        {!isSimplified && localChecklist.map((item) => (
           <S.ChecklistItem key={item.id} className={item.isConcluded ? 'concluded' : ''}>
             <input
               type="checkbox"
@@ -216,50 +221,54 @@ export function KanbanTaskCard({ task }: KanbanTaskCardProps) {
           </S.ChecklistItem>
         ))}
 
-        <S.AddChecklistRow>
-          <S.AddChecklistInput
-            placeholder="Adicionar item..."
-            value={newItemText}
-            onChange={(e) => setNewItemText(e.target.value)}
-            onKeyDown={(e) => {
-              if (e.key === 'Enter') handleAddItem()
-            }}
-          />
-          <S.AddChecklistButton onClick={handleAddItem} type="button">
-            <PlusOutlined />
-          </S.AddChecklistButton>
-        </S.AddChecklistRow>
+        {!isSimplified && (
+          <S.AddChecklistRow>
+            <S.AddChecklistInput
+              placeholder="Adicionar item..."
+              value={newItemText}
+              onChange={(e) => setNewItemText(e.target.value)}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter') handleAddItem()
+              }}
+            />
+            <S.AddChecklistButton onClick={handleAddItem} type="button">
+              <PlusOutlined />
+            </S.AddChecklistButton>
+          </S.AddChecklistRow>
+        )}
       </S.ChecklistSection>
 
       {/* Focus config */}
-      <S.FocusSection>
-        <S.FocusLabel>
-          <FieldTimeOutlined />
-          Configurações de Foco
-        </S.FocusLabel>
+      {!isSimplified && (
+        <S.FocusSection>
+          <S.FocusLabel>
+            <FieldTimeOutlined />
+            Configurações de Foco
+          </S.FocusLabel>
 
-        <S.FocusRow>
-          <S.FocusInput
-            type="number"
-            min={1}
-            max={120}
-            value={focusMinutes}
-            onChange={(e) => setFocusMinutes(Number(e.target.value))}
-          />
-          <S.FocusUnit>min de foco</S.FocusUnit>
-        </S.FocusRow>
+          <S.FocusRow>
+            <S.FocusInput
+              type="number"
+              min={1}
+              max={120}
+              value={focusMinutes}
+              onChange={(e) => setFocusMinutes(Number(e.target.value))}
+            />
+            <S.FocusUnit>min de foco</S.FocusUnit>
+          </S.FocusRow>
 
-        <S.FocusRow>
-          <S.FocusInput
-            type="number"
-            min={1}
-            max={60}
-            value={breakMinutes}
-            onChange={(e) => setBreakMinutes(Number(e.target.value))}
-          />
-          <S.FocusUnit>min de descanso</S.FocusUnit>
-        </S.FocusRow>
-      </S.FocusSection>
+          <S.FocusRow>
+            <S.FocusInput
+              type="number"
+              min={1}
+              max={60}
+              value={breakMinutes}
+              onChange={(e) => setBreakMinutes(Number(e.target.value))}
+            />
+            <S.FocusUnit>min de descanso</S.FocusUnit>
+          </S.FocusRow>
+        </S.FocusSection>
+      )}
 
       {/* Footer */}
       <S.CardFooter>

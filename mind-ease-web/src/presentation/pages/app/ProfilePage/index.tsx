@@ -7,6 +7,7 @@ import {
   useToggle,
   useFontSize,
   useLetterSpacing,
+  useComplexity,
   usePomodoroSettings,
   ResponsiveSlider,
   ResponsiveSwitch,
@@ -23,6 +24,7 @@ export function ProfilePage() {
   const [isDrawerOpen, toggleFilterDrawer] = useToggle(true)
   const { fontSizeLevel, changeFontSize } = useFontSize()
   const { letterSpacingLevel, changeLetterSpacing } = useLetterSpacing()
+  const { complexityLevel, changeComplexity } = useComplexity()
   const {
     soundEnabled,
     toggleSound,
@@ -59,6 +61,33 @@ export function ProfilePage() {
               </S.InfoContainer>
             )}
           </S.Content>
+        </ResponsiveCard>
+
+        <ResponsiveCard $width="100%">
+          <S.Title>Nível de Complexidade da Interface</S.Title>
+          <S.SettingsContent>
+            <p style={{ fontSize: '14px', color: '#666', margin: '0 0 8px' }}>
+              Controla a quantidade de informações exibidas nos cards de tarefa.
+            </p>
+            <S.SettingsContainer>
+              <ResponsiveButton
+                width="220px"
+                height="56px"
+                type={complexityLevel === 'simplified' ? 'default' : 'neutral'}
+                onClick={() => changeComplexity('simplified')}
+              >
+                Simplificado
+              </ResponsiveButton>
+              <ResponsiveButton
+                width="220px"
+                height="56px"
+                type={complexityLevel === 'normal' ? 'default' : 'neutral'}
+                onClick={() => changeComplexity('normal')}
+              >
+                Normal
+              </ResponsiveButton>
+            </S.SettingsContainer>
+          </S.SettingsContent>
         </ResponsiveCard>
 
         <ResponsiveCard $width="100%">
