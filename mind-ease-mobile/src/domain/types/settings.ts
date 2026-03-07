@@ -1,6 +1,5 @@
 export type Contrast = "low" | "moderate" | "high";
 export type ActivityProfile = "work" | "study";
-export type ComplexityLevel = "low" | "medium" | "high";
 export type FontType = "sans" | "serif" | "mono";
 
 export interface IUserPreferences {
@@ -9,7 +8,6 @@ export interface IUserPreferences {
   contrast: Contrast;
   activityProfile: ActivityProfile;
   enableSummaryMode: boolean;
-  complexityLevel: ComplexityLevel;
   animationSpeed: number;
   fontType: FontType;
 }
