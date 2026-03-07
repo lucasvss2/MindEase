@@ -1,5 +1,7 @@
 import { ButtonGroup } from "@/presentation/components/ButtonGroup";
 import { Card } from "@/presentation/components/Card";
+import { TOKENS } from "@/presentation/constants";
+import { useAccessibilityScale } from "@/presentation/hooks/useAccessibilityScale";
 import useUserPreferencesStore from "@/presentation/store/useUserPreferencesStore";
 import { useMemo } from "react";
 import { View } from "react-native";
@@ -7,6 +9,15 @@ import { SectionTitle } from "../InterfaceAdjustments/components/SectionTitle";
 
 export const ComplexityLevel = () => {
   const { complexityLevel, updateComplexityLevel } = useUserPreferencesStore();
+  const scaled3xlSpacing = useAccessibilityScale<number>(
+    TOKENS.SPACING["3xl"],
+    "number",
+  );
+
+  const scaledMdSpacing = useAccessibilityScale<number>(
+    TOKENS.SPACING["md"],
+    "number",
+  );
 
   const buttonsOptions = useMemo(
     () => [
@@ -33,7 +44,7 @@ export const ComplexityLevel = () => {
   );
 
   return (
-    <View className='mb-10 gap-4 '>
+    <View style={{ marginBottom: scaled3xlSpacing, gap: scaledMdSpacing }}>
       <SectionTitle>Nível de Complexidade</SectionTitle>
       <Card>
         <ButtonGroup buttons={buttonsOptions} />

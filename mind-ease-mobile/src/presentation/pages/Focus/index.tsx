@@ -187,7 +187,7 @@ export function Focus({
             style={[
               scaledText3xlSize,
               {
-                fontFamily: fontType,
+                fontFamily: TOKENS.FONT_FAMILY[fontType],
                 fontWeight: 700,
                 marginBottom: scaledSpacingXsSize,
               },
@@ -200,7 +200,7 @@ export function Focus({
             style={[
               scaledTextBaseSize,
               {
-                fontFamily: fontType,
+                fontFamily: TOKENS.FONT_FAMILY[fontType],
                 fontWeight: 400,
                 marginBottom: scaledSpacing2xlSize,
               },
@@ -242,7 +242,7 @@ export function Focus({
           style={[
             scaledText3xlSize,
             {
-              fontFamily: fontType,
+              fontFamily: TOKENS.FONT_FAMILY[fontType],
               fontWeight: 700,
               marginBottom: scaledSpacingXsSize,
             },
@@ -255,7 +255,7 @@ export function Focus({
           style={[
             scaledTextBaseSize,
             {
-              fontFamily: fontType,
+              fontFamily: TOKENS.FONT_FAMILY[fontType],
               fontWeight: 400,
               marginBottom: scaledSpacing2xlSize,
             },

@@ -5,7 +5,7 @@ import { Text, TextStyle } from "react-native";
 
 export const CardTitle = ({ title }: { title: string }) => {
   const scaledTitleFontSpacing = useAccessibilityScale<TextStyle>(
-    TOKENS.FONT_SIZE["2xl"],
+    TOKENS.FONT_SIZE["xl"],
   );
   const { fontType } = useUserPreferencesStore();
 

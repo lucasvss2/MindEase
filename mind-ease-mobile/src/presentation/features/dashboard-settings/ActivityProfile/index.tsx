@@ -1,5 +1,6 @@
 import { ButtonGroup } from "@/presentation/components/ButtonGroup";
 import { Card } from "@/presentation/components/Card";
+import { TOKENS } from "@/presentation/constants";
 import { useAccessibilityScale } from "@/presentation/hooks/useAccessibilityScale";
 import useUserPreferencesStore from "@/presentation/store/useUserPreferencesStore";
 import { FontAwesome6 } from "@expo/vector-icons";
@@ -11,6 +12,16 @@ export const ActivityProfile = () => {
   const { activityProfile, updateActivityProfile } = useUserPreferencesStore();
   const scaledGap = useAccessibilityScale<number>(16, "number");
   const scaledIconSize = useAccessibilityScale<TextStyle>(20).fontSize;
+
+  const scaledMdSpacing = useAccessibilityScale<number>(
+    TOKENS.SPACING["md"],
+    "number",
+  );
+
+  const scaled3xlSpacing = useAccessibilityScale<number>(
+    TOKENS.SPACING["3xl"],
+    "number",
+  );
 
   const buttons = useMemo(
     () => [
@@ -31,7 +42,7 @@ export const ActivityProfile = () => {
   );
 
   return (
-    <View className='gap-4 mt-10'>
+    <View style={{ gap: scaledMdSpacing, marginTop: scaled3xlSpacing }}>
       <View className='flex flex-row items-center' style={{ gap: scaledGap }}>
         <FontAwesome6 name='user' size={scaledIconSize} color='black' />
 

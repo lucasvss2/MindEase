@@ -1,8 +1,9 @@
-import React from "react";
-import { View, Text, TouchableOpacity, Image, ImageSourcePropType } from "react-native";
-import { MaterialIcons } from "@expo/vector-icons";
-import { cn } from "@/utils/twClassnamesResolver";
+import { TOKENS } from "@/presentation/constants";
 import { THEME_COLORS } from "@/presentation/constants/theme";
+import useUserPreferencesStore from "@/presentation/store/useUserPreferencesStore";
+import { cn } from "@/utils/twClassnamesResolver";
+import { MaterialIcons } from "@expo/vector-icons";
+import { Image, Text, TouchableOpacity, View } from "react-native";
 import { IAvatarProps } from "./interface";
 
 function getInitials(name: string): string {
@@ -22,6 +23,7 @@ export function Avatar({
 }: IAvatarProps) {
   const hasImage = !!imageUri;
   const initials = name ? getInitials(name) : "";
+  const { fontType } = useUserPreferencesStore();
 
   const containerStyle = {
     width: size,
@@ -33,29 +35,30 @@ export function Avatar({
     <View
       className={cn(
         "items-center justify-center overflow-hidden bg-blue-400",
-        className
+        className,
       )}
       style={containerStyle}
     >
       {hasImage ? (
         <Image
           source={typeof imageUri === "string" ? { uri: imageUri } : imageUri}
-          className="w-full h-full"
-          resizeMode="cover"
+          className='w-full h-full'
+          resizeMode='cover'
         />
       ) : initials ? (
         <Text
-          className={cn(
-            "font-lexend-semi-bold text-neutral-0",
-            textClassName
-          )}
-          style={{ fontSize: size * 0.4 }}
+          className={cn(" text-neutral-0", textClassName)}
+          style={{
+            fontSize: size * 0.4,
+            fontFamily: TOKENS.FONT_FAMILY[fontType],
+            fontWeight: 700,
+          }}
         >
           {initials}
         </Text>
       ) : (
         <MaterialIcons
-          name="person"
+          name='person'
           size={size * 0.6}
           color={THEME_COLORS.neutral[0]}
         />
@@ -67,8 +70,8 @@ export function Avatar({
     return (
       <TouchableOpacity
         onPress={onPress}
-        accessibilityRole="button"
-        accessibilityLabel="Avatar do usuário"
+        accessibilityRole='button'
+        accessibilityLabel='Avatar do usuário'
       >
         {content}
       </TouchableOpacity>
@@ -77,3 +80,4 @@ export function Avatar({
 
   return content;
 }
+

@@ -1,3 +1,5 @@
+import { TOKENS } from "@/presentation/constants";
+import { useAccessibilityScale } from "@/presentation/hooks/useAccessibilityScale";
 import { useState } from "react";
 import { Controller, useFormContext } from "react-hook-form";
 import { Pressable, TextInputProps } from "react-native";
@@ -10,12 +12,21 @@ interface IPasswordField extends TextInputProps {
 }
 
 export const PasswordField = ({
-  label = 'Senha',
+  label = "Senha",
   controllerName = "password",
   ...props
 }: IPasswordField) => {
   const [showPassword, setShowPassword] = useState(false);
   const { control } = useFormContext();
+  const scaledLgIconSize = useAccessibilityScale<number>(
+    TOKENS.FONT_SIZE["lg"],
+    "number",
+  );
+
+  const scalexlIconSize = useAccessibilityScale<number>(
+    TOKENS.FONT_SIZE["xl"],
+    "number",
+  );
 
   const iconName = showPassword ? "eye" : "eye-slash";
 
@@ -31,7 +42,7 @@ export const PasswordField = ({
             message={fieldState?.error?.message}
           >
             <InputRoot isError={fieldState.invalid}>
-              <InputIcon name='lock' size={18} />
+              <InputIcon name='lock' size={scaledLgIconSize} />
 
               <InputField
                 secureTextEntry={!showPassword}
@@ -40,7 +51,7 @@ export const PasswordField = ({
                 {...field}
               />
               <Pressable onPress={() => setShowPassword((prev) => !prev)}>
-                <InputIcon name={iconName} size={20} />
+                <InputIcon name={iconName} size={scalexlIconSize} />
               </Pressable>
             </InputRoot>
           </FormField>

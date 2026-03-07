@@ -20,7 +20,7 @@ export const TaskHeader = ({ task, scaledTextBase }: ITaskHeader) => {
   } = useTaskHeader({ task });
 
   const scaledTitleSize = useAccessibilityScale<TextStyle>(
-    TOKENS.FONT_SIZE["2xl"],
+    TOKENS.FONT_SIZE["xl"],
   );
 
   return (

@@ -1,8 +1,10 @@
-import React from "react";
-import { View, Text, TouchableOpacity } from "react-native";
-import { MaterialIcons } from "@expo/vector-icons";
-import { cn } from "@/utils/twClassnamesResolver";
+import { TOKENS } from "@/presentation/constants";
 import { THEME_COLORS } from "@/presentation/constants/theme";
+import { useAccessibilityScale } from "@/presentation/hooks/useAccessibilityScale";
+import useUserPreferencesStore from "@/presentation/store/useUserPreferencesStore";
+import { cn } from "@/utils/twClassnamesResolver";
+import { MaterialIcons } from "@expo/vector-icons";
+import { Text, TextStyle, TouchableOpacity, View } from "react-native";
 import { IScreenHeaderProps } from "./interface";
 
 export function ScreenHeader({
@@ -13,35 +15,71 @@ export function ScreenHeader({
   className,
   titleClassName,
 }: IScreenHeaderProps) {
+  const { fontType } = useUserPreferencesStore();
+  const scaledMdSpacing = useAccessibilityScale<number>(
+    TOKENS.SPACING["md"],
+    "number",
+  );
+
+  const scaledXsSpacing = useAccessibilityScale<number>(
+    TOKENS.SPACING["xs"],
+    "number",
+  );
+
+  const scaledXlFontSize = useAccessibilityScale<TextStyle>(
+    TOKENS.SPACING["xl"],
+  );
+
+  const scaled3xsIconSize = useAccessibilityScale<number>(
+    TOKENS.SIZE["3xs"],
+    "number",
+  );
+
+  const scaledSmSize = useAccessibilityScale<number>(
+    TOKENS.SPACING["sm"],
+    "number",
+  );
+
   return (
     <View
       className={cn(
-        "flex-row items-center px-4 py-3 border-b border-neutral-200 bg-neutral-0",
-        className
+        "flex-row items-center border-b border-neutral-200 bg-neutral-0",
+        className,
       )}
+      style={{ padding: scaledMdSpacing }}
     >
-      <View className="flex-row items-center flex-1 min-w-0 gap-2">
-        <TouchableOpacity onPress={onBack} className="p-2 -ml-2" accessibilityRole="button" accessibilityLabel="Voltar">
+      <View
+        className='flex-row items-center flex-1 min-w-0'
+        style={{ gap: scaledXsSpacing }}
+      >
+        <TouchableOpacity
+          onPress={onBack}
+          accessibilityRole='button'
+          accessibilityLabel='Voltar'
+          style={{ padding: scaledXsSpacing, marginLeft: scaledXsSpacing }}
+        >
           <MaterialIcons
-            name="arrow-back"
-            size={24}
+            name='arrow-back'
+            size={scaled3xsIconSize}
             color={THEME_COLORS.neutral[1000]}
           />
         </TouchableOpacity>
         {titlePrefix}
         <Text
-          className={cn(
-            "text-2xl font-lexend-semi-bold text-neutral-1000 flex-1",
-            titleClassName
-          )}
+          className={cn("text-neutral-1000 flex-1", titleClassName)}
           numberOfLines={2}
           adjustsFontSizeToFit
           minimumFontScale={0.7}
+          style={[
+            scaledXlFontSize,
+            { fontFamily: TOKENS.FONT_FAMILY[fontType], fontWeight: 700 },
+          ]}
         >
           {title}
         </Text>
       </View>
-      {rightSlot ?? <View className="w-10" />}
+      {rightSlot ?? <View style={{ width: scaledSmSize }} />}
     </View>
   );
 }
+

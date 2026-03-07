@@ -11,7 +11,13 @@ import useUserPreferencesStore from "@/presentation/store/useUserPreferencesStor
 import { cn } from "@/utils/twClassnamesResolver";
 import { MaterialIcons } from "@expo/vector-icons";
 import { useState } from "react";
-import { ScrollView, Text, TouchableOpacity, View } from "react-native";
+import {
+  ScrollView,
+  Text,
+  TextStyle,
+  TouchableOpacity,
+  View,
+} from "react-native";
 import { BoardModal, Header } from "./components";
 
 export function Menu() {
@@ -20,6 +26,7 @@ export function Menu() {
   const { data: boards } = useGetBoards();
   const { mutateAsync: mutateCreateBoard, isPending: isCreatingBoard } =
     useCreateBoardMutation();
+  const { fontType } = useUserPreferencesStore();
 
   const scaledGapBoardList = useAccessibilityScale<number>(
     TOKENS.SPACING["lg"],
@@ -30,6 +37,16 @@ export function Menu() {
     TOKENS.SPACING["lg"],
     "number",
   );
+
+  const scaledFontSize2xl = useAccessibilityScale<TextStyle>(
+    TOKENS.FONT_SIZE["2xl"],
+  );
+
+  const scaledFontSizeSm = useAccessibilityScale<TextStyle>(
+    TOKENS.FONT_SIZE["sm"],
+  );
+
+  const fontFamily = TOKENS.FONT_FAMILY[fontType];
 
   const handleCreateBoard = async ({
     name,
@@ -65,12 +82,19 @@ export function Menu() {
             "px-5 pt-6 pb-6 border-b border-neutral-200 bg-neutral-0",
           )}
         >
-          <Text className='text-3xl font-lexend-bold text-neutral-1000'>
+          <Text
+            className='
+             text-neutral-1000'
+            style={[{ fontFamily, fontWeight: 700 }, scaledFontSize2xl]}
+          >
             Meus quadros
           </Text>
 
           {!enableSummaryMode && (
-            <Text className='text-base font-lexend-regular text-neutral-600 mt-1'>
+            <Text
+              className='text-neutral-600 mt-1'
+              style={[{ fontFamily }, scaledFontSizeSm]}
+            >
               {boards?.length} quadros ativos
             </Text>
           )}

@@ -13,7 +13,7 @@ export const SectionTitle: React.FC<{ children: React.ReactNode }> = ({
 
   return (
     <Text
-      className='font-lexend-semi-bold text-neutral-900 flex-shrink'
+      className=' text-neutral-900 flex-shrink'
       style={[
         scaledTitleFontSpacing,
         { fontFamily: TOKENS.FONT_FAMILY[fontType] },

@@ -17,7 +17,7 @@ export const Empty = ({ message }:{message: string}) => {
         style={[
           scaledEmptyText,
           {
-            fontFamily: fontType,
+            fontFamily: TOKENS.FONT_FAMILY[fontType],
             color: emptyContrast[contrast],
             fontWeight: 500,
           },

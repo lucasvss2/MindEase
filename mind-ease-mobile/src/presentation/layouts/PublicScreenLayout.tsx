@@ -96,7 +96,7 @@ export const PublicScreenLayout = ({
           {subTitle && (
             <Text
               className='text-center'
-              style={[scaledSubTitle, { fontFamily: fontType }]}
+              style={[scaledSubTitle, { fontFamily: TOKENS.FONT_FAMILY[fontType] }]}
             >
               {subTitle}
             </Text>

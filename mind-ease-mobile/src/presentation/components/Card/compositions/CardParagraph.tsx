@@ -9,7 +9,9 @@ export const CardParagraph = ({
   children,
   className = "",
 }: ICardsSharedProps) => {
-  const scaledFontSpacing = useAccessibilityScale<TextStyle>(18);
+  const scaledFontSpacing = useAccessibilityScale<TextStyle>(
+    TOKENS.FONT_SIZE.lg,
+  );
   const { fontType } = useUserPreferencesStore();
 
   return (

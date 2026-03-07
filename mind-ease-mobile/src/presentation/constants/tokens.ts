@@ -9,6 +9,7 @@ export const TOKENS = {
     "3xl": 28,
     "4xl": 32,
     "5xl": 36,
+    '7xl': 72
   },
   SPACING: {
     "2xs": 4,
@@ -27,8 +28,9 @@ export const TOKENS = {
     xs: 32,
     sm: 40,
     md: 44,
-    lg: 90,
-    xl: 112,
+    lg: 48,
+    xl: 52,
+    '2xl': 56
   },
   LINE_HEIGHT: 1.15,
   LETTER_SPACING: 0.12,

@@ -85,7 +85,6 @@ export const CreateAccountPage = () => {
         <PasswordField />
 
         <Button
-          className='gap-2'
           disabled={someFieldIsInvalid}
           onPress={handleSubmit(onCreateAccount)}
           isLoading={isPending}

@@ -1,6 +1,7 @@
-import React from "react";
-import { TouchableOpacity, TouchableOpacityProps } from "react-native";
+import { TOKENS } from "@/presentation/constants";
+import { useAccessibilityScale } from "@/presentation/hooks/useAccessibilityScale";
 import { cn } from "@/utils/twClassnamesResolver";
+import { TouchableOpacity, TouchableOpacityProps } from "react-native";
 import { useDropdownContext } from "../context/DropdownContext";
 
 interface DropdownItemProps extends Omit<TouchableOpacityProps, "onPress"> {
@@ -15,6 +16,10 @@ export function DropdownItem({
   ...props
 }: DropdownItemProps) {
   const { close, closeOnItemPress } = useDropdownContext();
+  const scaledMdSpacingSize = useAccessibilityScale<number>(
+    TOKENS.SPACING["md"],
+    "number",
+  );
 
   const handlePress = () => {
     onPress?.();
@@ -26,10 +31,12 @@ export function DropdownItem({
   return (
     <TouchableOpacity
       onPress={handlePress}
-      className={cn("px-4 py-3 border-b border-neutral-200", className)}
+      className={cn("border-b border-neutral-200", className)}
+      style={{ padding: scaledMdSpacingSize }}
       {...props}
     >
       {children}
     </TouchableOpacity>
   );
 }
+
