@@ -10,7 +10,8 @@ export const Column = styled.div<ColumnProps>`
   border-radius: 12px;
   padding: 16px;
   min-width: 280px;
-  max-width: 280px;
+  width: max-content;
+  max-width: 480px;
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -26,14 +27,14 @@ export const ColumnHeader = styled.div`
 `
 
 export const ColumnTitle = styled.span`
-  font-size: 14px;
+  font-size: calc(14px + var(--font-size-offset));
   font-weight: 600;
   color: var(--color-text);
   flex: 1;
 `
 
 export const ColumnTitleInput = styled.input`
-  font-size: 14px;
+  font-size: calc(14px + var(--font-size-offset));
   font-weight: 600;
   color: var(--color-text);
   background: transparent;
@@ -78,7 +79,7 @@ export const ColumnActions = styled.div`
 export const TaskCount = styled.span`
   font-weight: 400;
   color: var(--color-cardText);
-  font-size: 13px;
+  font-size: calc(13px + var(--font-size-offset));
 `
 
 export const DragHandle = styled.span`

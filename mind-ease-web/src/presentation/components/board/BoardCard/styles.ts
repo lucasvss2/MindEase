@@ -58,7 +58,7 @@ export const MenuButton = styled.button`
 `
 
 export const Name = styled.span`
-  font-size: 16px;
+  font-size: calc(16px + var(--font-size-offset));
   font-weight: 600;
   color: var(--color-text);
   line-height: 1.3;
@@ -66,7 +66,7 @@ export const Name = styled.span`
 `
 
 export const Description = styled.p`
-  font-size: 13px;
+  font-size: calc(13px + var(--font-size-offset));
   color: var(--color-subtext, #777);
   margin: 0;
   line-height: 1.5;

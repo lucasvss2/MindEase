@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { Dropdown, Modal } from 'antd'
+import { Dropdown, Modal, Tooltip } from 'antd'
 import {
   HolderOutlined,
   MoreOutlined,
@@ -8,6 +8,7 @@ import {
   ClockCircleOutlined,
   PlusOutlined,
   FieldTimeOutlined,
+  CloseOutlined,
 } from '@ant-design/icons'
 import { useSortable } from '@dnd-kit/sortable'
 import { CSS } from '@dnd-kit/utilities'
@@ -31,6 +32,12 @@ export function KanbanTaskCard({ task }: KanbanTaskCardProps) {
   // Local checklist optimistic state
   const [localChecklist, setLocalChecklist] = useState<ChecklistItem[]>(task.checklist ?? [])
   const [newItemText, setNewItemText] = useState('')
+
+  // Inline edit states
+  const [editingTitle, setEditingTitle] = useState(false)
+  const [titleDraft, setTitleDraft] = useState(task.title)
+  const [editingDesc, setEditingDesc] = useState(false)
+  const [descDraft, setDescDraft] = useState(task.description ?? '')
 
   const {
     attributes,
@@ -57,6 +64,12 @@ export function KanbanTaskCard({ task }: KanbanTaskCardProps) {
     updateTask({ taskId: task.id, params: { checklist: updated } })
   }
 
+  const handleDeleteItem = (itemId: string) => {
+    const updated = localChecklist.filter((i) => i.id !== itemId)
+    setLocalChecklist(updated)
+    updateTask({ taskId: task.id, params: { checklist: updated } })
+  }
+
   const handleAddItem = () => {
     const text = newItemText.trim()
     if (!text) return
@@ -65,6 +78,24 @@ export function KanbanTaskCard({ task }: KanbanTaskCardProps) {
     setLocalChecklist(updated)
     setNewItemText('')
     updateTask({ taskId: task.id, params: { checklist: updated } })
+  }
+
+  const handleTitleSave = () => {
+    const text = titleDraft.trim()
+    if (text && text !== task.title) {
+      updateTask({ taskId: task.id, params: { title: text } })
+    } else if (!text) {
+      setTitleDraft(task.title)
+    }
+    setEditingTitle(false)
+  }
+
+  const handleDescSave = () => {
+    const text = descDraft.trim()
+    if (text !== (task.description ?? '')) {
+      updateTask({ taskId: task.id, params: { description: text || null } })
+    }
+    setEditingDesc(false)
   }
 
   const handleDelete = () => {
@@ -107,8 +138,49 @@ export function KanbanTaskCard({ task }: KanbanTaskCardProps) {
         </S.DragHandle>
 
         <S.CardTitleBlock>
-          <S.CardTitle>{task.title}</S.CardTitle>
-          {task.description && <S.CardDescription>{task.description}</S.CardDescription>}
+          {editingTitle ? (
+            <S.CardTitleInput
+              autoFocus
+              value={titleDraft}
+              onChange={(e) => setTitleDraft(e.target.value)}
+              onBlur={handleTitleSave}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter') handleTitleSave()
+                if (e.key === 'Escape') { setTitleDraft(task.title); setEditingTitle(false) }
+              }}
+              onMouseDown={(e) => e.stopPropagation()}
+            />
+          ) : (
+            <Tooltip title={task.title} placement="top">
+              <S.CardTitle onDoubleClick={() => { setTitleDraft(task.title); setEditingTitle(true) }}>
+                {task.title}
+              </S.CardTitle>
+            </Tooltip>
+          )}
+          {editingDesc ? (
+            <S.CardDescInput
+              autoFocus
+              value={descDraft}
+              onChange={(e) => setDescDraft(e.target.value)}
+              onBlur={handleDescSave}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); handleDescSave() }
+                if (e.key === 'Escape') { setDescDraft(task.description ?? ''); setEditingDesc(false) }
+              }}
+              onMouseDown={(e) => e.stopPropagation()}
+              rows={2}
+              placeholder="Adicionar descrição..."
+            />
+          ) : (
+            <Tooltip title={task.description || undefined} placement="top">
+              <S.CardDescription
+                onDoubleClick={() => { setDescDraft(task.description ?? ''); setEditingDesc(true) }}
+                data-empty={!task.description || undefined}
+              >
+                {task.description || 'Clique duas vezes para adicionar descrição...'}
+              </S.CardDescription>
+            </Tooltip>
+          )}
         </S.CardTitleBlock>
 
         <Dropdown menu={{ items: menuItems }} trigger={['click']} placement="bottomRight">
@@ -131,7 +203,16 @@ export function KanbanTaskCard({ task }: KanbanTaskCardProps) {
               checked={item.isConcluded}
               onChange={() => handleToggleItem(item.id)}
             />
-            <span>{item.text}</span>
+            <Tooltip title={item.text} placement="top">
+              <S.ChecklistItemText>{item.text}</S.ChecklistItemText>
+            </Tooltip>
+            <S.ChecklistDeleteButton
+              type="button"
+              onClick={(e) => { e.preventDefault(); handleDeleteItem(item.id) }}
+              title="Remover item"
+            >
+              <CloseOutlined />
+            </S.ChecklistDeleteButton>
           </S.ChecklistItem>
         ))}
 

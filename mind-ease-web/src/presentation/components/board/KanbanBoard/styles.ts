@@ -19,7 +19,7 @@ export const AddColumnButton = styled.button`
   border-radius: 12px;
   background: transparent;
   color: var(--color-cardText);
-  font-size: 14px;
+  font-size: calc(14px + var(--font-size-offset));
   font-weight: 500;
   cursor: pointer;
   white-space: nowrap;
