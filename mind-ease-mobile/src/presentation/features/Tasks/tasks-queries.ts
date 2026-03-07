@@ -32,7 +32,7 @@ export const useGetTaskByBoardAndColumnId = (
   columnId: string,
 ) => {
   return useQuery({
-    queryKey: ["tasks"],
+    queryKey: ["tasks", boardId, columnId],
     queryFn: () => taskServices.getTaskByBoardAndColumnId(boardId, columnId!),
     enabled: !!columnId && !!boardId,
   });
