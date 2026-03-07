@@ -60,7 +60,7 @@ export const LoginPage = () => {
   return (
     <PublicScreenLayout
       title='Bem vindo(a)'
-      subTitle='Acesse sua conta Mind Ease'
+      subTitle='Acesse sua conta'
       footer={
         <View
           className='flex-row items-center justify-center w-full'
