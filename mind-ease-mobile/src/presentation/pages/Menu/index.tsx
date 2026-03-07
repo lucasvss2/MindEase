@@ -152,18 +152,17 @@ export function Menu() {
                 size={22}
                 color={THEME_COLORS.neutral[1000]}
               />
-              {!enableSummaryMode && (
-                <Text
-                  style={{
-                    fontSize: 16,
-                    fontFamily: "Lexend_600SemiBold",
-                    color: THEME_COLORS.neutral[1000],
-                    flexShrink: 0,
-                  }}
-                >
-                  Criar novo quadro
-                </Text>
-              )}
+
+              <Text
+                style={{
+                  fontSize: 16,
+                  fontFamily: "Lexend_600SemiBold",
+                  color: THEME_COLORS.neutral[1000],
+                  flexShrink: 0,
+                }}
+              >
+                {enableSummaryMode ? 'Novo quadro':'Criar novo quadro'}
+              </Text>
             </View>
           </TouchableOpacity>
         </View>

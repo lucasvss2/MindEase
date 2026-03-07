@@ -23,7 +23,7 @@ export const TasksColumnContainer = ({
   columnName,
 }: IColumnTasksSection) => {
   const [showCreateTaskModal, setShowCreateTaskModal] = useState(false);
-  const { fontType } = useUserPreferencesStore();
+  const { fontType, enableSummaryMode } = useUserPreferencesStore();
   const taskForm = useForm();
 
   const scaledHorizontalSpacing = useAccessibilityScale<number>(
@@ -63,11 +63,13 @@ export const TasksColumnContainer = ({
     >
       <View className={cn("py-3 flex-row justify-between")}>
         <View className={cn("flex-row items-center gap-2")}>
-          <MaterialIcons
-            name={"list"}
-            size={scaledIconSize}
-            color={boardColor}
-          />
+          {!enableSummaryMode && (
+            <MaterialIcons
+              name={"list"}
+              size={scaledIconSize}
+              color={boardColor}
+            />
+          )}
           <View className={cn("flex-row")}>
             <Text style={[scaledTextStyle]} className='font-bold'>
               {columnName}
@@ -79,7 +81,7 @@ export const TasksColumnContainer = ({
           className='flex-row items-center gap-4'
           onPress={() => setShowCreateTaskModal(true)}
         >
-          <Text style={[scaledXsText]}>Adicionar</Text>
+          {!enableSummaryMode && <Text style={[scaledXsText]}>Adicionar</Text>}
           <FontAwesome name='plus' size={14} />
         </TouchableOpacity>
       </View>
