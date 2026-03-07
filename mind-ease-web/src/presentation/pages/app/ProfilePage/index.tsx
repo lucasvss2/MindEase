@@ -31,7 +31,9 @@ export function ProfilePage() {
     notificationEnabled,
     toggleNotification,
     pomodoroDuration,
-    setPomodoroDuration
+    setPomodoroDuration,
+    cognitiveAlertThreshold,
+    setCognitiveAlertThreshold
   } = usePomodoroSettings()
 
   return (
@@ -184,6 +186,20 @@ export function ProfilePage() {
                   if (!isNaN(val) && val >= 1 && val <= 120) {
                     setPomodoroDuration(val)
                   }
+                }}
+              />
+            </S.SettingsContainer>
+            <h4 style={{ fontSize: '16px', fontWeight: 'bold' }}>Alerta de tempo (min)</h4>
+            <S.SettingsContainer>
+              <ResponsiveInput
+                type="number"
+                placeholder="Alertar após X minutos"
+                value={cognitiveAlertThreshold}
+                min={1}
+                max={240}
+                onChange={(e) => {
+                  const val = parseInt(e.target.value)
+                  if (!isNaN(val) && val >= 1) setCognitiveAlertThreshold(val)
                 }}
               />
             </S.SettingsContainer>

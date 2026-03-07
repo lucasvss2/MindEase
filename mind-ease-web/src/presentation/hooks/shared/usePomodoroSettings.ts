@@ -1,13 +1,15 @@
-import { usePomodoroSettingsStore } from "@/presentation/stores/pomodoro-settings-store"
+import { usePomodoroSettingsStore } from '@/presentation/stores/pomodoro-settings-store'
 
 export function usePomodoroSettings() {
   const {
     soundEnabled,
     notificationEnabled,
     pomodoroDuration,
+    cognitiveAlertThreshold,
     setSoundEnabled,
     setNotificationEnabled,
-    setPomodoroDuration
+    setPomodoroDuration,
+    setCognitiveAlertThreshold,
   } = usePomodoroSettingsStore()
 
   const toggleSound = () => setSoundEnabled(!soundEnabled)
@@ -17,10 +19,12 @@ export function usePomodoroSettings() {
     soundEnabled,
     notificationEnabled,
     pomodoroDuration,
+    cognitiveAlertThreshold,
     setSoundEnabled,
     setNotificationEnabled,
     setPomodoroDuration,
+    setCognitiveAlertThreshold,
     toggleSound,
-    toggleNotification
+    toggleNotification,
   }
 }

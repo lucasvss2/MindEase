@@ -48,7 +48,7 @@ export const FilterSidebar = ({
         <S.PanelContent>
           <ResponsiveButton
             type="default"
-            onClick={onClose}
+            onClick={() => navigate('/focus')}
           >
             <span style={{
               display: 'flex',
