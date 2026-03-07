@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query'
-import { makeRemoteLoadUser } from '@/main/factories'
+import { makeRemoteLoadUser } from '@/infra/factories'
 import authStore from '@/presentation/stores/auth-store'
 
 export const useUser = () => {
@@ -12,6 +12,6 @@ export const useUser = () => {
       return loadUser.load()
     },
     enabled: isUserAuthenticated,
-    staleTime: 1000 * 60 * 5, // 5 minutes
+    staleTime: 1000 * 60 * 5,
   })
 }

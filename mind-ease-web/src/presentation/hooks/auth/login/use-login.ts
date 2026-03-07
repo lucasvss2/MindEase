@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom'
 import { useMutation } from '@tanstack/react-query'
-import { makeRemoteAuthentication } from '@/main/factories'
+import { makeRemoteAuthentication } from '@/infra/factories'
 import authStore from '@/presentation/stores/auth-store'
 import { showToast } from '@/presentation'
 import { Authentication } from '@/domain/usecases'
