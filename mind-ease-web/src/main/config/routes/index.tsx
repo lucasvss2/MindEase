@@ -6,10 +6,10 @@ import {
   LoginPage,
   RegisterPage,
   BoardPage,
+  BoardsPage,
   ProfilePage,
   FocusModePage
 } from '@/presentation'
-import { } from '@/presentation/pages/app/FocusModePage'
 
 export const Routes = () => {
   return (
@@ -25,6 +25,7 @@ export const Routes = () => {
         {/* Private Routes - Deny Unauthenticated Users */}
         <Route element={<PrivateRoute />}>
           <Route path="/board" element={<BoardPage />} />
+          <Route path="/boards" element={<BoardsPage />} />
           <Route path="/profile" element={<ProfilePage />} />
           <Route path="/focus" element={<FocusModePage />} />
         </Route>
