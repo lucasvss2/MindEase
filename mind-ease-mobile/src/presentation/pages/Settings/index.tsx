@@ -38,6 +38,7 @@ export function Settings() {
       <InterfaceAdjustments />
       <SummaryMode />
       <Button
+        testID='save-preferences-button'
         variant='default'
         style={{ marginBottom: scaledSpacing2xl }}
         onPress={onSavePreferences}

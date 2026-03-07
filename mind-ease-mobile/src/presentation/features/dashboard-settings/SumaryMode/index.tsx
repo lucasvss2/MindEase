@@ -12,6 +12,7 @@ export const SummaryMode = () => {
     <Card className='flex-row justify-center mb-10 items-center flex-wrap'>
       <FormFieldLabel>Habilitar modo resumo</FormFieldLabel>
       <Switch
+        testID='summary-mode-switch'
         style={{ transform: [{ scaleX: 0.9 }, { scaleY: 0.9 }] }}
         value={enableSummaryMode}
         onValueChange={updateEnableSummaryMode}
