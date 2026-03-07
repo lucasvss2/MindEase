@@ -9,6 +9,7 @@ import {
   useLetterSpacing,
   useComplexity,
   usePomodoroSettings,
+  useReduceMotion,
   ResponsiveSlider,
   ResponsiveSwitch,
   ResponsiveInput,
@@ -25,6 +26,7 @@ export function ProfilePage() {
   const { fontSizeLevel, changeFontSize } = useFontSize()
   const { letterSpacingLevel, changeLetterSpacing } = useLetterSpacing()
   const { complexityLevel, changeComplexity } = useComplexity()
+  const { reduceMotion, transitionOverlayEnabled, setReduceMotion, setTransitionOverlayEnabled } = useReduceMotion()
   const {
     soundEnabled,
     toggleSound,
@@ -148,6 +150,20 @@ export function ProfilePage() {
               min={1}
               max={3}
             />
+            <h4 style={{ fontSize: '16px', fontWeight: 'bold' }}>Reduzir animações</h4>
+            <S.SettingsContainer>
+              <ResponsiveSwitch
+                checked={reduceMotion}
+                onChange={(val) => setReduceMotion(val)}
+              />
+            </S.SettingsContainer>
+            <h4 style={{ fontSize: '16px', fontWeight: 'bold' }}>Overlay de transição entre páginas</h4>
+            <S.SettingsContainer>
+              <ResponsiveSwitch
+                checked={transitionOverlayEnabled}
+                onChange={(val) => setTransitionOverlayEnabled(val)}
+              />
+            </S.SettingsContainer>
           </S.SettingsContent>
 
         </ResponsiveCard>

@@ -1,6 +1,6 @@
 import { Outlet, Navigate } from 'react-router-dom'
 import authStore from '@/presentation/stores/auth-store'
-import { useFontSize, useLetterSpacing, useLineHeight } from '@/presentation'
+import { useFontSize, useLetterSpacing, useLineHeight, useReduceMotion } from '@/presentation'
 
 interface PrivateRouteProps {
   isPublicRoute?: boolean
@@ -11,6 +11,7 @@ export const PrivateRoute = ({ isPublicRoute }: PrivateRouteProps) => {
   useFontSize()
   useLetterSpacing()
   useLineHeight()
+  useReduceMotion()
 
   if (isPublicRoute) {
     return isUserAuthenticated ? <Navigate to="/boards" replace /> : <Outlet />
