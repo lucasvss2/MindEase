@@ -15,6 +15,7 @@ type FilterSidebarProps = {
   isFiltersLoading?: boolean
   isFilterDrawerOpen: boolean
   onClose: () => void
+  boardSwitcher?: React.ReactNode
   /** @deprecated no longer needed — panel is now inline */
   getContainer?: () => HTMLElement
 }
@@ -24,6 +25,7 @@ export const FilterSidebar = ({
   isFiltersLoading,
   onClose,
   isFilterDrawerOpen,
+  boardSwitcher,
 }: FilterSidebarProps) => {
   const navigate = useNavigate()
   const { complexityLevel, changeComplexity } = useComplexity()
@@ -135,6 +137,8 @@ export const FilterSidebar = ({
               </S.ComplexityButton>
             </S.ComplexityButtons>
           </S.ComplexityGroup>
+
+          {boardSwitcher}
         </S.PanelContent>
 
         {filterFooter && (

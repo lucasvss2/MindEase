@@ -1,5 +1,5 @@
 import { useParams } from 'react-router-dom'
-import { FilterSidebar, useToggle, PageLayout, useBoard, KanbanBoard, usePomodoroSettings, useCognitiveAlert } from '@/presentation'
+import { FilterSidebar, useToggle, PageLayout, useBoard, KanbanBoard, usePomodoroSettings, useCognitiveAlert, BoardSwitcherSection } from '@/presentation'
 import * as S from './styles'
 import { Divider } from 'antd'
 
@@ -20,6 +20,7 @@ export function BoardPage() {
           isFilterDrawerOpen={isDrawerOpen}
           onClose={toggleFilterDrawer}
           filterFooter={null}
+          boardSwitcher={<BoardSwitcherSection activeBoardId={id!} />}
         />
       }
     >
