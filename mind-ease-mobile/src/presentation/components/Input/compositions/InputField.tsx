@@ -23,7 +23,7 @@ export const InputField = ({
 
   const { activeProfileId, study, work } = useUserPreferencesStore();
 
-  const { fontType , contrast} = activeProfileId === "study" ? study : work;
+  const { fontType, contrast } = activeProfileId === "study" ? study : work;
   const colorByContrast = inputColorsVariant[contrast].default;
 
   return (

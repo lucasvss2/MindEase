@@ -10,5 +10,6 @@ export interface ISheetModalProps {
   closeButtonAccessibilityLabel?: string;
   children: ReactNode;
   titleStyle?: TextStyle;
+  testId?: string
 }
 
