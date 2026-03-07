@@ -1,3 +1,5 @@
 export * from './auth'
 export * from './shared'
 export * from './boards'
+export * from './columns'
+export * from './tasks'
