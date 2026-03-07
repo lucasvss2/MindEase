@@ -1,7 +1,9 @@
-import { FilterSidebar, PomodoroTimer, ResponsiveCard, useToggle, PageLayout } from "@/presentation"
+import { FilterSidebar, PomodoroTimer, ResponsiveButton, ResponsiveCard, useToggle, PageLayout } from "@/presentation"
+import { useNavigate } from 'react-router-dom'
 import * as S from './styles'
 export const FocusModePage = () => {
   const [isDrawerOpen, toggleFilterDrawer] = useToggle(false)
+  const navigate = useNavigate()
   return (
     <PageLayout
       title="Modo Foco"
@@ -20,7 +22,9 @@ export const FocusModePage = () => {
           <S.Title>Timer Pomodoro</S.Title>
           <PomodoroTimer />
         </ResponsiveCard>
-
+        <ResponsiveButton type="neutral" width="200px" height="44px" onClick={() => navigate('/boards')}>
+          ← Voltar para Tarefas
+        </ResponsiveButton>
       </S.FocusModePageContainer>
     </PageLayout>
   )
