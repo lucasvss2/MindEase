@@ -6,6 +6,7 @@ export class TaskMapper {
     return {
       id: raw.id,
       userId: raw.userId,
+      boardId: raw.boardId,
       columnId: raw.columnId,
       title: raw.title,
       description: raw.description,
@@ -14,7 +15,9 @@ export class TaskMapper {
       hours: raw.hours,
       createdAt: raw.createdAt,
       updatedAt: raw.updatedAt,
-
+      checklist: raw.checklist,
+      enableSoundAlerts: raw.enableSoundAlerts,
+      isConcluded: raw.isConcluded,
       column: {
         id: raw.column.id,
         name: raw.column.name,

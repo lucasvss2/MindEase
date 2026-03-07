@@ -4,6 +4,7 @@ export interface TaskResponseDTO {
   id: string;
   userId: string;
   columnId: string;
+  boardId: string;
   title: string;
   description: string;
   status: TaskStatus;
@@ -21,6 +22,13 @@ export interface TaskResponseDTO {
       color: string;
     };
   };
+  checklist?: {
+    id: string;
+    text: string;
+    isConcluded: boolean;
+  }[];
+  isConcluded?: boolean;
+  enableSoundAlerts?: boolean;
 }
 
 export interface CreateTaskDTO {
@@ -30,10 +38,20 @@ export interface CreateTaskDTO {
   status: TaskStatus;
   dueDate: string;
   hours: number;
+  boardId: string;
+
+  checklist?: {
+    id: string;
+    text: string;
+    isConcluded: boolean;
+  }[];
+  isConcluded?: boolean;
+  enableSoundAlerts?: boolean;
 }
 
-export interface UpdateTaskDTO
-  extends Partial<Omit<CreateTaskDTO, "columnId">> {
+export interface UpdateTaskDTO extends Partial<
+  Omit<CreateTaskDTO, "columnId">
+> {
   columnId: string;
 }
 
