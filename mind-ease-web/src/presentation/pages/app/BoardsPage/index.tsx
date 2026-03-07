@@ -17,7 +17,7 @@ export function BoardsPage() {
       }
     >
       <S.Container>
-
+        <S.Title>Quadros | </S.Title>
       </S.Container>
     </PageLayout>
   )

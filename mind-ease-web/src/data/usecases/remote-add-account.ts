@@ -1,8 +1,8 @@
-import { AddAccount } from '@/domain/usecases'
-import { HttpClient, HttpStatusCode } from '@/data/protocols/http'
+import { AddAccount } from '@/domain'
+import { HttpClient, HttpStatusCode } from '@/data'
 
 export class RemoteAddAccount implements AddAccount {
-  constructor(private readonly httpClient: HttpClient<AddAccount.Model>) { }
+  constructor(private readonly httpClient: HttpClient<AddAccount.Model>) {}
 
   async add(params: AddAccount.Params): Promise<AddAccount.Model> {
     const httpResponse = await this.httpClient.request({

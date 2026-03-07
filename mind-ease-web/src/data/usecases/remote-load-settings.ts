@@ -1,8 +1,8 @@
-import { LoadSettings } from '@/domain/usecases'
-import { HttpClient, HttpStatusCode } from '@/data/protocols/http'
+import { LoadSettings } from '@/domain'
+import { HttpClient, HttpStatusCode } from '@/data'
 
 export class RemoteLoadSettings implements LoadSettings {
-  constructor(private readonly httpClient: HttpClient<LoadSettings.Model>) { }
+  constructor(private readonly httpClient: HttpClient<LoadSettings.Model>) {}
 
   async load(): Promise<LoadSettings.Model> {
     const httpResponse = await this.httpClient.request({

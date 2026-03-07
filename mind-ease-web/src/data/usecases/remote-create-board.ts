@@ -1,18 +1,18 @@
-import { SaveSettings } from '@/domain'
+import { CreateBoard } from '@/domain'
 import { HttpClient, HttpStatusCode } from '@/data'
 
-export class RemoteSaveSettings implements SaveSettings {
-  constructor(private readonly httpClient: HttpClient<SaveSettings.Model>) {}
+export class RemoteCreateBoard implements CreateBoard {
+  constructor(private readonly httpClient: HttpClient<CreateBoard.Model>) {}
 
-  async save(params: SaveSettings.Params): Promise<SaveSettings.Model> {
+  async create(params: CreateBoard.Params): Promise<CreateBoard.Model> {
     const httpResponse = await this.httpClient.request({
-      url: '/pomodoro/settings',
-      method: 'put',
+      url: '/boards',
+      method: 'post',
       body: params,
     })
 
     switch (httpResponse.statusCode) {
-      case HttpStatusCode.ok:
+      case HttpStatusCode.created:
         return httpResponse.body!
       case HttpStatusCode.unauthorized:
         throw new Error('Unauthorized')
