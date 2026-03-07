@@ -53,10 +53,10 @@ export const SettingsSlider = ({
 
         <View className='flex-row justify-between'>
           <Text
-            className='font-lexend-semi-bold self-end text-blue-600'
+            className='self-end text-blue-600'
             style={[
               scaledTitleFontSpacing,
-              { fontFamily: TOKENS.FONT_FAMILY[fontType] },
+              { fontFamily: TOKENS.FONT_FAMILY[fontType], fontWeight: 700 },
             ]}
           >
             {value.toFixed(2)}

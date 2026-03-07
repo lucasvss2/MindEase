@@ -138,7 +138,7 @@ export const TaskModal = ({
             className='text-green-800'
             style={[
               scaledChecklisTitle,
-              { fontFamily: fontType, fontWeight: "600" },
+              { fontFamily: TOKENS.FONT_FAMILY[fontType], fontWeight: "600" },
             ]}
           >
             CheckList

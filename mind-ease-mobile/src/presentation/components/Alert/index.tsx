@@ -29,7 +29,7 @@ export const Alert = ({ title, children, type = "info" }: IAlert) => {
       <Text
         style={{
           color: contrastStyle.color,
-          fontFamily: fontType,
+          fontFamily: TOKENS.FONT_FAMILY[fontType],
           fontWeight: 500,
           ...scaledTitleSize,
         }}
@@ -39,7 +39,7 @@ export const Alert = ({ title, children, type = "info" }: IAlert) => {
       <Text
         style={{
           color: contrastStyle.color,
-          fontFamily: fontType,
+          fontFamily: TOKENS.FONT_FAMILY[fontType],
           ...scaledDescriptionSize,
         }}
       >

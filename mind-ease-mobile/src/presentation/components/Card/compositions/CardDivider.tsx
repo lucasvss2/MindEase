@@ -1,8 +1,9 @@
+import { TOKENS } from "@/presentation/constants";
 import { useAccessibilityScale } from "@/presentation/hooks/useAccessibilityScale";
 import { View } from "react-native";
 
 export const CardDivider = () => {
-  const scaledMargin = useAccessibilityScale<number>(24, "number");
+  const scaledMargin = useAccessibilityScale<number>(TOKENS.SPACING.xl, "number");
 
   return (
     <View

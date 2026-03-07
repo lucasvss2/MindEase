@@ -20,7 +20,7 @@ export const TaskHeaderTextContainer = ({
     <View className='flex-row justify-between items-center'>
       <Text
         className='text-neutral-1000 break-words w-8/12'
-        style={[{ fontFamily: fontType }, scaledText]}
+        style={[{ fontFamily: TOKENS.FONT_FAMILY[fontType] }, scaledText]}
       >
         {text}
       </Text>

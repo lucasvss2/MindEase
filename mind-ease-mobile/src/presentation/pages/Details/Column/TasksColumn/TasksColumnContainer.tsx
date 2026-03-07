@@ -47,7 +47,7 @@ export const TasksColumnContainer = ({
   const scaledXsText = useAccessibilityScale<TextStyle>(TOKENS.FONT_SIZE.xs);
 
   const scaledTextStyle = {
-    fontFamily: fontType,
+    fontFamily: TOKENS.FONT_FAMILY[fontType],
     ...scaledSmText,
   };
 

@@ -1,17 +1,14 @@
-import { useState } from "react";
-import { View, Text, ScrollView, TextStyle } from "react-native";
-import { MaterialIcons } from "@expo/vector-icons";
-import {
-  MOCK_NOTIFICATIONS,
-  type INotification,
-} from "@/data/mocks";
+import { MOCK_NOTIFICATIONS, type INotification } from "@/data/mocks";
 import { Dropdown, DropdownItem } from "@/presentation/components";
 import { THEME_COLORS } from "@/presentation/constants/theme";
-import { formatTimestamp } from "@/utils/dateUtils";
-import { cn } from "@/utils/twClassnamesResolver";
 import { TOKENS } from "@/presentation/constants/tokens";
 import { useAccessibilityScale } from "@/presentation/hooks/useAccessibilityScale";
 import useUserPreferencesStore from "@/presentation/store/useUserPreferencesStore";
+import { formatTimestamp } from "@/utils/dateUtils";
+import { cn } from "@/utils/twClassnamesResolver";
+import { MaterialIcons } from "@expo/vector-icons";
+import { useState } from "react";
+import { ScrollView, Text, TextStyle, View } from "react-native";
 
 export function NotificationDropdown() {
   const [notifications] = useState<INotification[]>(MOCK_NOTIFICATIONS);
@@ -55,7 +52,7 @@ export function NotificationDropdown() {
   const trigger = (
     <View style={{ padding: scaledSpacingXs }}>
       <MaterialIcons
-        name="notifications-none"
+        name='notifications-none'
         size={28}
         color={THEME_COLORS.neutral[1000]}
       />
@@ -64,8 +61,8 @@ export function NotificationDropdown() {
 
   const badge =
     unreadCount > 0 ? (
-      <View className="absolute top-0 right-0 w-6 h-6 rounded-full bg-red-500 items-center justify-center">
-        <Text className="text-xs font-lexend-bold text-neutral-0">
+      <View className='absolute top-0 right-0 w-6 h-6 rounded-full bg-red-500 items-center justify-center'>
+        <Text className='text-xs font-lexend-bold text-neutral-0'>
           {unreadCount > 9 ? "9+" : unreadCount}
         </Text>
       </View>
@@ -77,44 +74,51 @@ export function NotificationDropdown() {
       badge={badge}
       width={320}
       maxHeight={384}
-      position="right"
-      align="bottom"
+      position='right'
+      align='bottom'
       closeOnItemPress={false}
       accessibilityLabel={`Notificações${unreadCount > 0 ? `, ${unreadCount} não lidas` : ""}`}
     >
-      <View className="flex-col">
+      <View className='flex-col'>
         <View
-          className="flex-row items-center justify-between border-b border-neutral-200"
+          className='flex-row items-center justify-between border-b border-neutral-200'
           style={{
             paddingHorizontal: scaledSpacingMd,
             paddingVertical: scaledSpacingSm,
           }}
         >
           <Text
-            className="text-base text-neutral-1000"
-            style={[{ fontFamily: fontType, fontWeight: 600 }, scaledTextBase]}
+            className='text-base text-neutral-1000'
+            style={[
+              { fontFamily: TOKENS.FONT_FAMILY[fontType], fontWeight: 600 },
+              scaledTextBase,
+            ]}
           >
             Notificações
           </Text>
         </View>
-        <ScrollView className="max-h-80">
+        <ScrollView className='max-h-80'>
           {notifications.length === 0 ? (
             <View
-            className="items-center"
+              className='items-center'
               style={{
                 paddingHorizontal: scaledSpacingMd,
                 paddingVertical: scaledSpacing2xl,
               }}
             >
               <MaterialIcons
-                name="notifications-none"
+                name='notifications-none'
                 size={48}
                 color={THEME_COLORS.neutral[300]}
               />
               <Text
-                className="text-neutral-600" 
+                className='text-neutral-600'
                 style={[
-                  { fontFamily: fontType, fontWeight: 400, marginTop: scaledSpacingSm },
+                  {
+                    fontFamily: TOKENS.FONT_FAMILY[fontType],
+                    fontWeight: 400,
+                    marginTop: scaledSpacingSm,
+                  },
                   scaledTextSm,
                 ]}
               >
@@ -132,40 +136,53 @@ export function NotificationDropdown() {
                 className={cn(!notification.read && "bg-blue-50")}
               >
                 <View
-                className="flex-row items-center"
+                  className='flex-row items-center'
                   style={{
-
                     gap: scaledSpacingSm,
                   }}
                 >
                   {!notification.read && (
                     <View
-                    className="w-2 h-2 rounded-full bg-blue-400"
+                      className='w-2 h-2 rounded-full bg-blue-400'
                       style={{
                         marginTop: scaledSpacingXs,
                       }}
                     />
                   )}
-                  <View className="flex-1">
+                  <View className='flex-1'>
                     <Text
-                      className=" text-neutral-1000"
-                      style={[{ fontFamily: fontType, fontWeight: 600 }, scaledTextSm]}
+                      className=' text-neutral-1000'
+                      style={[
+                        {
+                          fontFamily: TOKENS.FONT_FAMILY[fontType],
+                          fontWeight: 600,
+                        },
+                        scaledTextSm,
+                      ]}
                     >
                       {notification.title}
                     </Text>
                     <Text
-                      className=" text-neutral-600"
+                      className=' text-neutral-600'
                       style={[
-                        { fontFamily: fontType, fontWeight: 400, marginTop: scaledSpacing2xs },
+                        {
+                          fontFamily: TOKENS.FONT_FAMILY[fontType],
+                          fontWeight: 400,
+                          marginTop: scaledSpacing2xs,
+                        },
                         scaledTextXs,
                       ]}
                     >
                       {notification.message}
                     </Text>
                     <Text
-                      className=" text-neutral-400"
+                      className=' text-neutral-400'
                       style={[
-                        { fontFamily: fontType, fontWeight: 400, marginTop: scaledSpacing2xs },
+                        {
+                          fontFamily: TOKENS.FONT_FAMILY[fontType],
+                          fontWeight: 400,
+                          marginTop: scaledSpacing2xs,
+                        },
                         scaledTextXs,
                       ]}
                     >
@@ -181,3 +198,4 @@ export function NotificationDropdown() {
     </Dropdown>
   );
 }
+

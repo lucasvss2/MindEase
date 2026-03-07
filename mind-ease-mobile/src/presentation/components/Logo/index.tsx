@@ -13,7 +13,7 @@ export const Logo = ({ size = "sm" }: { size?: "xs" | "sm" }) => {
   );
 
   const scaledWidth = useAccessibilityScale<number>(
-    isSizeXs ? TOKENS.SIZE.sm : TOKENS.SIZE.lg,
+    isSizeXs ? TOKENS.SIZE.sm : 112,
     "number",
   );
 
@@ -27,11 +27,15 @@ export const Logo = ({ size = "sm" }: { size?: "xs" | "sm" }) => {
   return (
     <Text
       className={cn(
-        "border  border-blue-400 bg-blue-100 w-28 text-blue-600 font-extrabold rounded-lg text-center items-center font-inter-black shadow-lg",
+        "border  border-blue-400 bg-blue-100  text-blue-600 font-extrabold rounded-lg text-center items-center font-inter-black shadow-lg",
       )}
       style={[
         scaledText,
-        { fontFamily: fontType, width: scaledWidth, padding: scaledPadding },
+        {
+          fontFamily: TOKENS.FONT_FAMILY[fontType],
+          width: scaledWidth,
+          padding: scaledPadding,
+        },
       ]}
     >
       M

@@ -201,6 +201,7 @@ export function Details() {
                   boardId={boardId}
                   columnId={id}
                   columnName={columnData?.name ?? ""}
+                  boardColor={color!}
                 />
               );
             })}

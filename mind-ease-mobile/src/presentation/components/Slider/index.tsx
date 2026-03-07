@@ -1,9 +1,14 @@
 import { TOKENS } from "@/presentation/constants";
+import { useAccessibilityScale } from "@/presentation/hooks/useAccessibilityScale";
 import useUserPreferencesStore from "@/presentation/store/useUserPreferencesStore";
 import SliderCommunity, { SliderProps } from "@react-native-community/slider";
 
 export const Slider: React.FC<SliderProps> = (props) => {
   const { contrast } = useUserPreferencesStore();
+  const scaled3xlSpacing = useAccessibilityScale<number>(
+    TOKENS.SPACING["3xl"],
+    "number",
+  );
 
   const styleByContrast = {
     low: {
@@ -24,7 +29,7 @@ export const Slider: React.FC<SliderProps> = (props) => {
     <SliderCommunity
       {...styleByContrast[contrast]}
       maximumTrackTintColor={TOKENS.COLORS.neutral[350]}
-      className='p-10'
+      style={{ padding: scaled3xlSpacing }}
       {...props}
     />
   );

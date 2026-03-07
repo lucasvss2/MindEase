@@ -3,7 +3,7 @@ import useUserPreferencesStore from "@/presentation/store/useUserPreferencesStor
 import { cn } from "@/utils/twClassnamesResolver";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { Text, TouchableOpacity, View } from "react-native";
-import { IChecklistItemView } from "../interface";
+import { IChecklistItemView } from "../../interface";
 
 export const ChecklistItemView = ({
   item,
@@ -36,7 +36,7 @@ export const ChecklistItemView = ({
               ? "text-neutral-500 line-through"
               : "text-neutral-800",
           )}
-          style={{ fontFamily: fontType }}
+          style={{ fontFamily: TOKENS.FONT_FAMILY[fontType] }}
         >
           {item.text}
         </Text>
