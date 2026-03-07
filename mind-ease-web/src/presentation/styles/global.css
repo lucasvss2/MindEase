@@ -462,3 +462,15 @@ button {
   transition: none !important;
   animation: none !important;
 }
+
+/* ===== Sidebar: accessibility vars forwarding ===== */
+.ant-layout-sider {
+  font-size: calc(var(--font-size-base) + var(--font-size-offset));
+  letter-spacing: calc(0.12em + var(--letter-spacing-offset));
+}
+
+.ant-layout-sider .ant-btn,
+.ant-layout-sider .ant-btn > span:not(.anticon) {
+  font-size: inherit !important;
+  letter-spacing: inherit !important;
+}

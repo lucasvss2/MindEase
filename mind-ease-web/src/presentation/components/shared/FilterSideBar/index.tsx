@@ -4,6 +4,11 @@ import * as S from './styles'
 import { ResponsiveButton } from '@/presentation'
 import { useNavigate } from 'react-router-dom'
 import { useComplexity } from '@/presentation/hooks/shared/useComplexity'
+import { useFontSizeStore } from '@/presentation/stores/font-size-store'
+import { useLetterSpacingStore } from '@/presentation/stores/letter-spacing-store'
+
+const FONT_EXTRA: Record<number, number> = { 1: 0, 2: 16, 3: 32 }
+const SPACING_EXTRA: Record<number, number> = { 1: 0, 2: 24, 3: 48 }
 
 type FilterSidebarProps = {
   filterFooter?: React.ReactNode
@@ -22,6 +27,9 @@ export const FilterSidebar = ({
 }: FilterSidebarProps) => {
   const navigate = useNavigate()
   const { complexityLevel, changeComplexity } = useComplexity()
+  const { fontSizeLevel } = useFontSizeStore()
+  const { letterSpacingLevel } = useLetterSpacingStore()
+  const sidebarWidth = 280 + FONT_EXTRA[fontSizeLevel] + SPACING_EXTRA[letterSpacingLevel]
   return (
     <S.OuterWrapper $isOpen={isFilterDrawerOpen}>
       {!isFilterDrawerOpen &&
@@ -39,7 +47,7 @@ export const FilterSidebar = ({
 
       {/* Inline expanding panel — no overlay, no mask */}
       <S.InlinePanelWrapper
-        width={280}
+        width={sidebarWidth}
         collapsible={false}
         collapsed={!isFilterDrawerOpen}
         collapsedWidth={0}
@@ -47,6 +55,7 @@ export const FilterSidebar = ({
       >
         <S.PanelContent>
           <ResponsiveButton
+            width="100%"
             type="default"
             onClick={() => navigate('/focus')}
           >
