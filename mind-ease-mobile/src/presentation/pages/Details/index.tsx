@@ -14,13 +14,15 @@ import { useGetColumnsByBoardId } from "@/presentation/features/Columns/columns-
 import { lightenHex } from "@/utils/colorUtils";
 import { cn } from "@/utils/twClassnamesResolver";
 
+import { TOKENS } from "@/presentation/constants";
+import { useAccessibilityScale } from "@/presentation/hooks/useAccessibilityScale";
 import { useColumnStore } from "@/presentation/store/useColumnStore";
+import useUserPreferencesStore from "@/presentation/store/useUserPreferencesStore";
 import { MaterialIcons } from "@expo/vector-icons";
-import { useQueryClient } from "@tanstack/react-query";
 import { useLocalSearchParams, useRouter } from "expo-router";
 import { useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
-import { ScrollView, Text, View } from "react-native";
+import { ScrollView, Text, TextStyle, View } from "react-native";
 import { BoardModal } from "../Tasks/components/BoardModal";
 import { CreateColumnModal } from "./Column/Modal/CreateColumnModal";
 import { EditColumnModal } from "./Column/Modal/EditColumnModal";
@@ -47,6 +49,9 @@ export function Details() {
   const { data: columns } = useGetColumnsByBoardId(boardId);
 
   const { toggleColumn, selectionsByBoard } = useColumnStore();
+  const { fontType } = useUserPreferencesStore();
+  const scaledTextBase = useAccessibilityScale<TextStyle>(TOKENS.FONT_SIZE.sm);
+  const fontFamily = TOKENS.FONT_FAMILY[fontType];
 
   const taskForm = useForm();
   const currentBoardVisibleMap = selectionsByBoard[boardId] || {};
@@ -141,13 +146,19 @@ export function Details() {
               accessibilityLabel='Opções do quadro'
             >
               <DropdownItem onPress={() => setShowEditModal(true)}>
-                <Text className='text-sm font-lexend-regular text-neutral-1000'>
+                <Text
+                  className=' text-neutral-1000'
+                  style={[scaledTextBase, { fontFamily }]}
+                >
                   Editar quadro
                 </Text>
               </DropdownItem>
 
               <DropdownItem onPress={onDeleteBoard}>
-                <Text className='text-sm font-lexend-regular text-neutral-1000'>
+                <Text
+                  className=' text-neutral-1000'
+                  style={[scaledTextBase, { fontFamily }]}
+                >
                   Excluir quadro
                 </Text>
               </DropdownItem>
@@ -161,7 +172,10 @@ export function Details() {
               "px-5 pt-6 pb-6 border-b border-neutral-200 bg-neutral-0",
             )}
           >
-            <Text className='text-base font-lexend-regular text-neutral-600'>
+            <Text
+              className=' text-neutral-600'
+              style={[scaledTextBase, { fontFamily }]}
+            >
               {columns && columns?.length > 0
                 ? "Colunas visíveis"
                 : "Nenhuma coluna criada"}
