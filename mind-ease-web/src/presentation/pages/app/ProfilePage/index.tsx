@@ -8,7 +8,9 @@ import {
   useToggle,
   useFontSize,
   useLetterSpacing,
-  ResponsiveSlider
+  usePomodoroSettings,
+  ResponsiveSlider,
+  ResponsiveSwitch
 } from "@/presentation";
 import * as S from "./styles";
 import { Skeleton } from "antd";
@@ -20,6 +22,12 @@ export function ProfilePage() {
   const [isDrawerOpen, toggleFilterDrawer] = useToggle(true)
   const { fontSizeLevel, changeFontSize } = useFontSize()
   const { letterSpacingLevel, changeLetterSpacing } = useLetterSpacing()
+  const {
+    soundEnabled,
+    toggleSound,
+    notificationEnabled,
+    toggleNotification
+  } = usePomodoroSettings()
 
   return (
     <PageLayout
@@ -34,8 +42,8 @@ export function ProfilePage() {
         />
       }
     >
-      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'flex-start', height: '100%', gap: '24px' }}>
-        <ResponsiveCard $width="40%" $height="65%">
+      <S.ConfigBody>
+        <ResponsiveCard $width="100%" >
           <S.Title>Perfil</S.Title>
           <S.Content>
             {isLoading ? (
@@ -49,7 +57,8 @@ export function ProfilePage() {
             )}
           </S.Content>
         </ResponsiveCard>
-        <ResponsiveCard $width="50%" $height="65%">
+
+        <ResponsiveCard $width="100%">
           <S.Title>Ajustes de Interface</S.Title>
           <S.SettingsContent>
             <h4 style={{ fontSize: '16px', fontWeight: 'bold' }}>Contraste</h4>
@@ -108,7 +117,32 @@ export function ProfilePage() {
           </S.SettingsContent>
 
         </ResponsiveCard>
-      </div>
+        <ResponsiveCard $width="100%">
+          <S.Title>Configurações do Pomodoro</S.Title>
+          <S.SettingsSwitchContent>
+            <h4 style={{ fontSize: '16px', fontWeight: 'bold' }}>Sons</h4>
+            <S.SettingsContainer>
+              <ResponsiveSwitch
+                checked={soundEnabled}
+                onChange={toggleSound}
+              />
+            </S.SettingsContainer>
+            <h4 style={{ fontSize: '16px', fontWeight: 'bold' }}>Notificações</h4>
+            <S.SettingsContainer>
+              <ResponsiveSwitch
+                checked={notificationEnabled}
+                onChange={() => {
+                  if (!notificationEnabled && Notification.permission !== 'granted') {
+                    Notification.requestPermission();
+                  }
+                  toggleNotification();
+                }}
+              />
+            </S.SettingsContainer>
+          </S.SettingsSwitchContent>
+
+        </ResponsiveCard>
+      </S.ConfigBody>
     </PageLayout>
   )
 }
