@@ -1,5 +1,5 @@
 import { RefreshLoginResponse } from '@/domain'
-import authStore from '@/main/config/stores/auth-store'
+import authStore from '@/presentation/stores/auth-store'
 import axios, { AxiosError } from 'axios'
 
 export const api = axios.create({

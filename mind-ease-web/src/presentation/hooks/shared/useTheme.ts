@@ -1,6 +1,6 @@
 import { useEffect, useCallback } from 'react'
-import { ThemeMode, THEME_CLASSES } from '@/main/config/styles'
-import { useThemeStore } from '@/main/config/stores/theme-store'
+import { ThemeMode, THEME_CLASSES } from '@/presentation/styles'
+import { useThemeStore } from '@/presentation/stores/theme-store'
 
 export function useTheme() {
   const { theme, setTheme } = useThemeStore()

@@ -1,5 +1,5 @@
 import { useLayoutEffect, useCallback } from 'react'
-import { useLetterSpacingStore, LetterSpacingLevel } from '@/main/config/stores/letter-spacing-store'
+import { useLetterSpacingStore, LetterSpacingLevel } from '@/presentation/stores/letter-spacing-store'
 
 const OFFSET_MAP: Record<LetterSpacingLevel, number> = {
   1: 0,

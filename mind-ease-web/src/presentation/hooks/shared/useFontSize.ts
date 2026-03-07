@@ -1,5 +1,5 @@
 import { useLayoutEffect, useCallback } from 'react'
-import { useFontSizeStore, FontSizeLevel } from '@/main/config/stores/font-size-store'
+import { useFontSizeStore, FontSizeLevel } from '@/presentation/stores/font-size-store'
 
 const OFFSET_MAP: Record<FontSizeLevel, number> = {
   1: 0,

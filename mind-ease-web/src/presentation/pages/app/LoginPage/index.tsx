@@ -1,10 +1,10 @@
-import { PageLayout } from "@/layouts"
 import * as S from "./styles"
 import { Form, Divider } from "antd"
 import {
   ResponsiveButton,
   ResponsiveInput,
-  ResponsiveCard
+  ResponsiveCard,
+  PageLayout
 } from "@/presentation"
 import { useLogin } from "@/presentation/hooks/auth"
 import { Authentication } from "@/domain/usecases"

@@ -1,4 +1,3 @@
-import { PageLayout } from "@/layouts";
 import {
   ResponsiveButton,
   ResponsiveCard,
@@ -10,7 +9,9 @@ import {
   useLetterSpacing,
   usePomodoroSettings,
   ResponsiveSlider,
-  ResponsiveSwitch
+  ResponsiveSwitch,
+  ResponsiveInput,
+  PageLayout
 } from "@/presentation";
 import * as S from "./styles";
 import { Skeleton } from "antd";
@@ -26,7 +27,9 @@ export function ProfilePage() {
     soundEnabled,
     toggleSound,
     notificationEnabled,
-    toggleNotification
+    toggleNotification,
+    pomodoroDuration,
+    setPomodoroDuration
   } = usePomodoroSettings()
 
   return (
@@ -139,8 +142,23 @@ export function ProfilePage() {
                 }}
               />
             </S.SettingsContainer>
+            <h4 style={{ fontSize: '16px', fontWeight: 'bold' }}>Timer</h4>
+            <S.SettingsContainer>
+              <ResponsiveInput
+                type="number"
+                placeholder="Duração do Pomodoro (min)"
+                value={pomodoroDuration}
+                min={1}
+                max={120}
+                onChange={(e) => {
+                  const val = parseInt(e.target.value)
+                  if (!isNaN(val) && val >= 1 && val <= 120) {
+                    setPomodoroDuration(val)
+                  }
+                }}
+              />
+            </S.SettingsContainer>
           </S.SettingsSwitchContent>
-
         </ResponsiveCard>
       </S.ConfigBody>
     </PageLayout>

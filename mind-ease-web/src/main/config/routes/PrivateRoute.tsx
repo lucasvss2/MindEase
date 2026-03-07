@@ -1,5 +1,5 @@
 import { Outlet, Navigate } from 'react-router-dom'
-import authStore from '@/main/config/stores/auth-store'
+import authStore from '@/presentation/stores/auth-store'
 import { useFontSize, useLetterSpacing, useLineHeight } from '@/presentation'
 
 interface PrivateRouteProps {

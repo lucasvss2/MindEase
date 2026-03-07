@@ -1,6 +1,6 @@
 import { create } from 'zustand'
 import { persist, createJSONStorage } from 'zustand/middleware'
-import { ThemeMode } from '@/main/config/styles'
+import { ThemeMode } from '@/presentation/styles'
 
 interface ThemeStoreState {
   theme: ThemeMode

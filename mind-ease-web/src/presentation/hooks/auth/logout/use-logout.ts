@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom'
 import { useQueryClient } from '@tanstack/react-query'
-import { signOut } from '@/main/config/stores/auth-store'
+import { signOut } from '@/presentation/stores/auth-store'
 
 export const useLogout = () => {
   const navigate = useNavigate()

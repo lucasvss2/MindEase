@@ -1,8 +1,7 @@
-import { useState, useEffect, useCallback, useRef } from "react";
+import { useState, useEffect, useLayoutEffect, useCallback, useRef } from "react";
 import { usePomodoroSettings } from "@/presentation";
 import * as S from "./styles";
 
-const POMODORO_DURATION = 25 * 60; // 25 minutes in seconds
 const ALARM_SOUND_URL = "https://assets.mixkit.co/active_storage/sfx/2869/2869-preview.mp3";
 
 function formatTime(seconds: number): string {
@@ -12,10 +11,31 @@ function formatTime(seconds: number): string {
 }
 
 export function PomodoroTimer() {
-  const [timeLeft, setTimeLeft] = useState(POMODORO_DURATION);
+  const { soundEnabled, notificationEnabled, pomodoroDuration } = usePomodoroSettings();
+  const totalSeconds = pomodoroDuration * 60;
+
+  const [timeLeft, setTimeLeft] = useState(totalSeconds);
   const [isRunning, setIsRunning] = useState(false);
-  const { soundEnabled, notificationEnabled } = usePomodoroSettings();
   const audioRef = useRef<HTMLAudioElement | null>(null);
+
+  // Refs para acessar valores atuais dentro do interval sem dependências obsoletas
+  const soundEnabledRef = useRef(soundEnabled);
+  const notificationEnabledRef = useRef(notificationEnabled);
+
+  // Sincroniza refs após cada render (useLayoutEffect: síncrono, antes de qualquer paint)
+  useLayoutEffect(() => {
+    soundEnabledRef.current = soundEnabled;
+    notificationEnabledRef.current = notificationEnabled;
+  });
+
+  // Padrão "setState durante render" — reseta o timer quando a duração muda (apenas se pausado)
+  const [prevTotalSeconds, setPrevTotalSeconds] = useState(totalSeconds);
+  if (prevTotalSeconds !== totalSeconds) {
+    setPrevTotalSeconds(totalSeconds);
+    if (!isRunning) {
+      setTimeLeft(totalSeconds);
+    }
+  }
 
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -26,30 +46,30 @@ export function PomodoroTimer() {
   useEffect(() => {
     if (!isRunning) return;
 
-    if (timeLeft === 0) {
-      setIsRunning(false);
-
-      // Trigger Alerts
-      if (soundEnabled && audioRef.current) {
-        audioRef.current.play().catch(e => console.error("Error playing sound:", e));
-      }
-
-      if (notificationEnabled && Notification.permission === "granted") {
-        new Notification("MindEase Pomodoro", {
-          body: "Tempo esgotado! Hora de uma pausa.",
-          icon: "/favicon.ico" // Assuming favicon exists
-        });
-      }
-
-      return;
-    }
-
     const interval = setInterval(() => {
-      setTimeLeft((prev) => prev - 1);
+      setTimeLeft((prev) => {
+        if (prev > 1) return prev - 1;
+
+        // Timer concluído: agenda efeitos colaterais fora do updater
+        setTimeout(() => {
+          setIsRunning(false);
+          if (soundEnabledRef.current && audioRef.current) {
+            audioRef.current.play().catch(e => console.error("Error playing sound:", e));
+          }
+          if (notificationEnabledRef.current && Notification.permission === "granted") {
+            new Notification("MindEase Pomodoro", {
+              body: "Tempo esgotado! Hora de uma pausa.",
+              icon: "/favicon.ico"
+            });
+          }
+        }, 0);
+
+        return 0;
+      });
     }, 1000);
 
     return () => clearInterval(interval);
-  }, [isRunning, timeLeft]);
+  }, [isRunning]);
 
   const handleStartPause = useCallback(() => {
     if (timeLeft === 0) return;
@@ -58,10 +78,10 @@ export function PomodoroTimer() {
 
   const handleReset = useCallback(() => {
     setIsRunning(false);
-    setTimeLeft(POMODORO_DURATION);
-  }, []);
+    setTimeLeft(totalSeconds);
+  }, [totalSeconds]);
 
-  const progress = timeLeft / POMODORO_DURATION; // 1 → full, 0 → empty
+  const progress = timeLeft / totalSeconds; // 1 → full, 0 → empty
   const radius = 106;
   const circumference = 2 * Math.PI * radius;
   const strokeDashoffset = circumference * (1 - progress);

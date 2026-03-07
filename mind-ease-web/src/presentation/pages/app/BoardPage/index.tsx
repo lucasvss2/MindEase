@@ -1,5 +1,4 @@
-import { PageLayout } from "@/layouts";
-import { FilterSidebar, useToggle } from "@/presentation";
+import { FilterSidebar, useToggle, PageLayout } from "@/presentation";
 
 export function BoardPage() {
   const [isDrawerOpen, toggleFilterDrawer] = useToggle(true)

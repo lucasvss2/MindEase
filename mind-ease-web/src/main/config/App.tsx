@@ -6,11 +6,11 @@ import { Toaster } from 'sonner'
 import ptBR from 'antd/es/locale/pt_BR'
 
 import { Routes } from './routes'
-import { antdTheme } from './styles'
-import './styles/global.css'
+import { antdTheme } from '@/presentation/styles'
+import '@/presentation/styles/global.css'
 import { queryClient } from '@/infra'
 
-import './styles/font.css'
+import '@/presentation/styles/font.css'
 
 const App: React.FC = () => {
   return (

@@ -2,7 +2,7 @@ import { useNavigate } from 'react-router-dom'
 
 import { useMutation } from '@tanstack/react-query'
 import { makeRemoteRefreshLogin } from '@/main/factories'
-import authStore from '@/main/config/stores/auth-store'
+import authStore from '@/presentation/stores/auth-store'
 import { showToast } from '@/presentation'
 
 type RefreshLoginMutation = {
