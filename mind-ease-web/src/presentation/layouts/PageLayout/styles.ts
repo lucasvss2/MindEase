@@ -162,7 +162,9 @@ export const Content = styled(Layout.Content)`
     flex-direction: column;
     margin: 16px 0;
     overflow-y: auto;
+    overflow-x: hidden;
     height: 100%;
+    flex: 1;
 
     &.no-padding {
       padding: 0;

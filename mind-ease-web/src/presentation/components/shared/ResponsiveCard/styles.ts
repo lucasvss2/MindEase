@@ -23,6 +23,8 @@ export const ResponsiveCard = styled(Card) <ResponsiveCardProps>`
     width: 100%;
     height: 100%;
     gap: ${props => props.$gap || "0px"};
+    overflow-y: auto;
+    overflow-x: hidden;
     
     &::before, &::after {
       display: none;

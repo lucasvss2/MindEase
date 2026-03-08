@@ -30,7 +30,11 @@ export const FocusModePage = () => {
       }
     >
       <S.FocusModePageContainer>
-        <ResponsiveCard $width="60%" $height="70%">
+        <ResponsiveCard
+          $width="100%"
+          $height="auto"
+          style={{ maxWidth: '800px', flex: 1, minHeight: '400px', padding: '24px' }}
+        >
           <S.Title>Timer Pomodoro</S.Title>
           {taskTitle && (
             <S.TaskTitle>Em foco: {taskTitle}</S.TaskTitle>
