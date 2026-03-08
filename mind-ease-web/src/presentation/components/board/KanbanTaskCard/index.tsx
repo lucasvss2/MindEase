@@ -25,15 +25,12 @@ export function KanbanTaskCard({ task }: KanbanTaskCardProps) {
   const { mutate: deleteTask } = useDeleteTask(task.columnId)
   const { mutate: updateTask } = useUpdateTask(task.columnId)
 
-  // Local focus config stored per card (UI only)
   const [focusMinutes, setFocusMinutes] = useState(25)
   const [breakMinutes, setBreakMinutes] = useState(5)
 
-  // Local checklist optimistic state
   const [localChecklist, setLocalChecklist] = useState<ChecklistItem[]>(task.checklist ?? [])
   const [newItemText, setNewItemText] = useState('')
 
-  // Inline edit states
   const [editingTitle, setEditingTitle] = useState(false)
   const [titleDraft, setTitleDraft] = useState(task.title)
   const [editingDesc, setEditingDesc] = useState(false)
@@ -126,7 +123,6 @@ export function KanbanTaskCard({ task }: KanbanTaskCardProps) {
     },
   ]
 
-  // Total elapsed hours displayed
   const hours = task.hours ?? 0
   const h = Math.floor(hours)
   const m = Math.round((hours - h) * 60)
