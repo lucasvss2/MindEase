@@ -42,7 +42,7 @@ export function CreateBoardModal({ open, onClose }: CreateBoardModalProps) {
 
   return (
     <Modal
-      title="Novo Quadro"
+      title="Criar Novo Quadro"
       open={open}
       onCancel={handleClose}
       maskClosable={false}
