@@ -22,7 +22,9 @@ O **MindEase** é uma plataforma de organização e produtividade desenhada sob 
 
 ### Web
 
-- **Vite:** Build tool de próxima geração utilizada para garantir um ambiente de desenvolvimento ultra-rápido e otimização de performance no bundle final.
+- **Vite (v7):** Build tool de próxima geração utilizada para garantir um ambiente de desenvolvimento ultra-rápido e otimização de performance no bundle final.
+
+- **React (v19) & React DOM:** Base para construção da interface e lógica da versão web.
 
 - **React Router Dom (v7):** Gerenciamento de rotas e navegação declarativa na versão web.
 
@@ -32,9 +34,15 @@ O **MindEase** é uma plataforma de organização e produtividade desenhada sob 
 
 - **Polished:** Conjunto de ferramentas leves para manipular cores e estilos diretamente no código (útil para os cálculos de contraste dinâmico).
 
+#### 🖱️ Interação & Drag and Drop
+
+- **@dnd-kit (Core, Sortable, Utilities):** Biblioteca moderna e acessível para arrastar e soltar, utilizada no quadro Kanban para reordenar e mover tarefas entre colunas.
+
 #### 🛠️ Gestão de Dados & Utilitários
 
-- **TanStack React Query Devtools:** Ferramenta de inspeção para monitorar o estado das requisições e cache de dados em tempo real durante o desenvolvimento.
+- **TanStack React Query (v5) & Devtools:** Sincronização de dados, gerenciamento de cache e ferramenta de inspeção para monitorar o estado das requisições em tempo real.
+
+- **Axios:** Cliente HTTP para consumo de APIs.
 
 - **Dayjs:** Biblioteca leve para manipulação e formatação de datas (essencial para a lógica de calendários e histórico de tarefas).
 
@@ -44,11 +52,9 @@ O **MindEase** é uma plataforma de organização e produtividade desenhada sob 
 
 - **Zustand (v5):** Mesma solução de estado global utilizada no Mobile, garantindo paridade de lógica entre as plataformas para as configurações de contraste e acessibilidade.
 
-#### 🧪 Qualidade de Código & Testes
+#### 🧪 Qualidade de Código
 
 - **TypeScript (v5.9):** Superset JavaScript que adiciona tipagem estática, reduzindo erros em tempo de desenvolvimento e melhorando a manutenção do código.
-
-- **Vitest:** Framework de testes unitários focado em velocidade, utilizado para validar as lógicas de cálculo de tempo e transições de estado.
 
 - **ESLint & Prettier:** Conjunto de ferramentas para garantir a padronização do código e prevenir erros comuns de sintaxe e estilo.
 
@@ -142,7 +148,19 @@ npx expo run:ios
 
 ### 🌐 **Web**
 
-//Add imagens
+<img src="mind-ease-web/src/assets/images/Screen 1.png" alt="Tela 1" width="800" >
+
+<img src="mind-ease-web/src/assets/images/Screen 2.png" alt="Tela 2" width="800" >
+
+<img src="mind-ease-web/src/assets/images/Screen 3.png" alt="Tela 3" width="800" >
+
+<img src="mind-ease-web/src/assets/images/Screen 4.png" alt="Tela 4" width="800" >
+
+<img src="mind-ease-web/src/assets/images/Screen 5.png" alt="Tela 5" width="800" >
+
+<img src="mind-ease-web/src/assets/images/Screen 6.png" alt="Tela 6" width="800" >
+
+<img src="mind-ease-web/src/assets/images/Screen 7.png" alt="Tela 7" width="800" >
 
 ### 📱 **Mobile**
 
@@ -156,11 +174,10 @@ npx expo run:ios
 
 <img src="mind-ease-mobile/assets/images/screenshots/task-details.png" alt="Tela detalhes da tarefa" width="200" >
 
-
 ## 📄 Licença
 
-
 #### Este projeto é privado e de propriedade exclusiva.
+
 ---
 
 ## 🙏 Agradecimentos
@@ -172,4 +189,3 @@ Um agradecimento especial à comunidade de código aberto pelas incríveis ferra
 ---
 
 **MindEase** - MindEase - Apoiando o bem-estar mental através da tecnologia 💙💙
-
