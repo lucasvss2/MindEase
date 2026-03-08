@@ -19,7 +19,7 @@ import {
 } from '@dnd-kit/sortable'
 import { PlusOutlined } from '@ant-design/icons'
 import { useQueryClient } from '@tanstack/react-query'
-import { useColumns, useCreateColumn } from '@/presentation'
+import { useColumns, useCreateColumn, useReorderColumns } from '@/presentation'
 import { makeRemoteUpdateTask } from '@/infra/factories'
 import type { Column, Task } from '@/domain/models'
 import { KanbanColumn } from '../KanbanColumn'
@@ -38,6 +38,10 @@ const saveColumnOrder = (boardId: string, ids: string[]) => {
   localStorage.setItem(`column-order-${boardId}`, JSON.stringify(ids))
 }
 
+const saveTaskOrder = (columnId: string, ids: string[]) => {
+  localStorage.setItem(`task-order-${columnId}`, JSON.stringify(ids))
+}
+
 interface KanbanBoardProps {
   boardId: string
 }
@@ -45,6 +49,7 @@ interface KanbanBoardProps {
 export function KanbanBoard({ boardId }: KanbanBoardProps) {
   const { data: columns = [] } = useColumns(boardId)
   const { mutate: createColumn, isPending } = useCreateColumn(boardId)
+  const { mutate: reorderColumns } = useReorderColumns(boardId)
   const queryClient = useQueryClient()
 
   const [activeColumn, setActiveColumn] = useState<Column | null>(null)
@@ -152,6 +157,7 @@ export function KanbanBoard({ boardId }: KanbanBoardProps) {
         const reordered = arrayMove(orderedColumns, oldIndex, newIndex)
         saveColumnOrder(boardId, reordered.map((c) => c.id))
         queryClient.setQueryData<Column[]>(['columns', boardId], reordered)
+        reorderColumns(reordered.map((c, index) => ({ id: c.id, position: index })))
       }
       return
     }
@@ -172,6 +178,7 @@ export function KanbanBoard({ boardId }: KanbanBoardProps) {
       if (!targetColumnId) return
 
       if (originalColumnId !== targetColumnId) {
+        // Mover entre colunas — persiste no backend
         makeRemoteUpdateTask()
           .update(task.id, { columnId: targetColumnId })
           .then(() => {
@@ -182,6 +189,24 @@ export function KanbanBoard({ boardId }: KanbanBoardProps) {
             queryClient.invalidateQueries({ queryKey: ['tasks', originalColumnId] })
             queryClient.invalidateQueries({ queryKey: ['tasks', targetColumnId] })
           })
+      } else {
+        // Reordenar dentro da mesma coluna — salva ordem no localStorage
+        const currentTasks = getTasksForColumn(originalColumnId)
+        const oldIndex = currentTasks.findIndex((t) => t.id === task.id)
+
+        let newIndex: number
+        if (overType === 'task') {
+          newIndex = currentTasks.findIndex((t) => t.id === over.id)
+        } else {
+          // Solto sobre a coluna (área vazia) → move para o fim
+          newIndex = currentTasks.length - 1
+        }
+
+        if (oldIndex === -1 || newIndex === -1 || oldIndex === newIndex) return
+
+        const reordered = arrayMove(currentTasks, oldIndex, newIndex)
+        queryClient.setQueryData<Task[]>(['tasks', originalColumnId], reordered)
+        saveTaskOrder(originalColumnId, reordered.map((t) => t.id))
       }
     }
   }

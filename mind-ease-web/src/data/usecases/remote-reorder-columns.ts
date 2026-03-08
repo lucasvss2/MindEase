@@ -1,8 +1,18 @@
 import { ReorderColumns } from '@/domain'
+import { HttpClient } from '@/data/protocols/http'
 
 export class RemoteReorderColumns implements ReorderColumns {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  async reorder(_boardId: string, _params: ReorderColumns.Params): Promise<void> {
-    return
+  constructor(private readonly httpClient: HttpClient<unknown>) {}
+
+  async reorder(_boardId: string, params: ReorderColumns.Params): Promise<void> {
+    await Promise.all(
+      params.map(({ id, position }) =>
+        this.httpClient.request({
+          url: `/columns/${id}`,
+          method: 'put',
+          body: { position },
+        }),
+      ),
+    )
   }
 }
