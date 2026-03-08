@@ -73,28 +73,28 @@ export function CreateTaskModal({ open, onClose, boardId, columnId, columnName }
 
   return (
     <Modal
-      title={`Novo card em "${columnName}"`}
+      title={`Criar novo card em "${columnName}"`}
       open={open}
       onCancel={handleClose}
       width={520}
       footer={
         <S.Footer>
           <ResponsiveButton
+            type="neutral"
+            width="230px"
+            height="44px"
+            onClick={handleClose}
+          >
+            Cancelar
+          </ResponsiveButton>
+          <ResponsiveButton
             type="default"
-            width="260px"
+            width="230px"
             height="44px"
             onClick={handleSubmit}
             disabled={!title.trim() || isPending}
           >
             Criar Card
-          </ResponsiveButton>
-          <ResponsiveButton
-            type="neutral"
-            width="110px"
-            height="44px"
-            onClick={handleClose}
-          >
-            Cancelar
           </ResponsiveButton>
         </S.Footer>
       }
