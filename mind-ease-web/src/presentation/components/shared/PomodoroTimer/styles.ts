@@ -7,6 +7,11 @@ export const TimerWrapper = styled.div`
   gap: 32px;
   padding: 24px 0 8px;
   width: 100%;
+
+  @media (max-width: 1280px), (max-height: 720px) {
+    gap: 20px;
+    padding: 16px 0 4px;
+  }
 `
 
 interface PhaseLabelProps {
@@ -35,12 +40,19 @@ export const CircleContainer = styled.div`
   justify-content: center;
   width: 240px;
   height: 240px;
+
+  @media (max-width: 1280px), (max-height: 720px) {
+    width: 180px;
+    height: 180px;
+  }
 `
 
 export const TimerSvg = styled.svg`
   position: absolute;
   top: 0;
   left: 0;
+  width: 100%;
+  height: 100%;
   transform: rotate(-90deg);
 `
 
@@ -58,6 +70,10 @@ export const Time = styled.span`
   color: #2d3250;
   letter-spacing: 2px;
   line-height: 1;
+
+  @media (max-width: 1280px), (max-height: 720px) {
+    font-size: 36px;
+  }
 `
 
 export const StatusLabel = styled.span`
@@ -79,6 +95,12 @@ export const Dot = styled.div`
   transition:
     opacity 0.3s ease,
     background-color 0.5s ease;
+
+  @media (max-width: 1280px), (max-height: 720px) {
+    width: 10px;
+    height: 10px;
+    top: 5px;
+  }
 `
 
 export const ButtonRow = styled.div`
@@ -87,6 +109,10 @@ export const ButtonRow = styled.div`
   gap: 24px;
   width: 100%;
   justify-content: center;
+
+  @media (max-width: 1280px), (max-height: 720px) {
+    gap: 16px;
+  }
 `
 
 interface StartButtonProps {
@@ -111,6 +137,13 @@ export const StartButton = styled.button<StartButtonProps>`
     background-color 0.5s ease,
     filter 0.2s ease,
     transform 0.1s ease;
+
+  @media (max-width: 1280px), (max-height: 720px) {
+    padding: 12px 24px;
+    font-size: 14px;
+    min-width: 140px;
+    border-radius: 12px;
+  }
 
   &:hover:not(:disabled) {
     filter: brightness(0.88);
@@ -139,6 +172,12 @@ export const ResetButton = styled.button`
   cursor: pointer;
   border-radius: 16px;
   transition: background-color 0.2s ease;
+
+  @media (max-width: 1280px), (max-height: 720px) {
+    padding: 12px 16px;
+    font-size: 14px;
+    border-radius: 12px;
+  }
 
   &:hover {
     background-color: rgba(0, 0, 0, 0.05);

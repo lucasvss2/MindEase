@@ -50,21 +50,21 @@ export function CreateBoardModal({ open, onClose }: CreateBoardModalProps) {
       footer={
         <S.Footer>
           <ResponsiveButton
+            type="neutral"
+            width="230px"
+            height="48px"
+            onClick={handleClose}
+          >
+            Cancelar
+          </ResponsiveButton>
+          <ResponsiveButton
             type="default"
-            width="280px"
+            width="230px"
             height="48px"
             onClick={handleSubmit}
             disabled={!name.trim() || isPending}
           >
             Criar Quadro
-          </ResponsiveButton>
-          <ResponsiveButton
-            type="neutral"
-            width="120px"
-            height="48px"
-            onClick={handleClose}
-          >
-            Cancelar
           </ResponsiveButton>
         </S.Footer>
       }

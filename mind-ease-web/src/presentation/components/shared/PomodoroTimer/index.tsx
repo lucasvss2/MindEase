@@ -155,7 +155,7 @@ export function PomodoroTimer() {
       <S.PhaseLabel $phase={phase}>{phaseLabel}</S.PhaseLabel>
 
       <S.CircleContainer>
-        <S.TimerSvg width="240" height="240" viewBox="0 0 240 240">
+        <S.TimerSvg viewBox="0 0 240 240">
           <circle
             cx="120"
             cy="120"

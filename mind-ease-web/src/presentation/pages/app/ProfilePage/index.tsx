@@ -72,33 +72,6 @@ export function ProfilePage() {
         </ResponsiveCard>
 
         <ResponsiveCard $width="100%">
-          <S.Title>Nível de Complexidade da Interface</S.Title>
-          <S.SettingsContent>
-            <p style={{ fontSize: '14px', color: '#666', margin: '0 0 8px' }}>
-              Controla a quantidade de informações exibidas nos cards de tarefa.
-            </p>
-            <S.SettingsContainer>
-              <ResponsiveButton
-                width="220px"
-                height="56px"
-                type={complexityLevel === 'simplified' ? 'default' : 'neutral'}
-                onClick={() => changeComplexity('simplified')}
-              >
-                Simplificado
-              </ResponsiveButton>
-              <ResponsiveButton
-                width="220px"
-                height="56px"
-                type={complexityLevel === 'normal' ? 'default' : 'neutral'}
-                onClick={() => changeComplexity('normal')}
-              >
-                Normal
-              </ResponsiveButton>
-            </S.SettingsContainer>
-          </S.SettingsContent>
-        </ResponsiveCard>
-
-        <ResponsiveCard $width="100%">
           <S.Title>Ajustes de Interface</S.Title>
           <S.SettingsContent>
             <h4 style={{ fontSize: '16px', fontWeight: 'bold' }}>Contraste</h4>
@@ -192,6 +165,18 @@ export function ProfilePage() {
                 onChange={(val) => setTransitionOverlayEnabled(val)}
               />
             </S.SettingsContainer>
+
+            <h4 style={{ fontSize: '16px', fontWeight: 'bold' }}>Modo resumo - Controla a quantidade de informações exibidas nos cards de tarefa.</h4>
+
+            <S.SettingsContent>
+
+              <S.SettingsContainer>
+                <ResponsiveSwitch
+                  checked={complexityLevel === 'simplified'}
+                  onChange={(checked) => changeComplexity(checked ? 'simplified' : 'normal')}
+                />
+              </S.SettingsContainer>
+            </S.SettingsContent>
           </S.SettingsContent>
 
         </ResponsiveCard>

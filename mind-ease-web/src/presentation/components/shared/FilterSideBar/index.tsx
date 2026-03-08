@@ -1,7 +1,7 @@
 import { RightOutlined, SettingOutlined } from '@ant-design/icons'
 
 import * as S from './styles'
-import { ResponsiveButton } from '@/presentation'
+import { ResponsiveButton, ResponsiveSwitch } from '@/presentation'
 import { useNavigate } from 'react-router-dom'
 import { useComplexity } from '@/presentation/hooks/shared/useComplexity'
 import { useFontSizeStore } from '@/presentation/stores/font-size-store'
@@ -125,22 +125,14 @@ export const FilterSidebar = ({
             <>
               {/* Mini-toggle de complexidade — só na tela de board */}
               <S.ComplexityGroup>
-                <S.ComplexityLabel>Nível de Complexidade</S.ComplexityLabel>
-                <S.ComplexityButtons>
-                  <S.ComplexityButton
-                    $active={complexityLevel === 'simplified'}
-                    onClick={() => changeComplexity('simplified')}
-                    title="Simplificado"
-                  >
-                    Simplificado
-                  </S.ComplexityButton>
-                  <S.ComplexityButton
-                    $active={complexityLevel === 'normal'}
-                    onClick={() => changeComplexity('normal')}
-                    title="Normal"
-                  >
-                    Normal
-                  </S.ComplexityButton>
+                <S.ComplexityLabel>Modo resumo</S.ComplexityLabel>
+                <S.ComplexityButtons style={{ alignItems: 'center' }}>
+                  <span style={{ fontSize: '12px', color: complexityLevel === 'normal' ? 'var(--color-brand)' : 'var(--color-cardText)', fontWeight: complexityLevel === 'normal' ? 'bold' : 'normal', transition: 'color 0.2s', cursor: 'pointer' }} onClick={() => changeComplexity('normal')}>Normal</span>
+                  <ResponsiveSwitch
+                    checked={complexityLevel === 'simplified'}
+                    onChange={(checked) => changeComplexity(checked ? 'simplified' : 'normal')}
+                  />
+                  <span style={{ fontSize: '12px', color: complexityLevel === 'simplified' ? 'var(--color-brand)' : 'var(--color-cardText)', fontWeight: complexityLevel === 'simplified' ? 'bold' : 'normal', transition: 'color 0.2s', cursor: 'pointer' }} onClick={() => changeComplexity('simplified')}>Resumido</span>
                 </S.ComplexityButtons>
               </S.ComplexityGroup>
 
