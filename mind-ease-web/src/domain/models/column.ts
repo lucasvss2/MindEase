@@ -4,6 +4,7 @@ export type Column = {
   boardId: string
   name: string
   slug: string
+  color?: string
   tasksCount: number
   position?: number
   createdAt: string

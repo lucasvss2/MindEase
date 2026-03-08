@@ -8,6 +8,7 @@ export namespace UpdateColumn {
   export type Params = {
     name?: string
     position?: number
+    color?: string
   }
 
   export type Model = Column

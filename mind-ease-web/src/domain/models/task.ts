@@ -19,6 +19,11 @@ export type Task = {
   isConcluded: boolean
   dueDate?: string | null
   hours: number
+  position?: number
   createdAt: string
   updatedAt: string
+  focusMinutes?: number
+  shortBreakMinutes?: number
+  longBreakMinutes?: number
+  longBreakEvery?: number
 }

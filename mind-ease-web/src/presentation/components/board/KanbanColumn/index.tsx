@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react'
+import { useState, useMemo, useEffect } from 'react'
 import { Dropdown, Modal } from 'antd'
 import { PlusOutlined, HolderOutlined, MoreOutlined, EditOutlined, DeleteOutlined, BgColorsOutlined } from '@ant-design/icons'
 import {
@@ -14,16 +14,8 @@ import { KanbanTaskCard } from '../KanbanTaskCard'
 import { CreateTaskModal } from '../CreateTaskModal'
 import * as S from './styles'
 
-const getTaskOrder = (columnId: string): string[] => {
-  try {
-    return JSON.parse(localStorage.getItem(`task-order-${columnId}`) ?? '[]')
-  } catch {
-    return []
-  }
-}
-
 const COLUMN_COLORS = [
-  { value: '', label: 'Padrão' },
+  { value: '#F8F9F9', label: 'Padrão' },
   { value: '#F2F2F5', label: 'Cinza' },
   { value: '#FCDEDE', label: 'Salmão' },
   { value: '#FFF7D2', label: 'Amarelo' },
@@ -45,9 +37,11 @@ export function KanbanColumn({ column, boardId }: KanbanColumnProps) {
   const [createTaskOpen, setCreateTaskOpen] = useState(false)
   const [isPickingColor, setIsPickingColor] = useState(false)
 
-  const [columnColor, setColumnColorState] = useState<string>(
-    () => localStorage.getItem(`column-color-${column.id}`) ?? '',
-  )
+  const [columnColor, setColumnColorState] = useState<string>(column.color ?? '')
+
+  useEffect(() => {
+    setColumnColorState(column.color ?? '')
+  }, [column.color])
 
   const { mutate: deleteColumn } = useDeleteColumn(boardId)
   const { mutate: updateColumn } = useUpdateColumn(boardId)
@@ -55,22 +49,21 @@ export function KanbanColumn({ column, boardId }: KanbanColumnProps) {
 
   const setColumnColor = (color: string) => {
     if (color) {
-      localStorage.setItem(`column-color-${column.id}`, color)
+      updateColumn({ columnId: column.id, params: { color } })
     } else {
-      localStorage.removeItem(`column-color-${column.id}`)
+      updateColumn({ columnId: column.id, params: { color: null } as any })
     }
     setColumnColorState(color)
     setIsPickingColor(false)
   }
 
   const tasks = useMemo(() => {
-    const saved = getTaskOrder(column.id)
-    if (!saved.length) return rawTasks
-    const orderMap = new Map(saved.map((id, i) => [id, i]))
-    return [...rawTasks].sort(
-      (a, b) => (orderMap.get(a.id) ?? rawTasks.length) - (orderMap.get(b.id) ?? rawTasks.length),
-    )
-  }, [rawTasks, column.id])
+    return [...rawTasks].sort((a, b) => {
+      const posA = a.position ?? Infinity
+      const posB = b.position ?? Infinity
+      return posA - posB
+    })
+  }, [rawTasks])
 
   const {
     attributes,

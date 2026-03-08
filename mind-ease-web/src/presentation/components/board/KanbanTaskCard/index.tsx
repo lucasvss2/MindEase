@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Dropdown, Modal, Tooltip } from 'antd'
 import {
@@ -25,8 +25,13 @@ export function KanbanTaskCard({ task }: KanbanTaskCardProps) {
   const { mutate: deleteTask } = useDeleteTask(task.columnId)
   const { mutate: updateTask } = useUpdateTask(task.columnId)
 
-  const [focusMinutes, setFocusMinutes] = useState(25)
-  const [breakMinutes, setBreakMinutes] = useState(5)
+  const [focusMinutes, setFocusMinutes] = useState(task.focusMinutes ?? 25)
+  const [breakMinutes, setBreakMinutes] = useState(task.shortBreakMinutes ?? 5)
+
+  useEffect(() => {
+    setFocusMinutes(task.focusMinutes ?? 25)
+    setBreakMinutes(task.shortBreakMinutes ?? 5)
+  }, [task.focusMinutes, task.shortBreakMinutes])
 
   const [localChecklist, setLocalChecklist] = useState<ChecklistItem[]>(task.checklist ?? [])
   const [newItemText, setNewItemText] = useState('')
@@ -110,7 +115,7 @@ export function KanbanTaskCard({ task }: KanbanTaskCardProps) {
   }
 
   const handleStartFocus = () => {
-    navigate(`/focus?taskId=${task.id}&focus=${focusMinutes}&break=${breakMinutes}`)
+    navigate(`/focus?taskId=${task.id}&focus=${focusMinutes}&break=${breakMinutes}&title=${encodeURIComponent(task.title)}`)
   }
 
   const menuItems = [
@@ -249,6 +254,12 @@ export function KanbanTaskCard({ task }: KanbanTaskCardProps) {
               max={120}
               value={focusMinutes}
               onChange={(e) => setFocusMinutes(Number(e.target.value))}
+              onBlur={() => updateTask({ taskId: task.id, params: { focusMinutes } })}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter') {
+                  ; (e.target as HTMLInputElement).blur()
+                }
+              }}
             />
             <S.FocusUnit>min de foco</S.FocusUnit>
           </S.FocusRow>
@@ -260,6 +271,12 @@ export function KanbanTaskCard({ task }: KanbanTaskCardProps) {
               max={60}
               value={breakMinutes}
               onChange={(e) => setBreakMinutes(Number(e.target.value))}
+              onBlur={() => updateTask({ taskId: task.id, params: { shortBreakMinutes: breakMinutes } })}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter') {
+                  ; (e.target as HTMLInputElement).blur()
+                }
+              }}
             />
             <S.FocusUnit>min de descanso</S.FocusUnit>
           </S.FocusRow>

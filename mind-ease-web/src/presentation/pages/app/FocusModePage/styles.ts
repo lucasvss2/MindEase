@@ -16,3 +16,16 @@ export const Title = styled.span`
   width: 100%;
   font-size: 24px;
 `;
+
+export const TaskTitle = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  font-size: 16px;
+  color: var(--text);
+  margin-top: 8px;
+  margin-bottom: 24px;
+  opacity: 0.8;
+  text-align: center;
+`;

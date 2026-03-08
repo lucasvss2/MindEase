@@ -22,6 +22,10 @@ export namespace CreateTask {
     status?: 'TODO' | 'IN_PROGRESS' | 'DONE'
     dueDate?: string | null
     hours?: number
+    focusMinutes?: number
+    shortBreakMinutes?: number
+    longBreakMinutes?: number
+    longBreakEvery?: number
   }
 
   export type Model = Task
