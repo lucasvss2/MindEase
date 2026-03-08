@@ -22,17 +22,14 @@ const prefixMap: Record<ButtonType, string> = {
 
 const getPrefix = (type?: ButtonType) => prefixMap[type ?? 'default']
 
-// State: default
 const getBG = (type?: ButtonType) => `var(--color-button${getPrefix(type)}BG)`
 const getText = (type?: ButtonType) => `var(--color-button${getPrefix(type)}Text)`
 const getBorder = (type?: ButtonType) => `var(--color-button${getPrefix(type)}Border)`
 
-// State: hover
 const getHoverBG = (type?: ButtonType) => `var(--color-button${getPrefix(type)}HoverBG)`
 const getHoverText = (type?: ButtonType) => `var(--color-button${getPrefix(type)}HoverText)`
 const getHoverBorder = (type?: ButtonType) => `var(--color-button${getPrefix(type)}HoverBorder)`
 
-// State: active
 const getActiveBG = (type?: ButtonType) => `var(--color-button${getPrefix(type)}ActiveBG)`
 const getActiveText = (type?: ButtonType) => `var(--color-button${getPrefix(type)}ActiveText)`
 const getActiveBorder = (type?: ButtonType) => `var(--color-button${getPrefix(type)}ActiveBorder)`
@@ -43,6 +40,7 @@ type FilteredButtonProps = ButtonProps & {
   $type?: ButtonType
 }
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const FilteredButton = ({ $width, $height, $type, ...props }: FilteredButtonProps) => (
   <Button {...props} />
 )
@@ -71,5 +69,5 @@ export const ResponsiveButton = styled(FilteredButton) <ResponsiveButtonProps>`
     border: ${({ $type }) => getActiveBorder($type)} !important;
     box-shadow: var(--box-shadow-sm) !important;
   }
-  
+
 `

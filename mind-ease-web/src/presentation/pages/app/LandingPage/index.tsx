@@ -1,10 +1,10 @@
 import { useNavigate } from 'react-router-dom'
 import { useState } from 'react'
-import { PageLayout } from '@/layouts'
 import {
   LandingPageCarrousel,
   ResponsiveButton,
-  ResponsiveInput
+  ResponsiveInput,
+  PageLayout
 } from '@/presentation'
 import * as S from './styles'
 

@@ -6,11 +6,11 @@ import { Toaster } from 'sonner'
 import ptBR from 'antd/es/locale/pt_BR'
 
 import { Routes } from './routes'
-import { antdTheme } from './styles'
-import './styles/global.css'
+import { antdTheme } from '@/presentation/styles'
+import '@/presentation/styles/global.css'
 import { queryClient } from '@/infra'
 
-import './styles/font.css'
+import '@/presentation/styles/font.css'
 
 const App: React.FC = () => {
   return (
@@ -21,7 +21,15 @@ const App: React.FC = () => {
           richColors
           closeButton={false}
           position="top-right"
-          toastOptions={{ style: { height: '40px', padding: '8px' } }}
+          toastOptions={{
+            style: {
+              padding: '12px 16px',
+              minHeight: '48px',
+              height: 'auto',
+              wordBreak: 'break-word',
+              whiteSpace: 'pre-wrap',
+            }
+          }}
         />
       </ConfigProvider>
       <ReactQueryDevtools buttonPosition="bottom-right" />

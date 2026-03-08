@@ -17,3 +17,11 @@ export const Title = styled.h1`
   justify-content: center;
   align-items: center;
 `
+
+export const Subtitle = styled.span`
+  font-size: 16px;
+  font-weight: normal;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`

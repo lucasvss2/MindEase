@@ -1,0 +1,48 @@
+import { useNavigate } from 'react-router-dom'
+import { useMutation } from '@tanstack/react-query'
+import { makeRemoteAddAccount } from '@/infra/factories'
+import authStore from '@/presentation/stores/auth-store'
+import { showToast } from '@/presentation'
+import { AddAccount } from '@/domain/usecases'
+
+export const useRegister = () => {
+  const navigate = useNavigate()
+  const addAccount = makeRemoteAddAccount()
+
+  return useMutation({
+    mutationFn: async (params: AddAccount.Params) => {
+      return addAccount.add(params)
+    },
+    onSuccess: (data) => {
+      authStore.setState(
+        {
+          user: data.user,
+          accessToken: data.accessToken,
+          refreshToken: data.refreshToken,
+          isUserAuthenticated: true,
+        },
+        false,
+        'sign-up',
+      )
+
+      showToast({
+        type: 'success',
+        message: 'Conta criada!',
+        description: 'Sua conta foi criada com sucesso.',
+      })
+
+      navigate('/boards')
+    },
+    onError: (err: any) => {
+      console.error('Error registering', err)
+
+      const errorMessage = err?.response?.data?.error || 'Erro ao criar conta. Tente novamente.'
+
+      showToast({
+        type: 'error',
+        message: 'Erro no cadastro',
+        description: errorMessage,
+      })
+    },
+  })
+}

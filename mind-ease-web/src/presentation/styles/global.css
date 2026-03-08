@@ -1,0 +1,476 @@
+@layer reset, base, tokens, recipes, utilities;
+
+/* ===== CSS Custom Properties - Theme System ===== */
+/* Cores definidas em: src/main/config/styles/theme.ts -> themeColors */
+
+/* Light Theme (Default) */
+:root,
+.theme-light {
+  --color-brand: #7fb3d5ff;
+  --color-bgColor: #ffffff;
+  --color-borderHeader: #e8e8e8;
+  --color-black: #000000;
+
+  --color-link: #7fb3d5ff;
+  --color-linkActive: #7fb3d5ff;
+  --color-linkHover: #badb91;
+
+  --color-titleText: #3b3a3a;
+  --color-text: #3b3a3a;
+  --color-error: #fe2000;
+  --color-colorBorderPrimary: #d9d9d9;
+
+  /* button-default */
+  --color-buttonDefaultBG: #eff6ff;
+  --color-buttonDefaultText: #002d63;
+  --color-buttonDefaultBorder: none;
+  --color-buttonDefaultActiveBG: #eff6ff;
+  --color-buttonDefaultActiveText: #002d63;
+  --color-buttonDefaultActiveBorder: 1px solid #2563eb;
+  --color-buttonDefaultHoverBG: #d0e4ff;
+  --color-buttonDefaultHoverText: #002d63;
+  --color-buttonDefaultHoverBorder: 1px solid #2563eb;
+
+  /* button-dashed */
+  --color-buttonDashedBG: #ffffff;
+  --color-buttonDashedText: #1b2332;
+  --color-buttonDashedBorder: 1px dashed #2563eb;
+  --color-buttonDashedActiveBG: #e8e8e8;
+  --color-buttonDashedActiveText: #292929;
+  --color-buttonDashedActiveBorder: 1px dashed #5ea4fe;
+  --color-buttonDashedHoverBG: #d9d9d9;
+  --color-buttonDashedHoverText: #383838;
+  --color-buttonDashedHoverBorder: 1px dashed #008fff;
+
+  /* button-outlined */
+  --color-buttonOutlinedBG: #eff6ff;
+  --color-buttonOutlinedText: #1b2332;
+  --color-buttonOutlinedBorder: 1px solid #5ea4fe;
+  --color-buttonOutlinedActiveBG: #d1e6ff;
+  --color-buttonOutlinedActiveText: #002d63;
+  --color-buttonOutlinedActiveBorder: 1px solid #50adff;
+  --color-buttonOutlinedHoverBG: #c7dffe;
+  --color-buttonOutlinedHoverText: #002d63;
+  --color-buttonOutlinedHoverBorder: 1px solid #2563eb;
+
+  /* button-neutral (disabled) */
+  --color-buttonNeutralBG: #8a858517;
+  --color-buttonNeutralText: #383838;
+  --color-buttonNeutralBorder: none;
+  --color-buttonNeutralActiveBG: #edebeb;
+  --color-buttonNeutralActiveText: #3a3636;
+  --color-buttonNeutralActiveBorder: 1px solid #79747e;
+  --color-buttonNeutralHoverBG: #edebeb;
+  --color-buttonNeutralHoverText: #383838;
+  --color-buttonNeutralHoverBorder: 1px solid #79747e;
+
+  /* button-link */
+  --color-buttonLinkBG: transparent;
+  --color-buttonLinkText: #383838;
+  --color-buttonLinkBorder: none;
+  --color-buttonLinkActiveBG: #ffffff;
+  --color-buttonLinkActiveText: #383838;
+  --color-buttonLinkActiveBorder: none;
+  --color-buttonLinkHoverBG: #ffffff;
+  --color-buttonLinkHoverText: #383838;
+  --color-buttonLinkHoverBorder: none;
+
+  /* dialog-danger */
+  --color-dialogDangerBG: #f8f8f8;
+  --color-dialogDangerText: #6e2215;
+  --color-dialogDangerTitle: #6e2215;
+  --color-dialogDangerBorder: 1px solid #c9280c;
+  /* dialog-default */
+  --color-dialogDefaultBG: #f8f9f9;
+  --color-dialogDefaultText: #3b3a3a;
+  --color-dialogDefaultTitle: #3b3a3a;
+  --color-dialogDefaultBorder: 1px solid #d9d9d9;
+
+  /* carousel */
+  --color-activeDotColor: #eff6ff;
+  --color-inactiveDotColor: #8a858517;
+
+  /* input-default */
+  --color-inputDefaultBG: #ffffff;
+  --color-inputDefaultText: #3b3a3a;
+  --color-inputDefaultLabel: #3b3a3a;
+  --color-inputDefaultBorder: 1px solid #3b3a3a;
+  --color-inputDefaultPlaceholder: #3b3a3a;
+
+  /* input-error */
+  --color-inputErrorBG: #ffffff;
+  --color-inputErrorText: #940000;
+  --color-inputErrorLabel: #3b3a3a;
+  --color-inputErrorBorder: 1px solid #940000;
+  --color-inputErrorPlaceholder: #292929;
+
+  /* switch-active */
+  --color-switchActiveBG: #0a5f8a;
+  --color-switchActiveHandle: #e2e2e2;
+  /* switch-inactive */
+  --color-switchInactiveBG: #79747e;
+  --color-switchInactiveHandle: #ededed;
+
+  /* slider */
+  --color-sliderHandle: #1581b7;
+  --color-sliderBG: #d9d9d9;
+  --color-sliderBorder: #79747e;
+
+  /* card */
+  --color-cardBG: #f8f9f9;
+  --color-cardText: #3b3a3a;
+  --color-cardTitle: #3b3a3a;
+  --color-cardBorder: 1px solid #e3dddd;
+  --color-cardDivider: #e3dddd;
+}
+
+/* Light Low Contrast Theme */
+.theme-light-low-contrast {
+  --color-brand: #7fb3d5ff;
+  --color-bgColor: #ffffff;
+  --color-borderHeader: #e8e8e8;
+  --color-black: #000000;
+
+  --color-link: #a8c8dc;
+  --color-linkActive: #a8c8dc;
+  --color-linkHover: #c8e8b0;
+
+  --color-titleText: #585858;
+  --color-text: #727272;
+  --color-colorBorderPrimary: #e0e0e0;
+  --color-error: #e85040;
+
+  /* button-default */
+  --color-buttonDefaultBG: #eff6ff;
+  --color-buttonDefaultText: #4a6b9c;
+  --color-buttonDefaultBorder: none;
+  --color-buttonDefaultActiveBG: #eff6ff;
+  --color-buttonDefaultActiveText: #4a6b9c;
+  --color-buttonDefaultActiveBorder: 1px solid #a2c9ff;
+  --color-buttonDefaultHoverBG: #e4f0ff;
+  --color-buttonDefaultHoverText: #4a6b9c;
+  --color-buttonDefaultHoverBorder: 1px solid #a2c9ff;
+
+  /* button-dashed */
+  --color-buttonDashedBG: #ffffff;
+  --color-buttonDashedText: #4d4d4d;
+  --color-buttonDashedBorder: 1px dashed #2563eb;
+  --color-buttonDashedActiveBG: #f5f5f5;
+  --color-buttonDashedActiveText: #4d4d4d;
+  --color-buttonDashedActiveBorder: 1px dashed #5ea4fe;
+  --color-buttonDashedHoverBG: #edebeb;
+  --color-buttonDashedHoverText: #4d4d4d;
+  --color-buttonDashedHoverBorder: 1px dashed #008fff;
+
+  /* button-outlined */
+  --color-buttonOutlinedBG: #eff6ff;
+  --color-buttonOutlinedText: #383838;
+  --color-buttonOutlinedBorder: 1px solid #a2c9ff;
+  --color-buttonOutlinedActiveBG: #e3f2fd;
+  --color-buttonOutlinedActiveText: #3d5a85;
+  --color-buttonOutlinedActiveBorder: 1px solid #8ecaff;
+  --color-buttonOutlinedHoverBG: #e4f0ff;
+  --color-buttonOutlinedHoverText: #4a6b9c;
+  --color-buttonOutlinedHoverBorder: 1px solid #5ea4fe;
+
+  /* button-neutral (disabled) */
+  --color-buttonNeutralBG: #e8e8e8;
+  --color-buttonNeutralText: #615e5e;
+  --color-buttonNeutralBorder: none;
+  --color-buttonNeutralActiveBG: #eae9e9;
+  --color-buttonNeutralActiveText: #5c5c5c;
+  --color-buttonNeutralActiveBorder: none;
+  --color-buttonNeutralHoverBG: #eae9e9;
+  --color-buttonNeutralHoverText: #5c5c5c;
+  --color-buttonNeutralHoverBorder: 1px solid #636363;
+
+  /* button-link */
+  --color-buttonLinkBG: transparent;
+  --color-buttonLinkText: #636363;
+  --color-buttonLinkBorder: none;
+  --color-buttonLinkActiveBG: #ffffff;
+  --color-buttonLinkActiveText: #636363;
+  --color-buttonLinkActiveBorder: none;
+  --color-buttonLinkHoverBG: #ffffff;
+  --color-buttonLinkHoverText: #636363;
+  --color-buttonLinkHoverBorder: none;
+
+  /* dialog-danger */
+  --color-dialogDangerBG: #f8f8f8;
+  --color-dialogDangerText: #9a2a17;
+  --color-dialogDangerTitle: #9a2a17;
+  --color-dialogDangerBorder: 1px solid #9a2a17;
+  /* dialog-default */
+  --color-dialogDefaultBG: #f8f9f9;
+  --color-dialogDefaultText: #3b3a3a;
+  --color-dialogDefaultTitle: #5b5b5b;
+  --color-dialogDefaultBorder: 1px solid #f8f8f8;
+
+  /* carousel */
+  --color-activeDotColor: #eff6ff;
+  --color-inactiveDotColor: #8a858517;
+
+  /* input-default */
+  --color-inputDefaultBG: #ffffff;
+  --color-inputDefaultText: #727272;
+  --color-inputDefaultLabel: #727272;
+  --color-inputDefaultBorder: 1px solid #727272;
+  --color-inputDefaultPlaceholder: #727272;
+
+  /* input-error */
+  --color-inputErrorBG: #ffffff;
+  --color-inputErrorText: #c22929;
+  --color-inputErrorLabel: #727272;
+  --color-inputErrorBorder: 1px solid #c22929;
+  --color-inputErrorPlaceholder: #727272;
+
+  /* switch-active */
+  --color-switchActiveBG: #46a4d2;
+  --color-switchActiveHandle: #2b2b2b;
+  /* switch-inactive */
+  --color-switchInactiveBG: #79747e;
+  --color-switchInactiveHandle: #e3dddd;
+
+  /* slider */
+  --color-sliderHandle: #46a4d2;
+  --color-sliderBG: #d9d9d9;
+  --color-sliderBorder: #585858;
+
+  /* card */
+  --color-cardBG: #f5f5f5;
+  --color-cardText: #727272;
+  --color-cardTitle: #585858;
+  --color-cardBorder: 1px solid #d1cdcd;
+  --color-cardDivider: #d1cdcd;
+}
+
+/* Light High Contrast Theme */
+.theme-light-high-contrast {
+  --color-brand: #7fb3d5ff;
+  --color-bgColor: #ffffff;
+  --color-borderHeader: #e8e8e8;
+  --color-black: #000000;
+
+  --color-link: #0066cc;
+  --color-linkActive: #003366;
+  --color-linkHover: #004d99;
+
+  --color-titleText: #000000;
+  --color-text: #2f2e2e;
+  --color-colorBorderPrimary: #000000;
+  --color-error: #cc0000;
+
+  /* button-default */
+  --color-buttonDefaultBG: #eff6ff;
+  --color-buttonDefaultText: #1b2332;
+  --color-buttonDefaultBorder: none;
+  --color-buttonDefaultActiveBG: #eff6ff;
+  --color-buttonDefaultActiveText: #1b2332;
+  --color-buttonDefaultActiveBorder: 1px solid #5ea4fe;
+  --color-buttonDefaultHoverBG: #e4f0ff;
+  --color-buttonDefaultHoverText: #1b2332;
+  --color-buttonDefaultHoverBorder: none;
+
+  /* button-dashed */
+  --color-buttonDashedBG: #ffffff;
+  --color-buttonDashedText: #000000;
+  --color-buttonDashedBorder: 1px dashed #5ea4fe;
+  --color-buttonDashedActiveBG: #f5f5f5;
+  --color-buttonDashedActiveText: #000000;
+  --color-buttonDashedActiveBorder: 1px dashed #5ea4fe;
+  --color-buttonDashedHoverBG: #f8f9f9;
+  --color-buttonDashedHoverText: #000000;
+  --color-buttonDashedHoverBorder: 1px dashed #5ea4fe;
+
+  /* button-outlined */
+  --color-buttonOutlinedBG: #eff6ff;
+  --color-buttonOutlinedText: #1b2332;
+  --color-buttonOutlinedBorder: 1px solid #5ea4fe;
+  --color-buttonOutlinedActiveBG: #dbebff;
+  --color-buttonOutlinedActiveText: #000000;
+  --color-buttonOutlinedActiveBorder: 1px solid #3ba2f3;
+  --color-buttonOutlinedHoverBG: #caddff;
+  --color-buttonOutlinedHoverText: #000000;
+  --color-buttonOutlinedHoverBorder: 1px solid #008fff;
+
+  /* button-neutral (disabled) */
+  --color-buttonNeutralBG: #8a858517;
+  --color-buttonNeutralText: #000000;
+  --color-buttonNeutralBorder: none;
+  --color-buttonNeutralActiveBG: #e3e3e3;
+  --color-buttonNeutralActiveText: #000000;
+  --color-buttonNeutralActiveBorder: none;
+  --color-buttonNeutralHoverBG: #e3e3e3;
+  --color-buttonNeutralHoverText: #000000;
+  --color-buttonNeutralHoverBorder: 1px solid #2b2b2b;
+
+  /* button-link */
+  --color-buttonLinkBG: transparent;
+  --color-buttonLinkText: #000000;
+  --color-buttonLinkBorder: none;
+  --color-buttonLinkActiveBG: #ffffff;
+  --color-buttonLinkActiveText: #000000;
+  --color-buttonLinkActiveBorder: none;
+  --color-buttonLinkHoverBG: #ffffff;
+  --color-buttonLinkHoverText: #000000;
+  --color-buttonLinkHoverBorder: none;
+
+  /* dialog-danger */
+  --color-dialogDangerBG: #ffffff;
+  --color-dialogDangerText: #43150d;
+  --color-dialogDangerTitle: #43150d;
+  --color-dialogDangerBorder: 1px solid #43150d;
+  /* dialog-default */
+  --color-dialogDefaultBG: #ffffff;
+  --color-dialogDefaultTitle: #000000;
+  --color-dialogDefaultText: #000000;
+  --color-dialogDefaultBorder: 1px solid #d9d9d9;
+
+  /* carousel */
+  --color-activeDotColor: #eff6ff;
+  --color-inactiveDotColor: #8a858517;
+
+  /* input-default */
+  --color-inputDefaultBG: #ffffff;
+  --color-inputDefaultText: #292929;
+  --color-inputDefaultLabel: #000000;
+  --color-inputDefaultBorder: 1px solid #000000;
+  --color-inputDefaultPlaceholder: #292929;
+
+  /* input-error */
+  --color-inputErrorBG: #ffffff;
+  --color-inputErrorText: #6b1304;
+  --color-inputErrorLabel: #292929;
+  --color-inputErrorBorder: 1px solid #6b1304;
+  --color-inputErrorPlaceholder: #292929;
+
+  /* switch-active */
+  --color-switchActiveBG: #004b70;
+  --color-switchActiveHandle: #ffffff;
+  /* switch-inactive */
+  --color-switchInactiveBG: #444444;
+  --color-switchInactiveHandle: #f8f9f9;
+
+  /* slider */
+  --color-sliderHandle: #004b70;
+  --color-sliderBG: #d9d9d9;
+  --color-sliderBorder: #444444;
+
+  /* card */
+  --color-cardBG: #ffffff;
+  --color-cardText: #2f2e2e;
+  --color-cardTitle: #000000;
+  --color-cardBorder: 1px solid #e3dddd;
+  --color-cardDivider: #79747e;
+}
+
+/* ===== Font Variables ===== */
+
+:root {
+  --font-sans: 'Lexend', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-serif: 'Bitter', Georgia, 'Times New Roman', serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
+  --box-shadow-sm: 0 4px 8px 0 rgba(88, 84, 84, 0.25);
+  --font-size-base: 16px;
+  --font-size-offset: 0px;
+  --line-height-offset: 0px;
+  --letter-spacing-offset: 0px;
+}
+
+/* ===== Base Styles ===== */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font-sans);
+  font-size: calc(var(--font-size-base) + var(--font-size-offset));
+  -webkit-font-smoothing: antialiased;
+  color: var(--color-text);
+  line-height: calc(1.5em + var(--line-height-offset));
+  letter-spacing: calc(0.12em + var(--letter-spacing-offset));
+  word-spacing: 0.16em;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin-top: 0;
+  margin-bottom: 0;
+  font-weight: 400;
+  color: var(--color-text);
+}
+
+p {
+  margin-bottom: 2em;
+}
+
+a {
+  text-decoration: none;
+  cursor: pointer;
+  color: var(--color-link);
+}
+
+a:hover {
+  color: var(--color-linkHover);
+}
+
+button {
+  cursor: pointer;
+}
+
+.ant-form-item-explain-error {
+  background-position: 8px center;
+  color: var(--color-error);
+  border: 1px solid var(--color-error);
+  background-color: rgba(254, 32, 0, 0.1);
+  padding: 0 12px 0 24px;
+  border-radius: 4px;
+  margin: 4px 0 8px;
+}
+
+.ant-form-show-help-item {
+  height: 0px !important;
+  padding: 0px !important;
+  margin: 0px !important;
+  display: none !important;
+  opacity: 0 !important;
+}
+
+.toast-success [data-sonner-toast][data-type='success'] {
+  background: #e9ffd4 !important;
+  border: 1px solid #7bba25 !important;
+  color: var(--color-text) !important;
+  margin-right: 0px !important;
+}
+
+.toast-success {
+  --toast-icon-margin-end: 0px !important;
+  --toast-icon-margin-start: 0px !important;
+}
+
+/* ===== Reduce Motion ===== */
+.reduce-motion *,
+.reduce-motion *::before,
+.reduce-motion *::after {
+  transition: none !important;
+  animation: none !important;
+}
+
+/* ===== Sidebar: accessibility vars forwarding ===== */
+.ant-layout-sider {
+  font-size: calc(var(--font-size-base) + var(--font-size-offset));
+  letter-spacing: calc(0.12em + var(--letter-spacing-offset));
+}
+
+.ant-layout-sider .ant-btn,
+.ant-layout-sider .ant-btn > span:not(.anticon) {
+  font-size: inherit !important;
+  letter-spacing: inherit !important;
+}
