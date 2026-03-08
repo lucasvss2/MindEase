@@ -81,6 +81,8 @@ export const FilterSidebar = ({
             </span>
           </ResponsiveButton>
           <ResponsiveButton
+            width="100%"
+
             type="link"
             onClick={() => { navigate('/boards') }}
           >
@@ -101,6 +103,8 @@ export const FilterSidebar = ({
             </span>
           </ResponsiveButton>
           <ResponsiveButton
+            width="100%"
+
             type="link"
             onClick={() => { navigate('/profile') }}
           >
