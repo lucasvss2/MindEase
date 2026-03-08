@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { FilterSidebar, useToggle, PageLayout, useBoards, ResponsiveButton, CreateBoardModal, BoardCard } from "@/presentation";
 import { PlusOutlined } from "@ant-design/icons";
 import * as S from "./styles";
+import { Divider } from 'antd';
 
 export function BoardsPage() {
   const [isDrawerOpen, toggleFilterDrawer] = useToggle(true)
@@ -31,6 +32,7 @@ export function BoardsPage() {
             <PlusOutlined /> Criar novo quadro
           </ResponsiveButton>
         </S.Header>
+        <Divider style={{ margin: '0px', marginBottom: '24px', border: 'var(--color-buttonNeutralHoverBorder)' }} />
 
         {count === 0 ? (
           <S.EmptyText>Nenhum quadro encontrado. Crie seu primeiro quadro!</S.EmptyText>

@@ -7,6 +7,7 @@ export const FocusModePage = () => {
   const navigate = useNavigate()
   const [searchParams] = useSearchParams()
   const { setPomodoroDuration, setBreakDuration } = usePomodoroSettings()
+  const taskTitle = searchParams.get('title')
 
   useEffect(() => {
     const focus = Number(searchParams.get('focus'))
@@ -31,6 +32,9 @@ export const FocusModePage = () => {
       <S.FocusModePageContainer>
         <ResponsiveCard $width="60%" $height="70%">
           <S.Title>Timer Pomodoro</S.Title>
+          {taskTitle && (
+            <S.TaskTitle>Em foco: {taskTitle}</S.TaskTitle>
+          )}
           <PomodoroTimer />
         </ResponsiveCard>
         <ResponsiveButton type="neutral" width="200px" height="44px" onClick={() => navigate('/boards')} style={{ marginTop: '16px' }}>

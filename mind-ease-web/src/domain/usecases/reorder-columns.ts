@@ -3,5 +3,7 @@ export interface ReorderColumns {
 }
 
 export namespace ReorderColumns {
-  export type Params = Array<{ id: string; position: number }>
+  export type Params = {
+    columnIds: string[]
+  }
 }

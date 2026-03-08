@@ -20,27 +20,11 @@ import {
 import { PlusOutlined } from '@ant-design/icons'
 import { useQueryClient } from '@tanstack/react-query'
 import { useColumns, useCreateColumn, useReorderColumns } from '@/presentation'
-import { makeRemoteUpdateTask } from '@/infra/factories'
+import { makeRemoteUpdateTask, makeRemoteReorderTasks } from '@/infra/factories'
 import type { Column, Task } from '@/domain/models'
 import { KanbanColumn } from '../KanbanColumn'
 import { KanbanTaskCard } from '../KanbanTaskCard'
 import * as S from './styles'
-
-const getColumnOrder = (boardId: string): string[] => {
-  try {
-    return JSON.parse(localStorage.getItem(`column-order-${boardId}`) ?? '[]')
-  } catch {
-    return []
-  }
-}
-
-const saveColumnOrder = (boardId: string, ids: string[]) => {
-  localStorage.setItem(`column-order-${boardId}`, JSON.stringify(ids))
-}
-
-const saveTaskOrder = (columnId: string, ids: string[]) => {
-  localStorage.setItem(`task-order-${columnId}`, JSON.stringify(ids))
-}
 
 interface KanbanBoardProps {
   boardId: string
@@ -57,25 +41,16 @@ export function KanbanBoard({ boardId }: KanbanBoardProps) {
   const [activeTaskOriginalColumnId, setActiveTaskOriginalColumnId] = useState<string | null>(null)
 
   useEffect(() => {
-    if (columns.length === 0) return
-    const savedOrder = getColumnOrder(boardId)
-    const knownIds = new Set(savedOrder)
-    const newIds = columns.filter((c) => !knownIds.has(c.id)).map((c) => c.id)
-    if (newIds.length > 0) {
-      saveColumnOrder(boardId, [...savedOrder, ...newIds])
-    }
+    // Removed local storage auto-save for column order as it is now persisted strictly via API.
   }, [columns, boardId])
 
   const orderedColumns = useMemo(() => {
-    const savedOrder = getColumnOrder(boardId)
-    if (savedOrder.length === 0) return columns
-    const orderMap = new Map(savedOrder.map((id, index) => [id, index]))
     return [...columns].sort((a, b) => {
-      const ai = orderMap.get(a.id) ?? Infinity
-      const bi = orderMap.get(b.id) ?? Infinity
-      return ai - bi
+      const posA = a.position ?? Infinity
+      const posB = b.position ?? Infinity
+      return posA - posB
     })
-  }, [columns, boardId])
+  }, [columns])
 
   const sensors = useSensors(
     useSensor(PointerSensor, { activationConstraint: { distance: 8 } }),
@@ -155,9 +130,10 @@ export function KanbanBoard({ boardId }: KanbanBoardProps) {
       const newIndex = orderedColumns.findIndex((c) => c.id === over.id)
       if (oldIndex !== -1 && newIndex !== -1) {
         const reordered = arrayMove(orderedColumns, oldIndex, newIndex)
-        saveColumnOrder(boardId, reordered.map((c) => c.id))
-        queryClient.setQueryData<Column[]>(['columns', boardId], reordered)
-        reorderColumns(reordered.map((c, index) => ({ id: c.id, position: index })))
+        const reorderedWithPosition = reordered.map((c, index) => ({ ...c, position: index }))
+
+        queryClient.setQueryData<Column[]>(['columns', boardId], reorderedWithPosition)
+        reorderColumns({ columnIds: reorderedWithPosition.map(c => c.id) })
       }
       return
     }
@@ -205,8 +181,10 @@ export function KanbanBoard({ boardId }: KanbanBoardProps) {
         if (oldIndex === -1 || newIndex === -1 || oldIndex === newIndex) return
 
         const reordered = arrayMove(currentTasks, oldIndex, newIndex)
-        queryClient.setQueryData<Task[]>(['tasks', originalColumnId], reordered)
-        saveTaskOrder(originalColumnId, reordered.map((t) => t.id))
+        const reorderedWithPosition = reordered.map((t, index) => ({ ...t, position: index }))
+
+        queryClient.setQueryData<Task[]>(['tasks', originalColumnId], reorderedWithPosition)
+        makeRemoteReorderTasks().reorder(originalColumnId, { taskIds: reorderedWithPosition.map(t => t.id) })
       }
     }
   }
