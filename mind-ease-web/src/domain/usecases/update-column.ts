@@ -7,6 +7,7 @@ export interface UpdateColumn {
 export namespace UpdateColumn {
   export type Params = {
     name?: string
+    position?: number
   }
 
   export type Model = Column

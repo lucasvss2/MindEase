@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useMemo } from 'react'
 import { Dropdown, Modal } from 'antd'
 import { PlusOutlined, HolderOutlined, MoreOutlined, EditOutlined, DeleteOutlined, BgColorsOutlined } from '@ant-design/icons'
 import {
@@ -13,6 +13,14 @@ import type { Column } from '@/domain/models'
 import { KanbanTaskCard } from '../KanbanTaskCard'
 import { CreateTaskModal } from '../CreateTaskModal'
 import * as S from './styles'
+
+const getTaskOrder = (columnId: string): string[] => {
+  try {
+    return JSON.parse(localStorage.getItem(`task-order-${columnId}`) ?? '[]')
+  } catch {
+    return []
+  }
+}
 
 const COLUMN_COLORS = [
   { value: '', label: 'Padrão' },
@@ -41,6 +49,10 @@ export function KanbanColumn({ column, boardId }: KanbanColumnProps) {
     () => localStorage.getItem(`column-color-${column.id}`) ?? '',
   )
 
+  const { mutate: deleteColumn } = useDeleteColumn(boardId)
+  const { mutate: updateColumn } = useUpdateColumn(boardId)
+  const { data: rawTasks = [] } = useTasks(column.id)
+
   const setColumnColor = (color: string) => {
     if (color) {
       localStorage.setItem(`column-color-${column.id}`, color)
@@ -51,9 +63,14 @@ export function KanbanColumn({ column, boardId }: KanbanColumnProps) {
     setIsPickingColor(false)
   }
 
-  const { mutate: deleteColumn } = useDeleteColumn(boardId)
-  const { mutate: updateColumn } = useUpdateColumn(boardId)
-  const { data: tasks = [] } = useTasks(column.id)
+  const tasks = useMemo(() => {
+    const saved = getTaskOrder(column.id)
+    if (!saved.length) return rawTasks
+    const orderMap = new Map(saved.map((id, i) => [id, i]))
+    return [...rawTasks].sort(
+      (a, b) => (orderMap.get(a.id) ?? rawTasks.length) - (orderMap.get(b.id) ?? rawTasks.length),
+    )
+  }, [rawTasks, column.id])
 
   const {
     attributes,

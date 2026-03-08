@@ -1,9 +1,20 @@
-import { FilterSidebar, PomodoroTimer, ResponsiveButton, ResponsiveCard, useToggle, PageLayout } from "@/presentation"
-import { useNavigate } from 'react-router-dom'
+import { useEffect } from 'react'
+import { FilterSidebar, PomodoroTimer, ResponsiveButton, ResponsiveCard, useToggle, PageLayout, usePomodoroSettings } from "@/presentation"
+import { useNavigate, useSearchParams } from 'react-router-dom'
 import * as S from './styles'
 export const FocusModePage = () => {
   const [isDrawerOpen, toggleFilterDrawer] = useToggle(false)
   const navigate = useNavigate()
+  const [searchParams] = useSearchParams()
+  const { setPomodoroDuration, setBreakDuration } = usePomodoroSettings()
+
+  useEffect(() => {
+    const focus = Number(searchParams.get('focus'))
+    const breakMin = Number(searchParams.get('break'))
+    if (focus > 0) setPomodoroDuration(focus)
+    if (breakMin > 0) setBreakDuration(breakMin)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
   return (
     <PageLayout
       title="Modo Foco"
