@@ -1,6 +1,6 @@
 import { useEffect, useCallback } from 'react'
-import { ThemeMode, THEME_CLASSES } from '@/main/config/styles'
-import { useThemeStore } from '@/main/config/stores/theme-store'
+import { ThemeMode, THEME_CLASSES } from '@/presentation/styles'
+import { useThemeStore } from '@/presentation/stores/theme-store'
 
 export function useTheme() {
   const { theme, setTheme } = useThemeStore()
@@ -8,18 +8,19 @@ export function useTheme() {
   useEffect(() => {
     const root = document.documentElement
 
-    // Remove all theme classes
     Object.values(THEME_CLASSES).forEach((className) => {
       root.classList.remove(className)
     })
 
-    // Add current theme class
     root.classList.add(THEME_CLASSES[theme])
   }, [theme])
 
-  const changeTheme = useCallback((newTheme: ThemeMode) => {
-    setTheme(newTheme)
-  }, [setTheme])
+  const changeTheme = useCallback(
+    (newTheme: ThemeMode) => {
+      setTheme(newTheme)
+    },
+    [setTheme],
+  )
 
   const toggleContrast = useCallback(() => {
     const currentTheme = useThemeStore.getState().theme

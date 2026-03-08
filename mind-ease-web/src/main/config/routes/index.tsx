@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes as ReactRoutes, Navigate } from 'react-router-dom'
+import { BrowserRouter, Route, Routes as ReactRoutes } from 'react-router-dom'
 
 import { PrivateRoute } from './PrivateRoute'
 import {
@@ -6,31 +6,30 @@ import {
   LoginPage,
   RegisterPage,
   BoardPage,
-  ProfilePage
+  BoardsPage,
+  ProfilePage,
+  FocusModePage,
+  TransitionOverlay
 } from '@/presentation'
 
 export const Routes = () => {
   return (
     <BrowserRouter >
+      <TransitionOverlay />
       <ReactRoutes>
-        {/* Public Routes */}
-        <Route path="/" >
-          <Route index element={<LandingPage />} />
-        </Route>
-        <Route path="/register" >
-          <Route index element={<RegisterPage />} />
-        </Route>
-        <Route path="/login" >
-          <Route index element={<LoginPage />} />
+        {/* Public Routes - Restrict Authenticated Users */}
+        <Route element={<PrivateRoute isPublicRoute />}>
+          <Route path="/" element={<LandingPage />} />
+          <Route path="/register" element={<RegisterPage />} />
+          <Route path="/login" element={<LoginPage />} />
         </Route>
 
-        {/* Private Routes */}
-        <Route path="/" element={<PrivateRoute allowedRoles={['*']} />}>
-          <Route index element={<Navigate to="/board" replace={false} />} />
-          <Route path="board" element={<BoardPage />} />
-        </Route>
-        <Route path="/profile" element={<PrivateRoute allowedRoles={['*']} />}>
-          <Route index element={<ProfilePage />} />
+        {/* Private Routes - Deny Unauthenticated Users */}
+        <Route element={<PrivateRoute />}>
+          <Route path="/board/:id" element={<BoardPage />} />
+          <Route path="/boards" element={<BoardsPage />} />
+          <Route path="/profile" element={<ProfilePage />} />
+          <Route path="/focus" element={<FocusModePage />} />
         </Route>
       </ReactRoutes>
     </BrowserRouter>
