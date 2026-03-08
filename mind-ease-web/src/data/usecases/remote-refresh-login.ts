@@ -18,7 +18,7 @@ export class RemoteRefreshLogin implements RefreshLogin {
       case HttpStatusCode.ok:
         return httpResponse.body!
       case HttpStatusCode.unauthorized:
-        throw new Error('Unauthorized') // Na prática viriam de domain/errors/
+        throw new Error('Unauthorized')
       default:
         throw new Error('Unexpected error')
     }

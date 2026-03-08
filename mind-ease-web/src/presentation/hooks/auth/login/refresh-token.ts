@@ -22,7 +22,6 @@ export const useRefreshLoginToken = () => {
       })
     },
     onSuccess: (data, { redirectPage }) => {
-      // Atualizar auth stores
       authStore.setState(
         {
           accessToken: data.accessToken,

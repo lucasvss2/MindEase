@@ -1,4 +1,4 @@
-import { styled } from "@linaria/react";
+import { styled } from '@linaria/react'
 
 export const TimerWrapper = styled.div`
   display: flex;
@@ -7,7 +7,26 @@ export const TimerWrapper = styled.div`
   gap: 32px;
   padding: 24px 0 8px;
   width: 100%;
-`;
+`
+
+interface PhaseLabelProps {
+  $phase: 'work' | 'break'
+}
+
+export const PhaseLabel = styled.span<PhaseLabelProps>`
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: ${({ $phase }) => ($phase === 'work' ? '#2d3250' : '#3a9b93')};
+  background: ${({ $phase }) =>
+    $phase === 'work' ? 'rgba(45,50,80,0.08)' : 'rgba(128,222,217,0.2)'};
+  padding: 4px 16px;
+  border-radius: 99px;
+  transition:
+    color 0.4s ease,
+    background 0.4s ease;
+`
 
 export const CircleContainer = styled.div`
   position: relative;
@@ -16,14 +35,14 @@ export const CircleContainer = styled.div`
   justify-content: center;
   width: 240px;
   height: 240px;
-`;
+`
 
 export const TimerSvg = styled.svg`
   position: absolute;
   top: 0;
   left: 0;
   transform: rotate(-90deg);
-`;
+`
 
 export const TimeDisplay = styled.div`
   display: flex;
@@ -31,7 +50,7 @@ export const TimeDisplay = styled.div`
   align-items: center;
   gap: 4px;
   z-index: 1;
-`;
+`
 
 export const Time = styled.span`
   font-size: 48px;
@@ -39,13 +58,13 @@ export const Time = styled.span`
   color: #2d3250;
   letter-spacing: 2px;
   line-height: 1;
-`;
+`
 
 export const StatusLabel = styled.span`
   font-size: 14px;
   color: #9e9e9e;
   font-weight: 400;
-`;
+`
 
 export const Dot = styled.div`
   position: absolute;
@@ -55,10 +74,12 @@ export const Dot = styled.div`
   width: 12px;
   height: 12px;
   border-radius: 50%;
-  background-color: #7ecec4;
+  background-color: #80ded9;
   z-index: 2;
-  transition: opacity 0.3s ease;
-`;
+  transition:
+    opacity 0.3s ease,
+    background-color 0.5s ease;
+`
 
 export const ButtonRow = styled.div`
   display: flex;
@@ -66,13 +87,17 @@ export const ButtonRow = styled.div`
   gap: 24px;
   width: 100%;
   justify-content: center;
-`;
+`
 
-export const StartButton = styled.button`
+interface StartButtonProps {
+  $color: string
+}
+
+export const StartButton = styled.button<StartButtonProps>`
   display: flex;
   align-items: center;
   gap: 10px;
-  background-color: #7ecec4;
+  background-color: ${({ $color }) => $color};
   color: #ffffff;
   border: none;
   border-radius: 16px;
@@ -82,16 +107,24 @@ export const StartButton = styled.button`
   cursor: pointer;
   min-width: 160px;
   justify-content: center;
-  transition: background-color 0.2s ease, transform 0.1s ease;
+  transition:
+    background-color 0.5s ease,
+    filter 0.2s ease,
+    transform 0.1s ease;
 
-  &:hover {
-    background-color: #6abdb3;
+  &:hover:not(:disabled) {
+    filter: brightness(0.88);
   }
 
-  &:active {
+  &:active:not(:disabled) {
     transform: scale(0.97);
   }
-`;
+
+  &:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+  }
+`
 
 export const ResetButton = styled.button`
   display: flex;
@@ -110,4 +143,4 @@ export const ResetButton = styled.button`
   &:hover {
     background-color: rgba(0, 0, 0, 0.05);
   }
-`;
+`

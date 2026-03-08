@@ -22,7 +22,7 @@ export const FocusModePage = () => {
           <S.Title>Timer Pomodoro</S.Title>
           <PomodoroTimer />
         </ResponsiveCard>
-        <ResponsiveButton type="neutral" width="200px" height="44px" onClick={() => navigate('/boards')}>
+        <ResponsiveButton type="neutral" width="200px" height="44px" onClick={() => navigate('/boards')} style={{ marginTop: '16px' }}>
           ← Voltar para Tarefas
         </ResponsiveButton>
       </S.FocusModePageContainer>

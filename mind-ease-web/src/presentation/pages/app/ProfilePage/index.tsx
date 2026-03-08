@@ -36,6 +36,8 @@ export function ProfilePage() {
     toggleNotification,
     pomodoroDuration,
     setPomodoroDuration,
+    breakDuration,
+    setBreakDuration,
     cognitiveAlertThreshold,
     setCognitiveAlertThreshold
   } = usePomodoroSettings()
@@ -217,19 +219,38 @@ export function ProfilePage() {
             </S.SettingsContainer>
             <h4 style={{ fontSize: '16px', fontWeight: 'bold' }}>Timer</h4>
             <S.SettingsContainer>
-              <ResponsiveInput
-                type="number"
-                placeholder="Duração do Pomodoro (min)"
-                value={pomodoroDuration}
-                min={1}
-                max={120}
-                onChange={(e) => {
-                  const val = parseInt(e.target.value)
-                  if (!isNaN(val) && val >= 1 && val <= 120) {
-                    setPomodoroDuration(val)
-                  }
-                }}
-              />
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
+                <span style={{ fontSize: '12px', color: '#666' }}>Foco (min)</span>
+                <ResponsiveInput
+                  type="number"
+                  placeholder="Duração do Pomodoro (min)"
+                  value={pomodoroDuration}
+                  min={1}
+                  max={120}
+                  onChange={(e) => {
+                    const val = parseInt(e.target.value)
+                    if (!isNaN(val) && val >= 1 && val <= 120) {
+                      setPomodoroDuration(val)
+                    }
+                  }}
+                />
+              </div>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
+                <span style={{ fontSize: '12px', color: '#666' }}>Descanso (min)</span>
+                <ResponsiveInput
+                  type="number"
+                  placeholder="Duração do descanso (min)"
+                  value={breakDuration}
+                  min={1}
+                  max={60}
+                  onChange={(e) => {
+                    const val = parseInt(e.target.value)
+                    if (!isNaN(val) && val >= 1 && val <= 60) {
+                      setBreakDuration(val)
+                    }
+                  }}
+                />
+              </div>
             </S.SettingsContainer>
             <h4 style={{ fontSize: '16px', fontWeight: 'bold' }}>Alerta de tempo (min)</h4>
             <S.SettingsContainer>

@@ -51,7 +51,6 @@ export function KanbanBoard({ boardId }: KanbanBoardProps) {
   const [activeTask, setActiveTask] = useState<Task | null>(null)
   const [activeTaskOriginalColumnId, setActiveTaskOriginalColumnId] = useState<string | null>(null)
 
-  // Persiste na localStorage colunas que a API retornou mas ainda não estão na ordem salva
   useEffect(() => {
     if (columns.length === 0) return
     const savedOrder = getColumnOrder(boardId)
@@ -62,7 +61,6 @@ export function KanbanBoard({ boardId }: KanbanBoardProps) {
     }
   }, [columns, boardId])
 
-  // Ordena as colunas pela ordem salva; novas colunas (não na lista salva) ficam no final
   const orderedColumns = useMemo(() => {
     const savedOrder = getColumnOrder(boardId)
     if (savedOrder.length === 0) return columns
@@ -112,7 +110,6 @@ export function KanbanBoard({ boardId }: KanbanBoardProps) {
     }
   }
 
-  // Move task between columns optimistically while dragging
   const handleDragOver = ({ active, over }: DragOverEvent) => {
     if (!over) return
     if (active.data.current?.type !== 'task') return
@@ -130,19 +127,16 @@ export function KanbanBoard({ boardId }: KanbanBoardProps) {
     const task = activeTasks.find((t) => t.id === active.id)
     if (!task) return
 
-    // Remove from source column cache
     queryClient.setQueryData<Task[]>(
       ['tasks', activeColumnId],
       (prev) => (prev ?? []).filter((t) => t.id !== active.id),
     )
 
-    // Add to destination column cache
     queryClient.setQueryData<Task[]>(
       ['tasks', overColumnId],
       (prev) => [...(prev ?? []), { ...task, columnId: overColumnId }],
     )
 
-    // Update active task's local columnId reference
     setActiveTask((t) => (t ? { ...t, columnId: overColumnId } : null))
   }
 
@@ -178,7 +172,6 @@ export function KanbanBoard({ boardId }: KanbanBoardProps) {
       if (!targetColumnId) return
 
       if (originalColumnId !== targetColumnId) {
-        // Atualização otimista já aplicada pelo handleDragOver. Persiste na API.
         makeRemoteUpdateTask()
           .update(task.id, { columnId: targetColumnId })
           .then(() => {
@@ -186,7 +179,6 @@ export function KanbanBoard({ boardId }: KanbanBoardProps) {
             queryClient.invalidateQueries({ queryKey: ['tasks', targetColumnId] })
           })
           .catch(() => {
-            // Reverte: refaz fetch de ambas as colunas
             queryClient.invalidateQueries({ queryKey: ['tasks', originalColumnId] })
             queryClient.invalidateQueries({ queryKey: ['tasks', targetColumnId] })
           })
