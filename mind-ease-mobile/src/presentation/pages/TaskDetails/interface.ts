@@ -76,5 +76,6 @@ export interface IFocusConfigField {
   value: string;
   setValue: Dispatch<SetStateAction<string>>;
   onUpdateFocusConfig: () => void
+  isPending?: boolean
 }
 

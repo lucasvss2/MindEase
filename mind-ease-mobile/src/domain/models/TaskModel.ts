@@ -30,5 +30,7 @@ export interface TaskModel {
   checklist?: ITaskChecklist[];
   isConcluded?: boolean;
   enableSoundAlerts?: boolean;
+  focusMinutes?: number;
+  shortBreakMinutes?: number;
 }
 
