@@ -29,6 +29,8 @@ export interface TaskResponseDTO {
   }[];
   isConcluded?: boolean;
   enableSoundAlerts?: boolean;
+  focusMinutes?: number;
+  shortBreakMinutes?: number;
 }
 
 export interface CreateTaskDTO {
@@ -47,6 +49,8 @@ export interface CreateTaskDTO {
   }[];
   isConcluded?: boolean;
   enableSoundAlerts?: boolean;
+  focusMinutes?: number;
+  shortBreakMinutes?: number;
 }
 
 export interface UpdateTaskDTO extends Partial<

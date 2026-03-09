@@ -3,7 +3,7 @@ import { InputField, InputRoot } from "@/presentation/components/Input";
 import { THEME_COLORS } from "@/presentation/constants";
 import { cn } from "@/utils/twClassnamesResolver";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { TouchableOpacity, View } from "react-native";
+import { ActivityIndicator, TouchableOpacity, View } from "react-native";
 import { IFocusConfigField } from "../interface";
 
 export const FocusConfigField = ({
@@ -13,6 +13,7 @@ export const FocusConfigField = ({
   value,
   setValue,
   onUpdateFocusConfig,
+  isPending,
 }: IFocusConfigField) => {
   return (
     <View className='flex-row items-center gap-4'>
@@ -29,12 +30,19 @@ export const FocusConfigField = ({
           </InputRoot>
 
           {isEditing && (
-            <TouchableOpacity onPress={onUpdateFocusConfig}>
-              <MaterialCommunityIcons
-                name='check-circle'
-                size={30}
-                color={THEME_COLORS.neutral[1000]}
-              />
+            <TouchableOpacity
+              onPress={onUpdateFocusConfig}
+              disabled={isPending}
+            >
+              {isPending ? (
+                <ActivityIndicator />
+              ) : (
+                <MaterialCommunityIcons
+                  name='check-circle'
+                  size={30}
+                  color={THEME_COLORS.neutral[1000]}
+                />
+              )}
             </TouchableOpacity>
           )}
         </View>
