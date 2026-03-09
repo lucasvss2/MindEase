@@ -28,6 +28,8 @@ export class TaskMapper {
           color: raw.column.board.color,
         },
       },
+      focusMinutes: raw.focusMinutes,
+      shortBreakMinutes: raw.shortBreakMinutes,
     };
   }
 }

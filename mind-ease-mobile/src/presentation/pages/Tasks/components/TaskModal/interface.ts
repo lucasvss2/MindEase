@@ -21,5 +21,7 @@ export interface ICreateTask {
   title: string;
   checklist: IGetFormattedChecklistData[];
   enableSoundAlerts?: boolean;
+  focusMinutes?: number;
+  shortBreakMinutes?: number;
 }
 

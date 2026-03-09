@@ -63,6 +63,8 @@ export const TaskModal = ({
     title,
     checklist,
     enableSoundAlerts,
+    focusMinutes,
+    shortBreakMinutes,
   }: ICreateTask) => {
     const formattedChecklist = getFormattedChecklistData(checklist);
 
@@ -79,6 +81,8 @@ export const TaskModal = ({
           checklist: formattedChecklist,
           enableSoundAlerts: enableSoundAlerts || false,
           isConcluded: false,
+          focusMinutes,
+          shortBreakMinutes,
         },
       });
       onCancelAction();

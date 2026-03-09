@@ -27,6 +27,8 @@ import { BoardModal } from "../Tasks/components/BoardModal";
 import { CreateColumnModal } from "./Column/Modal/CreateColumnModal";
 import { EditColumnModal } from "./Column/Modal/EditColumnModal";
 import { TasksColumn } from "./Column/TasksColumn";
+import { Toast } from "toastify-react-native";
+import handleError from "@/utils/helpers/handleError";
 
 export function Details() {
   const router = useRouter();
@@ -66,10 +68,16 @@ export function Details() {
   const validatedActiveIds = activeIds.filter((id) =>
     columns?.some((col) => col.id === id),
   );
+
   const onDeleteBoard = async () => {
-    if (!boardId) return;
-    await mutateDeleteBoard(boardId);
-    router.back();
+    try {
+      if (!boardId) return;
+      await mutateDeleteBoard(boardId);
+      router.back();
+      Toast.success("Quadro excluído com sucesso!");
+    } catch (error) {
+      handleError(error, Toast.error);
+    }
   };
 
   const onEditBoard = async ({
@@ -79,9 +87,14 @@ export function Details() {
     name?: string;
     color?: string;
   }) => {
-    if (!boardId || !name) return;
-    await mutateUpdateBoard({ id: boardId, data: { name, color } });
-    setShowEditModal(false);
+    try {
+      if (!boardId || !name) return;
+      await mutateUpdateBoard({ id: boardId, data: { name, color } });
+      setShowEditModal(false);
+      Toast.success("Quadro editado com sucesso!");
+    } catch (error) {
+      handleError(error, Toast.error);
+    }
   };
 
   return (
@@ -183,7 +196,7 @@ export function Details() {
             <Text
               className=' text-neutral-600'
               style={[scaledTextBase, { fontFamily }]}
-              testID="columns-section-title"
+              testID='columns-section-title'
             >
               {columns && columns?.length > 0
                 ? "Colunas visíveis"

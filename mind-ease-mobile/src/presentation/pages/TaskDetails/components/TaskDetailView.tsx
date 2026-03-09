@@ -3,29 +3,42 @@ import { THEME_COLORS, TOKENS } from "@/presentation/constants";
 import { useAccessibilityScale } from "@/presentation/hooks/useAccessibilityScale";
 import { FontAwesome } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
-import { useCallback, useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 import { ScrollView, TextStyle } from "react-native";
 import { ITaskSharedProps } from "../interface";
 import { ChecklistSection } from "./Checklist/ChecklistSection";
 import { FocusConfigField } from "./FocusConfigField";
 import { TaskHeader } from "./TaskHeader";
+import { useTimerStore } from "@/presentation/store";
+import { useUpdateTaskMutation } from "@/presentation/features/Tasks/tasks-queries";
+import { Toast } from "toastify-react-native";
+import handleError from "@/utils/helpers/handleError";
 
 export function TaskDetailView({ task }: ITaskSharedProps) {
-  const scaledTextSm = useAccessibilityScale<TextStyle>(
-    TOKENS.FONT_SIZE.sm,
+  const scaledTextSm = useAccessibilityScale<TextStyle>(TOKENS.FONT_SIZE.sm);
+  const [focusTime, setFocusTime] = useState<string>(
+    task?.focusMinutes?.toString() || "",
   );
-  const [focusTime, setFocusTime] = useState<string>("1");
-  const [restTime, setRestTime] = useState<string>("1");
+  const [restTime, setRestTime] = useState<string>(
+    task?.shortBreakMinutes?.toString() || "",
+  );
 
   const [isEditingFocusTime, setIsEditingFocusTime] = useState(false);
   const [isEditingRestTime, setIsEditingRestTime] = useState(false);
+  const { setFocusDurationMinutes, setRestDurationMinutes } = useTimerStore();
+  const { mutateAsync: updateTaskMutation, isPending: isUpdateTaskPending } =
+    useUpdateTaskMutation();
 
   const router = useRouter();
-  // const { setFocusDurationMinutes, setRestDurationMinutes } = useTimerStore();
+
+  const shouldEnableFocusButton = useMemo(
+    () => focusTime && focusTime !== "0" && focusTime !== "",
+    [focusTime],
+  );
 
   const onNavigateToFocusScreen = useCallback(() => {
-    // setFocusDurationMinutes(task?.focusDurationMinutes)
-    //setRestDurationMinutes(task?.restDurationMinutes)
+    setFocusDurationMinutes(task?.focusMinutes || 0);
+    setRestDurationMinutes(task?.shortBreakMinutes || 0);
 
     router.push({
       pathname: "/(private)/focus",
@@ -33,16 +46,54 @@ export function TaskDetailView({ task }: ITaskSharedProps) {
         taskId: task.id,
         activityTitle: task.title,
         activityDescription: task.description,
+        activityFocusDuration: task?.focusMinutes,
+        activityRestDuration: task?.shortBreakMinutes,
       },
     });
-  }, [router, task.description, task.id, task.title]);
+  }, [
+    router,
+    setFocusDurationMinutes,
+    setRestDurationMinutes,
+    task.description,
+    task?.focusMinutes,
+    task.id,
+    task?.shortBreakMinutes,
+    task.title,
+  ]);
 
-  //TODO: Implementar quando a API estiver pronta
-  const onUpdateFocusConfig = useCallback((fieldName: "focus" | "rest") => {
-    if (fieldName === "focus") setIsEditingFocusTime(false);
-    else setIsEditingRestTime(false);
-    //TODO: Remover foco do campo após clicar em 'confirmar'
-  }, []);
+  const onResetFocusSectionField = useCallback(
+    (isFocusMinutesField: boolean) => {
+      if (isFocusMinutesField) setIsEditingFocusTime(false);
+      else setIsEditingRestTime(false);
+    },
+    [],
+  );
+
+  const onUpdateFocusConfig = useCallback(
+    async (field: "focusMinutes" | "shortBreakMinutes", value: string) => {
+      try {
+        const updatedTask = {
+          ...task,
+          [field]: Number(value),
+        };
+
+        await updateTaskMutation({
+          id: task?.id,
+          data: updatedTask,
+        });
+
+        const isFocusMinutesField = field === "focusMinutes";
+
+        const successMessage = `Periodo de ${isFocusMinutesField ? "foco" : "descanso"} atualizado com sucesso!`;
+
+        Toast.success(successMessage);
+        onResetFocusSectionField(isFocusMinutesField);
+      } catch (error) {
+        handleError(error, Toast.error);
+      }
+    },
+    [onResetFocusSectionField, task, updateTaskMutation],
+  );
 
   return (
     <ScrollView
@@ -58,14 +109,17 @@ export function TaskDetailView({ task }: ITaskSharedProps) {
 
       <ChecklistSection task={task} />
 
-      <Card className='gap-4 mt-8' testID="task-focus">
+      <Card className='gap-4 mt-8' testID='task-focus'>
         <FocusConfigField
           label='Tempo de foco(min)'
           isEditing={isEditingFocusTime}
           setIsEditing={setIsEditingFocusTime}
           value={focusTime}
           setValue={setFocusTime}
-          onUpdateFocusConfig={() => onUpdateFocusConfig("focus")}
+          onUpdateFocusConfig={() =>
+            onUpdateFocusConfig("focusMinutes", focusTime)
+          }
+          isPending={isUpdateTaskPending}
         />
 
         <FocusConfigField
@@ -74,12 +128,16 @@ export function TaskDetailView({ task }: ITaskSharedProps) {
           setIsEditing={setIsEditingRestTime}
           value={restTime}
           setValue={setRestTime}
-          onUpdateFocusConfig={() => onUpdateFocusConfig("rest")}
+          onUpdateFocusConfig={() =>
+            onUpdateFocusConfig("shortBreakMinutes", restTime)
+          }
+          isPending={isUpdateTaskPending}
         />
 
         <Button
           className='mt-6'
           onPress={onNavigateToFocusScreen}
+          disabled={!shouldEnableFocusButton}
           leftIcon={
             <FontAwesome
               name='clock-o'
